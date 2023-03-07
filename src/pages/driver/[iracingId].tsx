@@ -31,8 +31,10 @@ const Driver: NextPage<DriverPageProps> = ({ memberData, memberRecap }) => {
         <div className="flex w-[90%] flex-col gap-2">
           <Header memberData={memberData} />
           <ShortRecap memberRecap={memberRecap} />
-          <FavoriteCar favoriteCar={memberRecap.stats.favoriteCar} />
-          <FavoriteTrack favoriteTrack={memberRecap.stats.favoriteTrack} />
+          <div className="grid w-full grid-cols-1 grid-rows-2 gap-2 md:grid-cols-2 md:grid-rows-2">
+            <FavoriteCar favoriteCar={memberRecap.stats.favoriteCar} />
+            <FavoriteTrack favoriteTrack={memberRecap.stats.favoriteTrack} />
+          </div>
         </div>
       </main>
     </>
