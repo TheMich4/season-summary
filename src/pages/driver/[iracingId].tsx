@@ -11,7 +11,6 @@ import { useRouter } from "next/router";
 
 interface DriverPageProps {
   memberData: MemberData;
-  //   memberProfile: any;
   memberRecap: MemberRecap;
 }
 
@@ -31,7 +30,7 @@ const Driver: NextPage<DriverPageProps> = ({ memberData, memberRecap }) => {
       <main className="flex h-screen w-screen flex-col items-center bg-slate-800 p-2 text-slate-100">
         <div className="flex w-[90%] flex-col gap-2">
           <Header memberData={memberData} />
-          {/* <ShortRecap memberRecap={memberRecap} /> */}
+          <ShortRecap memberRecap={memberRecap} />
           <FavoriteCar favoriteCar={memberRecap.stats.favoriteCar} />
           <FavoriteTrack favoriteTrack={memberRecap.stats.favoriteTrack} />
         </div>
