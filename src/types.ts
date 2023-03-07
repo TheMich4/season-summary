@@ -11,22 +11,26 @@ export interface MemberData {
   clubName: string;
 }
 
+export interface Car {
+  carId: number;
+  carImage: string;
+  carName: string;
+}
+
+export interface Track {
+  configName: string;
+  trackId: number;
+  trackLogo: string;
+  trackName: string;
+}
+
 export interface MemberRecap {
   custId: number;
   stats: {
     avgFinishPosition: number;
     avgStartPosition: number;
-    favoriteCar: {
-      carId: number;
-      carImage: string;
-      carName: string;
-    };
-    favoriteTrack: {
-      configName: string;
-      trackId: number;
-      trackLogo: string;
-      trackName: string;
-    };
+    favoriteCar: Car;
+    favoriteTrack: Track;
     laps: number;
     lapsLed: number;
     starts: number;
