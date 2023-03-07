@@ -2,6 +2,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import type { MemberData, MemberRecap } from "~/types";
 import { createApiInstance, getMemberData, getMemberRecap, login } from "~/api";
 
+import Box from "~/components/Box";
 import FavoriteCar from "~/components/FavoriteCar";
 import FavoriteTrack from "~/components/FavoriteTrack";
 import Head from "next/head";
@@ -12,6 +13,7 @@ import { useRouter } from "next/router";
 interface DriverPageProps {
   memberData: MemberData;
   memberRecap: MemberRecap;
+  memberInfo: any;
 }
 
 const Driver: NextPage<DriverPageProps> = ({ memberData, memberRecap }) => {
@@ -29,6 +31,7 @@ const Driver: NextPage<DriverPageProps> = ({ memberData, memberRecap }) => {
       </Head>
       <main className="flex h-screen w-screen flex-col items-center bg-slate-800 p-2 text-slate-100">
         <div className="flex w-[90%] flex-col gap-2">
+          <Box>Year: 2023 - Season: 1</Box>
           <Header memberData={memberData} />
           <ShortRecap memberRecap={memberRecap} />
           <div className="grid w-full grid-cols-1 grid-rows-2 gap-2 md:grid-cols-2 md:grid-rows-2">
