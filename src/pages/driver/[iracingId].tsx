@@ -3,6 +3,7 @@ import type { MemberData, MemberRecap } from "~/types";
 import { createApiInstance, getMemberData, getMemberRecap, login } from "~/api";
 
 import FavoriteCar from "~/components/FavoriteCar";
+import FavoriteTrack from "~/components/FavoriteTrack";
 import Head from "next/head";
 import Header from "~/displays/Driver/Header";
 import ShortRecap from "~/displays/Driver/ShortRecap";
@@ -32,6 +33,7 @@ const Driver: NextPage<DriverPageProps> = ({ memberData, memberRecap }) => {
           <Header memberData={memberData} />
           {/* <ShortRecap memberRecap={memberRecap} /> */}
           <FavoriteCar favoriteCar={memberRecap.stats.favoriteCar} />
+          <FavoriteTrack favoriteTrack={memberRecap.stats.favoriteTrack} />
         </div>
       </main>
     </>
