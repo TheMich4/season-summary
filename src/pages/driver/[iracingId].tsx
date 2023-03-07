@@ -1,18 +1,21 @@
-import { type GetServerSideProps, type NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
+import type { MemberData, MemberRecap } from "~/types";
+import { createApiInstance, getMemberData, getMemberRecap, login } from "~/api";
+
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { createApiInstance, getMemberData, login } from "~/api";
-import { MemberData } from "~/types";
 
 interface DriverPageProps {
   memberData: MemberData;
+  //   memberProfile: any;
+  memberRecap: MemberRecap;
 }
 
-const Driver: NextPage<DriverPageProps> = ({ memberData }) => {
+const Driver: NextPage<DriverPageProps> = ({ memberData, memberRecap }) => {
   const router = useRouter();
   const { iracingId } = router.query;
 
-  console.log({ iracingId, memberData });
+  console.log({ iracingId, memberData, memberRecap });
 
   return (
     <>
@@ -28,6 +31,7 @@ const Driver: NextPage<DriverPageProps> = ({ memberData }) => {
   );
 };
 
+// TODO: Add await all
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   res,
@@ -38,13 +42,14 @@ export const getServerSideProps: GetServerSideProps = async ({
     const apiInstance = createApiInstance();
     await login(apiInstance);
     const memberData = await getMemberData(apiInstance, iracingId);
-
-    // const x = await parseIracingResponse(res);
-    console.log({ memberData });
+    // const memberProfile = await getMemberProfile(apiInstance, iracingId);
+    const memberRecap = await getMemberRecap(apiInstance, iracingId);
 
     return {
       props: {
         memberData,
+        // memberProfile,
+        memberRecap,
       },
     };
   } catch {

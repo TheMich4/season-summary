@@ -3,7 +3,7 @@ import { getLoginData, parseIracingResponse } from "./helpers";
 import { CookieJar } from "tough-cookie";
 import axios from "axios";
 import { wrapper } from "axios-cookiejar-support";
-import type { MemberData } from "./types";
+import type { MemberData, MemberRecap } from "./types";
 
 const jar = new CookieJar();
 
@@ -50,4 +50,37 @@ export const getMemberData = async (
   }
 
   return iracingData.members[0] as MemberData;
+};
+
+export const getMemberProfile = async (
+  apiInstance: AxiosInstance,
+  iracingId: string
+): Promise<Record<string, unknown> | undefined> => {
+  const res = await apiInstance.get("data/member/profile", {
+    params: { cust_id: iracingId },
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  if (!res?.data?.link) {
+    return undefined;
+  }
+
+  return await parseIracingResponse(res);
+};
+
+export const getMemberRecap = async (
+  apiInstance: AxiosInstance,
+  iracingId: string
+): Promise<MemberRecap | undefined> => {
+  const res = await apiInstance.get("data/stats/member_recap", {
+    params: { cust_id: iracingId, year: 2023, season: 1 },
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  if (!res?.data?.link) {
+    return undefined;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return await parseIracingResponse(res);
 };
