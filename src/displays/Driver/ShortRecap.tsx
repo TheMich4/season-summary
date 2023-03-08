@@ -5,7 +5,17 @@ interface ShortRecapProps {
   memberRecap: MemberRecap;
 }
 
-const fields = [
+const fields: Array<{
+  label: string;
+  key:
+    | "avgFinishPosition"
+    | "avgStartPosition"
+    | "laps"
+    | "lapsLed"
+    | "starts"
+    | "top5"
+    | "wins";
+}> = [
   {
     label: "Starts",
     key: "starts",

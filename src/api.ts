@@ -45,10 +45,12 @@ export const getMemberData = async (
 
   const iracingData = await parseIracingResponse(res);
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (!iracingData?.members?.length) {
     return undefined;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return iracingData.members[0] as MemberData;
 };
 
@@ -82,5 +84,5 @@ export const getMemberRecap = async (
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return await parseIracingResponse(res);
+  return (await parseIracingResponse(res)) as MemberRecap;
 };

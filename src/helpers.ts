@@ -26,5 +26,6 @@ export const parseIracingResponse = async (response: {
     return undefined;
   }
 
-  return camelcaseKeys(res.data, { deep: true }) as Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return camelcaseKeys(res.data, { deep: true }) as Record<string, any>;
 };
