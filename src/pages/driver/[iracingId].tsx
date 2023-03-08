@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
-import type { MemberData, MemberRecap } from "~/types";
+import type { MemberData, MemberRecap, SeasonResult } from "~/types";
 import {
   createApiInstance,
   getMemberData,
@@ -13,6 +13,7 @@ import FavoriteCar from "~/components/FavoriteCar";
 import FavoriteTrack from "~/components/FavoriteTrack";
 import Head from "next/head";
 import Header from "~/displays/Driver/Header";
+import RaceList from "~/components/RaceList";
 import ShortRecap from "~/displays/Driver/ShortRecap";
 import { useRouter } from "next/router";
 
@@ -20,7 +21,7 @@ interface DriverPageProps {
   memberData: MemberData;
   memberRecap: MemberRecap;
   // memberInfo: any;
-  seasonResults: any;
+  seasonResults: Array<SeasonResult>;
 }
 
 const Driver: NextPage<DriverPageProps> = ({
@@ -30,8 +31,6 @@ const Driver: NextPage<DriverPageProps> = ({
 }) => {
   const router = useRouter();
   const { iracingId } = router.query;
-
-  console.log({ iracingId, memberData, memberRecap, seasonResults });
 
   return (
     <>
@@ -45,10 +44,11 @@ const Driver: NextPage<DriverPageProps> = ({
           <Box>Year: 2023 - Season: 1</Box>
           <Header memberData={memberData} />
           <ShortRecap memberRecap={memberRecap} />
-          <div className="grid w-full grid-cols-1 grid-rows-2 gap-2 md:grid-cols-2 md:grid-rows-2">
+          <div className="grid w-full grid-cols-1 grid-rows-1 gap-2 md:grid-cols-2">
             <FavoriteCar favoriteCar={memberRecap.stats.favoriteCar} />
             <FavoriteTrack favoriteTrack={memberRecap.stats.favoriteTrack} />
           </div>
+          <RaceList seasonResults={seasonResults} iracingId={iracingId} />
         </div>
       </main>
     </>

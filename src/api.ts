@@ -104,8 +104,6 @@ export const getSeasonResults = async (
     },
   });
 
-  // console.log("1", res.data);
-
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (!res?.data?.data?.chunk_info) {
     return undefined;

@@ -56,7 +56,7 @@ export interface SeasonResult {
   startTime: string;
   startingPosition: number;
   startingPositionInClass: number;
-  subSessionId: number;
+  subsessionId: number;
   track: {
     configName: string;
     trackId: number;
