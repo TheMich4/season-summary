@@ -17,7 +17,7 @@ const RaceList = ({
         <div className="font-bold">Races:</div>
       </Box>
       {seasonResults.map((result) => (
-        <Race result={result} key={result.subSessionId} iracingId={iracingId} />
+        <Race result={result} key={result.subsessionId} iracingId={iracingId} />
       ))}
     </>
   );
