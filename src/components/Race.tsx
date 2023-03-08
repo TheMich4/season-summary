@@ -34,7 +34,7 @@ const Race = ({
           </div>
           <div>
             {result.track.trackName} - {result.track.configName}
-            {" with "}
+            <span className="text-sm text-gray-300">{" with "}</span>
             {result.carClassName}
           </div>
           {/* {stats.map((stat) => (
