@@ -14,6 +14,7 @@ import FavoriteTrack from "~/components/FavoriteTrack";
 import Head from "next/head";
 import Header from "~/displays/Driver/Header";
 import RaceList from "~/components/RaceList";
+import RaceRecap from "~/displays/Driver/RaceRecap";
 import ShortRecap from "~/displays/Driver/ShortRecap";
 import { useRouter } from "next/router";
 
@@ -48,6 +49,7 @@ const Driver: NextPage<DriverPageProps> = ({
             <FavoriteCar favoriteCar={memberRecap.stats.favoriteCar} />
             <FavoriteTrack favoriteTrack={memberRecap.stats.favoriteTrack} />
           </div>
+          <RaceRecap seasonResults={seasonResults} />
           <RaceList
             seasonResults={seasonResults}
             iracingId={iracingId as string}
