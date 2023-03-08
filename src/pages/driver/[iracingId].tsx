@@ -1,6 +1,12 @@
 import type { GetServerSideProps, NextPage } from "next";
 import type { MemberData, MemberRecap } from "~/types";
-import { createApiInstance, getMemberData, getMemberRecap, login } from "~/api";
+import {
+  createApiInstance,
+  getMemberData,
+  getMemberRecap,
+  getSeasonResults,
+  login,
+} from "~/api";
 
 import Box from "~/components/Box";
 import FavoriteCar from "~/components/FavoriteCar";
@@ -13,14 +19,19 @@ import { useRouter } from "next/router";
 interface DriverPageProps {
   memberData: MemberData;
   memberRecap: MemberRecap;
-  memberInfo: any;
+  // memberInfo: any;
+  seasonResults: any;
 }
 
-const Driver: NextPage<DriverPageProps> = ({ memberData, memberRecap }) => {
+const Driver: NextPage<DriverPageProps> = ({
+  memberData,
+  memberRecap,
+  seasonResults,
+}) => {
   const router = useRouter();
   const { iracingId } = router.query;
 
-  console.log({ iracingId, memberData, memberRecap });
+  console.log({ iracingId, memberData, memberRecap, seasonResults });
 
   return (
     <>
@@ -57,12 +68,14 @@ export const getServerSideProps: GetServerSideProps = async ({
     const memberData = await getMemberData(apiInstance, iracingId);
     // const memberProfile = await getMemberProfile(apiInstance, iracingId);
     const memberRecap = await getMemberRecap(apiInstance, iracingId);
+    const seasonResults = await getSeasonResults(apiInstance, iracingId);
 
     return {
       props: {
         memberData,
         // memberProfile,
         memberRecap,
+        seasonResults,
       },
     };
   } catch {

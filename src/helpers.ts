@@ -15,11 +15,7 @@ export const getLoginData = (
   };
 };
 
-export const parseIracingResponse = async (response: {
-  data: { link: string };
-}) => {
-  const { link } = response.data;
-
+export const parseIracingResponse = async (link: string) => {
   const res = await axios.get(link);
 
   if (!res?.data) {

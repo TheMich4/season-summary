@@ -43,7 +43,8 @@ export const getMemberData = async (
     return undefined;
   }
 
-  const iracingData = await parseIracingResponse(res);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+  const iracingData = await parseIracingResponse(res.data.link);
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (!iracingData?.members?.length) {
@@ -67,7 +68,8 @@ export const getMemberProfile = async (
     return undefined;
   }
 
-  return await parseIracingResponse(res);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+  return await parseIracingResponse(res.data.link);
 };
 
 export const getMemberRecap = async (
@@ -84,5 +86,36 @@ export const getMemberRecap = async (
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return (await parseIracingResponse(res)) as MemberRecap;
+  return (await parseIracingResponse(res.data.link)) as MemberRecap;
+};
+
+export const getSeasonResults = async (
+  apiInstance: AxiosInstance,
+  iracingId: string
+): Promise<Record<string, unknown> | undefined> => {
+  const res = await apiInstance.get("data/results/search_series", {
+    params: {
+      season_year: 2023,
+      season_quarter: 1,
+      cust_id: iracingId,
+      official_only: true,
+      // 5 = race
+      event_types: "5",
+    },
+  });
+
+  // console.log("1", res.data);
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  if (!res?.data?.data?.chunk_info) {
+    return undefined;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+  const chunk_info = res?.data?.data?.chunk_info;
+
+  return await parseIracingResponse(
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-unsafe-member-access
+    `${chunk_info.base_download_url}${chunk_info.chunk_file_names[0]}`
+  );
 };
