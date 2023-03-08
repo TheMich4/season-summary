@@ -3,7 +3,7 @@ import { getLoginData, parseIracingResponse } from "./helpers";
 import { CookieJar } from "tough-cookie";
 import axios from "axios";
 import { wrapper } from "axios-cookiejar-support";
-import type { MemberData, MemberRecap } from "./types";
+import type { MemberData, MemberRecap, SeasonResult } from "./types";
 
 const jar = new CookieJar();
 
@@ -85,14 +85,14 @@ export const getMemberRecap = async (
     return undefined;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
   return (await parseIracingResponse(res.data.link)) as MemberRecap;
 };
 
 export const getSeasonResults = async (
   apiInstance: AxiosInstance,
   iracingId: string
-): Promise<Record<string, unknown> | undefined> => {
+): Promise<Array<SeasonResult> | undefined> => {
   const res = await apiInstance.get("data/results/search_series", {
     params: {
       season_year: 2023,
@@ -114,8 +114,8 @@ export const getSeasonResults = async (
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   const chunk_info = res?.data?.data?.chunk_info;
 
-  return await parseIracingResponse(
+  return (await parseIracingResponse(
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-unsafe-member-access
     `${chunk_info.base_download_url}${chunk_info.chunk_file_names[0]}`
-  );
+  )) as Array<SeasonResult>;
 };

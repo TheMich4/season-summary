@@ -38,3 +38,29 @@ export interface MemberRecap {
     wins: number;
   };
 }
+
+export interface SeasonResult {
+  carClassName: string;
+  champPoints: number;
+  eventAverageLap: number;
+  eventBestLapTime: number;
+  eventLapsComplete: number;
+  eventStrengthOfField: number;
+  finishPosition: number;
+  finishPositionInClass: number;
+  incidents: number;
+  lapsComplete: number;
+  lapsLed: number;
+  seriesName: string;
+  sessionId: number;
+  startTime: string;
+  startingPosition: number;
+  startingPositionInClass: number;
+  subSessionId: number;
+  track: {
+    configName: string;
+    trackId: number;
+    trackName: string;
+  };
+  winnerName: string;
+}
