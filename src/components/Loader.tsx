@@ -2,7 +2,7 @@ const Loader = () => (
   <div role="status">
     <svg
       aria-hidden="true"
-      class="mr-2 inline h-10 w-10 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
+      className="mr-2 inline h-10 w-10 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600"
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@ const Loader = () => (
         fill="currentFill"
       />
     </svg>
-    <span class="sr-only">Loading...</span>
+    <span className="sr-only">Loading...</span>
   </div>
 );
 
