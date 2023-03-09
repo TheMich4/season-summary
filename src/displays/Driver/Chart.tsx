@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import {
   Line,
   LineChart,
@@ -10,6 +12,26 @@ import {
 import Box from "~/components/Box";
 import type { ChartData } from "~/types";
 import { useMemo } from "react";
+
+const CustomTooltip = ({
+  active,
+  payload,
+}: {
+  active: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  payload: any;
+}) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  if (active && payload && payload.length) {
+    return (
+      <div className="rounded-md bg-slate-800 p-2" border-0>
+        <p>{payload[0].value}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 const Chart = ({ chartData }: { chartData: Array<ChartData> }) => {
   const data = useMemo(
@@ -42,6 +64,7 @@ const Chart = ({ chartData }: { chartData: Array<ChartData> }) => {
             />
             <XAxis dataKey="when" hide />
             <YAxis domain={[min, max]} hide />
+            <Tooltip content={(props) => <CustomTooltip {...props} />} />
           </LineChart>
         </ResponsiveContainer>
       </div>
