@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import DriverList from "~/components/DriverList";
 
 const Home: NextPage = () => {
   return (
@@ -11,7 +10,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex h-screen w-screen flex-col items-center justify-center bg-slate-800 text-slate-100">
-        <DriverList />
+        {/* <DriverList /> */}
       </main>
     </>
   );
