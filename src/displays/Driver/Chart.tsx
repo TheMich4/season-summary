@@ -64,7 +64,9 @@ const Chart = ({ chartData }: { chartData: Array<ChartData> }) => {
             />
             <XAxis dataKey="when" hide />
             <YAxis domain={[min, max]} hide />
-            <Tooltip content={(props) => <CustomTooltip {...props} />} />
+            <Tooltip
+              content={<CustomTooltip active={false} payload={undefined} />}
+            />
           </LineChart>
         </ResponsiveContainer>
       </div>
