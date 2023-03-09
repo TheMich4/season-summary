@@ -54,7 +54,7 @@ const Driver: NextPage<DriverPageProps> = ({
             <FavoriteTrack favoriteTrack={memberRecap.stats.favoriteTrack} />
           </div>
           <Chart chartData={chartData} />
-          <RaceRecap seasonResults={seasonResults} />
+          <RaceRecap seasonResults={seasonResults} chartData={chartData} />
           <RaceList
             seasonResults={seasonResults}
             iracingId={iracingId as string}
