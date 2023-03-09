@@ -46,8 +46,6 @@ const RaceRecap = ({
     };
   }, [seasonResults]);
 
-  console.log({ seasonResults });
-
   return (
     <div className="grid w-full grid-cols-1 grid-rows-4 gap-2 sm:grid-cols-2 sm:grid-rows-2  md:grid-cols-4 md:grid-rows-1">
       <Stat label="Busiest day" value={busiestDay} />

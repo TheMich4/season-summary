@@ -1,7 +1,8 @@
+import type { ChartData, MemberData, MemberRecap, SeasonResult } from "~/types";
 import type { GetServerSideProps, NextPage } from "next";
-import type { MemberData, MemberRecap, SeasonResult } from "~/types";
 import {
   createApiInstance,
+  getMemberChartData,
   getMemberData,
   getMemberRecap,
   getSeasonResults,
@@ -9,6 +10,7 @@ import {
 } from "~/api";
 
 import Box from "~/components/Box";
+import Chart from "~/displays/Driver/Chart";
 import FavoriteCar from "~/components/FavoriteCar";
 import FavoriteTrack from "~/components/FavoriteTrack";
 import Head from "next/head";
@@ -23,12 +25,14 @@ interface DriverPageProps {
   memberRecap: MemberRecap;
   // memberInfo: any;
   seasonResults: Array<SeasonResult>;
+  chartData: Array<ChartData>;
 }
 
 const Driver: NextPage<DriverPageProps> = ({
   memberData,
   memberRecap,
   seasonResults,
+  chartData,
 }) => {
   const router = useRouter();
   const { iracingId } = router.query;
@@ -49,6 +53,7 @@ const Driver: NextPage<DriverPageProps> = ({
             <FavoriteCar favoriteCar={memberRecap.stats.favoriteCar} />
             <FavoriteTrack favoriteTrack={memberRecap.stats.favoriteTrack} />
           </div>
+          <Chart chartData={chartData} />
           <RaceRecap seasonResults={seasonResults} />
           <RaceList
             seasonResults={seasonResults}
@@ -74,6 +79,11 @@ export const getServerSideProps: GetServerSideProps = async ({
     // const memberProfile = await getMemberProfile(apiInstance, iracingId);
     const memberRecap = await getMemberRecap(apiInstance, iracingId);
     const seasonResults = await getSeasonResults(apiInstance, iracingId);
+    const chartData = await getMemberChartData(apiInstance, iracingId);
+
+    const firstRaceDate = new Date(
+      seasonResults?.[0]?.startTime?.split("T")[0] as string
+    );
 
     return {
       props: {
@@ -81,6 +91,14 @@ export const getServerSideProps: GetServerSideProps = async ({
         // memberProfile,
         memberRecap,
         seasonResults,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        chartData: firstRaceDate
+          ? // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+            chartData?.data?.filter(
+              (cd: { when: string; value: number }) =>
+                new Date(cd.when) > firstRaceDate
+            )
+          : [],
       },
     };
   } catch {

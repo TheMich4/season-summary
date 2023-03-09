@@ -3,7 +3,7 @@ import { getLoginData, parseIracingResponse } from "./helpers";
 import { CookieJar } from "tough-cookie";
 import axios from "axios";
 import { wrapper } from "axios-cookiejar-support";
-import type { MemberData, MemberRecap, SeasonResult } from "./types";
+import type { ChartData, MemberData, MemberRecap, SeasonResult } from "./types";
 
 const jar = new CookieJar();
 
@@ -116,4 +116,23 @@ export const getSeasonResults = async (
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-unsafe-member-access
     `${chunk_info.base_download_url}${chunk_info.chunk_file_names[0]}`
   )) as Array<SeasonResult>;
+};
+
+export const getMemberChartData = async (
+  apiInstance: AxiosInstance,
+  iracingId: string
+): Promise<{ data: Array<ChartData> } | undefined> => {
+  const res = await apiInstance.get("data/member/chart_data", {
+    params: { cust_id: iracingId, category_id: "2", chart_type: "1" },
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  if (!res?.data?.link) {
+    return undefined;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
+  return (await parseIracingResponse(res.data.link)) as {
+    data: Array<ChartData>;
+  };
 };

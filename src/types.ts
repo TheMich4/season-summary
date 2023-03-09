@@ -64,3 +64,13 @@ export interface SeasonResult {
   };
   winnerName: string;
 }
+
+export interface ChartData {
+  when: string;
+  value: number;
+}
+
+export interface ChartDataFormatted {
+  when: Date;
+  value: number;
+}
