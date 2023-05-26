@@ -21,7 +21,7 @@ export const IracingIdInput = () => {
       <Button
         type="submit"
         className="w-full md:w-36"
-        onClick={() => router.push(`/driver/${iracingId}`)}
+        onClick={() => router.push(`/${iracingId}`)}
         disabled={!iracingId}
       >
         Go to Profile
