@@ -1,5 +1,3 @@
-"use client"
-
 import { recapKeyToName } from "@/config/recap"
 
 type MemberRecapValue = keyof typeof recapKeyToName

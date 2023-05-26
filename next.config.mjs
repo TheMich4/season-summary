@@ -6,6 +6,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images: {
+    domains: ["images-static.iracing.com"],
+  },
 }
 
 export default nextConfig

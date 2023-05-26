@@ -1,6 +1,7 @@
 import { env } from "@/env.mjs"
 import IracingAPI from "iracing-api"
 
+import { Favorite } from "@/components/favorite"
 import { MemberRecap } from "@/components/member-recap"
 import { SeasonSwitch } from "@/components/season-switch"
 
@@ -39,7 +40,7 @@ export const Profile = async ({ iracingId }: ProfileProps) => {
       <SeasonSwitch />
 
       <div className="flex flex-col justify-center gap-2 md:flex-row">
-        <div className="text-3xl font-extrabold leading-tight tracking-tighter">
+        <div className="text-3xl font-extrabold leading-tight tracking-tighter text-center">
           {memberData?.displayName}
         </div>
         <div className="flex items-center justify-center text-end text-sm text-secondary">
@@ -48,6 +49,8 @@ export const Profile = async ({ iracingId }: ProfileProps) => {
       </div>
 
       <MemberRecap memberRecap={memberRecap} />
+
+      <Favorite memberRecap={memberRecap} />
     </div>
   )
 }
