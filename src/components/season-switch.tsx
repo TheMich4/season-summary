@@ -4,7 +4,7 @@ import { Button } from "./ui/button"
 
 export const SeasonSwitch = () => {
   return (
-    <div className="flex flex-row items-center justify-center gap-2 rounded-md p-2">
+    <div className="flex flex-row items-center justify-center gap-2 rounded-md">
       <Button size="xs" variant="outline" disabled>
         <ChevronLeft className="h-4 w-4" />
       </Button>
