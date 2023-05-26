@@ -29,11 +29,7 @@ const getIracingData = async (iracingId: string) => {
 }
 
 export const Profile = async ({ iracingId }: ProfileProps) => {
-  const { memberData, memberRecap, ...iracingData } = await getIracingData(
-    iracingId
-  )
-
-  // console.log({ memberData, memberRecap, iracingData })
+  const { memberData, memberRecap } = await getIracingData(iracingId)
 
   return (
     <div className="flex w-full flex-col gap-2">
