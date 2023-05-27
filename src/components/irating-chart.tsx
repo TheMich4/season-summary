@@ -54,10 +54,11 @@ export const IratingChart = ({
 
   console.log({ chartData, data })
 
+  // TODO: Fix this class to be responsive
   return (
-    <div className="rounded-md border">
-      <ResponsiveContainer width="100%" height={200}>
-        <LineChart width={730} height={250} data={chartData}>
+    <div className="flex w-full max-w-full self-center rounded-md border sm:w-full sm:max-w-md md:max-w-full">
+      <ResponsiveContainer height={200}>
+        <LineChart height={250} data={chartData}>
           <Line
             type="monotone"
             dataKey="value"

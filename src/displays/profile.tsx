@@ -62,7 +62,7 @@ export const Profile = async ({ iracingId }: ProfileProps) => {
     await getIracingData(iracingId)
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full flex-col gap-2 ">
       <SeasonSwitch />
 
       <div className="flex flex-col justify-center gap-2 md:flex-row">

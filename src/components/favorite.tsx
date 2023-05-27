@@ -20,7 +20,7 @@ export const FavoriteItem = ({
         width={400}
         height={230}
         alt={`${type} image`}
-        className="rounded-md border object-contain max-h-[230px]"
+        className="max-h-[230px] self-center rounded-md object-contain"
       />
     </div>
   )
