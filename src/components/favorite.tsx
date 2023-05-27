@@ -1,5 +1,3 @@
-"use client"
-
 import Image from "next/image"
 
 export const FavoriteItem = ({
@@ -20,7 +18,7 @@ export const FavoriteItem = ({
       <Image
         src={imageSrc}
         width={400}
-        height={500}
+        height={230}
         alt={`${type} image`}
         className="rounded-md border object-contain"
       />
@@ -29,7 +27,6 @@ export const FavoriteItem = ({
 }
 
 export const Favorite = ({ memberRecap = {} }) => {
-  console.log({ memberRecap })
   return (
     <div className="flex w-full flex-col gap-2 md:flex-row">
       <FavoriteItem

@@ -17,8 +17,6 @@ const Stat = ({ name, value }: { name: string; value: number }) => {
 }
 
 export const MemberRecap = ({ memberRecap = {} }) => {
-  console.log({ memberRecap })
-
   return (
     <div className="grid w-full grid-cols-1 grid-rows-2 gap-2 sm:grid-cols-2 md:grid-cols-7 md:grid-rows-1">
       {Object.entries(memberRecap).map(([key, value]) => (
