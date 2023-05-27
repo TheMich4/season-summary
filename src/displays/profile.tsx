@@ -76,8 +76,8 @@ export const Profile = async ({ iracingId }: ProfileProps) => {
 
       <MemberRecap memberRecap={memberRecap} />
       <Favorite memberRecap={memberRecap} />
-      {/* <IratingChart chartData={chartData} />
-      <IracingStats chartData={chartData} seasonResults={seasonResults} /> */}
+      <IratingChart chartData={chartData} />
+      {/* <IracingStats chartData={chartData} seasonResults={seasonResults} /> */}
     </div>
   )
 }
