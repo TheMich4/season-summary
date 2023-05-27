@@ -14,7 +14,6 @@ interface ProfileProps {
 }
 
 const getIracingData = async (iracingId: string, year = 2023, season = 2) => {
-  console.log({ iracingId, year, season })
   const ir = new IracingAPI({ timeout: 20000 })
   await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD)
 
@@ -46,6 +45,11 @@ const getIracingData = async (iracingId: string, year = 2023, season = 2) => {
   const firstRaceDate = new Date(
     seasonResults?.[0]?.startTime?.split("T")[0] as string
   )
+  const lastRaceDate = new Date(
+    seasonResults?.[seasonResults?.length - 1]?.startTime?.split(
+      "T"
+    )[0] as string
+  )
 
   return {
     memberData: memberData?.members?.[0],
@@ -53,7 +57,8 @@ const getIracingData = async (iracingId: string, year = 2023, season = 2) => {
     chartData: firstRaceDate
       ? chartData?.data?.filter(
           (cd: { when: string; value: number }) =>
-            new Date(cd.when) > firstRaceDate
+            new Date(cd.when) > firstRaceDate &&
+            new Date(cd.when) < lastRaceDate
         )
       : [],
     seasonResults,

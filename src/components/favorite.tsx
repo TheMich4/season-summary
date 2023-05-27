@@ -27,16 +27,18 @@ export const FavoriteItem = ({
 }
 
 export const Favorite = ({ memberRecap = {} }) => {
+  if (!memberRecap.favoriteCar || !memberRecap.favoriteTrack) return null
+
   return (
     <div className="flex w-full flex-col gap-2 md:flex-row">
       <FavoriteItem
-        value={memberRecap.favoriteCar.carName}
-        imageSrc={memberRecap.favoriteCar.carImage}
+        value={memberRecap.favoriteCar?.carName ?? "Unknown"}
+        imageSrc={memberRecap.favoriteCar?.carImage}
         type="Car"
       />
       <FavoriteItem
-        value={memberRecap.favoriteTrack.trackName}
-        imageSrc={memberRecap.favoriteTrack.trackLogo}
+        value={memberRecap.favoriteTrack?.trackName ?? "Unknown"}
+        imageSrc={memberRecap.favoriteTrack?.trackLogo}
         type="Track"
       />
     </div>
