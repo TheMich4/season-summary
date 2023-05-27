@@ -9,10 +9,13 @@ import { SeasonSwitch } from "@/components/season-switch"
 
 interface ProfileProps {
   iracingId: string
+  season?: number
+  year?: number
 }
 
-const getIracingData = async (iracingId: string) => {
-  const ir = new IracingAPI({ timeout: 10000 })
+const getIracingData = async (iracingId: string, year = 2023, season = 2) => {
+  console.log({ iracingId, year, season })
+  const ir = new IracingAPI({ timeout: 20000 })
   await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD)
 
   const customerId = parseInt(iracingId, 10)
@@ -22,8 +25,8 @@ const getIracingData = async (iracingId: string) => {
       ir.getMemberData({ customerIds: [customerId] }),
       ir.getMemberRecap({
         customerId,
-        year: 2023,
-        season: 2,
+        year,
+        season,
       }),
       ir.getMemberChartData({
         customerId,
@@ -31,8 +34,8 @@ const getIracingData = async (iracingId: string) => {
         categoryId: 2,
       }),
       ir.searchSeries({
-        seasonYear: 2023,
-        seasonQuarter: 2,
+        seasonYear: year,
+        seasonQuarter: season,
         customerId,
         officialOnly: true,
         eventTypes: [5],
@@ -57,13 +60,13 @@ const getIracingData = async (iracingId: string) => {
   }
 }
 
-export const Profile = async ({ iracingId }: ProfileProps) => {
+export const Profile = async ({ iracingId, season, year }: ProfileProps) => {
   const { memberData, memberRecap, chartData, seasonResults } =
-    await getIracingData(iracingId)
+    await getIracingData(iracingId, year, season)
 
   return (
     <div className="flex w-full flex-col gap-2 ">
-      <SeasonSwitch />
+      <SeasonSwitch iracingId={iracingId} season={season} year={year} />
 
       <div className="flex flex-col justify-center gap-2 md:flex-row">
         <div className="text-center text-3xl font-extrabold leading-tight tracking-tighter">

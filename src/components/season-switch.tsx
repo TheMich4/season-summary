@@ -1,14 +1,33 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 import { Button } from "./ui/button"
 
 const currentSeason = { season: 2, year: 2023 }
 
-export const SeasonSwitch = () => {
-  const [{ season, year }, setSeason] = useState(currentSeason)
+const getSeason = (year?: number, season?: number) => {
+  if (year && season) {
+    return { year, season }
+  }
+
+  return currentSeason
+}
+
+export const SeasonSwitch = ({
+  iracingId,
+  season: _season,
+  year: _year,
+}: {
+  iracingId: string
+  season?: number
+  year?: number
+}) => {
+  const router = useRouter()
+
+  const [{ season, year }, setSeason] = useState(getSeason(_year, _season))
 
   const handleSeasonDown = () => {
     let newSeason = season - 1
@@ -20,6 +39,8 @@ export const SeasonSwitch = () => {
     }
 
     setSeason({ season: newSeason, year: newYear })
+
+    router.push(`${iracingId}/${newYear}/${newSeason}`)
   }
 
   const handleSeasonUp = () => {
@@ -32,6 +53,8 @@ export const SeasonSwitch = () => {
     }
 
     setSeason({ season: newSeason, year: newYear })
+
+    router.push(`${iracingId}/${newYear}/${newSeason}`)
   }
 
   return (

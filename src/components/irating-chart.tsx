@@ -52,8 +52,6 @@ export const IratingChart = ({
     return { min, max }
   }, [data])
 
-  console.log({ chartData, data })
-
   // TODO: Fix this class to be responsive
   return (
     <div className="flex w-full max-w-full self-center rounded-md border sm:w-full sm:max-w-md md:max-w-full">
