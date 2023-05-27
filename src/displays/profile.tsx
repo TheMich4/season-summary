@@ -13,7 +13,11 @@ interface ProfileProps {
   year?: number
 }
 
-const getIracingData = async (iracingId: string, year = 2023, season = 2) => {
+const getIracingData = async (
+  iracingId: string,
+  year: number,
+  season: number
+) => {
   const ir = new IracingAPI({ timeout: 20000 })
   await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD)
 
@@ -65,7 +69,11 @@ const getIracingData = async (iracingId: string, year = 2023, season = 2) => {
   }
 }
 
-export const Profile = async ({ iracingId, season, year }: ProfileProps) => {
+export const Profile = async ({
+  iracingId,
+  season = 2,
+  year = 2023,
+}: ProfileProps) => {
   const { memberData, memberRecap, chartData, seasonResults } =
     await getIracingData(iracingId, year, season)
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -18,18 +19,16 @@ const getSeason = (year?: number, season?: number) => {
 
 export const SeasonSwitch = ({
   iracingId,
-  season: _season,
-  year: _year,
+  season,
+  year,
 }: {
   iracingId: string
-  season?: number
-  year?: number
+  season: number
+  year: number
 }) => {
   const router = useRouter()
 
-  const [{ season, year }, setSeason] = useState(getSeason(_year, _season))
-
-  const handleSeasonDown = () => {
+  const getPreviousSeason = () => {
     let newSeason = season - 1
     let newYear = year
 
@@ -38,12 +37,10 @@ export const SeasonSwitch = ({
       newYear -= 1
     }
 
-    setSeason({ season: newSeason, year: newYear })
-
-    router.push(`${iracingId}/${newYear}/${newSeason}`)
+    return `${newYear}/${newSeason}`
   }
 
-  const handleSeasonUp = () => {
+  const getNextSeason = () => {
     let newSeason = season + 1
     let newYear = year
 
@@ -52,21 +49,20 @@ export const SeasonSwitch = ({
       newYear += 1
     }
 
-    setSeason({ season: newSeason, year: newYear })
-
-    router.push(`${iracingId}/${newYear}/${newSeason}`)
+    return `${newYear}/${newSeason}`
   }
 
   return (
     <div className="flex flex-row items-center justify-center gap-2 rounded-md">
-      <Button
-        size="xs"
-        variant="outline"
-        onClick={handleSeasonDown}
-        disabled={year === 2010 && season === 1}
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </Button>
+      <Link href={`/${iracingId}/${getPreviousSeason()}`} prefetch>
+        <Button
+          size="xs"
+          variant="outline"
+          disabled={year === 2010 && season === 1}
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+      </Link>
 
       <span>
         <span className="font-bold">{year}</span>
@@ -74,16 +70,17 @@ export const SeasonSwitch = ({
         <span className="font-bold">{season}</span>
       </span>
 
-      <Button
-        size="xs"
-        variant="outline"
-        disabled={
-          currentSeason.season === season && currentSeason.year === year
-        }
-        onClick={handleSeasonUp}
-      >
-        <ChevronRight className="h-4 w-4" />
-      </Button>
+      <Link href={`/${iracingId}/${getNextSeason()}`} prefetch>
+        <Button
+          size="xs"
+          variant="outline"
+          disabled={
+            currentSeason.season === season && currentSeason.year === year
+          }
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+      </Link>
     </div>
   )
 }

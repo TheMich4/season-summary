@@ -52,7 +52,7 @@ export const IratingChart = ({
     return { min, max }
   }, [data])
 
-  if (!chartData?.length) return null
+  if (!chartData?.length || chartData.length === 1) return null
 
   // TODO: Fix this class to be responsive
   return (
