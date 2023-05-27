@@ -2,7 +2,7 @@ import { IracingIdInput } from "@/components/iracing-id-input"
 
 export default function IndexPage() {
   return (
-    <section className="container grid items-center justify-center gap-6 pb-8 pt-6 md:py-10">
+    <section className="container grid items-center justify-center gap-6 md:gap-10 pb-8 pt-6 md:py-12">
       <div className="flex max-w-[980px] flex-col items-center gap-2">
         <h1 className="text-center text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
           Your iRacing Season Summary
