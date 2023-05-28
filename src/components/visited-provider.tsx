@@ -21,8 +21,6 @@ export const VisitedProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
-  console.log({ visited })
-
   return (
     <VisitedContext.Provider value={{ visited, addVisited }}>
       {children}

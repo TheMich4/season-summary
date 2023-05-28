@@ -14,7 +14,6 @@ export const VisitedManager = ({
   const { addVisited } = useVisited()
 
   useEffect(() => {
-    console.log("effect")
     addVisited({ iracingId, name: displayName ?? "" })
   }, [iracingId, displayName])
 
