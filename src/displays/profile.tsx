@@ -6,6 +6,7 @@ import { IracingStats } from "@/components/iracing-stats"
 import { IratingChart } from "@/components/irating-chart"
 import { MemberRecap } from "@/components/member-recap"
 import { SeasonSwitch } from "@/components/season-switch"
+import { VisitedManager } from "@/components/visited-manager"
 
 interface ProfileProps {
   iracingId: string
@@ -79,6 +80,11 @@ export const Profile = async ({
 
   return (
     <div className="flex w-full flex-col gap-2 ">
+      <VisitedManager
+        iracingId={iracingId}
+        displayName={memberData?.displayName}
+      />
+
       <SeasonSwitch iracingId={iracingId} season={season} year={year} />
 
       <div className="flex flex-col justify-center gap-2 md:flex-row">
