@@ -99,7 +99,7 @@ export const Profile = async ({
       <MemberRecap memberRecap={memberRecap} />
       <Favorite memberRecap={memberRecap} />
       <IratingChart chartData={chartData} />
-      {/* <IracingStats chartData={chartData} seasonResults={seasonResults} /> */}
+      <IracingStats chartData={chartData} seasonResults={seasonResults} />
     </div>
   )
 }
