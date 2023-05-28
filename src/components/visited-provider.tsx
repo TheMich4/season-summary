@@ -1,6 +1,12 @@
 "use client"
 
-import { ReactNode, createContext, useContext, useState } from "react"
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react"
 
 interface User {
   iracingId: string
@@ -16,10 +22,23 @@ export const VisitedProvider = ({ children }: { children: ReactNode }) => {
   const [visited, setVisited] = useState<Array<User>>([])
 
   const addVisited = (user: User) => {
-    setVisited((prev) => {
-      return [user, ...prev.filter((u) => u.iracingId !== user.iracingId)]
-    })
+    if (!user.iracingId || !user.name) return
+
+    const newVisited = [
+      user,
+      ...visited.filter((u) => u.iracingId !== user.iracingId),
+    ]
+
+    setVisited(newVisited)
+    localStorage.setItem("visited", JSON.stringify(newVisited))
   }
+
+  useEffect(() => {
+    const visited = localStorage.getItem("visited")
+    if (visited) {
+      setVisited(JSON.parse(visited))
+    }
+  }, [])
 
   return (
     <VisitedContext.Provider value={{ visited, addVisited }}>

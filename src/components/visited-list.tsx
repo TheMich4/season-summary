@@ -9,6 +9,8 @@ import { useVisited } from "./visited-provider"
 export const VisitedList = () => {
   const { visited } = useVisited()
 
+  if (!visited.length) return null
+
   return (
     <div>
       <div className="text-center text-2xl font-bold md:text-start">
