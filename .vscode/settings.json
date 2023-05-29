@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["camelcase", "cust"]
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "cSpell.words": ["cust", "Iracing", "lucide", "subsession", "tailwindcss"]
 }
