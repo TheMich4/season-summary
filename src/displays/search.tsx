@@ -39,7 +39,7 @@ export const Search = () => {
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <div className="flex flex-col gap-1 md:flex-row ">
+      <div className="flex w-full flex-col gap-1 md:flex-row">
         <Input
           placeholder="Search for iRacing profile"
           value={searchTerm}
@@ -61,7 +61,7 @@ export const Search = () => {
       )}
 
       {searchResults.length > 0 && (
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-2 py-2 md:grid-cols-2 lg:grid-cols-3">
           {searchResults.map(({ custId, displayName }) => (
             <Profile key={custId} iracingId={custId} name={displayName} />
           ))}
