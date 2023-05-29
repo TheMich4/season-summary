@@ -14,10 +14,7 @@ const createResultUrl = (subsessionId: number, iracingId: string | number) =>
   `https://members.iracing.com/membersite/member/EventResult.do?subsessionid=${subsessionId}&custid=${iracingId}`
 
 const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
-  const finishPosition =
-    result.finishPositionInClass === 0
-      ? result.finishPosition
-      : result.finishPositionInClass
+  const finishPosition = result.finishPositionInClass + 1
 
   return (
     <div className="flex flex-row justify-between rounded-md border p-2">

@@ -84,7 +84,7 @@ export const Profile = async ({
     return (
       <div className="flex w-full flex-col gap-2">
         <SeasonSwitch iracingId={iracingId} season={season} year={year} />
-        <div className="flex flex-col gap-2 text-center text-3xl justify-center">
+        <div className="flex flex-col justify-center gap-2 text-center text-3xl">
           <span className="font-extrabold leading-tight tracking-tighter">
             {memberData?.displayName ?? "This driver"}
           </span>
