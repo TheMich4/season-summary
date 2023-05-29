@@ -16,7 +16,6 @@ export const ProfileCard = ({
 }) => {
   const pathname = usePathname()
 
-  console.log({ name, iracingId, pathname })
   return (
     <div className="flex flex-row justify-between rounded-md border p-2">
       <div className="flex flex-row gap-2">
