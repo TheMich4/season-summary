@@ -2,14 +2,11 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 
 export const IracingIdInput = () => {
-  const router = useRouter()
-
   const [iracingId, setIracingId] = useState("")
 
   return (

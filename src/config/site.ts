@@ -8,6 +8,10 @@ export const siteConfig = {
       title: "Home",
       href: "/",
     },
+    {
+      title: "Search",
+      href: "/search",
+    },
   ],
   links: {
     github: "https://github.com/themich4/season-summary",

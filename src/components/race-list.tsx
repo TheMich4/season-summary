@@ -102,7 +102,7 @@ export const RaceList = ({
         </div>
       )}
 
-      <div className="gird-cols-1 grid gap-2 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
         {seasonResults
           .slice(page * racesPerPage, (page + 1) * racesPerPage)
           .map((result) => (
