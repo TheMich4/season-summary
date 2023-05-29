@@ -34,7 +34,11 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
             {new Date(result.startTime).toLocaleString() ?? "Unknown"}
           </span>
           <span className="font-bold">{result.seriesName}</span>
-          <span className="text-sm">{result.carName}</span>
+          <span className="text-sm">
+            {result.carName}
+            <span className="text-xs text-primary/80">{" at "}</span>
+            {result.track.trackName}
+          </span>
         </div>
       </div>
       <Link
