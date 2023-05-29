@@ -25,7 +25,7 @@ export const SeasonSwitch = ({
       newYear -= 1
     }
 
-    return `${newYear}/${newSeason}`
+    return `?year=${newYear}&season=${newSeason}`
   }
 
   const getNextSeason = () => {
@@ -37,7 +37,7 @@ export const SeasonSwitch = ({
       newYear += 1
     }
 
-    return `${newYear}/${newSeason}`
+    return `?year=${newYear}&season=${newSeason}`
   }
 
   return (

@@ -20,7 +20,11 @@ export default function DriverPage({
     <div className="container grid items-center justify-center gap-2 py-4">
       <Suspense fallback={<ProfileLoading iracingId={iracingId} />}>
         {/* @ts-ignore Server component */}
-        <Profile iracingId={iracingId} year={year} season={season} />
+        <Profile
+          iracingId={iracingId}
+          year={Number(year)}
+          season={Number(season)}
+        />
       </Suspense>
     </div>
   )
