@@ -18,8 +18,9 @@ export const VisitedList = () => {
       </div>
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
         {visited
-          .slice(0, 10)
+          
           .filter(({ iracingId, name }) => iracingId && name)
+          .slice(0, 10)
           .map(({ iracingId, name }) => (
             <div className="flex flex-row justify-between rounded-md border p-2">
               <div className="flex flex-col">

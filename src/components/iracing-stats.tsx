@@ -39,18 +39,43 @@ export const IracingStats = ({
     }
   }, [seasonResults])
 
-  const { startIR, finishIR } = useMemo(() => {
-    const startIR = chartData[0]?.value.toString() || ""
-    const finishIR = chartData[chartData.length - 1]?.value.toString() || ""
-    return { startIR, finishIR }
+  const { startIR, finishIR, delta } = useMemo(() => {
+    const startIR = chartData[0]?.value || "Unknown"
+    const finishIR = chartData[chartData.length - 1]?.value || "Unknown"
+    const delta = finishIR - startIR
+    return { startIR, finishIR, delta }
   }, [chartData])
+
+  const FinishIRNode = useMemo(() => {
+    console.log({ delta })
+    if (isNaN(delta)) return finishIR
+    if (delta > 0) {
+      return (
+        <>
+          {finishIR}
+          <span className="ml-1 flex self-center text-sm text-green-600">
+            (+{delta})
+          </span>
+        </>
+      )
+    } else {
+      return (
+        <>
+          {finishIR}
+          <span className="ml-1 flex self-center text-sm text-red-600">
+            ({delta})
+          </span>
+        </>
+      )
+    }
+  }, [finishIR, delta])
 
   return (
     <div className="grid w-full grid-cols-1 grid-rows-4 gap-2 sm:grid-cols-2 sm:grid-rows-2  md:grid-cols-4 md:grid-rows-1">
       <Stat name="Busiest day" value={busiestDay} />
       <Stat name="Most races" value={mostRaces} />
       <Stat name="Start iRating" value={startIR} />
-      <Stat name="Finish iRating" value={finishIR} />
+      <Stat name="Finish iRating" value={FinishIRNode} />
     </div>
   )
 }
