@@ -110,7 +110,7 @@ export const Profile = async ({
         <div className="text-center text-3xl font-extrabold leading-tight tracking-tighter">
           {memberData?.displayName}
         </div>
-        <div className="flex items-center justify-center text-end text-sm text-secondary">
+        <div className="flex items-center justify-center text-end text-sm text-primary/80">
           ({memberData?.clubName})
         </div>
       </div>
