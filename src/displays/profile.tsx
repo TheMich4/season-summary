@@ -1,5 +1,6 @@
 import { env } from "@/env.mjs"
 import IracingAPI from "iracing-api"
+import { Frown } from "lucide-react"
 
 import { Favorite } from "@/components/favorite"
 import { IracingStats } from "@/components/iracing-stats"
@@ -78,6 +79,23 @@ export const Profile = async ({
 }: ProfileProps) => {
   const { memberData, memberRecap, chartData, seasonResults } =
     await getIracingData(iracingId, year, season)
+
+  if (!memberRecap || memberRecap.starts === 0) {
+    return (
+      <div className="flex w-full flex-col gap-2">
+        <SeasonSwitch iracingId={iracingId} season={season} year={year} />
+        <div className="flex flex-col gap-2 text-center text-3xl justify-center">
+          <span className="font-extrabold leading-tight tracking-tighter">
+            {memberData?.displayName ?? "This driver"}
+          </span>
+          <span className="font-semibold">
+            {" doesn't have any data for this season"}
+          </span>
+          <Frown className="mt-2 self-center" size={48} />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex w-full flex-col gap-2">
