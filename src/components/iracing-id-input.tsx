@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import { Button } from "./ui/button"
@@ -18,14 +19,11 @@ export const IracingIdInput = () => {
         value={iracingId}
         onChange={(e) => setIracingId(e.target.value)}
       />
-      <Button
-        type="submit"
-        className="w-full md:w-36"
-        onClick={() => router.push(`/${iracingId}`)}
-        disabled={!iracingId}
-      >
-        Go to Profile
-      </Button>
+      <Link href={iracingId ? `/${iracingId}` : "#"}>
+        <Button type="submit" className="w-full md:w-36" disabled={!iracingId}>
+          Go to Profile
+        </Button>
+      </Link>
     </>
   )
 }
