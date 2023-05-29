@@ -8,7 +8,7 @@ import { Loader2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Profile } from "@/components/profile"
+import { ProfileCard } from "@/components/profile-card"
 
 type Drivers = GetDriversResponse
 
@@ -22,6 +22,7 @@ export const Search = () => {
   const [searchError, setSearchError] = useState("")
 
   const handleSearch = async () => {
+    setSearchResults([])
     setSearchError("")
     setLoading(true)
     const results = await iracingSearch(searchTerm)
@@ -72,13 +73,16 @@ export const Search = () => {
         <span className="text-center text-sm">{searchError}</span>
       )}
 
-      {searchResults.length > 0 && (
-        <div className="grid grid-cols-1 gap-2 py-2 md:grid-cols-2 lg:grid-cols-3">
-          {searchResults.map(({ custId, displayName }) => (
-            <Profile key={custId} iracingId={custId} name={displayName} />
-          ))}
-        </div>
-      )}
+      <div className="grid grid-cols-1 gap-2 py-2 md:grid-cols-2 lg:grid-cols-3">
+        {searchResults.length > 0
+          ? searchResults.map(({ custId, displayName }) => (
+              <ProfileCard key={custId} iracingId={custId} name={displayName} />
+            ))
+          : loading &&
+            new Array(12)
+              .fill(undefined)
+              .map((_, i) => <ProfileCard key={`search-${i}`} />)}
+      </div>
     </div>
   )
 }

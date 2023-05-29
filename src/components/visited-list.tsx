@@ -1,10 +1,6 @@
 "use client"
 
-import Link from "next/link"
-import { ChevronRight, User } from "lucide-react"
-
-import { Profile } from "./profile"
-import { Button } from "./ui/button"
+import { ProfileCard } from "./profile-card"
 import { useVisited } from "./visited-provider"
 
 export const VisitedList = () => {
@@ -23,7 +19,7 @@ export const VisitedList = () => {
           .filter(({ iracingId, name }) => iracingId && name)
           .slice(0, 10)
           .map(({ iracingId, name }) => (
-            <Profile key={iracingId} iracingId={iracingId} name={name} />
+            <ProfileCard key={iracingId} iracingId={iracingId} name={name} />
           ))}
       </div>
     </div>
