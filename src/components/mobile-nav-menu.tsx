@@ -6,7 +6,7 @@ import { Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 import { MainNavProps } from "./main-nav"
-import { Button } from "./ui/button"
+import { buttonVariants } from "./ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,10 +18,10 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
   return (
     <div className="flex self-center md:hidden">
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Button variant="ghost" size="sm">
-            <Menu />
-          </Button>
+        <DropdownMenuTrigger
+          className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+        >
+          <Menu />
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="start">
