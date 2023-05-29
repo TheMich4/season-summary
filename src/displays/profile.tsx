@@ -5,6 +5,7 @@ import { Favorite } from "@/components/favorite"
 import { IracingStats } from "@/components/iracing-stats"
 import { IratingChart } from "@/components/irating-chart"
 import { MemberRecap } from "@/components/member-recap"
+import { RaceList } from "@/components/race-list"
 import { SeasonSwitch } from "@/components/season-switch"
 import { VisitedManager } from "@/components/visited-manager"
 
@@ -100,6 +101,7 @@ export const Profile = async ({
       <Favorite memberRecap={memberRecap} />
       <IratingChart chartData={chartData} />
       <IracingStats chartData={chartData} seasonResults={seasonResults} />
+      <RaceList seasonResults={seasonResults} iracingId={iracingId} />
     </div>
   )
 }
