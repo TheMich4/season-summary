@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
 import { iracingSearch } from "@/server/iracing-search"
 import type { GetDriversResponse } from "iracing-api"
 import { Loader2 } from "lucide-react"
@@ -12,8 +13,11 @@ import { Profile } from "@/components/profile"
 type Drivers = GetDriversResponse
 
 export const Search = () => {
+  const searchParams = useSearchParams()
+  const search = searchParams.get("q")
+
   const [loading, setLoading] = useState(false)
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useState(search ?? "")
   const [searchResults, setSearchResults] = useState<Drivers>([])
   const [searchError, setSearchError] = useState("")
 
@@ -37,10 +41,18 @@ export const Search = () => {
     setLoading(false)
   }
 
+  useEffect(() => {
+    if (search) {
+      void handleSearch()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search])
+
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="flex w-full flex-col gap-1 md:flex-row">
         <Input
+          disabled={loading}
           placeholder="Search for iRacing profile"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
