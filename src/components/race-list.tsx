@@ -40,6 +40,8 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
       <Link
         href={createResultUrl(result.subsessionId, iracingId)}
         className="ml-2 self-center"
+        rel="noopener noreferrer"
+        target="_blank"
       >
         <Button size="sm" variant="ghost">
           <ChevronRight className="h-4 w-4" />
