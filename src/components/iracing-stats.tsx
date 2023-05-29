@@ -47,7 +47,7 @@ export const IracingStats = ({
   }, [chartData])
 
   const FinishIRNode = useMemo(() => {
-    if (isNaN(delta)) return finishIR
+    if (isNaN(delta) || delta === 0) return finishIR
     if (delta > 0) {
       return (
         <>
