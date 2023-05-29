@@ -65,38 +65,43 @@ export const RaceList = ({
   }, [seasonResults])
   const [page, setPage] = useState(0)
 
-  console.log({ page, numberOfPages, seasonResults })
-
   if (!seasonResults?.length) return null
 
   return (
     <div className="flex flex-col gap-2 rounded-md border p-2">
-      <span className="pt-2 text-center text-3xl font-bold">
+      <span
+        className={cn(
+          "pt-2 text-center text-3xl font-bold",
+          numberOfPages === 0 && "pb-2"
+        )}
+      >
         Your races this season:
       </span>
 
-      <div className="flex flex-row justify-center gap-1">
-        <div className="space-x-1 self-center">
-          <span className="self-center font-bold">{`Page: ${page + 1}`}</span>
-          <span className="self-center text-xs">{`(of ${numberOfPages})`}</span>
+      {numberOfPages > 1 && (
+        <div className="flex flex-row justify-center gap-1">
+          <div className="space-x-1 self-center">
+            <span className="self-center font-bold">{`Page: ${page + 1}`}</span>
+            <span className="self-center text-xs">{`(of ${numberOfPages})`}</span>
+          </div>
+          <Button
+            size="xs"
+            variant="outline"
+            disabled={page === 0}
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <Button
+            size="xs"
+            variant="outline"
+            disabled={page === numberOfPages - 1}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
         </div>
-        <Button
-          size="xs"
-          variant="outline"
-          disabled={page === 0}
-          onClick={() => setPage((prev) => prev - 1)}
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
-        <Button
-          size="xs"
-          variant="outline"
-          disabled={page === numberOfPages - 1}
-          onClick={() => setPage((prev) => prev + 1)}
-        >
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      </div>
+      )}
 
       <div className="gird-cols-1 grid gap-2 md:grid-cols-2">
         {seasonResults

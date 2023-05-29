@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Season summary",
+  name: "Season Summary",
   description: "Get your iRacing season summary",
   mainNav: [
     {

@@ -80,7 +80,7 @@ export const Profile = async ({
     await getIracingData(iracingId, year, season)
 
   return (
-    <div className="flex w-full flex-col gap-2 ">
+    <div className="flex w-full flex-col gap-2">
       <VisitedManager
         iracingId={iracingId}
         displayName={memberData?.displayName}
