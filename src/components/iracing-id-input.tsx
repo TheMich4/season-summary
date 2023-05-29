@@ -20,7 +20,11 @@ export const IracingIdInput = () => {
         onChange={(e) => setIracingId(e.target.value)}
       />
       <Link href={iracingId ? `/${iracingId}` : "#"}>
-        <Button type="submit" className="w-full md:w-36" disabled={!iracingId}>
+        <Button
+          type="submit"
+          className="w-full md:w-36"
+          disabled={isNaN(parseInt(iracingId, 10))}
+        >
           Go to Profile
         </Button>
       </Link>
