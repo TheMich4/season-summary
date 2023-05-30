@@ -12,7 +12,7 @@ export const FavoriteItem = ({
   return (
     <div className="flex flex-col gap-1 rounded-md border p-2 md:w-[50%]">
       <div className="text-center text-lg font-semibold">Favorite {type}:</div>
-      <div className="flex h-full items-start justify-center text-center align-bottom text-2xl font-bold">
+      <div className="flex items-start justify-center text-center  text-2xl font-bold">
         {value}
       </div>
       <Image
@@ -20,7 +20,7 @@ export const FavoriteItem = ({
         width={400}
         height={230}
         alt={`${type} image`}
-        className="max-h-[230px] self-center rounded-md object-contain"
+        className="h-full max-h-[230px] self-center rounded-md object-contain"
       />
     </div>
   );
