@@ -1,4 +1,11 @@
 {
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": ["cust", "Iracing", "lucide", "subsession", "tailwindcss"]
+  "cSpell.words": [
+    "cust",
+    "Iracing",
+    "Irating",
+    "lucide",
+    "subsession",
+    "tailwindcss"
+  ]
 }
