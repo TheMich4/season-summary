@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { Category, categoryToName } from "@/config/category";
 import { cn } from "@/lib/utils";
 
 import { Button } from "./ui/button";
@@ -58,9 +59,11 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
 export const RaceList = ({
   seasonResults,
   iracingId,
+  category,
 }: {
   seasonResults: Array<any> | undefined;
   iracingId: string;
+  category: Category;
 }) => {
   const numberOfPages = useMemo(() => {
     const numberOfRaces = seasonResults?.length ?? 0;
@@ -82,7 +85,7 @@ export const RaceList = ({
           numberOfPages === 0 && "pb-2"
         )}
       >
-        Your races this season:
+        Your {categoryToName[category]} races this season:
       </span>
 
       {numberOfPages > 1 && (

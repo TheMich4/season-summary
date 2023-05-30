@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { Frown } from "lucide-react";
 
 import { Stat } from "./stat";
 
@@ -68,6 +69,14 @@ export const IracingStats = ({
       );
     }
   }, [finishIR, delta]);
+
+  if (!seasonResults?.length)
+    return (
+      <div className="flex flex-row gap-2 self-center text-center text-xl">
+        <span>{"You don't have any data for this category"}</span>
+        <Frown className="h-5 w-5 self-center" />
+      </div>
+    );
 
   return (
     <div className="grid w-full grid-cols-1 grid-rows-4 gap-2 sm:grid-cols-2 sm:grid-rows-2  md:grid-cols-4 md:grid-rows-1">

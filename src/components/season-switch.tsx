@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { Category } from "@/config/category";
+
 import { Button } from "./ui/button";
 
 const currentSeason = { season: 2, year: 2023 };
@@ -11,10 +13,12 @@ export const SeasonSwitch = ({
   iracingId,
   season,
   year,
+  category,
 }: {
   iracingId: string;
   season: number;
   year: number;
+  category: Category;
 }) => {
   const getPreviousSeason = () => {
     let newSeason = season - 1;
@@ -25,7 +29,7 @@ export const SeasonSwitch = ({
       newYear -= 1;
     }
 
-    return `?year=${newYear}&season=${newSeason}`;
+    return `?year=${newYear}&season=${newSeason}&category=${category}`;
   };
 
   const getNextSeason = () => {
@@ -37,12 +41,12 @@ export const SeasonSwitch = ({
       newYear += 1;
     }
 
-    return `?year=${newYear}&season=${newSeason}`;
+    return `?year=${newYear}&season=${newSeason}&category=${category}`;
   };
 
   return (
     <div className="flex flex-row items-center justify-center gap-2 rounded-md">
-      <Link href={`/${iracingId}/${getPreviousSeason()}`} prefetch>
+      <Link href={`/${iracingId}${getPreviousSeason()}`} prefetch>
         <Button
           size="xs"
           variant="outline"

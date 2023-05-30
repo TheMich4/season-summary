@@ -33,7 +33,7 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
                     key={index}
                     href={item.href}
                     className={cn(
-                      "p-1",
+                      "w-full p-1",
                       item.disabled && "cursor-not-allowed opacity-80"
                     )}
                   >

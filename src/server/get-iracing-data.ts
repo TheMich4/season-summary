@@ -3,11 +3,16 @@
 import { env } from "@/env.mjs";
 import IracingAPI from "iracing-api";
 
+import { Category, categoryToId } from "@/config/category";
+
 export const getIracingData = async (
   iracingId: string,
   year: number,
-  season: number
+  season: number,
+  category: Category
 ) => {
+  const categoryId = categoryToId[category];
+
   const ir = new IracingAPI({ timeout: 20000 });
   await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD);
 
@@ -24,7 +29,7 @@ export const getIracingData = async (
       ir.getMemberChartData({
         customerId,
         chartType: 1,
-        categoryId: 2,
+        categoryId,
       }),
       ir.searchSeries({
         seasonYear: year,
@@ -32,6 +37,7 @@ export const getIracingData = async (
         customerId,
         officialOnly: true,
         eventTypes: [5],
+        categoryIds: [categoryId],
       }),
     ]
   );
