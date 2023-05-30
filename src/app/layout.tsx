@@ -46,7 +46,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <VisitedProvider>
               <div className="relative flex min-h-screen flex-col">
                 <SiteHeader />
-                <div className="flex-1">{children}</div>
+                <div className="flex-1 w-">{children}</div>
               </div>
               <TailwindIndicator />
             </VisitedProvider>

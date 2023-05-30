@@ -51,7 +51,7 @@ export const Search = () => {
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <div className="flex w-full flex-col gap-1 md:flex-row">
+      <div className="flex w-full flex-col gap-1 self-center sm:max-w-[570px] sm:flex-row">
         <Input
           disabled={loading}
           placeholder="Search for iRacing profile"
@@ -60,7 +60,7 @@ export const Search = () => {
         />
         <Button
           type="submit"
-          className="w-full md:w-36"
+          className="w-full sm:w-36"
           disabled={loading || searchTerm.length < 3}
           onClick={handleSearch}
         >

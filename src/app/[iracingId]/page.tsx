@@ -17,7 +17,7 @@ export default function DriverPage({
   searchParams: { year = "2023", season = "2" },
 }: DriverPageProps) {
   return (
-    <div className="container grid items-center justify-center gap-2 py-4">
+    <div className="container flex w-full items-center justify-center gap-2 py-4">
       <Suspense fallback={<ProfileLoading iracingId={iracingId} />}>
         {/* @ts-ignore Server component */}
         <Profile

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -67,6 +67,10 @@ export const RaceList = ({
     return Math.ceil(numberOfRaces / racesPerPage);
   }, [seasonResults]);
   const [page, setPage] = useState(0);
+
+  useEffect(() => {
+    setPage(0);
+  }, [seasonResults, numberOfPages]);
 
   if (!seasonResults?.length) return null;
 
