@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
+import { useEffect } from "react";
 
-import { useVisited } from "./visited-provider"
+import { useVisited } from "./visited-provider";
 
 export const VisitedManager = ({
   iracingId,
   displayName,
 }: {
-  iracingId: string
-  displayName?: string
+  iracingId: string;
+  displayName?: string;
 }) => {
-  const { addVisited } = useVisited()
+  const { addVisited } = useVisited();
 
   useEffect(() => {
-    addVisited({ iracingId, name: displayName ?? "" })
-  }, [iracingId, displayName])
+    addVisited({ iracingId, name: displayName ?? "" });
+  }, [iracingId, displayName]);
 
-  return null
-}
+  return null;
+};

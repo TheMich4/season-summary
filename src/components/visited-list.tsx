@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { ProfileCard } from "./profile-card"
-import { useVisited } from "./visited-provider"
+import { ProfileCard } from "./profile-card";
+import { useVisited } from "./visited-provider";
 
 export const VisitedList = () => {
-  const { visited } = useVisited()
+  const { visited } = useVisited();
 
-  if (!visited.length) return null
+  if (!visited.length) return null;
 
   return (
     <div>
@@ -23,5 +23,5 @@ export const VisitedList = () => {
           ))}
       </div>
     </div>
-  )
-}
+  );
+};

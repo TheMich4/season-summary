@@ -1,23 +1,23 @@
-import { getIracingData } from "@/server/get-iracing-data"
-import { Frown } from "lucide-react"
+import { getIracingData } from "@/server/get-iracing-data";
+import { Frown } from "lucide-react";
 
-import { Favorite } from "@/components/favorite"
-import { IracingStats } from "@/components/iracing-stats"
-import { IratingChart } from "@/components/irating-chart"
-import { MemberRecap } from "@/components/member-recap"
-import { RaceList } from "@/components/race-list"
-import { SeasonSwitch } from "@/components/season-switch"
-import { VisitedManager } from "@/components/visited-manager"
+import { Favorite } from "@/components/favorite";
+import { IracingStats } from "@/components/iracing-stats";
+import { IratingChart } from "@/components/irating-chart";
+import { MemberRecap } from "@/components/member-recap";
+import { RaceList } from "@/components/race-list";
+import { SeasonSwitch } from "@/components/season-switch";
+import { VisitedManager } from "@/components/visited-manager";
 
 interface ProfileProps {
-  iracingId: string
-  season: number
-  year: number
+  iracingId: string;
+  season: number;
+  year: number;
 }
 
 export const Profile = async ({ iracingId, season, year }: ProfileProps) => {
   const { memberData, memberRecap, chartData, seasonResults } =
-    await getIracingData(iracingId, year, season)
+    await getIracingData(iracingId, year, season);
 
   if (!memberRecap || memberRecap.starts === 0) {
     return (
@@ -33,7 +33,7 @@ export const Profile = async ({ iracingId, season, year }: ProfileProps) => {
           <Frown className="mt-2 self-center" size={48} />
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -60,5 +60,5 @@ export const Profile = async ({ iracingId, season, year }: ProfileProps) => {
       <IracingStats chartData={chartData} seasonResults={seasonResults} />
       <RaceList seasonResults={seasonResults} iracingId={iracingId} />
     </div>
-  )
-}
+  );
+};

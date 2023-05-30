@@ -6,4 +6,4 @@ export const recapKeyToName = {
   avgFinishPosition: "Avg Finish",
   laps: "Laps",
   lapsLed: "Laps Led",
-}
+};

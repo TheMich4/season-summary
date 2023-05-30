@@ -1,13 +1,13 @@
-import Image from "next/image"
+import Image from "next/image";
 
 export const FavoriteItem = ({
   imageSrc,
   type,
   value,
 }: {
-  imageSrc: string
-  type: string
-  value: string
+  imageSrc: string;
+  type: string;
+  value: string;
 }) => {
   return (
     <div className="flex flex-col gap-1 rounded-md border p-2 md:w-[50%]">
@@ -23,11 +23,11 @@ export const FavoriteItem = ({
         className="max-h-[230px] self-center rounded-md object-contain"
       />
     </div>
-  )
-}
+  );
+};
 
 export const Favorite = ({ memberRecap = {} }) => {
-  if (!memberRecap.favoriteCar || !memberRecap.favoriteTrack) return null
+  if (!memberRecap.favoriteCar || !memberRecap.favoriteTrack) return null;
 
   return (
     <div className="flex w-full flex-col gap-2 md:flex-row">
@@ -42,5 +42,5 @@ export const Favorite = ({ memberRecap = {} }) => {
         type="Track"
       />
     </div>
-  )
-}
+  );
+};

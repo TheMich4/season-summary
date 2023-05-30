@@ -1,4 +1,4 @@
-import { Search } from "@/displays/search"
+import { Search } from "@/displays/search";
 
 export default function SearchPage() {
   return (
@@ -9,5 +9,5 @@ export default function SearchPage() {
 
       <Search />
     </div>
-  )
+  );
 }

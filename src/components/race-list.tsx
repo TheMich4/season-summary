@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import { useMemo, useState } from "react"
-import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-import { Button } from "./ui/button"
+import { Button } from "./ui/button";
 
-const racesPerPage = 10
+const racesPerPage = 10;
 
 const createResultUrl = (subsessionId: number, iracingId: string | number) =>
-  `https://members.iracing.com/membersite/member/EventResult.do?subsessionid=${subsessionId}&custid=${iracingId}`
+  `https://members.iracing.com/membersite/member/EventResult.do?subsessionid=${subsessionId}&custid=${iracingId}`;
 
 const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
-  const finishPosition = result.finishPositionInClass + 1
+  const finishPosition = result.finishPositionInClass + 1;
 
   return (
     <div className="flex flex-row justify-between rounded-md border p-2">
@@ -52,23 +52,23 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
         </Button>
       </Link>
     </div>
-  )
-}
+  );
+};
 
 export const RaceList = ({
   seasonResults,
   iracingId,
 }: {
-  seasonResults: Array<any> | undefined
-  iracingId: string
+  seasonResults: Array<any> | undefined;
+  iracingId: string;
 }) => {
   const numberOfPages = useMemo(() => {
-    const numberOfRaces = seasonResults?.length ?? 0
-    return Math.ceil(numberOfRaces / racesPerPage)
-  }, [seasonResults])
-  const [page, setPage] = useState(0)
+    const numberOfRaces = seasonResults?.length ?? 0;
+    return Math.ceil(numberOfRaces / racesPerPage);
+  }, [seasonResults]);
+  const [page, setPage] = useState(0);
 
-  if (!seasonResults?.length) return null
+  if (!seasonResults?.length) return null;
 
   return (
     <div className="flex flex-col gap-2 rounded-md border p-2">
@@ -114,5 +114,5 @@ export const RaceList = ({
           ))}
       </div>
     </div>
-  )
-}
+  );
+};

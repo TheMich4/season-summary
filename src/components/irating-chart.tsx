@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useMemo } from "react"
-import { ChartData } from "iracing-api"
-import { useTheme } from "next-themes"
+import { useMemo } from "react";
+import { ChartData } from "iracing-api";
+import { useTheme } from "next-themes";
 import {
   Line,
   LineChart,
@@ -10,32 +10,32 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from "recharts"
+} from "recharts";
 
 const CustomTooltip = ({
   active,
   payload,
 }: {
-  active: boolean
-  payload: any
+  active: boolean;
+  payload: any;
 }) => {
   if (active && payload && payload.length) {
     return (
       <div className="rounded-md border bg-slate-800 p-2 text-white" border-0>
         <p>{payload[0].value}</p>
       </div>
-    )
+    );
   }
 
-  return null
-}
+  return null;
+};
 
 export const IratingChart = ({
   chartData,
 }: {
-  chartData: Array<ChartData> | undefined
+  chartData: Array<ChartData> | undefined;
 }) => {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
 
   const data = useMemo(
     () =>
@@ -44,15 +44,15 @@ export const IratingChart = ({
         when: new Date(cd.when).toDateString(),
       })),
     [chartData]
-  )
+  );
   const { min, max } = useMemo(() => {
-    const values = Math.min(...data.map((d) => d.value))
-    const min = Math.min(values)
-    const max = Math.max(values)
-    return { min, max }
-  }, [data])
+    const values = Math.min(...data.map((d) => d.value));
+    const min = Math.min(values);
+    const max = Math.max(values);
+    return { min, max };
+  }, [data]);
 
-  if (!chartData?.length || chartData.length === 1) return null
+  if (!chartData?.length || chartData.length === 1) return null;
 
   // TODO: Fix this class to be responsive
   return (
@@ -74,5 +74,5 @@ export const IratingChart = ({
         </LineChart>
       </ResponsiveContainer>
     </div>
-  )
-}
+  );
+};

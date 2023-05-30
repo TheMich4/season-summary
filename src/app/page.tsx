@@ -1,5 +1,5 @@
-import { IracingIdInput } from "@/components/iracing-id-input"
-import { VisitedList } from "@/components/visited-list"
+import { IracingIdInput } from "@/components/iracing-id-input";
+import { VisitedList } from "@/components/visited-list";
 
 export default function IndexPage() {
   return (
@@ -19,5 +19,5 @@ export default function IndexPage() {
 
       <VisitedList />
     </section>
-  )
+  );
 }
