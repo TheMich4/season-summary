@@ -1,15 +1,15 @@
-import { Loader2 } from "lucide-react"
+import { Loader2 } from "lucide-react";
 
-import { SeasonSwitch } from "@/components/season-switch"
+import { SeasonSwitch } from "@/components/season-switch";
 
 export const ProfileLoading = ({
   iracingId,
   season = 2,
   year = 2023,
 }: {
-  iracingId: string
-  season?: number
-  year?: number
+  iracingId: string;
+  season?: number;
+  year?: number;
 }) => {
   return (
     <div className="flex w-full flex-col gap-2">
@@ -25,5 +25,5 @@ export const ProfileLoading = ({
         It can take longer if you have many races this season!
       </span>
     </div>
-  )
-}
+  );
+};

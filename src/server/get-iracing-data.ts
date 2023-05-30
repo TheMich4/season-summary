@@ -1,17 +1,17 @@
-"use server"
+"use server";
 
-import { env } from "@/env.mjs"
-import IracingAPI from "iracing-api"
+import { env } from "@/env.mjs";
+import IracingAPI from "iracing-api";
 
 export const getIracingData = async (
   iracingId: string,
   year: number,
   season: number
 ) => {
-  const ir = new IracingAPI({ timeout: 20000 })
-  await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD)
+  const ir = new IracingAPI({ timeout: 20000 });
+  await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD);
 
-  const customerId = parseInt(iracingId, 10)
+  const customerId = parseInt(iracingId, 10);
 
   const [memberData, memberRecap, chartData, seasonResults] = await Promise.all(
     [
@@ -34,16 +34,16 @@ export const getIracingData = async (
         eventTypes: [5],
       }),
     ]
-  )
+  );
 
   const firstRaceDate = new Date(
     seasonResults?.[0]?.startTime?.split("T")[0] as string
-  )
+  );
   const lastRaceDate = new Date(
     seasonResults?.[seasonResults?.length - 1]?.startTime?.split(
       "T"
     )[0] as string
-  )
+  );
 
   return {
     memberData: memberData?.members?.[0],
@@ -56,5 +56,5 @@ export const getIracingData = async (
         )
       : [],
     seasonResults,
-  }
-}
+  };
+};

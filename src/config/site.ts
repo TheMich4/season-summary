@@ -1,4 +1,4 @@
-export type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "Season Summary",
@@ -16,4 +16,4 @@ export const siteConfig = {
   links: {
     github: "https://github.com/themich4/season-summary",
   },
-}
+};

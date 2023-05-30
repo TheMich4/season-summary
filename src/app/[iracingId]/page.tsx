@@ -1,15 +1,15 @@
-import { Suspense } from "react"
-import { Profile } from "@/displays/profile"
-import { ProfileLoading } from "@/displays/profile-loading"
+import { Suspense } from "react";
+import { Profile } from "@/displays/profile";
+import { ProfileLoading } from "@/displays/profile-loading";
 
 interface DriverPageProps {
   params: {
-    iracingId: string
-  }
+    iracingId: string;
+  };
   searchParams: {
-    year?: string
-    season?: string
-  }
+    year?: string;
+    season?: string;
+  };
 }
 
 export default function DriverPage({
@@ -27,5 +27,5 @@ export default function DriverPage({
         />
       </Suspense>
     </div>
-  )
+  );
 }

@@ -1,53 +1,53 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useSearchParams } from "next/navigation"
-import { iracingSearch } from "@/server/iracing-search"
-import type { GetDriversResponse } from "iracing-api"
-import { Loader2 } from "lucide-react"
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { iracingSearch } from "@/server/iracing-search";
+import type { GetDriversResponse } from "iracing-api";
+import { Loader2 } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ProfileCard } from "@/components/profile-card"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ProfileCard } from "@/components/profile-card";
 
-type Drivers = GetDriversResponse
+type Drivers = GetDriversResponse;
 
 export const Search = () => {
-  const searchParams = useSearchParams()
-  const search = searchParams.get("q")
+  const searchParams = useSearchParams();
+  const search = searchParams.get("q");
 
-  const [loading, setLoading] = useState(false)
-  const [searchTerm, setSearchTerm] = useState(search ?? "")
-  const [searchResults, setSearchResults] = useState<Drivers>([])
-  const [searchError, setSearchError] = useState("")
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(search ?? "");
+  const [searchResults, setSearchResults] = useState<Drivers>([]);
+  const [searchError, setSearchError] = useState("");
 
   const handleSearch = async () => {
-    setSearchResults([])
-    setSearchError("")
-    setLoading(true)
+    setSearchResults([]);
+    setSearchError("");
+    setLoading(true);
     const results = await iracingSearch(searchTerm)
       .catch(() => {
-        setSearchError("No results found")
+        setSearchError("No results found");
       })
       .then((res) => {
         if (res?.length === 0) {
-          setSearchError("No results found")
+          setSearchError("No results found");
         } else {
-          setSearchError("")
+          setSearchError("");
         }
-        return res
-      })
+        return res;
+      });
 
-    setSearchResults(results ?? [])
-    setLoading(false)
-  }
+    setSearchResults(results ?? []);
+    setLoading(false);
+  };
 
   useEffect(() => {
     if (search) {
-      void handleSearch()
+      void handleSearch();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search])
+  }, [search]);
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -84,5 +84,5 @@ export const Search = () => {
               .map((_, i) => <ProfileCard key={`search-${i}`} />)}
       </div>
     </div>
-  )
-}
+  );
+};

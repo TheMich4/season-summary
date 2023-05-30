@@ -1,44 +1,44 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { Button } from "./ui/button"
+import { Button } from "./ui/button";
 
-const currentSeason = { season: 2, year: 2023 }
+const currentSeason = { season: 2, year: 2023 };
 
 export const SeasonSwitch = ({
   iracingId,
   season,
   year,
 }: {
-  iracingId: string
-  season: number
-  year: number
+  iracingId: string;
+  season: number;
+  year: number;
 }) => {
   const getPreviousSeason = () => {
-    let newSeason = season - 1
-    let newYear = year
+    let newSeason = season - 1;
+    let newYear = year;
 
     if (newSeason === 0) {
-      newSeason = 4
-      newYear -= 1
+      newSeason = 4;
+      newYear -= 1;
     }
 
-    return `?year=${newYear}&season=${newSeason}`
-  }
+    return `?year=${newYear}&season=${newSeason}`;
+  };
 
   const getNextSeason = () => {
-    let newSeason = season + 1
-    let newYear = year
+    let newSeason = season + 1;
+    let newYear = year;
 
     if (newSeason === 5) {
-      newSeason = 1
-      newYear += 1
+      newSeason = 1;
+      newYear += 1;
     }
 
-    return `?year=${newYear}&season=${newSeason}`
-  }
+    return `?year=${newYear}&season=${newSeason}`;
+  };
 
   return (
     <div className="flex flex-row items-center justify-center gap-2 rounded-md">
@@ -70,5 +70,5 @@ export const SeasonSwitch = ({
         </Button>
       </Link>
     </div>
-  )
-}
+  );
+};

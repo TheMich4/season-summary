@@ -1,8 +1,8 @@
-import { recapKeyToName } from "@/config/recap"
+import { recapKeyToName } from "@/config/recap";
 
-import { Stat } from "./stat"
+import { Stat } from "./stat";
 
-type MemberRecapValue = keyof typeof recapKeyToName
+type MemberRecapValue = keyof typeof recapKeyToName;
 
 export const MemberRecap = ({ memberRecap = {} }) => {
   return (
@@ -17,5 +17,5 @@ export const MemberRecap = ({ memberRecap = {} }) => {
           />
         ))}
     </div>
-  )
-}
+  );
+};

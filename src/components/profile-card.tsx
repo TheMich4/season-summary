@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { ChevronRight, User } from "lucide-react"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ChevronRight, User } from "lucide-react";
 
-import { Button } from "./ui/button"
-import { Skeleton } from "./ui/skeleton"
+import { Button } from "./ui/button";
+import { Skeleton } from "./ui/skeleton";
 
 export const ProfileCard = ({
   name,
   iracingId,
 }: {
-  name?: string
-  iracingId?: number | string
+  name?: string;
+  iracingId?: number | string;
 }) => {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <div className="flex flex-row justify-between rounded-md border p-2">
@@ -41,5 +41,5 @@ export const ProfileCard = ({
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};

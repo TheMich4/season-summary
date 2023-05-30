@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Menu } from "lucide-react"
+import Link from "next/link";
+import { Menu } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-import { MainNavProps } from "./main-nav"
-import { buttonVariants } from "./ui/button"
+import { MainNavProps } from "./main-nav";
+import { buttonVariants } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu"
+} from "./ui/dropdown-menu";
 
 export const MobileNavMenu = ({ items }: MainNavProps) => {
   return (
@@ -45,5 +45,5 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  )
-}
+  );
+};
