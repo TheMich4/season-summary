@@ -42,14 +42,24 @@ export const getIracingData = async (
     ]
   );
 
-  const firstRaceDate = new Date(
-    seasonResults?.[0]?.startTime?.split("T")[0] as string
-  );
+  const firstRaceDate = new Date(seasonResults?.[0]?.startTime?.split("T")[0]);
   const lastRaceDate = new Date(
-    seasonResults?.[seasonResults?.length - 1]?.startTime?.split(
-      "T"
-    )[0] as string
+    seasonResults?.[seasonResults?.length - 1]?.startTime?.split("T")[0]
   );
+
+  const firstRace =
+    firstRaceDate &&
+    seasonResults?.[0] &&
+    (await ir.getResult({
+      subsessionId: seasonResults[0].subsessionId,
+    }));
+
+  const lastRace =
+    lastRaceDate &&
+    seasonResults?.[seasonResults?.length - 1] &&
+    (await ir.getResult({
+      subsessionId: seasonResults?.[seasonResults?.length - 1].subsessionId,
+    }));
 
   return {
     memberData: memberData?.members?.[0],
@@ -62,5 +72,7 @@ export const getIracingData = async (
         )
       : [],
     seasonResults,
+    firstRace,
+    lastRace,
   };
 };

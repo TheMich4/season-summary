@@ -1,16 +1,42 @@
 "use client";
 
 import { useMemo } from "react";
+import type { Result } from "iracing-api/lib/types/results";
 import { Frown } from "lucide-react";
 
 import { Stat } from "./stat";
 
+// TODO: Fix when iracing-api type is updated
+// TODO: Refactor
+const getPlayerRaceResult = (result: Result, iracingId: string) => {
+  const raceResult = result.sessionResults.find(
+    (sr) => sr.simsessionType === 3
+  );
+
+  const playerResult = raceResult?.results.find(
+    (r) => `${r.custId}` === iracingId
+  );
+
+  if (playerResult) return playerResult;
+
+  // Team event
+  return raceResult?.results.flatMap(
+    (r) => r.driverResults?.find((dr) => `${dr.custId}` === iracingId) ?? []
+  )?.[0];
+};
+
 export const IracingStats = ({
   seasonResults,
   chartData,
+  firstRace,
+  lastRace,
+  iracingId,
 }: {
   seasonResults;
   chartData;
+  firstRace: Result | undefined;
+  lastRace: Result | undefined;
+  iracingId: string;
 }) => {
   const { busiestDay, mostRaces } = useMemo(() => {
     const racesPerDay = seasonResults.reduce((acc, result) => {
@@ -41,11 +67,18 @@ export const IracingStats = ({
   }, [seasonResults]);
 
   const { startIR, finishIR, delta } = useMemo(() => {
-    const startIR = chartData[0]?.value || "Unknown";
-    const finishIR = chartData[chartData.length - 1]?.value || "Unknown";
-    const delta = finishIR - startIR;
+    const startIR =
+      getPlayerRaceResult(firstRace, iracingId)?.oldiRating ??
+      chartData[0]?.value ??
+      "Unknown";
+    const finishIR =
+      getPlayerRaceResult(lastRace, iracingId)?.newiRating ??
+      chartData[chartData.length - 1]?.value ??
+      "Unknown";
+    const delta = finishIR - startIR ?? 0;
+
     return { startIR, finishIR, delta };
-  }, [chartData]);
+  }, []);
 
   const FinishIRNode = useMemo(() => {
     if (isNaN(delta) || delta === 0) return finishIR;
