@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Profile } from "@/displays/profile";
 import { ProfileLoading } from "@/displays/profile-loading";
 
-import { Categories } from "@/config/category";
+import { Categories, Category } from "@/config/category";
 
 interface DriverPageProps {
   params: {
@@ -11,6 +11,7 @@ interface DriverPageProps {
   searchParams: {
     year?: string;
     season?: string;
+    category?: Category;
   };
 }
 
