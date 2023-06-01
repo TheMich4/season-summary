@@ -25,8 +25,14 @@ export const Profile = async ({
   year,
   category,
 }: ProfileProps) => {
-  const { memberData, memberRecap, chartData, seasonResults } =
-    await getIracingData(iracingId, year, season, category);
+  const {
+    memberData,
+    memberRecap,
+    chartData,
+    seasonResults,
+    firstRace,
+    lastRace,
+  } = await getIracingData(iracingId, year, season, category);
 
   if (!memberRecap || memberRecap.starts === 0) {
     return (
@@ -84,7 +90,13 @@ export const Profile = async ({
       />
 
       <IratingChart chartData={chartData} />
-      <IracingStats chartData={chartData} seasonResults={seasonResults} />
+      <IracingStats
+        chartData={chartData}
+        seasonResults={seasonResults}
+        firstRace={firstRace}
+        lastRace={lastRace}
+        iracingId={iracingId}
+      />
       <RaceList
         seasonResults={seasonResults}
         iracingId={iracingId}
