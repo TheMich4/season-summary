@@ -35,7 +35,7 @@ export const IratingChart = ({
 }: {
   chartData: Array<ChartData> | undefined;
 }) => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   const data = useMemo(
     () =>
@@ -62,7 +62,7 @@ export const IratingChart = ({
           <Line
             type="monotone"
             dataKey="value"
-            stroke={theme === "dark" ? "#fff" : "#000"}
+            stroke={resolvedTheme === "dark" ? "#fff" : "#000"}
             dot={false}
             strokeWidth={2}
           />
