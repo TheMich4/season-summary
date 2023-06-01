@@ -34,7 +34,10 @@ export const ProfileCard = ({
         </div>
       </div>
       <div className="flex items-center">
-        <Link href={iracingId ? `/${iracingId}` : pathname} className="ml-2">
+        <Link
+          href={iracingId ? `/driver/${iracingId}` : pathname}
+          className="ml-2"
+        >
           <Button size="sm" variant="ghost">
             <ChevronRight className="h-4 w-4" />
           </Button>

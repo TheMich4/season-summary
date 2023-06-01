@@ -14,7 +14,7 @@ export const IracingIdInput = () => {
 
     if (isNaN(Number(searchTerm))) return `/search?q=${searchTerm}`;
 
-    return `/${searchTerm}`;
+    return `/driver/${searchTerm}`;
   }, [searchTerm]);
 
   return (

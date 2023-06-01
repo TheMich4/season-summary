@@ -41,7 +41,7 @@ export const CategorySwitch = ({
               <DropdownMenuItem asChild>
                 <Link
                   key={cat}
-                  href={`/${iracingId}?year=${year}&season=${season}&category=${cat}`}
+                  href={`/driver/${iracingId}?year=${year}&season=${season}&category=${cat}`}
                   className={cn(
                     "w-full",
                     cat === category && "cursor-not-allowed opacity-80"
