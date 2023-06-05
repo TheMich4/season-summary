@@ -9,6 +9,8 @@ import { Stat } from "./stat";
 // TODO: Fix when iracing-api type is updated
 // TODO: Refactor
 const getPlayerRaceResult = (result: Result, iracingId: string) => {
+  if (!result) return undefined;
+
   const raceResult = result.sessionResults.find(
     (sr) => sr.simsessionType === 3
   );
