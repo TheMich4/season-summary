@@ -1,14 +1,14 @@
 import "@/styles/globals.css";
-import { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/react";
 
-import { siteConfig } from "@/config/site";
-import { fontSans } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
+import { GoogleAnalytics } from "@/components/google-analytics";
+import { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import { VisitedProvider } from "@/components/visited-provider";
+import { cn } from "@/lib/utils";
+import { fontSans } from "@/lib/fonts";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: {
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased scrollbar-thin scrollbar-track-secondary scrollbar-thumb-primary scrollbar-track-rounded-md scrollbar-thumb-rounded-md",
+            "bg-background scrollbar-thin scrollbar-track-secondary scrollbar-thumb-primary scrollbar-track-rounded-md scrollbar-thumb-rounded-md min-h-screen font-sans antialiased",
             fontSans.variable
           )}
         >
@@ -46,13 +46,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <VisitedProvider>
               <div className="relative flex min-h-screen flex-col">
                 <SiteHeader />
-                <div className="flex-1 w-">{children}</div>
+                <div className="flex-1">{children}</div>
               </div>
               <TailwindIndicator />
             </VisitedProvider>
           </ThemeProvider>
 
-          <Analytics />
+          <GoogleAnalytics />
         </body>
       </html>
     </>
