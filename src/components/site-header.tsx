@@ -12,19 +12,6 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
-            <a
-              href="https://www.buymeacoffee.com/dyczkowski"
-              target="_blank"
-              className="h-9"
-              rel="noreferrer"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="https://cdn.buymeacoffee.com/buttons/v2/default-black.png"
-                alt="Buy Me A Coffee"
-                className="min-w-32 h-9 rounded-md border transition duration-200 ease-in-out hover:scale-105"
-              />
-            </a>
             <Link
               href={siteConfig.links.github}
               target="_blank"
@@ -42,6 +29,20 @@ export function SiteHeader() {
             </Link>
 
             <ThemeToggle />
+
+            <a
+              href="https://www.buymeacoffee.com/dyczkowski"
+              target="_blank"
+              className="h-9 min-w-[120px]"
+              rel="noreferrer"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://cdn.buymeacoffee.com/buttons/v2/default-black.png"
+                alt="Buy Me A Coffee"
+                className="min-w-32 h-9 min-w-[120px] rounded-md border transition duration-200 ease-in-out hover:scale-105"
+              />
+            </a>
           </nav>
         </div>
       </div>
