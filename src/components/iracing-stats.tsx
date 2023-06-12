@@ -80,7 +80,7 @@ export const IracingStats = ({
     const delta = finishIR - startIR ?? 0;
 
     return { startIR, finishIR, delta };
-  }, []);
+  }, [firstRace, lastRace, chartData, iracingId]);
 
   const FinishIRNode = useMemo(() => {
     if (isNaN(delta) || delta === 0) return finishIR;
