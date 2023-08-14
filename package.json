@@ -21,7 +21,7 @@
     "clsx": "^2.0.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
-    "iracing-api": "^0.2.2",
+    "iracing-api": "^0.1.11",
     "lucide-react": "^0.263.1",
     "next": "13.4.13",
     "next-themes": "^0.2.1",

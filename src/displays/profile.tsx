@@ -30,7 +30,25 @@ export const Profile = async ({
     seasonResults,
     firstRace,
     lastRace,
+    error,
   } = await getIracingData(iracingId, year, season, category);
+
+  if (error) {
+    return (
+      <div className="flex w-full flex-col gap-2">
+        <SeasonSwitch
+          iracingId={iracingId}
+          season={season}
+          year={year}
+          category={category}
+        />
+        <div className="flex flex-col justify-center gap-2 text-center text-3xl font-extrabold leading-tight tracking-tighter">
+          Failed getting data! Try again later.
+          <Frown className="mt-2 self-center" size={48} />
+        </div>
+      </div>
+    );
+  }
 
   if (!memberRecap || memberRecap.starts === 0) {
     return (
