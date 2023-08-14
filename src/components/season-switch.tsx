@@ -7,7 +7,7 @@ import { Category } from "@/config/category";
 
 import { Button } from "./ui/button";
 
-const currentSeason = { season: 2, year: 2023 };
+const currentSeason = { season: 3, year: 2023 };
 
 export const SeasonSwitch = ({
   iracingId,

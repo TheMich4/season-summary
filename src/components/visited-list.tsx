@@ -15,7 +15,6 @@ export const VisitedList = () => {
       </div>
       <div className="grid grid-cols-1 gap-2 py-2 md:grid-cols-2">
         {visited
-
           .filter(({ iracingId, name }) => iracingId && name)
           .slice(0, 10)
           .map(({ iracingId, name }) => (
