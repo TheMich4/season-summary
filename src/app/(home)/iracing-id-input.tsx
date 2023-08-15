@@ -1,38 +1,74 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import * as z from "zod";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const formSchema = z.object({
+  searchTerm: z.string().min(3),
+});
 
 export const IracingIdInput = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
+  const [routing, setRouting] = useState(false);
 
-  const href = useMemo(() => {
-    if (searchTerm.length < 3) return "#";
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      searchTerm: "",
+    },
+  });
 
-    if (isNaN(Number(searchTerm))) return `/search?q=${searchTerm}`;
+  const onSubmit = async ({ searchTerm }: z.infer<typeof formSchema>) => {
+    setRouting(true);
 
-    return `/driver/${searchTerm}`;
-  }, [searchTerm]);
+    if (isNaN(Number(searchTerm))) {
+      await router.push(`/search?q=${searchTerm}`);
+    } else {
+      await router.push(`/driver/${searchTerm}`);
+    }
+
+    setRouting(false);
+  };
 
   return (
-    <>
-      <Input
-        placeholder="Search for iRacing profile"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <Link href={href}>
-        <Button
-          type="submit"
-          className="w-full md:w-36"
-          disabled={searchTerm.length < 3}
-        >
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex w-full flex-col items-center justify-center gap-2 md:justify-self-center md:w-[640px] md:flex-row"
+      >
+        <FormField
+          control={form.control}
+          name="searchTerm"
+          render={({ field }) => (
+            <FormItem className="w-full min-w-64">
+              <FormControl>
+                <Input
+                  placeholder="Search for iRacing profile"
+                  {...field}
+                ></Input>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="w-full md:w-44" disabled={routing}>
           Go to Profile
         </Button>
-      </Link>
-    </>
+      </form>
+    </Form>
   );
 };

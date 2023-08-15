@@ -12,9 +12,8 @@ export default function Home() {
           See how you did this season!
         </p>
       </div>
-      <div className="flex w-full flex-col items-center justify-center gap-2 justify-self-center md:w-[640px] md:flex-row">
-        <IracingIdInput />
-      </div>
+
+      <IracingIdInput />
       <VisitedList />
     </main>
   );
