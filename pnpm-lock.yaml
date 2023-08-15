@@ -42,8 +42,8 @@ dependencies:
     specifier: 13.4.13
     version: 13.4.13(eslint@8.46.0)(typescript@5.1.6)
   iracing-api:
-    specifier: ^0.1.11
-    version: 0.1.11
+    specifier: ^0.1.15
+    version: 0.1.15
   lucide-react:
     specifier: ^0.263.1
     version: 0.263.1(react@18.2.0)
@@ -2258,8 +2258,8 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
-  /iracing-api@0.1.11:
-    resolution: {integrity: sha512-hzkJieOKbqsQtlj8uBDhrjmZN1joA8k0Venbwk6uhTYMWrfAOngzlVERWJIyXK8NcOrMfcTmxwN6G4VgiE+fSg==}
+  /iracing-api@0.1.15:
+    resolution: {integrity: sha512-Su+KN6MXSIwrPpwKh8ItAr/To3maurHUE1IVUP/SGLjJ8e/gMCLk5QwicOen2B3LkER+8WfFYeuKJXf98vLUjA==}
     dependencies:
       axios: 1.4.0
       axios-cookiejar-support: 4.0.7(axios@1.4.0)(deasync@0.1.28)(tough-cookie@4.1.3)

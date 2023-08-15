@@ -1,8 +1,10 @@
 import "../styles/globals.css";
 
+import { GoogleAnalytics } from "@/components/google-analytics";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/nav/site-header";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { VisitedProvider } from "@/components/providers/visited-provider";
 import { siteConfig } from "@/config/site";
@@ -40,8 +42,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <SiteHeader />
               <div className="flex-1">{children}</div>
             </div>
+            <TailwindIndicator />
           </VisitedProvider>
         </ThemeProvider>
+
+        <GoogleAnalytics />
       </body>
     </html>
   );

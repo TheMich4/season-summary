@@ -3,6 +3,9 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  images: {
+    domains: ["images-static.iracing.com"],
+  },
 
   // TODO: Disable those in production
   typescript: {
