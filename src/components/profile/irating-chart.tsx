@@ -11,6 +11,7 @@ import {
 
 import { ChartData } from "iracing-api";
 import { useMemo } from "react";
+import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 import { useTheme } from "next-themes";
 
 const CustomTooltip = ({
@@ -36,7 +37,7 @@ export const IratingChart = ({
 }: {
   chartData: Array<ChartData> | undefined;
 }) => {
-  const { resolvedTheme } = useTheme();
+  const theme = useTailwindTheme();
 
   const data = useMemo(
     () =>
@@ -57,13 +58,13 @@ export const IratingChart = ({
 
   // TODO: Fix this class to be responsive
   return (
-    <div className="flex w-full max-w-full self-center rounded-md border sm:w-full sm:max-w-md md:max-w-full">
+    <div className="flex w-full max-w-full self-center rounded-md border sm:w-full sm:max-w-md md:max-w-full bg-card">
       <ResponsiveContainer height={200}>
         <LineChart height={250} data={chartData}>
           <Line
             type="monotone"
             dataKey="value"
-            stroke={resolvedTheme === "dark" ? "#fff" : "#000"}
+            stroke={theme.colors?.primary.DEFAULT}
             dot={false}
             strokeWidth={2}
           />

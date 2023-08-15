@@ -56,9 +56,9 @@ export const SeasonSwitch = ({
       </Link>
 
       <span>
-        <span className="font-bold">{year}</span>
+        <span className="font-bold dark:text-primary">{year}</span>
         {" Season "}
-        <span className="font-bold">{season}</span>
+        <span className="font-bold dark:text-primary">{season}</span>
       </span>
 
       <Link href={`/driver/${iracingId}/${getNextSeason()}`} prefetch>

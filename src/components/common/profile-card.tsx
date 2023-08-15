@@ -19,12 +19,12 @@ export const ProfileCard = ({
   return (
     <div className="flex flex-row justify-between rounded-md border p-2">
       <div className="flex flex-row gap-2">
-        <User className="h-6 w-6 self-center" />
+        <User className="h-6 w-6 self-center dark:text-primary" />
         <div className="flex flex-col">
           <div className="font-bold">
             {name ? name : <Skeleton className="h-4 w-32" />}
           </div>
-          <div className="text-sm">
+          <div className="text-xs dark:text-primary/80 italic">
             {iracingId ? (
               `(${iracingId})`
             ) : (
@@ -39,7 +39,7 @@ export const ProfileCard = ({
           className="ml-2"
         >
           <Button size="sm" variant="ghost">
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-4 w-4 dark:text-primary" />
           </Button>
         </Link>
       </div>
