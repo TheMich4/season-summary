@@ -17,14 +17,14 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
   const finishPosition = result.finishPositionInClass + 1;
 
   return (
-    <div className="flex flex-row justify-between rounded-md border p-2">
+    <div className="flex flex-row justify-between rounded-md border p-2 bg-card">
       <div className="flex flex-row gap-2">
         <div
           className={cn(
-            "w-12 self-center text-center text-3xl font-bold",
-            finishPosition === 1 && "text-yellow-400",
-            finishPosition === 2 && "text-gray-400",
-            finishPosition === 3 && "text-yellow-600"
+            "w-12 self-center text-center text-3xl font-bold dark:text-primary",
+            finishPosition === 1 && "text-yellow-400 dark:text-yellow-400",
+            finishPosition === 2 && "text-gray-400 dark:text-gray-400",
+            finishPosition === 3 && "text-yellow-600 dark:text-yellow-600"
           )}
         >
           {finishPosition}.
@@ -33,10 +33,12 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
           <span className="text-xs">
             {new Date(result.startTime).toLocaleString() ?? "Unknown"}
           </span>
-          <span className="font-bold">{result.seriesName}</span>
+          <span className="font-bold dark:text-primary">
+            {result.seriesName}
+          </span>
           <span className="text-sm">
             {result.carName}
-            <span className="text-xs text-primary/80">{" at "}</span>
+            <span className="text-xs dark:text-primary">{" at "}</span>
             {result.track.trackName}
           </span>
         </div>
@@ -48,7 +50,7 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
         target="_blank"
       >
         <Button size="sm" variant="ghost">
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="h-4 w-4 dark:text-primary" />
         </Button>
       </Link>
     </div>
@@ -77,7 +79,7 @@ export const RaceList = ({
   if (!seasonResults?.length) return null;
 
   return (
-    <div className="flex flex-col gap-2 rounded-md border p-2">
+    <div className="flex flex-col gap-2 rounded-md border p-2 bg-card">
       <span
         className={cn(
           "pt-2 text-center text-3xl font-bold",

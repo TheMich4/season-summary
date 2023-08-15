@@ -38,6 +38,8 @@ export const Search = () => {
         return res;
       });
 
+    console.log(results);
+
     setSearchResults(results ?? []);
     setLoading(false);
   };
