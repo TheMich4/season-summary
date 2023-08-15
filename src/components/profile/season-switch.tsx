@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
 import { Category } from "@/config/category";
-
-import { Button } from "./ui/button";
+import Link from "next/link";
 
 const currentSeason = { season: 3, year: 2023 };
 

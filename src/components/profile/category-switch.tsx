@@ -1,17 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import { ChevronDown } from "lucide-react";
-
 import { Category, categoryToName } from "@/config/category";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export const CategorySwitch = ({
   category,
@@ -38,7 +38,7 @@ export const CategorySwitch = ({
 
           <DropdownMenuContent>
             {Object.entries(categoryToName).map(([cat, catName]) => (
-              <DropdownMenuItem asChild>
+              <DropdownMenuItem asChild key={catName}>
                 <Link
                   key={cat}
                   href={`/driver/${iracingId}?year=${year}&season=${season}&category=${cat}`}

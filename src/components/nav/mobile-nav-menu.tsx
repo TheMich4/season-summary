@@ -1,18 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import { Menu } from "lucide-react";
-
-import { cn } from "@/lib/utils";
-
-import { MainNavProps } from "./main-nav";
-import { buttonVariants } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
+
+import Link from "next/link";
+import { MainNavProps } from "./main-nav";
+import { Menu } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export const MobileNavMenu = ({ items }: MainNavProps) => {
   return (
@@ -28,7 +27,7 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
           {items?.map(
             (item, index) =>
               item.href && (
-                <DropdownMenuItem>
+                <DropdownMenuItem key={item.title}>
                   <Link
                     key={index}
                     href={item.href}

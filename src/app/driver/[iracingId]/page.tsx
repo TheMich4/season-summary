@@ -1,8 +1,7 @@
-import { Suspense } from "react";
+import { Categories } from "@/config/category";
 import { Profile } from "@/displays/profile";
-import { ProfileLoading } from "@/displays/profile-loading";
-
-import { Categories, Category } from "@/config/category";
+import { ProfileLoader } from "@/components/profile/profile-loader";
+import { Suspense } from "react";
 
 interface DriverPageProps {
   params: {
@@ -11,17 +10,17 @@ interface DriverPageProps {
   searchParams: {
     year?: string;
     season?: string;
-    category?: Category;
+    category?: string;
   };
 }
 
 export default function DriverPage({
   params: { iracingId },
-  searchParams: { year = "2023", season = "2", category = Categories.ROAD },
+  searchParams: { year = "2023", season = "3", category = Categories.ROAD },
 }: DriverPageProps) {
   return (
     <div className="container flex w-full items-center justify-center gap-2 py-4">
-      <Suspense fallback={<ProfileLoading iracingId={iracingId} />}>
+      <Suspense fallback={<ProfileLoader iracingId={iracingId} />}>
         {/* @ts-ignore Server component */}
         <Profile
           iracingId={iracingId}

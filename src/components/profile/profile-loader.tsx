@@ -1,8 +1,7 @@
 import { Loader2 } from "lucide-react";
+// import { SeasonSwitch } from "@/components/season-switch";
 
-import { SeasonSwitch } from "@/components/season-switch";
-
-export const ProfileLoading = ({
+export const ProfileLoader = ({
   iracingId,
   season = 2,
   year = 2023,
@@ -13,7 +12,7 @@ export const ProfileLoading = ({
 }) => {
   return (
     <div className="flex w-full flex-col gap-2">
-      <SeasonSwitch iracingId={iracingId} season={season} year={year} />
+      {/* <SeasonSwitch iracingId={iracingId} season={season} year={year} /> */}
       <div className="align-center flex flex-row justify-center gap-2 text-2xl font-semibold">
         <Loader2 className="h-6 w-6 animate-spin self-center" />
         {"Loading stats for: "}

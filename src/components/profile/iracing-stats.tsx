@@ -1,9 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
-import type { Result } from "iracing-api/lib/types/results";
 import { Frown } from "lucide-react";
-
+import { type Result } from "iracing-api/lib/types/results";
+import { useMemo } from "react";
 import { Stat } from "./stat";
 
 // TODO: Fix when iracing-api type is updated

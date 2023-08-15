@@ -1,6 +1,5 @@
+import { Stat } from "@/components/profile/stat";
 import { recapKeyToName } from "@/config/recap";
-
-import { Stat } from "./stat";
 
 type MemberRecapValue = keyof typeof recapKeyToName;
 

@@ -1,16 +1,14 @@
+import { type Category } from "@/config/category";
 import { getIracingData } from "@/server/get-iracing-data";
 import { Frown } from "lucide-react";
-
-import type { Category } from "@/config/category";
-import { Favorite } from "@/components/favorite";
-import { IracingStats } from "@/components/iracing-stats";
-import { IratingChart } from "@/components/irating-chart";
-import { MemberRecap } from "@/components/member-recap";
-import { RaceList } from "@/components/race-list";
-import { SeasonSwitch } from "@/components/season-switch";
-import { VisitedManager } from "@/components/visited-manager";
-
-import { CategorySwitch } from "../components/category-switch";
+import { SeasonSwitch } from "../components/profile/season-switch";
+import { VisitedManager } from "../components/profile/visited-manager";
+import { MemberRecap } from "../components/profile/member-recap";
+import { CategorySwitch } from "@/components/profile/category-switch";
+import { IratingChart } from "../components/profile/irating-chart";
+import { IracingStats } from "@/components/profile/iracing-stats";
+import { RaceList } from "@/components/profile/race-list";
+import { Favorite } from "@/components/profile/favorite";
 
 interface ProfileProps {
   iracingId: string;
@@ -32,7 +30,25 @@ export const Profile = async ({
     seasonResults,
     firstRace,
     lastRace,
+    error,
   } = await getIracingData(iracingId, year, season, category);
+
+  if (error) {
+    return (
+      <div className="flex w-full flex-col gap-2">
+        <SeasonSwitch
+          iracingId={iracingId}
+          season={season}
+          year={year}
+          category={category}
+        />
+        <div className="flex flex-col justify-center gap-2 text-center text-3xl font-extrabold leading-tight tracking-tighter">
+          Failed getting data! Try again later.
+          <Frown className="mt-2 self-center" size={48} />
+        </div>
+      </div>
+    );
+  }
 
   if (!memberRecap || memberRecap.starts === 0) {
     return (

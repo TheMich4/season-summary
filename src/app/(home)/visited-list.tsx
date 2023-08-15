@@ -1,7 +1,7 @@
 "use client";
 
-import { ProfileCard } from "./profile-card";
-import { useVisited } from "./visited-provider";
+import { ProfileCard } from "@/components/common/profile-card";
+import { useVisited } from "@/components/providers/visited-provider";
 
 export const VisitedList = () => {
   const { visited } = useVisited();

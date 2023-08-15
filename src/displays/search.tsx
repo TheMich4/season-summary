@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { iracingSearch } from "@/server/iracing-search";
-import type { GetDriversResponse } from "iracing-api";
-import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import type { GetDriversResponse } from "iracing-api";
 import { Input } from "@/components/ui/input";
-import { ProfileCard } from "@/components/profile-card";
+import { Loader2 } from "lucide-react";
+import { ProfileCard } from "@/components/common/profile-card";
+import { iracingSearch } from "@/server/iracing-search";
+import { useSearchParams } from "next/navigation";
 
 type Drivers = GetDriversResponse;
 

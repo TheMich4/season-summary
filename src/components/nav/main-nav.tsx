@@ -1,12 +1,11 @@
 import * as React from "react";
-import Link from "next/link";
 
-import { NavItem } from "@/types/nav";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
-
+import Link from "next/link";
 import { MobileNavMenu } from "./mobile-nav-menu";
+import { NavItem } from "./types";
+import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
 
 export interface MainNavProps {
   items?: NavItem[];

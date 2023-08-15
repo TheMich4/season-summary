@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-
-import { useVisited } from "./visited-provider";
+import { useVisited } from "@/components/providers/visited-provider";
 
 export const VisitedManager = ({
   iracingId,

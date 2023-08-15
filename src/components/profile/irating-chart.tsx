@@ -1,8 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
-import { ChartData } from "iracing-api";
-import { useTheme } from "next-themes";
 import {
   Line,
   LineChart,
@@ -11,6 +8,10 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+
+import { ChartData } from "iracing-api";
+import { useMemo } from "react";
+import { useTheme } from "next-themes";
 
 const CustomTooltip = ({
   active,

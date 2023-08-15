@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-
 import { Category, categoryToName } from "@/config/category";
-import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const racesPerPage = 10;
 
