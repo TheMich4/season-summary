@@ -1,7 +1,7 @@
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { MainNav } from "./main-nav";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeSwitch } from "./theme-switch";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
@@ -28,7 +28,7 @@ export function SiteHeader() {
               </div>
             </Link>
 
-            <ThemeToggle />
+            <ThemeSwitch />
 
             {/* <a
               href="https://www.buymeacoffee.com/dyczkowski"
