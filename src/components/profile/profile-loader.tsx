@@ -1,11 +1,11 @@
-import { Loader2 } from "lucide-react";
+import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
-// import { SeasonSwitch } from "@/components/season-switch";
+import { Loader2 } from "lucide-react";
 
 export const ProfileLoader = ({
   iracingId,
-  season = 2,
-  year = 2023,
+  season = DEFAULT_SEASON,
+  year = DEFAULT_YEAR,
 }: {
   iracingId: string;
   season?: number;
@@ -13,7 +13,6 @@ export const ProfileLoader = ({
 }) => {
   return (
     <div className="flex w-full flex-col gap-2">
-      {/* <SeasonSwitch iracingId={iracingId} season={season} year={year} /> */}
       <div className="align-center flex flex-row justify-center gap-2 text-2xl font-semibold">
         <Loader2 className="h-6 w-6 animate-spin self-center dark:text-primary" />
         {"Loading stats for: "}

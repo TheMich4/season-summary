@@ -1,12 +1,12 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
 import { Button } from "@/components/ui/button";
-import { Category } from "@/config/category";
 import Link from "next/link";
 
-const currentSeason = { season: 3, year: 2023 };
+const currentSeason = { season: DEFAULT_SEASON, year: DEFAULT_YEAR };
 
 export const SeasonSwitch = ({
   iracingId,
@@ -17,7 +17,7 @@ export const SeasonSwitch = ({
   iracingId: string;
   season: number;
   year: number;
-  category: Category;
+  category: string | number;
 }) => {
   const getPreviousSeason = () => {
     let newSeason = season - 1;

@@ -1,3 +1,5 @@
+import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
+
 import { Categories } from "@/config/category";
 import { Profile } from "@/displays/profile";
 import { ProfileLoader } from "@/components/profile/profile-loader";
@@ -16,7 +18,11 @@ interface DriverPageProps {
 
 export default function DriverPage({
   params: { iracingId },
-  searchParams: { year = "2023", season = "3", category = Categories.ROAD },
+  searchParams: {
+    year = `${DEFAULT_YEAR}`,
+    season = `${DEFAULT_SEASON}`,
+    category = Categories.ROAD,
+  },
 }: DriverPageProps) {
   return (
     <div className="container flex w-full items-center justify-center gap-2 py-4">
