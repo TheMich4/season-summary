@@ -1,5 +1,14 @@
 "use client";
 
+import * as z from "zod";
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -8,30 +17,42 @@ import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import { ProfileCard } from "@/components/common/profile-card";
 import { iracingSearch } from "@/server/iracing-search";
+import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type Drivers = GetDriversResponse;
+
+const formSchema = z.object({
+  searchTerm: z.string().min(3),
+});
 
 export const Search = () => {
   const searchParams = useSearchParams();
   const search = searchParams.get("q");
 
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      searchTerm: search ?? "",
+    },
+  });
+
   const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(search ?? "");
   const [searchResults, setSearchResults] = useState<Drivers>([]);
   const [searchError, setSearchError] = useState("");
 
-  const handleSearch = async () => {
+  const handleSearch = async ({ searchTerm }: z.infer<typeof formSchema>) => {
     setSearchResults([]);
     setSearchError("");
     setLoading(true);
     const results = await iracingSearch(searchTerm)
       .catch(() => {
-        setSearchError("No results found");
+        setSearchError("No profiles found");
       })
       .then((res) => {
         if (res?.length === 0) {
-          setSearchError("No results found");
+          setSearchError("No profiles found");
         } else {
           setSearchError("");
         }
@@ -44,30 +65,38 @@ export const Search = () => {
 
   useEffect(() => {
     if (search) {
-      void handleSearch();
+      void handleSearch({ searchTerm: search });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <div className="flex w-full flex-col gap-1 self-center sm:max-w-[570px] sm:flex-row">
-        <Input
-          disabled={loading}
-          placeholder="Search for iRacing profile"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Button
-          type="submit"
-          className="w-full sm:w-36"
-          disabled={loading || searchTerm.length < 3}
-          onClick={handleSearch}
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(handleSearch)}
+          className="flex w-full flex-col gap-1 self-center sm:max-w-[570px] sm:flex-row"
         >
-          {loading && <Loader2 className="mr-1 h-5 w-5 animate-spin" />}
-          <span>{loading ? "Searching..." : "Search"}</span>
-        </Button>
-      </div>
+          <FormField
+            control={form.control}
+            name="searchTerm"
+            render={({ field }) => (
+              <FormItem className="w-full min-w-64">
+                <FormControl>
+                  <Input
+                    placeholder="Search for iRacing profile"
+                    {...field}
+                  ></Input>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit" className="w-full md:w-44" disabled={loading}>
+            {loading && <Loader2 className="mr-1 h-5 w-5 animate-spin" />}
+            <span>{loading ? "Searching..." : "Search"}</span>
+          </Button>
+        </form>
+      </Form>
 
       {searchError && (
         <span className="text-center text-sm">{searchError}</span>
