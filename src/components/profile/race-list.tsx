@@ -118,7 +118,11 @@ export const RaceList = ({
         {seasonResults
           .slice(page * racesPerPage, (page + 1) * racesPerPage)
           .map((result) => (
-            <Race result={result} iracingId={iracingId} />
+            <Race
+              result={result}
+              iracingId={iracingId}
+              key={result.subsessionId}
+            />
           ))}
       </div>
     </div>

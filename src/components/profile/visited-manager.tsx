@@ -14,7 +14,7 @@ export const VisitedManager = ({
 
   useEffect(() => {
     addVisited({ iracingId, name: displayName ?? "" });
-  }, [iracingId, displayName]);
+  }, [iracingId, displayName, addVisited]);
 
   return null;
 };
