@@ -44,7 +44,6 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
 
   // Navigate on change
   useEffect(() => {
-    console.log("change", config);
     router.push(
       `?year=${config.year}&season=${config.season}&category=${config.category}`
     );
