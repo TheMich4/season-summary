@@ -12,7 +12,6 @@ import {
 import { ChartData } from "iracing-api";
 import { useMemo } from "react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
-import { useTheme } from "next-themes";
 
 const CustomTooltip = ({
   active,
@@ -23,8 +22,15 @@ const CustomTooltip = ({
 }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-md border bg-slate-800 p-2 text-white" border-0>
-        <p>{payload[0].value}</p>
+      <div className="rounded-md border bg-background p-2 grid grid-cols-2 text-muted-foreground gap-2">
+        <div>
+          <div className="text-xs">AVERAGE</div>
+          <div className="font-bold">{payload[1].value}</div>
+        </div>
+        <div>
+          <div className="text-xs">IRATING</div>
+          <div className="font-bold text-foreground">{payload[0].value}</div>
+        </div>
       </div>
     );
   }
@@ -41,10 +47,26 @@ export const IratingChart = ({
 
   const data = useMemo(
     () =>
-      chartData?.map((cd) => ({
-        ...cd,
-        when: new Date(cd.when).toDateString(),
-      })),
+      chartData?.reduce(
+        (acc, cd, index) => [
+          ...acc,
+          {
+            ...cd,
+            when: new Date(cd.when).toDateString(),
+            index,
+            avg:
+              index === 0
+                ? cd.value
+                : Math.round(
+                    chartData
+                      .slice(0, index + 1)
+                      ?.reduce((a, b) => a + b.value, 0) /
+                      (index + 1)
+                  ),
+          },
+        ],
+        [] as Array<ChartData>
+      ),
     [chartData]
   );
   const { min, max } = useMemo(() => {
@@ -60,13 +82,21 @@ export const IratingChart = ({
   return (
     <div className="flex w-full max-w-full self-center rounded-md border sm:w-full sm:max-w-md md:max-w-full bg-card">
       <ResponsiveContainer height={200}>
-        <LineChart height={250} data={chartData}>
+        <LineChart height={250} data={data}>
           <Line
             type="monotone"
             dataKey="value"
             stroke={theme.colors?.primary.DEFAULT}
-            dot={false}
+            dot={true}
             strokeWidth={2}
+          />
+          <Line
+            className="opacity-25"
+            type="monotone"
+            dataKey="avg"
+            stroke={theme.colors?.primary.DEFAULT}
+            dot={true}
+            strokeWidth={1}
           />
           <XAxis dataKey="when" hide />
           <YAxis domain={[min, max]} hide />
