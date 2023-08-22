@@ -87,7 +87,7 @@ export const IratingChart = ({
             type="monotone"
             dataKey="value"
             stroke={theme.colors?.primary.DEFAULT}
-            dot={{ fill: false }}
+            dot={true}
             strokeWidth={2}
           />
           <Line
@@ -95,7 +95,7 @@ export const IratingChart = ({
             type="monotone"
             dataKey="avg"
             stroke={theme.colors?.primary.DEFAULT}
-            dot={{ fill: false }}
+            dot={true}
             strokeWidth={1}
           />
           <XAxis dataKey="when" hide />
