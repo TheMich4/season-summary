@@ -4,11 +4,11 @@ import { Frown } from "lucide-react";
 import { SeasonSwitch } from "../components/profile/season-switch";
 import { VisitedManager } from "../components/profile/visited-manager";
 import { MemberRecap } from "../components/profile/member-recap";
-import { CategorySwitch } from "@/components/profile/category-switch";
 import { IratingChart } from "../components/profile/irating-chart";
 import { IracingStats } from "@/components/profile/iracing-stats";
 import { RaceList } from "@/components/profile/race-list";
 import { Favorite } from "@/components/profile/favorite";
+import { ProfileHeader } from "@/components/profile/profile-header";
 
 interface ProfileProps {
   iracingId: string;
@@ -79,31 +79,16 @@ export const Profile = async ({
         displayName={memberData?.displayName}
       />
 
-      <SeasonSwitch
+      <ProfileHeader
+        memberData={memberData}
         iracingId={iracingId}
         season={season}
         year={year}
         category={category}
       />
-
-      <div className="flex flex-col justify-center gap-2 md:flex-row">
-        <div className="text-center text-3xl font-extrabold leading-tight tracking-tighter">
-          {memberData?.displayName}
-        </div>
-        <div className="flex items-center justify-center text-end text-sm dark:text-primary text-foreground/80">
-          ({memberData?.clubName})
-        </div>
-      </div>
 
       <MemberRecap memberRecap={memberRecap} />
       <Favorite memberRecap={memberRecap} />
-
-      <CategorySwitch
-        category={category}
-        iracingId={iracingId}
-        season={season}
-        year={year}
-      />
 
       <IratingChart chartData={chartData} />
       <IracingStats

@@ -4,6 +4,8 @@ import { Frown } from "lucide-react";
 import { type Result } from "iracing-api/lib/types/results";
 import { useMemo } from "react";
 import { Stat } from "./stat";
+import { useConfig } from "../providers/config-provider";
+import { categoryToName } from "@/config/category";
 
 // TODO: Fix when iracing-api type is updated
 // TODO: Refactor
@@ -39,6 +41,8 @@ export const IracingStats = ({
   lastRace: Result | undefined;
   iracingId: string;
 }) => {
+  const { category } = useConfig();
+
   const { busiestDay, mostRaces } = useMemo(() => {
     const racesPerDay = seasonResults.reduce((acc, result) => {
       const date = result.startTime.split("T")[0] as string;
@@ -106,10 +110,10 @@ export const IracingStats = ({
 
   if (!seasonResults?.length)
     return (
-      <div className="flex flex-row gap-2 self-center text-center text-xl">
-        <span>{"You don't have any data for this category"}</span>
+      <span className="flex flex-row gap-2 self-center text-center text-xl">
+        <span>{`You don't have any ${categoryToName[category]} data for this season`}</span>
         <Frown className="h-5 w-5 self-center" />
-      </div>
+      </span>
     );
 
   return (

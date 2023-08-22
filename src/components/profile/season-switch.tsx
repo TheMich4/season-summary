@@ -1,5 +1,3 @@
-"use client";
-
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
@@ -45,7 +43,7 @@ export const SeasonSwitch = ({
 
   return (
     <div className="flex flex-row items-center justify-center gap-2 rounded-md">
-      <Link href={`/driver/${iracingId}${getPreviousSeason()}`} prefetch>
+      <Link href={getPreviousSeason()} prefetch>
         <Button
           size="xs"
           variant="outline"
@@ -61,7 +59,7 @@ export const SeasonSwitch = ({
         <span className="font-bold dark:text-primary">{season}</span>
       </span>
 
-      <Link href={`/driver/${iracingId}/${getNextSeason()}`} prefetch>
+      <Link href={getNextSeason()} prefetch>
         <Button
           size="xs"
           variant="outline"
