@@ -1,5 +1,3 @@
-"use client";
-
 import { Category, categoryToName } from "@/config/category";
 import {
   DropdownMenu,
@@ -13,10 +11,13 @@ import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useConfig } from "../providers/config-provider";
 
+// TODO: Add loader
 export const CategoryDropdown = () => {
-  const { category, setCategory } = useConfig();
+  const { category, updateConfig } = useConfig();
 
-  console.log({ category });
+  const handleClick = (category: Category) => {
+    updateConfig({ category });
+  };
 
   return (
     <DropdownMenu>
@@ -33,7 +34,7 @@ export const CategoryDropdown = () => {
       <DropdownMenuContent>
         {Object.entries(categoryToName).map(([cat, catName]) => (
           <DropdownMenuItem asChild key={catName}>
-            <span onClick={() => setCategory(cat as Category)}>{catName}</span>
+            <span onClick={() => handleClick(cat as Category)}>{catName} </span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

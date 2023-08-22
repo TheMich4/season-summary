@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 
-import { ConfigProvider } from "@/components/providers/config-provider";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
@@ -38,15 +37,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ConfigProvider>
-            <VisitedProvider>
-              <div className="relative flex min-h-screen flex-col">
-                <SiteHeader />
-                <div className="flex-1">{children}</div>
-              </div>
-              <TailwindIndicator />
-            </VisitedProvider>
-          </ConfigProvider>
+          <VisitedProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <SiteHeader />
+              <div className="flex-1">{children}</div>
+            </div>
+            <TailwindIndicator />
+          </VisitedProvider>
         </ThemeProvider>
 
         <GoogleAnalytics />
