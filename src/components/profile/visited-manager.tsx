@@ -14,7 +14,9 @@ export const VisitedManager = ({
 
   useEffect(() => {
     addVisited({ iracingId, name: displayName ?? "" });
-  }, [iracingId, displayName, addVisited]);
+    // Reason: Infinite loop when adding addVisited to dependencies
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [iracingId, displayName]);
 
   return null;
 };
