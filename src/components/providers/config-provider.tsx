@@ -6,7 +6,7 @@ import {
   DEFAULT_SEASON,
   DEFAULT_YEAR,
 } from "@/config/iracing";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   type ReactNode,
   createContext,
@@ -35,6 +35,7 @@ export const ConfigContext = createContext({
 // TODO: Add saving favorite category
 export const ConfigProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [config, setConfig] = useState<Config>(DEFAULT_CONFIG);
 
   const updateConfig = (newConfig: Partial<Config>) => {
@@ -44,11 +45,13 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
 
   // Navigate on change
   useEffect(() => {
-    router.push(
-      `?year=${config.year}&season=${config.season}&category=${config.category}`
-    );
+    const year = Number(searchParams.get("year")) ?? config.year;
+    const season = Number(searchParams.get("season")) ?? config.season;
+    const category = config.category;
+
+    router.push(`?year=${year}&season=${season}&category=${category}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [config.category, config.season, config.year]);
+  }, [config.category]);
 
   return (
     <ConfigContext.Provider value={{ ...config, updateConfig }}>
