@@ -1,3 +1,4 @@
+import { CategoryDropdown } from "./category-dropdown";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { MainNav } from "./main-nav";
@@ -12,6 +13,8 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
+            <CategoryDropdown />
+
             <Link
               href={siteConfig.links.github}
               target="_blank"
