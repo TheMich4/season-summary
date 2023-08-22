@@ -31,7 +31,7 @@ export const Profile = async ({
     firstRace,
     lastRace,
     error,
-  } = await getIracingData(iracingId, parseInt(year, season, category);
+  } = await getIracingData(iracingId, year, season, category);
 
   if (error) {
     return (
