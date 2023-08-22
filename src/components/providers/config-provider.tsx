@@ -45,9 +45,11 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
 
   // Navigate on change
   useEffect(() => {
-    const year = Number(searchParams.get("year")) ?? config.year;
-    const season = Number(searchParams.get("season")) ?? config.season;
+    const year = Number(searchParams.get("year")) || config.year;
+    const season = Number(searchParams.get("season")) || config.season;
     const category = config.category;
+
+    console.log({ year, season, category, config });
 
     router.push(`?year=${year}&season=${season}&category=${category}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
