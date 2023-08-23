@@ -95,7 +95,7 @@ export const IratingChart = ({
             type="monotone"
             dataKey="avg"
             stroke={theme.colors?.primary.DEFAULT}
-            dot={true}
+            dot={false}
             strokeWidth={1}
           />
           <XAxis dataKey="when" hide />
