@@ -1,14 +1,18 @@
 "use client";
 
+import { Button, buttonVariants } from "../ui/button";
 import { Category, categoryToName } from "@/config/category";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 import { useEffect, useMemo, useState } from "react";
 
-import { Button } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-
-const racesPerPage = 10;
 
 const createResultUrl = (subsessionId: number, iracingId: string | number) =>
   `https://members.iracing.com/membersite/member/EventResult.do?subsessionid=${subsessionId}&custid=${iracingId}`;
@@ -66,15 +70,16 @@ export const RaceList = ({
   iracingId: string;
   category: Category;
 }) => {
+  const [racesPerPage, setRacePerPage] = useState(10);
   const numberOfPages = useMemo(() => {
     const numberOfRaces = seasonResults?.length ?? 0;
     return Math.ceil(numberOfRaces / racesPerPage);
-  }, [seasonResults]);
+  }, [seasonResults, racesPerPage]);
   const [page, setPage] = useState(0);
 
   useEffect(() => {
     setPage(0);
-  }, [seasonResults, numberOfPages]);
+  }, [seasonResults, numberOfPages, racesPerPage]);
 
   if (!seasonResults?.length) return null;
 
@@ -89,12 +94,13 @@ export const RaceList = ({
         Your {categoryToName[category]} races this season:
       </span>
 
-      {numberOfPages > 1 && (
-        <div className="flex flex-row justify-center gap-1">
-          <div className="space-x-1 self-center">
-            <span className="self-center font-bold">{`Page: ${page + 1}`}</span>
-            <span className="self-center text-xs">{`(of ${numberOfPages})`}</span>
-          </div>
+      <div className="flex flex-col sm:flex-row justify-center gap-1">
+        <div className="space-x-1 self-center">
+          <span className="self-center font-bold">{`Page: ${page + 1}`}</span>
+          <span className="self-center text-xs">{`(of ${numberOfPages})`}</span>
+        </div>
+
+        <div className="justify-center flex gap-1">
           <Button
             size="xs"
             variant="outline"
@@ -111,8 +117,27 @@ export const RaceList = ({
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              className={cn(
+                buttonVariants({ variant: "outline", size: "xs" }),
+                "gap-1"
+              )}
+            >
+              <ChevronDown className="h-4 w-4" />
+              {racesPerPage} per page
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent>
+              {[10, 20, 50, 100].map((n) => (
+                <DropdownMenuItem asChild key={n}>
+                  <span onClick={() => setRacePerPage(n)}>{n} </span>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
-      )}
+      </div>
 
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
         {seasonResults

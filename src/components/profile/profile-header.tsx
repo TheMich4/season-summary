@@ -22,7 +22,7 @@ export const ProfileHeader = ({
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-3 mb-2 gap-2">
       <div className="flex flex-col sm:flex-row gap-1 sm:gap-2 justify-self-center md:justify-self-start order-3 md:order-1 text-ellipsis items-baseline">
-        <p className="text-3xl font-extrabold leading-tight tracking-tighter">
+        <p className="text-3xl font-extrabold leading-tight tracking-tighter text-ellipsis">
           {memberData?.displayName ?? ""}
         </p>
         <p className="flex items-center justify-center self-center sm:self-auto text-sm dark:text-primary text-foreground/80">
