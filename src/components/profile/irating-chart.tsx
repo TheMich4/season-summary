@@ -78,7 +78,6 @@ export const IratingChart = ({
 
   if (!chartData?.length || chartData.length === 1) return null;
 
-  // TODO: Fix this class to be responsive
   return (
     <div className="flex w-full max-w-full self-center rounded-md border sm:w-full sm:max-w-md md:max-w-full bg-card">
       <ResponsiveContainer height={200}>
@@ -91,7 +90,7 @@ export const IratingChart = ({
             strokeWidth={2}
           />
           <Line
-            className="opacity-25"
+            className="opacity-50"
             type="monotone"
             dataKey="avg"
             stroke={theme.colors?.primary.DEFAULT}
