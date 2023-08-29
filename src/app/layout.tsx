@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/nav/site-header";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { VisitedProvider } from "@/components/providers/visited-provider";
+import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -35,7 +36,12 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={cn(
+          inter.className,
+          "scrollbar-thumb-foreground scrollbar-track-background dark:scrollbar-thumb-primary scrollbar-thin"
+        )}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <VisitedProvider>
             <div className="relative flex min-h-screen flex-col">
