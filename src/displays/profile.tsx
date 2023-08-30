@@ -9,6 +9,7 @@ import { IracingStats } from "@/components/profile/iracing-stats";
 import { RaceList } from "@/components/profile/race-list";
 import { Favorite } from "@/components/profile/favorite";
 import { ProfileHeader } from "@/components/profile/profile-header";
+import { NewStats } from "@/components/profile/new-stats";
 
 interface ProfileProps {
   iracingId: string;
@@ -98,6 +99,7 @@ export const Profile = async ({
         lastRace={lastRace}
         iracingId={iracingId}
       />
+      <NewStats seasonResults={seasonResults} />
       <RaceList
         seasonResults={seasonResults}
         iracingId={iracingId}
