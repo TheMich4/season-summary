@@ -49,8 +49,6 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
     const season = Number(searchParams.get("season")) || config.season;
     const category = config.category;
 
-    console.log({ year, season, category, config });
-
     router.push(`?year=${year}&season=${season}&category=${category}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config.category]);

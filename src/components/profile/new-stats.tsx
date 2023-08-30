@@ -18,8 +18,6 @@ export const NewStats = ({
   // TODO: types
   seasonResults: Array<any>;
 }) => {
-  console.log("seasonResults", { seasonResults });
-
   const stats = useMemo(() => {
     return seasonResults.reduce(
       (acc, result, index) => {
@@ -74,8 +72,6 @@ export const NewStats = ({
       }
     );
   }, [seasonResults]);
-
-  console.log({ ...stats });
 
   return (
     <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-6">
