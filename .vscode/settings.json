@@ -6,6 +6,7 @@
     "Lucide",
     "nocompatible",
     "subsession",
-    "tailwindcss"
+    "tailwindcss",
+    "tanstack"
   ]
 }
