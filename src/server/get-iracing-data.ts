@@ -5,6 +5,9 @@ import { Category, categoryToId } from "@/config/category";
 import IracingAPI from "iracing-api";
 import { env } from "@/env.mjs";
 
+let ir: IracingAPI | undefined = undefined;
+let lastLogin: Date | undefined = undefined;
+
 export const getIracingData = async (
   iracingId: string,
   year: number,
@@ -14,10 +17,23 @@ export const getIracingData = async (
   try {
     const categoryId = categoryToId[category];
 
-    const ir = new IracingAPI();
-    await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD);
+    if (!ir) {
+      ir = new IracingAPI();
+    }
+
+    // Re-login every hour
+    if (
+      !lastLogin ||
+      new Date().getTime() - lastLogin.getTime() > 1000 * 60 * 60
+    ) {
+      console.log("!!! Logging into iracing");
+      await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD);
+      lastLogin = new Date();
+    }
 
     const customerId = parseInt(iracingId, 10);
+
+    console.log("!!! Getting iracing data for ", customerId);
 
     const [memberData, memberRecap, chartData, seasonResults] =
       await Promise.all([
@@ -78,6 +94,9 @@ export const getIracingData = async (
       lastRace,
     };
   } catch (e) {
+    ir = undefined;
+    lastLogin = undefined;
+
     console.log(e);
     return { error: "Error getting iRacing data" };
   }
