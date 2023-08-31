@@ -1,4 +1,5 @@
 import { RaceSummary } from "@/components/race/race-summary";
+import { ResultTable } from "@/components/race/result-table/result-table";
 import { getRaceResult } from "@/server/get-race-result";
 
 export const Result = async ({ subsessionId }) => {
@@ -21,6 +22,8 @@ export const Result = async ({ subsessionId }) => {
       </div>
 
       <RaceSummary result={result} />
+
+      <ResultTable result={result} />
     </div>
   );
 };
