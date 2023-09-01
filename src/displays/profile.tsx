@@ -10,6 +10,7 @@ import { RaceList } from "@/components/profile/race-list";
 import { Favorite } from "@/components/profile/favorite";
 import { ProfileHeader } from "@/components/profile/profile-header";
 import { NewStats } from "@/components/profile/new-stats";
+import { getPreviousSeasonData } from "@/server/get-previous-season-data";
 
 interface ProfileProps {
   iracingId: string;
@@ -31,6 +32,7 @@ export const Profile = async ({
     seasonResults,
     firstRace,
     lastRace,
+    previousSeasonStats,
     error,
   } = await getIracingData(iracingId, year, season, category);
 
@@ -88,7 +90,10 @@ export const Profile = async ({
         category={category}
       />
 
-      <MemberRecap memberRecap={memberRecap} />
+      <MemberRecap
+        memberRecap={memberRecap}
+        previousSeasonStats={previousSeasonStats}
+      />
       <Favorite memberRecap={memberRecap} />
 
       <IratingChart chartData={chartData} />

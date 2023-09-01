@@ -85,29 +85,6 @@ export const IracingStats = ({
     return { startIR, finishIR, delta };
   }, [firstRace, lastRace, chartData, iracingId]);
 
-  const FinishIRNode = useMemo(() => {
-    if (isNaN(delta) || delta === 0) return finishIR;
-    if (delta > 0) {
-      return (
-        <>
-          {finishIR}
-          <span className="ml-1 flex self-center text-sm text-green-600">
-            (+{delta})
-          </span>
-        </>
-      );
-    } else {
-      return (
-        <>
-          {finishIR}
-          <span className="ml-1 flex self-center text-sm text-red-600">
-            ({delta})
-          </span>
-        </>
-      );
-    }
-  }, [finishIR, delta]);
-
   if (!seasonResults?.length)
     return (
       <span className="flex flex-row gap-2 self-center text-center text-xl">
@@ -121,7 +98,7 @@ export const IracingStats = ({
       <Stat name="Busiest day" value={busiestDay} />
       <Stat name="Most races" value={mostRaces} />
       <Stat name="Start iRating" value={startIR} />
-      <Stat name="Finish iRating" value={FinishIRNode} />
+      <Stat name="Finish iRating" value={finishIR} previous={startIR} />
     </div>
   );
 };

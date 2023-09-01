@@ -6,6 +6,26 @@ import {
   resetIracingAPIClient,
 } from "./iracing-api";
 
+import { getPreviousSeason } from "@/lib/get-previous-season";
+
+const getPreviousSeasonStats = (
+  memberRecap: Record<string, any> | undefined
+) => {
+  if (!memberRecap) {
+    return {};
+  }
+
+  return {
+    avgFinishPosition: memberRecap.avgFinishPosition,
+    avgStartPosition: memberRecap.avgStartPosition,
+    laps: memberRecap.laps,
+    lapsLed: memberRecap.lapsLed,
+    starts: memberRecap.starts,
+    top5: memberRecap.top5,
+    wins: memberRecap.wins,
+  };
+};
+
 export const getIracingData = async (
   iracingId: string,
   year: number,
@@ -14,35 +34,52 @@ export const getIracingData = async (
 ) => {
   try {
     const categoryId = categoryToId[category];
+    const customerId = parseInt(iracingId, 10);
+    const { year: previousYear, season: previousSeason } = getPreviousSeason(
+      year,
+      season
+    );
 
     const ir = await getLoggedInIracingAPIClient();
 
-    const customerId = parseInt(iracingId, 10);
+    console.log(
+      "!!! Getting iracing data for ",
+      customerId,
+      `(${year}/${season})`
+    );
 
-    console.log("!!! Getting iracing data for ", customerId);
-
-    const [memberData, memberRecap, chartData, seasonResults] =
-      await Promise.all([
-        ir.getMemberData({ customerIds: [customerId] }),
-        ir.getMemberRecap({
-          customerId,
-          year,
-          season,
-        }),
-        ir.getMemberChartData({
-          customerId,
-          chartType: 1,
-          categoryId,
-        }),
-        ir.searchSeries({
-          seasonYear: year,
-          seasonQuarter: season,
-          customerId,
-          officialOnly: true,
-          eventTypes: [5],
-          categoryIds: [categoryId],
-        }),
-      ]);
+    const [
+      memberData,
+      memberRecap,
+      chartData,
+      seasonResults,
+      previousSeasonRecap,
+    ] = await Promise.all([
+      ir.getMemberData({ customerIds: [customerId] }),
+      ir.getMemberRecap({
+        customerId,
+        year,
+        season,
+      }),
+      ir.getMemberChartData({
+        customerId,
+        chartType: 1,
+        categoryId,
+      }),
+      ir.searchSeries({
+        seasonYear: year,
+        seasonQuarter: season,
+        customerId,
+        officialOnly: true,
+        eventTypes: [5],
+        categoryIds: [categoryId],
+      }),
+      ir.getMemberRecap({
+        customerId,
+        year: previousYear,
+        season: previousSeason,
+      }),
+    ]);
 
     const firstRaceDate = new Date(
       seasonResults?.[0]?.startTime?.split("T")[0]
@@ -65,6 +102,10 @@ export const getIracingData = async (
         subsessionId: seasonResults?.[seasonResults?.length - 1].subsessionId,
       }));
 
+    const previousSeasonStats = getPreviousSeasonStats(
+      previousSeasonRecap?.stats as any
+    );
+
     return {
       memberData: memberData?.members?.[0],
       memberRecap: memberRecap?.stats,
@@ -78,6 +119,7 @@ export const getIracingData = async (
       seasonResults,
       firstRace,
       lastRace,
+      previousSeasonStats,
     };
   } catch (e) {
     resetIracingAPIClient();
