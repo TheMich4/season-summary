@@ -1,4 +1,4 @@
-import { Change } from "./change";
+import { Delta } from "@/components/common/Delta";
 import { Interval } from "./interval";
 import { createColumnHelper } from "@tanstack/react-table";
 
@@ -12,13 +12,13 @@ export const getColumns = (result) => [
   columnHelper.accessor("finishPositionInClass", {
     cell: ({ getValue, row }) => (
       <span className="flex flex-row gap-2 items-baseline">
-        {getValue() + 1}
-        <Change
-          change={
-            row.original.startingPositionInClass -
-            row.original.finishPositionInClass
-          }
-        />
+        <p>{getValue() + 1}</p>
+        <p className="text-xs">
+          <Delta
+            value={row.original.finishPositionInClass}
+            previous={row.original.startingPositionInClass}
+          />
+        </p>
       </span>
     ),
     header: "Class",
@@ -50,8 +50,13 @@ export const getColumns = (result) => [
     header: "iRating",
     cell: ({ getValue, row }) => (
       <span className="flex flex-row gap-2 items-baseline">
-        {getValue()}
-        <Change change={row.original.newiRating - row.original.oldiRating} />
+        <p>{getValue()}</p>
+        <p className="text-xs">
+          <Delta
+            previous={row.original.oldiRating}
+            value={row.original.newiRating}
+          />
+        </p>
       </span>
     ),
   }),
