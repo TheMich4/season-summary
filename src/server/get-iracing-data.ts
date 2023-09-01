@@ -82,7 +82,6 @@ export const getIracingData = async (
   } catch (e) {
     resetIracingAPIClient();
 
-    console.log(e);
     return { error: "Error getting iRacing data" };
   }
 };

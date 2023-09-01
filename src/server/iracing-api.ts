@@ -3,8 +3,8 @@
 import IracingAPI from "iracing-api";
 import { env } from "@/env.mjs";
 
-export let ir: IracingAPI | undefined = undefined;
-export let lastLogin: Date | undefined = undefined;
+let ir: IracingAPI | undefined = undefined;
+let lastLogin: Date | undefined = undefined;
 
 export const getLoggedInIracingAPIClient = async () => {
   if (!ir) {
