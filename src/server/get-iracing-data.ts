@@ -4,7 +4,7 @@ import { Category, categoryToId } from "@/config/category";
 import {
   getLoggedInIracingAPIClient,
   resetIracingAPIClient,
-} from "./iracing-api";
+} from "./store/iracing-api";
 
 import { getPreviousSeason } from "@/lib/get-previous-season";
 

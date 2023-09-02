@@ -11,6 +11,7 @@ import { Favorite } from "@/components/profile/favorite";
 import { ProfileHeader } from "@/components/profile/profile-header";
 import { NewStats } from "@/components/profile/new-stats";
 import { getPreviousSeasonData } from "@/server/get-previous-season-data";
+import { url } from "@/config/site";
 
 interface ProfileProps {
   iracingId: string;
@@ -25,18 +26,12 @@ export const Profile = async ({
   year,
   category,
 }: ProfileProps) => {
-  const {
-    memberData,
-    memberRecap,
-    chartData,
-    seasonResults,
-    firstRace,
-    lastRace,
-    previousSeasonStats,
-    error,
-  } = await getIracingData(iracingId, year, season, category);
+  const test = await fetch(
+    `${url}/api/season-data?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
+  );
+  const { data } = await test.json();
 
-  if (error) {
+  if (!data || data.error) {
     return (
       <div className="flex w-full flex-col gap-2">
         <SeasonSwitch
@@ -52,6 +47,16 @@ export const Profile = async ({
       </div>
     );
   }
+
+  const {
+    memberData,
+    memberRecap,
+    chartData,
+    seasonResults,
+    previousSeasonStats,
+    firstRace,
+    lastRace,
+  } = data;
 
   if (!memberRecap || memberRecap.starts === 0) {
     return (
