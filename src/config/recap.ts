@@ -7,3 +7,13 @@ export const recapKeyToName = {
   laps: "Laps",
   lapsLed: "Laps Led",
 };
+
+export const recapKeyToInvert = {
+  starts: false,
+  wins: false,
+  top5: false,
+  avgStartPosition: true,
+  avgFinishPosition: true,
+  laps: false,
+  lapsLed: false,
+};

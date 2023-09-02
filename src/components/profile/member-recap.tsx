@@ -1,7 +1,8 @@
 "use client";
 
+import { recapKeyToInvert, recapKeyToName } from "@/config/recap";
+
 import { Stat } from "@/components/profile/stat";
-import { recapKeyToName } from "@/config/recap";
 
 type MemberRecapValue = keyof typeof recapKeyToName;
 
@@ -16,6 +17,7 @@ export const MemberRecap = ({ memberRecap = {}, previousSeasonStats = {} }) => {
             value={value as number}
             key={key}
             previous={previousSeasonStats[key as MemberRecapValue]}
+            invert={recapKeyToInvert[key as MemberRecapValue]}
           />
         ))}
     </div>

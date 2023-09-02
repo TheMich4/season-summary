@@ -5,7 +5,9 @@ export const Stat = ({
   name,
   previous,
   value,
+  invert,
 }: {
+  invert?: boolean;
   name: string;
   previous?: string | number | ReactNode;
   value: string | number | ReactNode;
