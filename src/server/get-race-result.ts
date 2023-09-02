@@ -1,6 +1,6 @@
 "use server";
 
-import { getLoggedInIracingAPIClient } from "./iracing-api";
+import { getLoggedInIracingAPIClient } from "./store/iracing-api";
 
 export const getRaceResult = async (subsessionId: string | number) => {
   const ir = await getLoggedInIracingAPIClient();

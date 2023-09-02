@@ -17,3 +17,8 @@ export const siteConfig = {
     github: "https://github.com/themich4/season-summary",
   },
 };
+
+export const url =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:3000"
+    : "https://season-summary.dyczkowski.dev";
