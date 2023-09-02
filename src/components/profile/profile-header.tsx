@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+
 import { CategoryDropdown } from "./category-dropdown";
 import { SeasonSwitch } from "./season-switch";
 import { useConfig } from "../providers/config-provider";
@@ -52,7 +59,17 @@ export const ProfileHeader = ({
           <CategoryDropdown />
         </div>
       </div>
-      <p className="text-xs self-end text-gray-400">{`Last updated: ${lastFetchString}`}</p>
+
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger className="self-end">
+            <div className="text-xs text-gray-400">{`Last updated: ${lastFetchString}`}</div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Your data is updated at most one time in 24 hours.</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </div>
   );
 };
