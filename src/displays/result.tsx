@@ -10,7 +10,24 @@ export const Result = async ({ subsessionId }) => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full">
+      <div className="text-sm items-center flex flex-col border rounded-md p-2">
+        <p className="text-red-400">This page is a work in progress!</p>
+        <p>
+          {" "}
+          If you have any feedback or ideas, please let me know on{" "}
+          <a
+            href="https://github.com/themich4/season-summary"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary"
+          >
+            Github
+          </a>
+          .
+        </p>
+      </div>
+
       <div className="flex flex-col md:flex-row gap-1 md:items-baseline items-center justify-center">
         <p className="text-2xl font-extrabold leading-tight tracking-tighter text-primary">
           {result.seriesName}
