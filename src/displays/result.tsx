@@ -12,8 +12,8 @@ export const Result = async ({ subsessionId }) => {
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <div className="text-sm items-center flex flex-col border rounded-md p-2">
-        <p className="text-red-500 font-bold">
+      <div className="text-sm items-center flex flex-col border rounded-md p-2 text-balance text-center">
+        <p className="text-red-500 font-bold mb-1">
           This page is a work in progress!
         </p>
         <p>

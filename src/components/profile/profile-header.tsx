@@ -62,7 +62,7 @@ export const ProfileHeader = ({
 
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger className="self-end">
+          <TooltipTrigger className="self-center md:self-end">
             <div className="text-xs text-gray-400">{`Last updated: ${lastFetchString}`}</div>
           </TooltipTrigger>
           <TooltipContent>

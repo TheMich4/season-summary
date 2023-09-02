@@ -15,7 +15,7 @@ export const Stat = ({
   return (
     <div className="flex flex-col gap-1 rounded-md border p-2 bg-card/80 text-card-foreground">
       <div className="text-center text-lg font-semibold">{name}:</div>
-      <div className="flex flex-row items-baseline gap-1 justify-center">
+      <div className="flex flex-row md:flex-col lg:flex-row items-baseline gap-1 justify-center md:items-center lg:items-baseline">
         <p className="items-center flex h-full justify-center text-center text-3xl font-bold text-accent-foreground">
           {value}
         </p>
