@@ -15,6 +15,7 @@ export const siteConfig = {
   ],
   links: {
     github: "https://github.com/themich4/season-summary",
+    twitter: "https://twitter.com/SeasonSummary",
   },
 };
 

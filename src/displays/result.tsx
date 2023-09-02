@@ -1,6 +1,7 @@
 import { RaceSummary } from "@/components/race/race-summary";
 import { ResultTable } from "@/components/race/result-table/result-table";
 import { getRaceResult } from "@/server/get-race-result";
+import { siteConfig } from "@/config/site";
 
 export const Result = async ({ subsessionId }) => {
   const result = await getRaceResult(subsessionId);
@@ -12,17 +13,30 @@ export const Result = async ({ subsessionId }) => {
   return (
     <div className="flex flex-col gap-2 w-full">
       <div className="text-sm items-center flex flex-col border rounded-md p-2">
-        <p className="text-red-400">This page is a work in progress!</p>
+        <p className="text-red-500 font-bold">
+          This page is a work in progress!
+        </p>
         <p>
-          {" "}
           If you have any feedback or ideas, please let me know on{" "}
           <a
-            href="https://github.com/themich4/season-summary"
+            href={siteConfig.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary"
+            className="text-primary font-bold"
           >
             Github
+          </a>
+          .
+        </p>
+        <p>
+          Or contact me on{" "}
+          <a
+            href={siteConfig.links.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary font-bold"
+          >
+            Twitter
           </a>
           .
         </p>
