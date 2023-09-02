@@ -17,6 +17,7 @@ export const getColumns = (result) => [
           <Delta
             value={row.original.finishPositionInClass}
             previous={row.original.startingPositionInClass}
+            invert
           />
         </p>
       </span>

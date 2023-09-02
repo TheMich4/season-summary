@@ -1,22 +1,27 @@
 export const Delta = ({
   value,
   previous,
+  invert = false,
 }: {
   value: number;
   previous: number;
+  invert?: boolean;
 }) => {
-  if (value > previous) {
+  const expectedHigh = invert ? previous : value;
+  const expectedLow = invert ? value : previous;
+
+  if (expectedHigh > expectedLow) {
     return (
       <p className="text-green-500 flex flex-row">
         <p>↑</p>
-        {value - previous}
+        {expectedHigh - expectedLow}
       </p>
     );
-  } else if (value < previous) {
+  } else if (expectedHigh < expectedLow) {
     return (
       <p className="text-red-500 flex flex-row">
         <p>↓</p>
-        {previous - value}
+        {expectedLow - expectedHigh}
       </p>
     );
   }
