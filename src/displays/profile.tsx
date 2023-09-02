@@ -1,5 +1,4 @@
 import { type Category } from "@/config/category";
-import { getIracingData } from "@/server/get-iracing-data";
 import { Frown } from "lucide-react";
 import { SeasonSwitch } from "../components/profile/season-switch";
 import { VisitedManager } from "../components/profile/visited-manager";
@@ -10,7 +9,6 @@ import { RaceList } from "@/components/profile/race-list";
 import { Favorite } from "@/components/profile/favorite";
 import { ProfileHeader } from "@/components/profile/profile-header";
 import { NewStats } from "@/components/profile/new-stats";
-import { getPreviousSeasonData } from "@/server/get-previous-season-data";
 import { url } from "@/config/site";
 
 interface ProfileProps {
@@ -29,7 +27,7 @@ export const Profile = async ({
   const test = await fetch(
     `${url}/api/season-data?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
   );
-  const { data } = await test.json();
+  const { data, lastFetch } = await test.json();
 
   if (!data || data.error) {
     return (
@@ -93,6 +91,7 @@ export const Profile = async ({
         season={season}
         year={year}
         category={category}
+        lastFetch={lastFetch}
       />
 
       <MemberRecap
