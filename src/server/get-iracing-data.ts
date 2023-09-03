@@ -6,7 +6,7 @@ import {
   resetIracingAPIClient,
 } from "./store/iracing-api";
 
-import { getPreviousSeason } from "@/lib/get-previous-season";
+import { getPreviousSeason } from "@/lib/season";
 
 const getPreviousSeasonStats = (
   memberRecap: Record<string, any> | undefined
