@@ -80,7 +80,7 @@ export const Search = () => {
             control={form.control}
             name="searchTerm"
             render={({ field }) => (
-              <FormItem className="w-full min-w-64">
+              <FormItem className="min-w-64 w-full">
                 <FormControl>
                   <Input
                     placeholder="Search for iRacing profile"

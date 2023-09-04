@@ -12,14 +12,14 @@ export const Delta = ({
 
   if (expectedHigh > expectedLow) {
     return (
-      <p className="text-green-500 flex flex-row">
+      <p className="flex flex-row text-green-500">
         <p>↑</p>
         {expectedHigh - expectedLow}
       </p>
     );
   } else if (expectedHigh < expectedLow) {
     return (
-      <p className="text-red-500 flex flex-row">
+      <p className="flex flex-row text-red-500">
         <p>↓</p>
         {expectedLow - expectedHigh}
       </p>

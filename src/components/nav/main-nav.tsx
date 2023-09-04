@@ -17,7 +17,7 @@ export function MainNav({ items }: MainNavProps) {
       <MobileNavMenu items={items} />
       <Link
         href="/"
-        className="hidden items-center space-x-2 md:flex dark:text-primary"
+        className="hidden items-center space-x-2 dark:text-primary md:flex"
       >
         <Icons.home className="h-6 w-6 " />
         <span className="inline-block font-bold">{siteConfig.name}</span>

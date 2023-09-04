@@ -11,9 +11,9 @@ export const Result = async ({ subsessionId }) => {
   }
 
   return (
-    <div className="flex flex-col gap-2 w-full">
-      <div className="text-sm items-center flex flex-col border rounded-md p-2 text-balance text-center">
-        <p className="text-red-500 font-bold mb-1">
+    <div className="flex w-full flex-col gap-2">
+      <div className="text-balance flex flex-col items-center rounded-md border p-2 text-center text-sm">
+        <p className="mb-1 font-bold text-red-500">
           This page is a work in progress!
         </p>
         <p>
@@ -22,7 +22,7 @@ export const Result = async ({ subsessionId }) => {
             href={siteConfig.links.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary font-bold"
+            className="font-bold text-primary"
           >
             Github
           </a>
@@ -34,7 +34,7 @@ export const Result = async ({ subsessionId }) => {
             href={siteConfig.links.twitter}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary font-bold"
+            className="font-bold text-primary"
           >
             Twitter
           </a>
@@ -42,7 +42,7 @@ export const Result = async ({ subsessionId }) => {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-1 md:items-baseline items-center justify-center">
+      <div className="flex flex-col items-center justify-center gap-1 md:flex-row md:items-baseline">
         <p className="text-2xl font-extrabold leading-tight tracking-tighter text-primary">
           {result.seriesName}
         </p>

@@ -10,7 +10,7 @@ export const FavoriteItem = ({
   value: string;
 }) => {
   return (
-    <div className="flex flex-col gap-1 rounded-md border p-2 md:w-[50%] bg-card">
+    <div className="flex flex-col gap-1 rounded-md border bg-card p-2 md:w-[50%]">
       <div className="text-center text-lg font-semibold">Favorite {type}:</div>
       <div className="flex items-start justify-center text-center  text-2xl font-bold">
         {value}

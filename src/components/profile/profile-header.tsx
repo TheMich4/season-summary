@@ -35,18 +35,18 @@ export const ProfileHeader = ({
   );
 
   return (
-    <div className="w-full flex flex-col">
-      <div className="w-full grid grid-cols-1 md:grid-cols-3 mb-2 gap-2">
-        <div className="flex flex-col sm:flex-row gap-1 sm:gap-2 justify-self-center md:justify-self-start order-3 md:order-1 text-ellipsis items-baseline">
-          <p className="text-3xl font-extrabold leading-tight tracking-tighter text-ellipsis">
+    <div className="flex w-full flex-col">
+      <div className="mb-2 grid w-full grid-cols-1 gap-2 md:grid-cols-3">
+        <div className="order-3 flex flex-col items-baseline gap-1 justify-self-center text-ellipsis sm:flex-row sm:gap-2 md:order-1 md:justify-self-start">
+          <p className="text-ellipsis text-3xl font-extrabold leading-tight tracking-tighter">
             {memberData?.displayName ?? ""}
           </p>
-          <p className="flex items-center justify-center self-center sm:self-auto text-sm dark:text-primary text-foreground/80">
+          <p className="flex items-center justify-center self-center text-sm text-foreground/80 dark:text-primary sm:self-auto">
             ({memberData?.clubName ?? ""})
           </p>
         </div>
 
-        <div className="order-1 md:order-2 flex justify-center">
+        <div className="order-1 flex justify-center md:order-2">
           <SeasonSwitch
             iracingId={iracingId}
             season={season}
@@ -55,7 +55,7 @@ export const ProfileHeader = ({
           />
         </div>
 
-        <div className="md:justify-self-end align-center justify-self-center order-2 md:order-3 flex items-center">
+        <div className="align-center order-2 flex items-center justify-self-center md:order-3 md:justify-self-end">
           <CategoryDropdown />
         </div>
       </div>
