@@ -24,10 +24,10 @@ export const Profile = async ({
   year,
   category,
 }: ProfileProps) => {
-  const test = await fetch(
+  const response = await fetch(
     `${url}/api/season-data?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
   );
-  const { data, lastFetch } = await test.json();
+  const { data, lastFetch } = await response.json();
 
   if (!data || data.error) {
     return (
