@@ -1,6 +1,6 @@
 "use client";
 
-export const Test = (x) => {
-  console.log({ x });
+export const Test = ({ data }) => {
+  console.log({ data });
   return <div>Loaded</div>;
 };

@@ -1,5 +1,6 @@
 import { Test } from "@/components/extended/test";
-import { getExtendedSeasonData } from "@/server/get-extended-season-data";
+import { getExtendedSeasonData } from "@/server/extended-data";
+import { url } from "@/config/site";
 
 export const ExtendedProfile = async ({
   iracingId,
@@ -7,11 +8,14 @@ export const ExtendedProfile = async ({
   year,
   category,
 }) => {
-  const x = await getExtendedSeasonData(iracingId, year, season, category);
+  const test = await fetch(
+    `${url}/api/season-data?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
+  );
+  const { data } = await test.json();
 
   return (
     <div>
-      <Test x={x} />
+      <Test data={data} />
     </div>
   );
 };

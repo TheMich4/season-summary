@@ -1,8 +1,6 @@
 import { Category } from "@/config/category";
 import { NextResponse } from "next/server";
-import { getSeasonData } from "@/server/store/iracing-data";
-
-export const revalidate = 60 * 60; // 1 hour
+import { getExtendedSeasonData } from "@/server/extended-data";
 
 export async function GET(request: Request) {
   try {
@@ -16,14 +14,16 @@ export async function GET(request: Request) {
       return NextResponse.error();
     }
 
-    const data = await getSeasonData(
+    const extendedData = await getExtendedSeasonData(
       iracingId,
-      year,
-      season,
+      parseInt(year, 10),
+      parseInt(season, 10),
       category as Category
     );
 
-    return NextResponse.json(data);
+    console.log(extendedData);
+
+    return NextResponse.json(extendedData);
   } catch (e) {
     console.log(e);
     return NextResponse.error();
