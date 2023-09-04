@@ -89,7 +89,7 @@ export const getExtendedSeasonData = async (
     } else {
       const result = await getRaceResult(race.subsessionId);
 
-      if (result) {
+      if (result && result.track.categoryId === categoryId) {
         results.push(result);
       }
     }

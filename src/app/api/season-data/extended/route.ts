@@ -12,7 +12,8 @@ export async function GET(request: Request) {
     const category = searchParams.get("category");
 
     if (!iracingId || !year || !season || !category) {
-      return NextResponse.error();
+      return NextResponse.json(null);
+      // return NextResponse.error();
     }
 
     const results = await getExtendedSeasonData(
@@ -23,7 +24,8 @@ export async function GET(request: Request) {
     );
 
     if (!results) {
-      return NextResponse.error();
+      return NextResponse.json(null);
+      // return NextResponse.error();
     }
 
     const parsedExtendedData = "parseExtendedData(results, iracingId)";

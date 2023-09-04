@@ -1,5 +1,4 @@
 import { Test } from "@/components/extended/test";
-import { getExtendedSeasonData } from "@/server/extended-data";
 import { url } from "@/config/site";
 
 export const ExtendedProfile = async ({
@@ -11,11 +10,8 @@ export const ExtendedProfile = async ({
   const test = await fetch(
     `${url}/api/season-data/extended/?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
   );
-  const data = await test.json();
+  // TODO: Add notification that data is being fetched
+  const data = await test?.json();
 
-  return (
-    <div>
-      <Test data={data} iracingId={iracingId} />
-    </div>
-  );
+  return <Test data={data} iracingId={iracingId} />;
 };
