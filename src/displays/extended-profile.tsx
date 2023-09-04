@@ -9,13 +9,13 @@ export const ExtendedProfile = async ({
   category,
 }) => {
   const test = await fetch(
-    `${url}/api/season-data?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
+    `${url}/api/season-data/extended/?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
   );
-  const { data } = await test.json();
+  const data = await test.json();
 
   return (
     <div>
-      <Test data={data} />
+      <Test data={data} iracingId={iracingId} />
     </div>
   );
 };

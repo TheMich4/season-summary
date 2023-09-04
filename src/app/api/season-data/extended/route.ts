@@ -1,6 +1,7 @@
 import { Category } from "@/config/category";
 import { NextResponse } from "next/server";
 import { getExtendedSeasonData } from "@/server/extended-data";
+import { parseExtendedData } from "@/lib/extended-data";
 
 export async function GET(request: Request) {
   try {
@@ -14,16 +15,20 @@ export async function GET(request: Request) {
       return NextResponse.error();
     }
 
-    const extendedData = await getExtendedSeasonData(
+    const results = await getExtendedSeasonData(
       iracingId,
       parseInt(year, 10),
       parseInt(season, 10),
       category as Category
     );
 
-    console.log(extendedData);
+    if (!results) {
+      return NextResponse.error();
+    }
 
-    return NextResponse.json(extendedData);
+    const parsedExtendedData = "parseExtendedData(results, iracingId)";
+
+    return NextResponse.json({ results, parsedExtendedData });
   } catch (e) {
     console.log(e);
     return NextResponse.error();
