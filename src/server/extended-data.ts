@@ -41,12 +41,17 @@ export const getExtendedSeasonData = async (
   const categoryId = categoryToId[category];
   const extended = extendedData[customerId]?.[year]?.[season]?.[categoryId];
 
+  console.log(iracingId, {
+    isFetching: extended?.isFetching,
+    isFetched: extended?.isFetched,
+  });
+
   if (extended && extended.isFetched) {
-    return extended.data;
+    return { data: extended.data };
   }
 
   if (extended && extended.isFetching) {
-    return null;
+    return { data: null, error: "Data is fetching" };
   }
 
   extendedData[customerId] = {
@@ -76,7 +81,7 @@ export const getExtendedSeasonData = async (
   });
 
   if (!races?.length) {
-    return null;
+    return { data: null, error: "No races found" };
   }
 
   let results = [];
@@ -101,5 +106,5 @@ export const getExtendedSeasonData = async (
     data: results,
   };
 
-  return results;
+  return { data: results };
 };

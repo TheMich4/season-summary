@@ -88,7 +88,8 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
         // Races per week
         racesPerWeek: {
           ...acc.racesPerWeek,
-          [result.raceWeekNum]: (acc.racesPerWeek[result.raceWeekNum] ?? 0) + 1,
+          [result.raceWeekNum + 1]:
+            (acc.racesPerWeek[result.raceWeekNum + 1] ?? 0) + 1,
         },
       };
     },

@@ -17,7 +17,7 @@ interface DriverPageProps {
   };
 }
 
-export default function DriverPage({
+export default function ExtendedPage({
   params: { iracingId },
   searchParams: {
     year = `${DEFAULT_YEAR}`,
