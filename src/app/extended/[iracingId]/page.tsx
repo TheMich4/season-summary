@@ -27,9 +27,9 @@ export default function ExtendedPage({
   },
 }: DriverPageProps) {
   return (
-    <div className="container flex w-full items-center justify-center gap-2 py-4 flex-col">
-      <div className="border rounded-md border-red-500 p-2 w-full justify-center flex  text-balance text-center flex-col">
-        <p className="text-red-500 font-bold mb-1">
+    <div className="container flex w-full flex-col items-center justify-center gap-2 py-4">
+      <div className="text-balance flex w-full flex-col justify-center rounded-md border  border-red-500 p-2 text-center">
+        <p className="mb-1 font-bold text-red-500">
           This page is experimental!
         </p>
         <p>
@@ -43,7 +43,7 @@ export default function ExtendedPage({
             href={siteConfig.links.twitter}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary font-bold"
+            className="font-bold text-primary"
           >
             Twitter
           </a>

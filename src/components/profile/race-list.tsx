@@ -21,7 +21,7 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
   const finishPosition = result.finishPositionInClass + 1;
 
   return (
-    <div className="flex flex-row justify-between rounded-md border p-2 bg-card">
+    <div className="flex flex-row justify-between rounded-md border bg-card p-2">
       <div className="flex flex-row gap-2">
         <div
           className={cn(
@@ -82,7 +82,7 @@ export const RaceList = ({
   if (!seasonResults?.length) return null;
 
   return (
-    <div className="flex flex-col gap-2 rounded-md border p-2 bg-card">
+    <div className="flex flex-col gap-2 rounded-md border bg-card p-2">
       <span
         className={cn(
           "pt-2 text-center text-3xl font-bold",
@@ -92,13 +92,13 @@ export const RaceList = ({
         Your {categoryToName[category]} races this season:
       </span>
 
-      <div className="flex flex-col sm:flex-row justify-center gap-1">
+      <div className="flex flex-col justify-center gap-1 sm:flex-row">
         <div className="space-x-1 self-center">
           <span className="self-center font-bold">{`Page: ${page + 1}`}</span>
           <span className="self-center text-xs">{`(of ${numberOfPages})`}</span>
         </div>
 
-        <div className="justify-center flex gap-1">
+        <div className="flex justify-center gap-1">
           <Button
             size="xs"
             variant="outline"

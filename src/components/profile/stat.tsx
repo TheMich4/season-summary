@@ -13,10 +13,10 @@ export const Stat = ({
   value: string | number | ReactNode;
 }) => {
   return (
-    <div className="flex flex-col gap-1 rounded-md border p-2 bg-card/80 text-card-foreground">
+    <div className="flex flex-col gap-1 rounded-md border bg-card/80 p-2 text-card-foreground">
       <div className="text-center text-lg font-semibold">{name}:</div>
-      <div className="flex flex-row md:flex-col lg:flex-row items-baseline gap-1 justify-center md:items-center lg:items-baseline">
-        <p className="items-center flex h-full justify-center text-center text-3xl font-bold text-accent-foreground">
+      <div className="flex flex-row items-baseline justify-center gap-1 md:flex-col md:items-center lg:flex-row lg:items-baseline">
+        <p className="flex h-full items-center justify-center text-center text-3xl font-bold text-accent-foreground">
           {value}
         </p>
         {(previous || previous === 0) && (

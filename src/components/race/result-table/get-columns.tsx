@@ -11,7 +11,7 @@ export const getColumns = (result) => [
   }),
   columnHelper.accessor("finishPositionInClass", {
     cell: ({ getValue, row }) => (
-      <span className="flex flex-row gap-2 items-baseline">
+      <span className="flex flex-row items-baseline gap-2">
         <p>{getValue() + 1}</p>
         <p className="text-xs">
           <Delta
@@ -50,7 +50,7 @@ export const getColumns = (result) => [
   columnHelper.accessor("newiRating", {
     header: "iRating",
     cell: ({ getValue, row }) => (
-      <span className="flex flex-row gap-2 items-baseline">
+      <span className="flex flex-row items-baseline gap-2">
         <p>{getValue()}</p>
         <p className="text-xs">
           <Delta

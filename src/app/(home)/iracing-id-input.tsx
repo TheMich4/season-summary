@@ -48,13 +48,13 @@ export const IracingIdInput = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-col items-center justify-center gap-2 md:justify-self-center md:w-[640px] md:flex-row"
+        className="flex w-full flex-col items-center justify-center gap-2 md:w-[640px] md:flex-row md:justify-self-center"
       >
         <FormField
           control={form.control}
           name="searchTerm"
           render={({ field }) => (
-            <FormItem className="w-full min-w-64">
+            <FormItem className="min-w-64 w-full">
               <FormControl>
                 <Input
                   placeholder="Search for iRacing profile"

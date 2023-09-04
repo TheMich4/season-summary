@@ -16,16 +16,16 @@ const WeekList = ({
 }) => {
   return (
     <div className="flex flex-col">
-      <div className="grid grid-cols-2 gap-2 items-baseline mb-1">
+      <div className="mb-1 grid grid-cols-2 items-baseline gap-2">
         <p className="text-md font-bold">WEEK</p>
         <p className="text-md font-bold">RACES</p>
       </div>
       {Object.entries(racesPerWeek).map(([week, numberOfRaces]) => (
-        <div className="grid grid-cols-2 gap-2 items-baseline" key={week}>
-          <p className="text-md text-foreground/80 flex justify-center">
+        <div className="grid grid-cols-2 items-baseline gap-2" key={week}>
+          <p className="text-md flex justify-center text-foreground/80">
             {week}
           </p>
-          <p className="text-md font-bold flex justify-center dark:text-primary">
+          <p className="text-md flex justify-center font-bold dark:text-primary">
             {numberOfRaces}
           </p>
         </div>
@@ -61,11 +61,11 @@ export const MostRacedWeek = ({
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <div className="border rounded-md p-2 flex flex-col max-w-fit">
+          <div className="flex max-w-fit flex-col rounded-md border p-2">
             <p className="text-xl font-bold tracking-tighter">
               Most raced week:
             </p>
-            <div className="flex flex-row items-baseline gap-1 justify-center">
+            <div className="flex flex-row items-baseline justify-center gap-1">
               <p className="text-xl font-bold">{mostRacedWeek.week}</p>
               <p className="text-sm text-foreground/80">
                 ({mostRacedWeek.numberOfRaces} races)

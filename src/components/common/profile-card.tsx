@@ -24,7 +24,7 @@ export const ProfileCard = ({
           <div className="font-bold">
             {name ? name : <Skeleton className="h-4 w-32" />}
           </div>
-          <div className="text-xs dark:text-primary/80 italic">
+          <div className="text-xs italic dark:text-primary/80">
             {iracingId ? (
               `(${iracingId})`
             ) : (

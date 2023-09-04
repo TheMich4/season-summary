@@ -22,7 +22,7 @@ const CustomTooltip = ({
 }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="rounded-md border bg-background p-2 grid grid-cols-2 text-muted-foreground gap-2">
+      <div className="grid grid-cols-2 gap-2 rounded-md border bg-background p-2 text-muted-foreground">
         <div>
           <div className="text-xs">AVERAGE</div>
           <div className="font-bold">{payload[1].value}</div>
@@ -79,7 +79,7 @@ export const IratingChart = ({
   if (!chartData?.length || chartData.length === 1) return null;
 
   return (
-    <div className="flex w-full max-w-full self-center rounded-md border sm:w-full sm:max-w-md md:max-w-full bg-card">
+    <div className="flex w-full max-w-full self-center rounded-md border bg-card sm:w-full sm:max-w-md md:max-w-full">
       <ResponsiveContainer height={200}>
         <LineChart height={250} data={data}>
           <Line
