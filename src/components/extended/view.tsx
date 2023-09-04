@@ -5,7 +5,7 @@ import { MostRacedWeek } from "./most-raced-week";
 import { parseExtendedData } from "@/lib/extended-data";
 import { useMemo } from "react";
 
-export const Test = ({ data, iracingId }) => {
+export const View = ({ data, iracingId }) => {
   const parsed = useMemo(
     () => data && parseExtendedData(data.results, iracingId),
     [data]

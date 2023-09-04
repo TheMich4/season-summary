@@ -61,7 +61,7 @@ export const FullIratingChart = ({ dataPoints }) => {
               type="monotone"
               dataKey="value"
               stroke={theme.colors?.primary.DEFAULT}
-              dot={true}
+              dot={false}
               strokeWidth={2}
             />
 

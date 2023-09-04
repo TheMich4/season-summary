@@ -1,4 +1,4 @@
-import { Test } from "@/components/extended/test";
+import { View } from "@/components/extended/view";
 import { url } from "@/config/site";
 
 export const ExtendedProfile = async ({
@@ -7,16 +7,16 @@ export const ExtendedProfile = async ({
   year,
   category,
 }) => {
-  const test = await fetch(
+  const response = await fetch(
     `${url}/api/season-data/extended/?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
   );
 
   // TODO: Add notification that data is being fetched
-  const data = await test?.json();
+  const data = await response?.json();
 
-  if (data.error) {
+  if (data?.error) {
     return <div>{data.error}</div>;
   }
 
-  return <Test data={data} iracingId={iracingId} />;
+  return <View data={data} iracingId={iracingId} />;
 };

@@ -5,6 +5,7 @@ import { ConfigProvider } from "@/components/providers/config-provider";
 import { ExtendedProfile } from "@/displays/extended-profile";
 import { ProfileLoader } from "@/components/profile/profile-loader";
 import { Suspense } from "react";
+import { siteConfig } from "@/config/site";
 
 interface DriverPageProps {
   params: {
@@ -26,7 +27,29 @@ export default function ExtendedPage({
   },
 }: DriverPageProps) {
   return (
-    <div className="container flex w-full items-center justify-center gap-2 py-4">
+    <div className="container flex w-full items-center justify-center gap-2 py-4 flex-col">
+      <div className="border rounded-md border-red-500 p-2 w-full justify-center flex  text-balance text-center flex-col">
+        <p className="text-red-500 font-bold mb-1">
+          This page is experimental!
+        </p>
+        <p>
+          This page is under development so it will be updated regularly. Please
+          come back soon to check new features!
+        </p>
+        <p>
+          If you have any issues, feedback or you would want to see more data
+          contact me on{" "}
+          <a
+            href={siteConfig.links.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary font-bold"
+          >
+            Twitter
+          </a>
+          .
+        </p>
+      </div>
       <Suspense fallback={<ProfileLoader iracingId={iracingId} />}>
         <ConfigProvider>
           {/* @ts-ignore Server component */}
