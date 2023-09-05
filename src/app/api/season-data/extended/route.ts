@@ -2,6 +2,7 @@ import { Category } from "@/config/category";
 import { NextResponse } from "next/server";
 import { getExtendedSeasonData } from "@/server/extended-data";
 
+export const runtime = "edge"; // 'nodejs' is the default
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
