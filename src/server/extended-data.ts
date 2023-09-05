@@ -43,13 +43,6 @@ export const getExtendedSeasonData = async (
   try {
     const extended = extendedData[customerId]?.[year]?.[season]?.[categoryId];
 
-    console.log({ extendedData: extendedData[customerId], extended });
-
-    console.log(iracingId, {
-      isFetching: extended?.isFetching,
-      isFetched: extended?.isFetched,
-    });
-
     if (extended && extended.isFetched) {
       return { data: extended.data };
     }
