@@ -36,6 +36,7 @@ const WeekChart = ({
               payload={undefined}
             />
           }
+          wrapperStyle={{ zIndex: 1000 }}
         />
       </BarChart>
     </ResponsiveContainer>
