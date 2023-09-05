@@ -54,7 +54,7 @@ export const FullIratingChart = ({ dataPoints }) => {
   return (
     <div className="flex w-full flex-col gap-2 rounded-md border p-4 text-start">
       <p className="text-2xl font-semibold leading-none tracking-tight">
-        IRating:
+        iRating:
       </p>
       <p className="text-sm text-muted-foreground">
         How your iRating developed over the season.

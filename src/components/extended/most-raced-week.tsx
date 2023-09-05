@@ -108,7 +108,7 @@ export const MostRacedWeek = ({
   return (
     <div className="flex w-full flex-col rounded-md border p-4 text-start">
       <p className="pb-2 text-base font-normal tracking-tight">
-        Most raced week:
+        Most raced week
       </p>
       <p className="text-2xl font-bold">Week {mostRacedWeek.week}</p>
       <p className="text-xs text-muted-foreground">

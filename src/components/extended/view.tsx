@@ -45,10 +45,10 @@ export const View = ({ data, iracingId }) => {
         </div>
         <div className="grid lg:col-span-5 lg:grid-cols-2">
           <div className="col-span-2 flex flex-col gap-4">
+            {/* <Skeleton className="col-span-2 h-[200px] w-full" /> */}
+            <SeriesStats racesPerSeries={parsed.racesPerSeries} />
             <Skeleton className="col-span-2 h-[200px] w-full" />
             {/* <TrackStats racesPerTrack={parsed.racesPerTrack} /> */}
-            <Skeleton className="col-span-2 h-[200px] w-full" />
-            {/* <SeriesStats racesPerTrack={parsed.racesPerTrack} /> */}
             <div className="flex flex-col gap-4 lg:flex-row">
               <Skeleton className="h-[150px] w-full" />
               <Skeleton className="h-[150px] w-full" />

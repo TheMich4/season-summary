@@ -93,6 +93,8 @@ export const getExtendedSeasonData = async (
     for (const race of races) {
       const { subsessionId } = race;
 
+      console.log("getting race result", subsessionId);
+
       if (iracingResults[subsessionId]) {
         results.push(iracingResults[subsessionId]);
       } else {
