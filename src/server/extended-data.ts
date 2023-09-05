@@ -48,7 +48,7 @@ export const getExtendedSeasonData = async (
     }
 
     if (extended && extended.isFetching) {
-      return { data: null, error: "Data is fetching" };
+      return { data: null, error: "FETCHING" };
     }
 
     extendedData[customerId] = {

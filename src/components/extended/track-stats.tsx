@@ -24,9 +24,9 @@ export const TrackStats = ({ racesPerTrack }) => {
         Most raced series
       </p>
       <div className="flex flex-row items-baseline gap-1 text-sm text-muted-foreground">
-        You raced
+        You raced at
         <p className="font-bold text-foreground dark:text-primary">{count}</p>
-        different series this season.
+        different tracks this season.
       </div>
       <div className="flex flex-col">
         {data.map(({ trackName, numberOfRaces }) => (
