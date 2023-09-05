@@ -11,6 +11,7 @@
 
 // import { useMemo } from "react";
 
+import { Skeleton } from "../ui/skeleton";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 
 // const CustomTooltip = ({
@@ -45,8 +46,8 @@ export const FullSafetyRatingChart = ({}) => {
       <p className="text-sm text-muted-foreground">
         How your iRating developed over the season.
       </p>
-      <div className="flex w-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">
-        There will be a chart here soon.
+      <div className="flex h-full w-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">
+        <Skeleton className="h-full min-h-[150px] w-full" />
         {/* <ResponsiveContainer height={150}>
           <LineChart height={150} data={data}>
             <Line
