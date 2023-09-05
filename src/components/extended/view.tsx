@@ -25,7 +25,7 @@ export const View = ({ data, iracingId }) => {
     <div className="flex w-full flex-col gap-4">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <FullIratingChart dataPoints={parsed.iratingPoints} />
-        <FullSafetyRatingChart />
+        <FullSafetyRatingChart dataPoints={parsed.safetyRatingPoints} />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-10">
         <div className="lg:col-span-5">

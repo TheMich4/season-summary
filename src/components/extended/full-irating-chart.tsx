@@ -37,10 +37,10 @@ export const FullIratingChart = ({ dataPoints }) => {
   const theme = useTailwindTheme();
 
   const data = useMemo(() => {
-    return dataPoints.map((dp, index) => {
+    return dataPoints.map((value, index) => {
       return {
         index,
-        value: dp,
+        value,
       };
     });
   }, [dataPoints]);
