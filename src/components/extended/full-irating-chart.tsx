@@ -52,11 +52,16 @@ export const FullIratingChart = ({ dataPoints }) => {
   }, [data]);
 
   return (
-    <div>
-      IRating:
-      <div className="flex w-full max-w-full self-center rounded-md border bg-card sm:w-full sm:max-w-md md:max-w-full">
-        <ResponsiveContainer height={200}>
-          <LineChart height={250} data={data}>
+    <div className="flex w-full flex-col gap-2 rounded-md border p-4 text-start">
+      <p className="text-2xl font-semibold leading-none tracking-tight">
+        IRating:
+      </p>
+      <p className="text-sm text-muted-foreground">
+        How your iRating developed over the season.
+      </p>
+      <div className="flex w-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">
+        <ResponsiveContainer height={150}>
+          <LineChart height={150} data={data}>
             <Line
               type="monotone"
               dataKey="value"
