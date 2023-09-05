@@ -39,72 +39,89 @@ export const getExtendedSeasonData = async (
 ) => {
   const customerId = parseInt(iracingId, 10);
   const categoryId = categoryToId[category];
-  const extended = extendedData[customerId]?.[year]?.[season]?.[categoryId];
 
-  console.log(iracingId, {
-    isFetching: extended?.isFetching,
-    isFetched: extended?.isFetched,
-  });
+  try {
+    const extended = extendedData[customerId]?.[year]?.[season]?.[categoryId];
 
-  if (extended && extended.isFetched) {
-    return { data: extended.data };
-  }
+    console.log({ extendedData: extendedData[customerId], extended });
 
-  if (extended && extended.isFetching) {
-    return { data: null, error: "Data is fetching" };
-  }
+    console.log(iracingId, {
+      isFetching: extended?.isFetching,
+      isFetched: extended?.isFetched,
+    });
 
-  extendedData[customerId] = {
-    ...extendedData[customerId],
-    [year]: {
-      ...extendedData[customerId]?.[year],
-      [season]: {
-        ...extendedData[customerId]?.[year]?.[season],
-        [categoryId]: {
-          isFetching: true,
-          isFetched: false,
-          data: null,
+    if (extended && extended.isFetched) {
+      return { data: extended.data };
+    }
+
+    if (extended && extended.isFetching) {
+      return { data: null, error: "Data is fetching" };
+    }
+
+    extendedData[customerId] = {
+      ...extendedData[customerId],
+      [year]: {
+        ...extendedData[customerId]?.[year],
+        [season]: {
+          ...extendedData[customerId]?.[year]?.[season],
+          [categoryId]: {
+            isFetching: true,
+            isFetched: false,
+            data: null,
+          },
         },
       },
-    },
-  };
+    };
 
-  const ir = await getLoggedInIracingAPIClient();
+    const ir = await getLoggedInIracingAPIClient();
 
-  const races = await ir.searchSeries({
-    seasonYear: year,
-    seasonQuarter: season,
-    customerId,
-    officialOnly: true,
-    eventTypes: [5],
-    categoryIds: [categoryId],
-  });
+    const races = await ir.searchSeries({
+      seasonYear: year,
+      seasonQuarter: season,
+      customerId,
+      officialOnly: true,
+      eventTypes: [5],
+      categoryIds: [categoryId],
+    });
 
-  if (!races?.length) {
-    return { data: null, error: "No races found" };
-  }
+    if (!races?.length) {
+      return { data: null, error: "No races found" };
+    }
 
-  let results = [];
+    let results = [];
 
-  for (const race of races) {
-    const { subsessionId } = race;
+    for (const race of races) {
+      const { subsessionId } = race;
 
-    if (iracingResults[subsessionId]) {
-      results.push(iracingResults[subsessionId]);
-    } else {
-      const result = await getRaceResult(race.subsessionId);
+      if (iracingResults[subsessionId]) {
+        results.push(iracingResults[subsessionId]);
+      } else {
+        const result = await getRaceResult(race.subsessionId);
 
-      if (result && result.track.categoryId === categoryId) {
-        results.push(result);
+        if (result && result.track.categoryId === categoryId) {
+          results.push(result);
+        }
       }
     }
+
+    extendedData[customerId][year][season][categoryId] = {
+      isFetching: false,
+      isFetched: true,
+      data: results,
+    };
+
+    console.log("Finished getting extended data", iracingId, year, season);
+
+    return { data: results };
+  } catch (error) {
+    console.log(error);
+
+    extendedData[customerId][year][season][categoryId] = {
+      isFetching: false,
+      isFetched: false,
+      data: null,
+    };
+
+    return { data: null, error: "Error" };
   }
-
-  extendedData[customerId][year][season][categoryId] = {
-    isFetching: false,
-    isFetched: true,
-    data: results,
-  };
-
-  return { data: results };
 };
