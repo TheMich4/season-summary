@@ -64,8 +64,25 @@ const getIratingPoints = (currentIratingPoints: Array<number>, result: any) => {
   return [...currentIratingPoints, newiRating];
 };
 
+const getSafetyRatingPoints = (
+  currentSafetyRatingPoints: Array<number>,
+  result: any
+) => {
+  const { newSubLevel, oldSubLevel } = result;
+
+  if (newSubLevel === -1) {
+    return currentSafetyRatingPoints;
+  }
+
+  if (currentSafetyRatingPoints.length === 0 && oldSubLevel !== -1) {
+    return [oldSubLevel / 100, newSubLevel / 100];
+  }
+
+  return [...currentSafetyRatingPoints, newSubLevel / 100];
+};
+
 export const parseExtendedData = (results: Array<any>, iracingId: string) => {
-  return results.reduce(
+  return results?.reduce(
     (acc, result) => {
       const raceResult = getDriverResult(result, iracingId);
 
@@ -91,6 +108,10 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
           [result.raceWeekNum + 1]:
             (acc.racesPerWeek[result.raceWeekNum + 1] ?? 0) + 1,
         },
+        safetyRatingPoints: getSafetyRatingPoints(
+          acc.safetyRatingPoints,
+          raceResult
+        ),
       };
     },
     {
@@ -111,6 +132,7 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
       racesPerTrack: {},
       racesPerWeek: {},
       raceResults: [],
+      safetyRatingPoints: [],
     }
   );
 };

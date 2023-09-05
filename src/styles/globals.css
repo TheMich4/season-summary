@@ -53,6 +53,11 @@
   * {
     @apply border-border;
   }
+
+  *::selection {
+    @apply text-black bg-primary;
+  }
+
   body {
     @apply bg-background text-foreground;
   }

@@ -1,31 +1,79 @@
 "use client";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { Bar, BarChart, ResponsiveContainer, Tooltip } from "recharts";
 
+import { cn } from "@/lib/utils";
 import { useMemo } from "react";
+import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 
-const WeekList = ({
+const WeekChart = ({
   racesPerWeek,
 }: {
   racesPerWeek: Record<string, number>;
 }) => {
+  const theme = useTailwindTheme();
+
+  const data = useMemo(() => {
+    return Array.from({ length: 12 }, (_, i) => {
+      const week = i + 1;
+      return {
+        name: week,
+        races: racesPerWeek[week] || 0,
+      };
+    });
+  }, [racesPerWeek]);
+
   return (
-    <div className="flex flex-col">
+    <ResponsiveContainer width="100%" height={80}>
+      <BarChart data={data}>
+        <Bar dataKey="races" fill={theme.colors?.primary.DEFAULT} />
+        <Tooltip
+          cursor={false}
+          content={
+            <WeekList
+              racesPerWeek={racesPerWeek}
+              active={false}
+              payload={undefined}
+            />
+          }
+          wrapperStyle={{ zIndex: 1000 }}
+        />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+
+const WeekList = ({
+  active,
+  racesPerWeek,
+  payload,
+}: {
+  active: boolean;
+  racesPerWeek: Record<string, number>;
+  payload: any;
+}) => {
+  if (!active || !payload) {
+    return null;
+  }
+
+  return (
+    <div className="flex flex-col rounded-md border bg-background p-2">
       <div className="mb-1 grid grid-cols-2 items-baseline gap-2">
-        <p className="text-md font-bold">WEEK</p>
-        <p className="text-md font-bold">RACES</p>
+        <p className="font-bold">WEEK</p>
+        <p className="font-bold">RACES</p>
       </div>
       {Object.entries(racesPerWeek).map(([week, numberOfRaces]) => (
         <div className="grid grid-cols-2 items-baseline gap-2" key={week}>
-          <p className="text-md flex justify-center text-foreground/80">
+          <p
+            className={cn(
+              "flex justify-center text-muted-foreground",
+              `${payload[0]?.payload.name}` === week &&
+                "font-bold text-foreground"
+            )}
+          >
             {week}
           </p>
-          <p className="text-md flex justify-center font-bold dark:text-primary">
+          <p className="flex justify-center font-bold dark:text-primary">
             {numberOfRaces}
           </p>
         </div>
@@ -58,28 +106,15 @@ export const MostRacedWeek = ({
   }, [racesPerWeek]);
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger>
-          <div className="flex max-w-fit flex-col rounded-md border p-2">
-            <p className="text-xl font-bold tracking-tighter">
-              Most raced week:
-            </p>
-            <div className="flex flex-row items-baseline justify-center gap-1">
-              <p className="text-xl font-bold">{mostRacedWeek.week}</p>
-              <p className="text-sm text-foreground/80">
-                ({mostRacedWeek.numberOfRaces} races)
-              </p>
-            </div>
-          </div>
-        </TooltipTrigger>
-        <TooltipContent className="flex md:hidden">
-          <WeekList racesPerWeek={racesPerWeek} />
-        </TooltipContent>
-        <TooltipContent side="right" className="hidden md:flex">
-          <WeekList racesPerWeek={racesPerWeek} />
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <div className="flex w-full flex-col rounded-md border p-4 text-start">
+      <p className="pb-2 text-base font-normal tracking-tight">
+        Most raced week
+      </p>
+      <p className="text-2xl font-bold">Week {mostRacedWeek.week}</p>
+      <p className="text-xs text-muted-foreground">
+        ({mostRacedWeek.numberOfRaces} races)
+      </p>
+      <WeekChart racesPerWeek={racesPerWeek} />
+    </div>
   );
 };

@@ -13,7 +13,7 @@ export const ProfileLoader = ({
 }) => {
   return (
     <div className="flex w-full flex-col gap-2">
-      <div className="align-center flex flex-row justify-center gap-2 text-2xl font-semibold">
+      <div className="flex flex-row justify-center gap-2 text-2xl font-semibold">
         <Loader2 className="h-6 w-6 animate-spin self-center dark:text-primary" />
         {"Loading stats for: "}
         <span className="self-center font-extrabold leading-tight tracking-tighter dark:text-primary">

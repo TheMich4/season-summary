@@ -9,6 +9,7 @@ import {
   YAxis,
 } from "recharts";
 
+import { Skeleton } from "../ui/skeleton";
 import { useMemo } from "react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 
@@ -23,7 +24,7 @@ const CustomTooltip = ({
     return (
       <div className="grid grid-cols-2 gap-2 rounded-md border bg-background p-2 text-muted-foreground">
         <div>
-          <div className="text-xs">IRATING</div>
+          <div className="text-xs">SR</div>
           <div className="font-bold text-foreground">{payload[0].value}</div>
         </div>
       </div>
@@ -33,7 +34,7 @@ const CustomTooltip = ({
   return null;
 };
 
-export const FullIratingChart = ({ dataPoints }) => {
+export const FullSafetyRatingChart = ({ dataPoints }) => {
   const theme = useTailwindTheme();
 
   const data = useMemo(() => {
@@ -54,12 +55,12 @@ export const FullIratingChart = ({ dataPoints }) => {
   return (
     <div className="flex w-full flex-col gap-2 rounded-md border p-4 text-start">
       <p className="text-2xl font-semibold leading-none tracking-tight">
-        iRating:
+        Safety rating:
       </p>
       <p className="text-sm text-muted-foreground">
         How your iRating developed over the season.
       </p>
-      <div className="flex w-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">
+      <div className="flex h-full w-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">
         <ResponsiveContainer height={150}>
           <LineChart height={150} data={data}>
             <Line
