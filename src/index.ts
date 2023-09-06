@@ -14,7 +14,10 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/get-full-data", async (req: Request, res: Response) => {
-  const { iracingId, year, season, categoryId } = req.query;
+  const iracingId = req.query.iracingId as string;
+  const year = req.query.year as string;
+  const season = req.query.season as string;
+  const categoryId = req.query.categoryId as string;
 
   if (!iracingId || !year || !season || !categoryId) {
     res.send({ error: "missing params" });
@@ -24,10 +27,10 @@ app.get("/get-full-data", async (req: Request, res: Response) => {
   console.log("/get-full-data", { iracingId, year, season, categoryId });
 
   const fullData = getFullData({
-    customerId: iracingId as string,
-    year: year as string,
-    season: season as string,
-    categoryId: categoryId as string,
+    customerId: iracingId,
+    year: year,
+    season: season,
+    categoryId: categoryId,
   });
 
   if (!fullData) {

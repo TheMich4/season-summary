@@ -1,4 +1,5 @@
 import {
+  FullDataParams,
   getFullData,
   isFullDataFetched,
   isFullDataFetching,
@@ -14,7 +15,7 @@ export const getFullSeasonData = async ({
   year,
   season,
   categoryId,
-}) => {
+}: FullDataParams) => {
   console.log("getFullSeasonData", customerId, year, season, categoryId);
 
   if (!customerId || !year || !season || !categoryId) {
@@ -42,12 +43,12 @@ export const getFullSeasonData = async ({
   setFullDataFetching({ customerId, year, season, categoryId });
 
   const races = await ir.searchSeries({
-    seasonYear: year,
-    seasonQuarter: season,
-    customerId,
+    seasonYear: parseInt(year),
+    seasonQuarter: parseInt(season),
+    customerId: parseInt(customerId),
     officialOnly: true,
     eventTypes: [5],
-    categoryIds: [categoryId],
+    categoryIds: [parseInt(categoryId, 10)],
   });
 
   if (!races?.length) {

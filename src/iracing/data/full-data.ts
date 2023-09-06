@@ -1,6 +1,6 @@
-import { Result } from "iracing-api/lib/types/results";
+import { Result } from "./results.js";
 
-interface FullData {
+export interface FullData {
   [customerId: string]: {
     [year: string]: {
       [season: string]: {
@@ -14,7 +14,7 @@ interface FullData {
   };
 }
 
-interface FullDataParams {
+export interface FullDataParams {
   categoryId: string;
   customerId: string;
   season: string;

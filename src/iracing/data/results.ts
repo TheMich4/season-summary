@@ -1,4 +1,9 @@
-import { Result } from "iracing-api/lib/types/results";
+// import { Result } from "iracing-api/lib/types/results";
+
+// TODO: Add iracing-api type
+export interface Result {
+  [key: string]: any;
+}
 
 interface Results {
   [subsessionId: string]: Result;
