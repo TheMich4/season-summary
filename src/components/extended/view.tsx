@@ -17,7 +17,7 @@ export const View = ({ results, iracingId, simpleData }) => {
     [results]
   );
 
-  console.log({ results, parsed, simpleData });
+  // console.log({ results, parsed, simpleData });
 
   if (!parsed) {
     return null;
