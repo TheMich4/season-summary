@@ -94,8 +94,6 @@ export const FinishPositions = ({
     );
   }, [finishPositions]);
 
-  console.log({ finishPositions, bestFinish });
-
   return (
     <div className="flex w-full flex-col rounded-md border p-4 text-start">
       <p className="pb-2 text-base font-normal tracking-tight">Best finish</p>
