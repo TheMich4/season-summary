@@ -11,7 +11,10 @@ export const ExtendedProfile = async ({
   category,
 }) => {
   const response = await fetch(
-    `${env.API_URL}get-full-data?iracingId=${iracingId}&year=${year}&season=${season}&categoryId=${categoryToId[category]}`
+    `${env.API_URL}get-full-data?iracingId=${iracingId}&year=${year}&season=${season}&categoryId=${categoryToId[category]}`,
+    {
+      cache: "no-cache",
+    }
   );
 
   const { error, data, isFetching } = await response.json();
