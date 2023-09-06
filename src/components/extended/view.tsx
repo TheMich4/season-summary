@@ -9,13 +9,13 @@ import { TrackStats } from "./track-stats";
 import { parseExtendedData } from "@/lib/extended-data";
 import { useMemo } from "react";
 
-export const View = ({ data, iracingId }) => {
+export const View = ({ results, iracingId }) => {
   const parsed = useMemo(
-    () => data && parseExtendedData(data.results, iracingId),
-    [data]
+    () => results && parseExtendedData(results, iracingId),
+    [results]
   );
 
-  // console.log({ data, parsed });
+  // console.log({ results, parsed });
 
   if (!parsed) {
     return null;
