@@ -1,5 +1,6 @@
 "use client";
 
+import { FinishPositions } from "./finish-positions";
 import { FullIratingChart } from "./full-irating-chart";
 import { FullSafetyRatingChart } from "./full-safety-rating-chart";
 import { MostRacedWeek } from "./most-raced-week";
@@ -32,6 +33,7 @@ export const View = ({ results, iracingId }) => {
           <div className="grid gap-4 lg:grid-cols-3">
             <div className="flex flex-col gap-4 lg:col-span-2">
               <MostRacedWeek racesPerWeek={parsed.racesPerWeek} />
+              <FinishPositions finishPositions={parsed.finishPositions} />
               <Skeleton className="h-[150px] w-full" />
               <Skeleton className="h-[150px] w-full" />
               <Skeleton className="h-[150px] w-full" />
