@@ -11,13 +11,13 @@ import { TrackStats } from "./track-stats";
 import { parseExtendedData } from "@/lib/extended-data";
 import { useMemo } from "react";
 
-export const View = ({ results, iracingId }) => {
+export const View = ({ results, iracingId, simpleData }) => {
   const parsed = useMemo(
     () => results && parseExtendedData(results, iracingId),
     [results]
   );
 
-  console.log({ results, parsed });
+  console.log({ results, parsed, simpleData });
 
   if (!parsed) {
     return null;
@@ -40,8 +40,7 @@ export const View = ({ results, iracingId }) => {
               <Skeleton className="h-[150px] w-full" />
             </div>
             <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col">
-              <SimpleStat label="Races" value={parsed.stats.races} />
-              <SimpleStat label="Wins" value={parsed.stats.wins} />
+              <Skeleton className="h-[120px] w-full" />
               <Skeleton className="h-[120px] w-full" />
               <Skeleton className="h-[120px] w-full" />
               <Skeleton className="h-[120px] w-full" />
@@ -52,11 +51,35 @@ export const View = ({ results, iracingId }) => {
         </div>
         <div className="grid lg:col-span-5 lg:grid-cols-2">
           <div className="col-span-2 flex flex-col gap-4">
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:flex-row">
+              <SimpleStat
+                label="Races"
+                value={simpleData.memberRecap.starts}
+                previous={simpleData.previousSeasonStats.starts}
+              />
+              <SimpleStat
+                label="Wins"
+                value={simpleData.memberRecap.wins}
+                previous={simpleData.previousSeasonStats.wins}
+              />
+              <SimpleStat
+                label="Top 5"
+                value={simpleData.memberRecap.top5}
+                previous={simpleData.previousSeasonStats.top5}
+              />
+              <SimpleStat
+                label="Laps"
+                value={simpleData.memberRecap.laps}
+                previous={simpleData.previousSeasonStats.laps}
+              />
+            </div>
             <SeriesStats racesPerSeries={parsed.racesPerSeries} />
             <TrackStats racesPerTrack={parsed.racesPerTrack} />
-            <div className="flex flex-col gap-4 lg:flex-row">
-              <Skeleton className="h-[150px] w-full" />
-              <Skeleton className="h-[150px] w-full" />
+            <div className="grid gap-4 lg:grid-cols-2">
+              <Skeleton className="h-[120px] w-full" />
+              <Skeleton className="h-[120px] w-full" />
+              <Skeleton className="h-[120px] w-full" />
+              <Skeleton className="h-[120px] w-full" />
             </div>
           </div>
         </div>

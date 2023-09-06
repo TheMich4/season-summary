@@ -39,8 +39,8 @@ dependencies:
     specifier: ^2.0.0
     version: 2.0.0
   iracing-api:
-    specifier: ^0.2.3
-    version: 0.2.3
+    specifier: ^0.2.4
+    version: 0.2.4
   lucide-react:
     specifier: ^0.263.1
     version: 0.263.1(react@18.2.0)
@@ -2247,8 +2247,8 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
-  /iracing-api@0.2.3:
-    resolution: {integrity: sha512-6Ai2VrzooueGtlfIrpku3u9AsOnbDLqaN88jhIiGiQ8rpe4KtBwtyJ/oQiWxpNtmgjUALfYxL2qKexTuUD3ovw==}
+  /iracing-api@0.2.4:
+    resolution: {integrity: sha512-jNPxduo8s7JO4GzrXGxPaC/fhuRLl0dytFwqcc9FCQfUyGhtqsNjAnw5uGQn3wT9J7YHO1L54OxOaq7HlIm7cg==}
     dependencies:
       crypto-js: 4.1.1
       fetch-cookie: 2.1.0

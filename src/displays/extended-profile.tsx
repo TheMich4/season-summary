@@ -42,5 +42,11 @@ export const ExtendedProfile = async ({
     );
   }
 
-  return <View results={data} iracingId={iracingId} />;
+  const simpleResponse = await fetch(
+    `${url}/api/season-data?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
+  );
+
+  const { data: simpleData } = await simpleResponse.json();
+
+  return <View results={data} iracingId={iracingId} simpleData={simpleData} />;
 };
