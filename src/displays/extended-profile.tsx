@@ -1,4 +1,6 @@
 import { View } from "@/components/extended/view";
+import { categoryToId } from "@/config/category";
+import { env } from "@/env.mjs";
 import { getExtendedSeasonData } from "@/server/extended-data";
 import { url } from "@/config/site";
 
@@ -8,14 +10,13 @@ export const ExtendedProfile = async ({
   year,
   category,
 }) => {
-  const { data: results, error } = await getExtendedSeasonData(
-    iracingId,
-    year,
-    season,
-    category
+  const response = await fetch(
+    `${env.API_URL}get-full-data?iracingId=${iracingId}&year=${year}&season=${season}&categoryId=${categoryToId[category]}`
   );
 
-  if (error === "FETCHING") {
+  const { error, data, isFetching } = await response.json();
+
+  if (isFetching || error === "START_FETCHING") {
     return (
       <div className="flex flex-col items-center justify-center text-center">
         <p className="font-semibold">We are preparing your data.</p>
@@ -30,5 +31,13 @@ export const ExtendedProfile = async ({
     return <div>{error}</div>;
   }
 
-  return <View results={results} iracingId={iracingId} />;
+  if (data?.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center text-center">
+        <p className="font-semibold">No data found.</p>
+      </div>
+    );
+  }
+
+  return <View results={data} iracingId={iracingId} />;
 };

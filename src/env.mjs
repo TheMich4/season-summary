@@ -6,6 +6,7 @@ export const env = createEnv({
   server: {
     IRACING_EMAIL: z.string().min(1).email(),
     IRACING_PASSWORD: z.string().min(1),
+    API_URL: z.string().min(1).url(),
   },
   client: {
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().optional(),
