@@ -14,14 +14,14 @@ export const TrackStats = ({ racesPerTrack }) => {
           };
         })
         .sort((a, b) => b.numberOfRaces - a.numberOfRaces)
-        .slice(0, 10),
+        .slice(0, 5),
     };
   }, [racesPerTrack]);
 
   return (
     <div className="flex w-full flex-col gap-2 rounded-md border p-4 text-start">
       <p className="text-2xl font-semibold leading-none tracking-tight">
-        Most raced series
+        Most raced tracks
       </p>
       <div className="flex flex-row items-baseline gap-1 text-sm text-muted-foreground">
         You raced at

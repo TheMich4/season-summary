@@ -8,6 +8,8 @@ import { Incidents } from "./incidents";
 import { IncidentsGraph } from "./incidents-graph";
 import { MostRacedWeek } from "./most-raced-week";
 import { Points } from "./points";
+import { RaceList } from "../profile/race-list";
+import { ResultTable } from "../race/result-table/result-table";
 import { SOF } from "./sof";
 import { SeasonSwitch } from "../profile/season-switch";
 import { SeriesStats } from "./series-stats";
@@ -30,7 +32,7 @@ export const View = ({
     [results]
   );
 
-  // console.log({ results, parsed, simpleData });
+  console.log({ results, parsed, simpleData });
 
   if (!parsed) {
     return null;
@@ -114,6 +116,12 @@ export const View = ({
           </div>
         </div>
       </div>
+
+      <RaceList
+        seasonResults={simpleData.seasonResults}
+        iracingId={iracingId}
+        category={category}
+      />
     </div>
   );
 };
