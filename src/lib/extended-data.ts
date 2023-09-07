@@ -1,3 +1,12 @@
+const getRacesPerCar = (currentRacesPerCar: any, raceResult: any) => {
+  const { carName } = raceResult;
+
+  return {
+    ...currentRacesPerCar,
+    [carName]: (currentRacesPerCar[carName] ?? 0) + 1,
+  };
+};
+
 const getDriverResult = (result: any, iracingId: string) => {
   const raceResult = result.sessionResults
     .find((r) => r.simsessionType === 6)
@@ -168,6 +177,7 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
         incidents: getIncidentsData(acc.incidents, raceResult, result),
         iratingPoints: getIratingPoints(acc.iratingPoints, raceResult),
         raceResults: [...acc.raceResults, raceResult],
+        racesPerCar: getRacesPerCar(acc.racesPerCar, raceResult),
         // Races per series
         racesPerSeries: {
           ...acc.racesPerSeries,
@@ -224,6 +234,7 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
         incidentPoints: [],
       },
       iratingPoints: [],
+      racesPerCar: {},
       racesPerSeries: {},
       racesPerTrack: {},
       racesPerWeek: {},

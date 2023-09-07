@@ -1,5 +1,4 @@
 export const RaceStats = ({ raceData }: Record<string, any>) => {
-  console.log({ raceData });
   return (
     <div className="flex w-full flex-col rounded-md border p-4 text-start">
       <div className="pb-2 text-base font-normal tracking-tight">

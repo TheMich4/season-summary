@@ -1,5 +1,6 @@
 "use client";
 
+import { CarStats } from "./car-stats";
 import { CategoryDropdown } from "../profile/category-dropdown";
 import { FinishPositions } from "./finish-positions";
 import { FullIratingChart } from "./full-irating-chart";
@@ -110,6 +111,7 @@ export const View = ({
               />
             </div>
             <SeriesStats racesPerSeries={parsed.racesPerSeries} />
+            <CarStats racesPerCar={parsed.racesPerCar} />
             <TrackStats racesPerTrack={parsed.racesPerTrack} />
             <div className="grid grid-cols-2 gap-4">
               <QualifyingStats qualiData={parsed.quali} />
