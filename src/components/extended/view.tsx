@@ -6,6 +6,7 @@ import { FullIratingChart } from "./full-irating-chart";
 import { FullSafetyRatingChart } from "./full-safety-rating-chart";
 import { Incidents } from "./incidents";
 import { MostRacedWeek } from "./most-raced-week";
+import { SOF } from "./sof";
 import { SeasonSwitch } from "../profile/season-switch";
 import { SeriesStats } from "./series-stats";
 import { SimpleStat } from "./simple-stat";
@@ -75,7 +76,7 @@ export const View = ({
             </div>
             <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col">
               <Incidents incidentData={parsed.incidents} />
-              <Skeleton className="h-[120px] w-full" />
+              <SOF sofData={parsed.sof} />
               <Skeleton className="h-[120px] w-full" />
               <Skeleton className="h-[120px] w-full" />
               <Skeleton className="h-[120px] w-full" />

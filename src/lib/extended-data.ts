@@ -83,6 +83,30 @@ const getSafetyRatingPoints = (
   return [...currentSafetyRatingPoints, newSubLevel / 100];
 };
 
+const getSOFData = (currentSOF: any, raceResult: any, result: any) => {
+  const { finishPositionInClass } = raceResult;
+  const {
+    raceSummary: { fieldStrength },
+  } = result;
+
+  return {
+    ...currentSOF,
+    average:
+      (currentSOF.average * currentSOF.races + fieldStrength) /
+      (currentSOF.races + 1),
+    highest: Math.max(currentSOF.highest, fieldStrength),
+    highestWin:
+      finishPositionInClass === 0 && fieldStrength > currentSOF.highestWin
+        ? fieldStrength
+        : currentSOF.highestWin,
+
+    lowest: currentSOF.lowest
+      ? Math.min(currentSOF.lowest, fieldStrength)
+      : fieldStrength,
+    races: currentSOF.races + 1,
+  };
+};
+
 export const parseExtendedData = (results: Array<any>, iracingId: string) => {
   return results?.reduce(
     (acc, result, index) => {
@@ -123,6 +147,7 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
           [raceResult.finishPosition + 1]:
             (acc.finishPositions[raceResult.finishPosition + 1] ?? 0) + 1,
         },
+        sof: getSOFData(acc.sof, raceResult, result),
       };
     },
     {
@@ -154,6 +179,13 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
         wins: 0,
       },
       finishPositions: {},
+      sof: {
+        average: 0,
+        highest: null,
+        lowest: null,
+        highestWin: null,
+        races: 0,
+      },
     }
   );
 };
