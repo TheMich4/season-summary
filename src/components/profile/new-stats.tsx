@@ -21,21 +21,18 @@ export const NewStats = ({
   const stats = useMemo(() => {
     return seasonResults.reduce(
       (acc, result, index) => {
+        const start = result.startingPositionInClass + 1;
+        const finish = result.finishPositionInClass + 1;
+
         const bestStart =
-          !acc.bestStart || result.startingPositionInClass < acc.bestStart
-            ? result.startingPositionInClass
-            : acc.bestStart;
+          !acc.bestStart || start < acc.bestStart ? start : acc.bestStart;
         const bestFinish =
-          !acc.bestFinish || result.finishPositionInClass < acc.bestFinish
-            ? result.finishPositionInClass
-            : acc.bestFinish;
+          !acc.bestFinish || finish < acc.bestFinish ? finish : acc.bestFinish;
         const worstStart =
-          !acc.worstStart || result.startingPositionInClass > acc.worstStart
-            ? result.startingPositionInClass
-            : acc.worstStart;
+          !acc.worstStart || start > acc.worstStart ? start : acc.worstStart;
         const worstFinish =
-          !acc.worstFinish || result.finishPositionInClass > acc.worstFinish
-            ? result.finishPositionInClass
+          !acc.worstFinish || finish > acc.worstFinish
+            ? finish
             : acc.worstFinish;
         const mostIncidents =
           !acc.mostIncidents || result.incidents > acc.mostIncidents
