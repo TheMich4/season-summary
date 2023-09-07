@@ -90,7 +90,6 @@ const getSOFData = (currentSOF: any, raceResult: any, result: any) => {
   } = result;
 
   return {
-    ...currentSOF,
     average:
       (currentSOF.average * currentSOF.races + fieldStrength) /
       (currentSOF.races + 1),
@@ -104,6 +103,33 @@ const getSOFData = (currentSOF: any, raceResult: any, result: any) => {
       ? Math.min(currentSOF.lowest, fieldStrength)
       : fieldStrength,
     races: currentSOF.races + 1,
+  };
+};
+
+const getPointData = (currentPoints: any, raceResult: any) => {
+  const { champPoints } = raceResult;
+
+  if (champPoints === -1) {
+    return currentPoints;
+  }
+
+  console.log({
+    champPoints,
+    currentPoints,
+    x:
+      (currentPoints.average * currentPoints.races + champPoints) /
+      (currentPoints.races + 1),
+  });
+
+  return {
+    average:
+      (currentPoints.average * currentPoints.races + champPoints) /
+      (currentPoints.races + 1),
+    highest: Math.max(currentPoints.highest, champPoints),
+    lowest: currentPoints.lowest
+      ? Math.min(currentPoints.lowest, champPoints)
+      : champPoints,
+    races: currentPoints.races + 1,
   };
 };
 
@@ -148,6 +174,7 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
             (acc.finishPositions[raceResult.finishPosition + 1] ?? 0) + 1,
         },
         sof: getSOFData(acc.sof, raceResult, result),
+        points: getPointData(acc.points, raceResult),
       };
     },
     {
@@ -184,6 +211,12 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
         highest: null,
         lowest: null,
         highestWin: null,
+        races: 0,
+      },
+      points: {
+        average: 0,
+        highest: null,
+        lowest: null,
         races: 0,
       },
     }

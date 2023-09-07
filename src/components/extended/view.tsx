@@ -6,6 +6,7 @@ import { FullIratingChart } from "./full-irating-chart";
 import { FullSafetyRatingChart } from "./full-safety-rating-chart";
 import { Incidents } from "./incidents";
 import { MostRacedWeek } from "./most-raced-week";
+import { Points } from "./points";
 import { SOF } from "./sof";
 import { SeasonSwitch } from "../profile/season-switch";
 import { SeriesStats } from "./series-stats";
@@ -28,7 +29,7 @@ export const View = ({
     [results]
   );
 
-  // console.log({ results, parsed, simpleData });
+  console.log({ results, parsed, simpleData });
 
   if (!parsed) {
     return null;
@@ -75,6 +76,7 @@ export const View = ({
             <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col">
               <Incidents incidentData={parsed.incidents} />
               <SOF sofData={parsed.sof} />
+              <Points pointsData={parsed.points} />
             </div>
           </div>
         </div>
