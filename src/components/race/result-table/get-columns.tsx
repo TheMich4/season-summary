@@ -33,7 +33,6 @@ export const getColumns = (result) => [
         original: { custId },
       },
     }) => {
-      console.log({ custId });
       return (
         <Link href={`/driver/${custId}`} prefetch={false}>
           {getValue()}

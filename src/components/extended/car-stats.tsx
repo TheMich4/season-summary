@@ -21,7 +21,7 @@ export const CarStats = ({ racesPerCar }) => {
   return (
     <div className="flex w-full flex-col gap-2 rounded-md border p-4 text-start">
       <p className="text-2xl font-semibold leading-none tracking-tight">
-        Most raced tracks
+        Most raced cars
       </p>
       <div className="flex flex-row items-baseline gap-1 text-sm text-muted-foreground">
         You raced at
