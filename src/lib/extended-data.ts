@@ -49,6 +49,7 @@ const getIncidentsData = (
       total: currentIncidents.incidentsPerRace.total + incidents,
       value: (currentIncidents.incidentsPerRace.total + incidents) / raceCount,
     },
+    incidentPoints: [...currentIncidents.incidentPoints, incidents],
   };
 };
 
@@ -194,6 +195,7 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
           total: 0,
           value: 0,
         },
+        incidentPoints: [],
       },
       iratingPoints: [],
       racesPerSeries: {},

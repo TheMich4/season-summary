@@ -5,6 +5,7 @@ import { FinishPositions } from "./finish-positions";
 import { FullIratingChart } from "./full-irating-chart";
 import { FullSafetyRatingChart } from "./full-safety-rating-chart";
 import { Incidents } from "./incidents";
+import { IncidentsGraph } from "./incidents-graph";
 import { MostRacedWeek } from "./most-raced-week";
 import { Points } from "./points";
 import { SOF } from "./sof";
@@ -50,8 +51,8 @@ export const View = ({
         <div className="order-1 flex justify-center md:order-2">
           <SeasonSwitch
             iracingId={iracingId}
-            season={season}
-            year={year}
+            season={parseInt(season, 10)}
+            year={parseInt(year, 10)}
             category={category}
           />
         </div>
@@ -71,7 +72,7 @@ export const View = ({
             <div className="flex flex-col gap-4 lg:col-span-2">
               <MostRacedWeek racesPerWeek={parsed.racesPerWeek} />
               <FinishPositions finishPositions={parsed.finishPositions} />
-              <Skeleton className="h-[150px] w-full" />
+              <IncidentsGraph dataPoints={parsed.incidents.incidentPoints} />
             </div>
             <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col">
               <Incidents incidentData={parsed.incidents} />
