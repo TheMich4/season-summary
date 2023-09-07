@@ -73,6 +73,8 @@ export const getFullSeasonData = async ({
     if (result && result.track.categoryId?.toString() === categoryId) {
       results.push(result);
     }
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   }
 
   setFullData(
