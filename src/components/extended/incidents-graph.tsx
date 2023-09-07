@@ -60,10 +60,10 @@ export const IncidentsGraph = ({ dataPoints }) => {
         <p className="text-xs text-muted-foreground">most incidents</p>
       </div>
 
-      <div className="flex flex-row items-baseline gap-1">
+      {/* <div className="flex flex-row items-baseline gap-1">
         <p className="text-2xl font-bold">{min}</p>
         <p className="text-xs text-muted-foreground">least incidents</p>
-      </div>
+      </div> */}
 
       <div className="flex flex-row items-baseline gap-1">
         <p className="text-2xl font-bold">{incidentFree}</p>

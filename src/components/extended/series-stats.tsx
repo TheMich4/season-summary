@@ -14,7 +14,7 @@ export const SeriesStats = ({ racesPerSeries }) => {
           };
         })
         .sort((a, b) => b.numberOfRaces - a.numberOfRaces)
-        .slice(0, 10),
+        .slice(0, 5),
     };
   }, [racesPerSeries]);
 

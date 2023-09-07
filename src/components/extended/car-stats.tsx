@@ -2,21 +2,21 @@
 
 import { useMemo } from "react";
 
-export const TrackStats = ({ racesPerTrack }) => {
+export const CarStats = ({ racesPerCar }) => {
   const { count, data } = useMemo(() => {
     return {
-      count: Object.values(racesPerTrack).length,
-      data: Object.entries(racesPerTrack)
-        .map(([trackName, numberOfRaces]) => {
+      count: Object.values(racesPerCar).length,
+      data: Object.entries(racesPerCar)
+        .map(([carName, numberOfRaces]) => {
           return {
-            trackName,
+            carName,
             numberOfRaces,
           };
         })
         .sort((a, b) => b.numberOfRaces - a.numberOfRaces)
         .slice(0, 5),
     };
-  }, [racesPerTrack]);
+  }, [racesPerCar]);
 
   return (
     <div className="flex w-full flex-col gap-2 rounded-md border p-4 text-start">
@@ -29,16 +29,16 @@ export const TrackStats = ({ racesPerTrack }) => {
         different tracks this season.
       </div>
       <div className="flex flex-col">
-        {data.map(({ trackName, numberOfRaces }) => (
+        {data.map(({ carName, numberOfRaces }) => (
           <div
             className="flex w-full flex-row items-baseline gap-1"
-            key={trackName}
+            key={carName}
           >
             <p className="min-w-[19px] font-bold dark:text-primary">
               {numberOfRaces}
             </p>
             <p className="text-xs text-muted-foreground">at</p>
-            <p className="text-sm">{trackName}</p>
+            <p className="text-sm">{carName}</p>
           </div>
         ))}
       </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { CarStats } from "./car-stats";
 import { CategoryDropdown } from "../profile/category-dropdown";
 import { FinishPositions } from "./finish-positions";
 import { FullIratingChart } from "./full-irating-chart";
@@ -8,6 +9,10 @@ import { Incidents } from "./incidents";
 import { IncidentsGraph } from "./incidents-graph";
 import { MostRacedWeek } from "./most-raced-week";
 import { Points } from "./points";
+import { QualifyingStats } from "./qualifying-stats";
+import { RaceList } from "../profile/race-list";
+import { RaceStats } from "./race-stats";
+import { ResultTable } from "../race/result-table/result-table";
 import { SOF } from "./sof";
 import { SeasonSwitch } from "../profile/season-switch";
 import { SeriesStats } from "./series-stats";
@@ -106,14 +111,21 @@ export const View = ({
               />
             </div>
             <SeriesStats racesPerSeries={parsed.racesPerSeries} />
+            <CarStats racesPerCar={parsed.racesPerCar} />
             <TrackStats racesPerTrack={parsed.racesPerTrack} />
-            <div className="grid gap-4 lg:grid-cols-2">
-              <Skeleton className="h-[120px] w-full" />
-              <Skeleton className="h-[120px] w-full" />
+            <div className="grid grid-cols-2 gap-4">
+              <QualifyingStats qualiData={parsed.quali} />
+              <RaceStats raceData={parsed.race} />
             </div>
           </div>
         </div>
       </div>
+
+      <RaceList
+        seasonResults={simpleData.seasonResults}
+        iracingId={iracingId}
+        category={category}
+      />
     </div>
   );
 };
