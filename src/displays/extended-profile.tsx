@@ -1,5 +1,7 @@
+import { categoryToId, categoryToName } from "@/config/category";
+
+import { SeasonSwitch } from "@/components/profile/season-switch";
 import { View } from "@/components/extended/view";
-import { categoryToId } from "@/config/category";
 import { env } from "@/env.mjs";
 import { url } from "@/config/site";
 
@@ -21,7 +23,16 @@ export const ExtendedProfile = async ({
   if (isFetching || error === "START_FETCHING") {
     return (
       <div className="flex flex-col items-center justify-center text-center">
-        <p className="font-semibold">We are preparing your data.</p>
+        <SeasonSwitch
+          iracingId={iracingId}
+          season={season}
+          year={year}
+          category={category}
+        />
+        <p className="font-semibold">
+          We are preparing your {categoryToName[category].toLowerCase()} data
+          fot this season.
+        </p>
         <p className="text-muted-foreground">
           Please come back in few minutes!
         </p>
@@ -47,5 +58,14 @@ export const ExtendedProfile = async ({
 
   const { data: simpleData } = await simpleResponse.json();
 
-  return <View results={data} iracingId={iracingId} simpleData={simpleData} />;
+  return (
+    <View
+      results={data}
+      iracingId={iracingId}
+      simpleData={simpleData}
+      season={season}
+      year={year}
+      category={category}
+    />
+  );
 };

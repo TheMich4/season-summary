@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "../ui/button";
 import { ToastAction } from "../ui/toast";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -16,10 +17,14 @@ export const FullDataToaster = ({
   const { toast } = useToast();
   const router = useRouter();
 
-  console.log({ isFetched, isFetching });
+  const URL = `/driver/${iracingId}/full?year=${year}&season=${season}&category=${category}`;
 
   useEffect(() => {
-    if (isFetching) {
+    if (isFetching || (!isFetching && !isFetched)) {
+      toast({
+        title: "Your full season data is being prepared!",
+        description: "Come back in a few minutes!",
+      });
     }
     if (isFetched) {
       toast({
@@ -29,11 +34,7 @@ export const FullDataToaster = ({
         action: (
           <ToastAction
             altText="Go to full stats"
-            onClick={() =>
-              router.push(
-                `/driver/${iracingId}/full?year=${year}&season=${season}&category=${category}`
-              )
-            }
+            onClick={() => router.push(URL)}
           >
             Go to full stats
           </ToastAction>
@@ -41,6 +42,14 @@ export const FullDataToaster = ({
       });
     }
   }, [isFetching, isFetched]);
+
+  if (isFetched) {
+    return (
+      <Button onClick={() => router.push(URL)}>
+        More advanced season stats
+      </Button>
+    );
+  }
 
   return <></>;
 };
