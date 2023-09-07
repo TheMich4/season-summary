@@ -1,5 +1,4 @@
 export const SOF = ({ sofData }: { sofData: Record<string, any> }) => {
-  console.log({ sofData });
   return (
     <div className="flex flex-col gap-2 rounded-md border p-4">
       <p className="pb-2 text-base font-normal tracking-tight">SOF</p>

@@ -28,7 +28,7 @@ export const View = ({
     [results]
   );
 
-  console.log({ results, parsed, simpleData });
+  // console.log({ results, parsed, simpleData });
 
   if (!parsed) {
     return null;
@@ -71,16 +71,10 @@ export const View = ({
               <MostRacedWeek racesPerWeek={parsed.racesPerWeek} />
               <FinishPositions finishPositions={parsed.finishPositions} />
               <Skeleton className="h-[150px] w-full" />
-              <Skeleton className="h-[150px] w-full" />
-              <Skeleton className="h-[150px] w-full" />
             </div>
             <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col">
               <Incidents incidentData={parsed.incidents} />
               <SOF sofData={parsed.sof} />
-              <Skeleton className="h-[120px] w-full" />
-              <Skeleton className="h-[120px] w-full" />
-              <Skeleton className="h-[120px] w-full" />
-              <Skeleton className="h-[120px] w-full" />
             </div>
           </div>
         </div>
@@ -111,8 +105,6 @@ export const View = ({
             <SeriesStats racesPerSeries={parsed.racesPerSeries} />
             <TrackStats racesPerTrack={parsed.racesPerTrack} />
             <div className="grid gap-4 lg:grid-cols-2">
-              <Skeleton className="h-[120px] w-full" />
-              <Skeleton className="h-[120px] w-full" />
               <Skeleton className="h-[120px] w-full" />
               <Skeleton className="h-[120px] w-full" />
             </div>
