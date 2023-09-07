@@ -17,8 +17,13 @@ export const getLoggedInIracingAPIClient = async () => {
     new Date().getTime() - lastLogin.getTime() > 1000 * 60 * 60
   ) {
     console.log("!!! Logging into iracing");
-    await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD);
-    lastLogin = new Date();
+    const response = await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD);
+
+    if (response.error) {
+      lastLogin = undefined;
+    } else {
+      lastLogin = new Date();
+    }
   }
 
   return ir;

@@ -21,7 +21,11 @@ export const Stat = ({
         </p>
         {(previous || previous === 0) && (
           <p className="text-center text-sm font-bold">
-            {<Delta value={value as number} previous={previous as number} />}
+            <Delta
+              value={value as number}
+              previous={previous as number}
+              invert={invert}
+            />
           </p>
         )}
       </div>

@@ -50,6 +50,7 @@ export default function ExtendedPage({
           .
         </p>
       </div>
+
       <Suspense fallback={<ProfileLoader iracingId={iracingId} />}>
         <ConfigProvider>
           {/* @ts-ignore Server component */}

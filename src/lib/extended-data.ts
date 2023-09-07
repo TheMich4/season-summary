@@ -83,7 +83,7 @@ const getSafetyRatingPoints = (
 
 export const parseExtendedData = (results: Array<any>, iracingId: string) => {
   return results?.reduce(
-    (acc, result) => {
+    (acc, result, index) => {
       const raceResult = getDriverResult(result, iracingId);
 
       return {
@@ -112,6 +112,15 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
           acc.safetyRatingPoints,
           raceResult
         ),
+        stats: {
+          races: index + 1,
+          wins: acc.stats.wins + (raceResult.finishPosition === 1 ? 1 : 0),
+        },
+        finishPositions: {
+          ...acc.finishPositions,
+          [raceResult.finishPosition + 1]:
+            (acc.finishPositions[raceResult.finishPosition + 1] ?? 0) + 1,
+        },
       };
     },
     {
@@ -133,6 +142,11 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
       racesPerWeek: {},
       raceResults: [],
       safetyRatingPoints: [],
+      stats: {
+        races: 0,
+        wins: 0,
+      },
+      finishPositions: {},
     }
   );
 };

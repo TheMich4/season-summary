@@ -9,7 +9,6 @@ import {
 
 import { CategoryDropdown } from "./category-dropdown";
 import { SeasonSwitch } from "./season-switch";
-import { useConfig } from "../providers/config-provider";
 import { useMemo } from "react";
 
 interface ProfileHeaderProps {
@@ -55,7 +54,7 @@ export const ProfileHeader = ({
           />
         </div>
 
-        <div className="align-center order-2 flex items-center justify-self-center md:order-3 md:justify-self-end">
+        <div className="order-2 flex items-center justify-self-center md:order-3 md:justify-self-end">
           <CategoryDropdown />
         </div>
       </div>

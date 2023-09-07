@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/nav/site-header";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 import { VisitedProvider } from "@/components/providers/visited-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
@@ -47,6 +48,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <div className="relative flex min-h-screen flex-col">
               <SiteHeader />
               <div className="flex-1">{children}</div>
+
+              <Toaster />
             </div>
             <TailwindIndicator />
           </VisitedProvider>
