@@ -65,7 +65,7 @@ app.get("/get-full-data", async (req: Request, res: Response) => {
   });
 });
 
-app.get("/get-full-data-status", (req: Request, res: Response) => {
+app.get("/get-full-data-status", async (req: Request, res: Response) => {
   const iracingId = req.query.iracingId as string;
   const year = req.query.year as string;
   const season = req.query.season as string;
@@ -96,6 +96,15 @@ app.get("/get-full-data-status", (req: Request, res: Response) => {
     isFetched,
     isFetching,
   });
+
+  if (!isFetched && !isFetching) {
+    await getFullSeasonData({
+      customerId: iracingId,
+      year,
+      season,
+      categoryId,
+    });
+  }
 });
 
 app.listen(port, () => {
