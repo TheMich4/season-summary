@@ -25,8 +25,8 @@ export const ExtendedProfile = async ({
       <div className="flex flex-col items-center justify-center text-center">
         <SeasonSwitch
           iracingId={iracingId}
-          season={season}
-          year={year}
+          season={parseInt(season, 10)}
+          year={parseInt(year, 10)}
           category={category}
         />
         <p className="font-semibold">
