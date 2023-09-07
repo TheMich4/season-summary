@@ -114,14 +114,6 @@ const getPointData = (currentPoints: any, raceResult: any) => {
     return currentPoints;
   }
 
-  console.log({
-    champPoints,
-    currentPoints,
-    x:
-      (currentPoints.average * currentPoints.races + champPoints) /
-      (currentPoints.races + 1),
-  });
-
   return {
     average:
       (currentPoints.average * currentPoints.races + champPoints) /

@@ -30,7 +30,7 @@ export const View = ({
     [results]
   );
 
-  console.log({ results, parsed, simpleData });
+  // console.log({ results, parsed, simpleData });
 
   if (!parsed) {
     return null;

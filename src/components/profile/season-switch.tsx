@@ -33,8 +33,6 @@ export const SeasonSwitch = ({
     let newSeason = season + 1;
     let newYear = year;
 
-    console.log({ newSeason });
-
     if (newSeason === 5) {
       newSeason = 1;
       newYear += 1;

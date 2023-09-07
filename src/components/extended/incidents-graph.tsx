@@ -44,7 +44,6 @@ export const IncidentsGraph = ({ dataPoints }) => {
     });
   }, [dataPoints]);
   const { min, max } = useMemo(() => {
-    console.log({ dataPoints });
     const max = Math.max(...dataPoints);
     const min = Math.min(...dataPoints);
     return { max, min };
@@ -52,8 +51,6 @@ export const IncidentsGraph = ({ dataPoints }) => {
   const incidentFree = useMemo(() => {
     return dataPoints.filter((d) => d === 0).length;
   }, [dataPoints]);
-
-  console.log({ min, max, incidentFree });
 
   return (
     <div className="flex w-full flex-col rounded-md border p-4 text-start">
