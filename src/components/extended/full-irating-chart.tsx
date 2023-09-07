@@ -9,6 +9,7 @@ import {
   YAxis,
 } from "recharts";
 
+import { Delta } from "../common/Delta";
 import { useMemo } from "react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 
@@ -52,11 +53,18 @@ export const FullIratingChart = ({ dataPoints }) => {
   }, [data]);
 
   return (
-    <div className="flex w-full flex-col gap-2 rounded-md border p-4 text-start">
-      <p className="text-2xl font-semibold leading-none tracking-tight">
-        iRating:
+    <div className="flex w-full flex-col rounded-md border p-4 text-start">
+      <p className="pb-2 text-base font-normal tracking-tight">iRating</p>
+      <p className="flex flex-row items-baseline gap-1 text-2xl font-bold">
+        {dataPoints[dataPoints.length - 1]}
+        <p className="text-sm">
+          <Delta
+            value={dataPoints[dataPoints.length - 1]}
+            previous={dataPoints[0]}
+          />
+        </p>
       </p>
-      <p className="text-sm text-muted-foreground">
+      <p className="mb-2 text-xs text-muted-foreground">
         How your iRating developed over the season.
       </p>
       <div className="flex w-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">

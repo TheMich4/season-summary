@@ -2,10 +2,12 @@ export const Delta = ({
   value,
   previous,
   invert = false,
+  parseResult = (result: number) => `${result}`,
 }: {
   value: number;
   previous: number;
   invert?: boolean;
+  parseResult?: (result: number) => string;
 }) => {
   const expectedHigh = invert ? previous : value;
   const expectedLow = invert ? value : previous;
@@ -14,14 +16,14 @@ export const Delta = ({
     return (
       <p className="flex flex-row text-green-500">
         <p>↑</p>
-        {expectedHigh - expectedLow}
+        {parseResult(expectedHigh - expectedLow)}
       </p>
     );
   } else if (expectedHigh < expectedLow) {
     return (
       <p className="flex flex-row text-red-500">
         <p>↓</p>
-        {expectedLow - expectedHigh}
+        {parseResult(expectedLow - expectedHigh)}
       </p>
     );
   }
