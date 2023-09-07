@@ -8,7 +8,9 @@ import { Incidents } from "./incidents";
 import { IncidentsGraph } from "./incidents-graph";
 import { MostRacedWeek } from "./most-raced-week";
 import { Points } from "./points";
+import { QualifyingStats } from "./qualifying-stats";
 import { RaceList } from "../profile/race-list";
+import { RaceStats } from "./race-stats";
 import { ResultTable } from "../race/result-table/result-table";
 import { SOF } from "./sof";
 import { SeasonSwitch } from "../profile/season-switch";
@@ -32,7 +34,7 @@ export const View = ({
     [results]
   );
 
-  console.log({ results, parsed, simpleData });
+  // console.log({ results, parsed, simpleData });
 
   if (!parsed) {
     return null;
@@ -109,9 +111,9 @@ export const View = ({
             </div>
             <SeriesStats racesPerSeries={parsed.racesPerSeries} />
             <TrackStats racesPerTrack={parsed.racesPerTrack} />
-            <div className="grid gap-4 lg:grid-cols-2">
-              <Skeleton className="h-[120px] w-full" />
-              <Skeleton className="h-[120px] w-full" />
+            <div className="grid grid-cols-2 gap-4">
+              <QualifyingStats qualiData={parsed.quali} />
+              <RaceStats raceData={parsed.race} />
             </div>
           </div>
         </div>

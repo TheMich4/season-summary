@@ -17,10 +17,12 @@ export const SOF = ({ sofData }: { sofData: Record<string, any> }) => {
         <p className="text-xs text-muted-foreground">highest</p>
       </div>
 
-      <div className="flex flex-row items-baseline gap-1">
-        <p className="text-2xl font-bold">{sofData.highest}</p>
-        <p className="text-xs text-muted-foreground">highest win</p>
-      </div>
+      {sofData.highestWin && (
+        <div className="flex flex-row items-baseline gap-1">
+          <p className="text-2xl font-bold">{sofData.highestWin}</p>
+          <p className="text-xs text-muted-foreground">highest win</p>
+        </div>
+      )}
     </div>
   );
 };

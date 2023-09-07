@@ -126,6 +126,38 @@ const getPointData = (currentPoints: any, raceResult: any) => {
   };
 };
 
+const getQualiData = (currentQuali: any, raceResult: any) => {
+  const start = raceResult.startingPositionInClass + 1;
+
+  return {
+    average:
+      (currentQuali.average * currentQuali.races + start) /
+      (currentQuali.races + 1),
+    highest: Math.max(currentQuali.highest, start),
+    lowest: currentQuali.lowest ? Math.min(currentQuali.lowest, start) : start,
+    poles: start === 1 ? currentQuali.poles + 1 : currentQuali.poles,
+    races: currentQuali.races + 1,
+  };
+};
+
+const getRaceData = (currentRace: any, raceResult: any) => {
+  const start = raceResult.startingPositionInClass + 1;
+  const finish = raceResult.finishPositionInClass + 1;
+  const gain = start - finish;
+
+  return {
+    average:
+      (currentRace.average * currentRace.races + finish) /
+      (currentRace.races + 1),
+    highest: Math.max(currentRace.highest, finish),
+    lowest: currentRace.lowest ? Math.min(currentRace.lowest, finish) : finish,
+    wins: finish === 1 ? currentRace.wins + 1 : currentRace.wins,
+    races: currentRace.races + 1,
+    podiums: finish <= 3 ? currentRace.podiums + 1 : currentRace.podiums,
+    bestGain: Math.max(currentRace.bestGain, gain),
+  };
+};
+
 export const parseExtendedData = (results: Array<any>, iracingId: string) => {
   return results?.reduce(
     (acc, result, index) => {
@@ -168,6 +200,8 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
         },
         sof: getSOFData(acc.sof, raceResult, result),
         points: getPointData(acc.points, raceResult),
+        quali: getQualiData(acc.quali, raceResult),
+        race: getRaceData(acc.race, raceResult),
       };
     },
     {
@@ -212,6 +246,27 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
         highest: null,
         lowest: null,
         races: 0,
+      },
+      quali: {
+        average: 0,
+        highest: null,
+        lowest: null,
+        poles: 0,
+        races: 0,
+        beatNo: 0,
+        lostNo: 0,
+      },
+      race: {
+        average: 0,
+        highest: null,
+        lowest: null,
+        wins: 0,
+        races: 0,
+        beatNo: 0,
+        lostNo: 0,
+        podiums: 0,
+        bestGain: 0,
+        worstLoss: 0,
       },
     }
   );
