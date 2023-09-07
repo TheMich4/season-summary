@@ -1,7 +1,6 @@
 import { View } from "@/components/extended/view";
 import { categoryToId } from "@/config/category";
 import { env } from "@/env.mjs";
-import { getExtendedSeasonData } from "@/server/extended-data";
 import { url } from "@/config/site";
 
 export const ExtendedProfile = async ({

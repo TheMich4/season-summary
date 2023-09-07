@@ -10,6 +10,9 @@ import { Favorite } from "@/components/profile/favorite";
 import { ProfileHeader } from "@/components/profile/profile-header";
 import { NewStats } from "@/components/profile/new-stats";
 import { url } from "@/config/site";
+import { FullDataManager } from "@/components/profile/full-data-manager";
+import { env } from "@/env.mjs";
+import { Suspense } from "react";
 
 interface ProfileProps {
   iracingId: string;
@@ -114,6 +117,16 @@ export const Profile = async ({
         iracingId={iracingId}
         category={category}
       />
+
+      <Suspense fallback={<></>}>
+        <FullDataManager
+          apiUrl={env.API_URL}
+          iracingId={iracingId}
+          year={year}
+          season={season}
+          category={category}
+        />
+      </Suspense>
     </div>
   );
 };

@@ -18,6 +18,7 @@ export const getLoggedInIracingAPIClient = async () => {
   ) {
     console.log("!!! Logging into iracing");
     const response = await ir.login(env.IRACING_EMAIL, env.IRACING_PASSWORD);
+
     if (response.error) {
       lastLogin = undefined;
     } else {
