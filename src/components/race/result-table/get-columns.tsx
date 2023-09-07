@@ -1,5 +1,6 @@
 import { Delta } from "@/components/common/Delta";
 import { Interval } from "./interval";
+import Link from "next/link";
 import { createColumnHelper } from "@tanstack/react-table";
 
 const columnHelper = createColumnHelper<any>();
@@ -26,6 +27,19 @@ export const getColumns = (result) => [
   }),
   columnHelper.accessor("displayName", {
     header: "Name",
+    cell: ({
+      getValue,
+      row: {
+        original: { custId },
+      },
+    }) => {
+      console.log({ custId });
+      return (
+        <Link href={`/driver/${custId}`} prefetch={false}>
+          {getValue()}
+        </Link>
+      );
+    },
   }),
   columnHelper.accessor("carName", {
     header: "Car",
