@@ -22,6 +22,13 @@ export const Incidents = ({
 
       <div className="flex flex-row items-baseline gap-1">
         <p className="text-2xl font-bold">
+          {incidentData.incidentsPerLap.value.toFixed(3)}
+        </p>
+        <p className="text-xs text-muted-foreground">per lap</p>
+      </div>
+
+      <div className="flex flex-row items-baseline gap-1">
+        <p className="text-2xl font-bold">
           {incidentData.incidentsPerRace.value.toFixed(3)}
         </p>
         <p className="text-xs text-muted-foreground">per race</p>

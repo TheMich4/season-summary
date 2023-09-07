@@ -28,6 +28,7 @@ const getIncidentsData = (
 
   const cornerCount =
     currentIncidents.incidentsPerCorner.count + cornersPerLap * lapsComplete;
+  const lapsCount = currentIncidents.incidentsPerLap.count + lapsComplete;
   const raceCount = currentIncidents.incidentsPerRace.count + 1;
 
   return {
@@ -38,14 +39,15 @@ const getIncidentsData = (
       value:
         (currentIncidents.incidentsPerRace.total + incidents) / cornerCount,
     },
+    incidentsPerLap: {
+      count: lapsCount,
+      total: currentIncidents.incidentsPerRace.total + incidents,
+      value: (currentIncidents.incidentsPerRace.total + incidents) / lapsCount,
+    },
     incidentsPerRace: {
       count: raceCount,
       total: currentIncidents.incidentsPerRace.total + incidents,
-      value:
-        Math.round(
-          ((currentIncidents.incidentsPerRace.total + incidents) / raceCount) *
-            100
-        ) / 100,
+      value: (currentIncidents.incidentsPerRace.total + incidents) / raceCount,
     },
   };
 };
@@ -127,6 +129,11 @@ export const parseExtendedData = (results: Array<any>, iracingId: string) => {
       incidents: {
         incidentsPerCorner: {
           count: 0, // Corner count
+          total: 0,
+          value: 0,
+        },
+        incidentsPerLap: {
+          count: 0, // Lap count
           total: 0,
           value: 0,
         },
