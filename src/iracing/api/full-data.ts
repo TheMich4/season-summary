@@ -74,9 +74,7 @@ export const getFullSeasonData = async ({
 
     let results = [];
 
-    for (const race of races) {
-      const { subsessionId } = race;
-
+    const getResult = async (subsessionId: number) => {
       const result = await getRaceResult(subsessionId);
 
       if (result && result.track.categoryId?.toString() === categoryId) {
@@ -84,6 +82,17 @@ export const getFullSeasonData = async ({
       }
 
       await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      return result;
+    };
+
+    // TODO: Temporary try second time
+    for (const race of races) {
+      const r = await getResult(race.subsessionId);
+
+      if (!r) {
+        await getResult(race.subsessionId);
+      }
     }
 
     setFullData(
