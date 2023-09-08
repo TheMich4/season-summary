@@ -72,10 +72,10 @@ export const getFullSeasonData = async ({
       categoryId
     );
 
-    let results = [];
+    let results: Array<any> = [];
 
     const getResult = async (subsessionId: number) => {
-      const result = await getRaceResult(subsessionId);
+      const result: any = await getRaceResult(`${subsessionId}`);
 
       if (result && result.track.categoryId?.toString() === categoryId) {
         results.push(result);
