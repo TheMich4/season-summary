@@ -1,3 +1,5 @@
+"use client";
+
 import { Category, categoryToName } from "@/config/category";
 import {
   DropdownMenu,

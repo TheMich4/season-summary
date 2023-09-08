@@ -43,7 +43,7 @@ export const SeasonSwitch = ({
 
   return (
     <div className="flex flex-row items-center justify-center gap-2 rounded-md">
-      <Link href={getPreviousSeason()} prefetch>
+      <Link href={getPreviousSeason()} prefetch={false}>
         <Button
           size="xs"
           variant="outline"
@@ -59,7 +59,7 @@ export const SeasonSwitch = ({
         <span className="font-bold dark:text-primary">{season}</span>
       </span>
 
-      <Link href={getNextSeason()} prefetch>
+      <Link href={getNextSeason()} prefetch={false}>
         <Button
           size="xs"
           variant="outline"
