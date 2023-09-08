@@ -12,32 +12,26 @@ import { Points } from "./points";
 import { QualifyingStats } from "./qualifying-stats";
 import { RaceList } from "../profile/race-list";
 import { RaceStats } from "./race-stats";
-import { ResultTable } from "../race/result-table/result-table";
 import { SOF } from "./sof";
 import { SeasonSwitch } from "../profile/season-switch";
 import { SeriesStats } from "./series-stats";
 import { SimpleStat } from "./simple-stat";
-import { Skeleton } from "../ui/skeleton";
 import { TrackStats } from "./track-stats";
-import { parseExtendedData } from "@/lib/extended-data";
-import { useMemo } from "react";
 
 export const View = ({
-  results,
+  data,
   iracingId,
   simpleData,
   season,
   year,
   category,
 }) => {
-  const parsed = useMemo(
-    () => results && parseExtendedData(results, iracingId),
-    [results]
-  );
+  // console.log({
+  //   data,
+  //   simpleData,
+  // });
 
-  // console.log({ results, parsed, simpleData });
-
-  if (!parsed) {
+  if (!data) {
     return null;
   }
 
@@ -68,21 +62,21 @@ export const View = ({
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <FullIratingChart dataPoints={parsed.iratingPoints} />
-        <FullSafetyRatingChart dataPoints={parsed.safetyRatingPoints} />
+        <FullIratingChart dataPoints={data.iratingPoints} />
+        <FullSafetyRatingChart dataPoints={data.safetyRatingPoints} />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-10">
         <div className="lg:col-span-5">
           <div className="grid gap-4 lg:grid-cols-3">
             <div className="flex flex-col gap-4 lg:col-span-2">
-              <MostRacedWeek racesPerWeek={parsed.racesPerWeek} />
-              <FinishPositions finishPositions={parsed.finishPositions} />
-              <IncidentsGraph dataPoints={parsed.incidents.incidentPoints} />
+              <MostRacedWeek racesPerWeek={data.racesPerWeek} />
+              <FinishPositions finishPositions={data.finishPositions} />
+              <IncidentsGraph dataPoints={data.incidents.incidentPoints} />
             </div>
             <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col">
-              <Incidents incidentData={parsed.incidents} />
-              <SOF sofData={parsed.sof} />
-              <Points pointsData={parsed.points} />
+              <Incidents incidentData={data.incidents} />
+              <SOF sofData={data.sof} />
+              <Points pointsData={data.points} />
             </div>
           </div>
         </div>
@@ -110,12 +104,12 @@ export const View = ({
                 previous={simpleData.previousSeasonStats.laps}
               />
             </div>
-            <SeriesStats racesPerSeries={parsed.racesPerSeries} />
-            <CarStats racesPerCar={parsed.racesPerCar} />
-            <TrackStats racesPerTrack={parsed.racesPerTrack} />
+            <SeriesStats racesPerSeries={data.racesPerSeries} />
+            <CarStats racesPerCar={data.racesPerCar} />
+            <TrackStats racesPerTrack={data.racesPerTrack} />
             <div className="grid grid-cols-2 gap-4">
-              <QualifyingStats qualiData={parsed.quali} />
-              <RaceStats raceData={parsed.race} />
+              <QualifyingStats qualiData={data.quali} />
+              <RaceStats raceData={data.race} />
             </div>
           </div>
         </div>

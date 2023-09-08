@@ -83,7 +83,7 @@ export const ExtendedProfile = async ({
 
   return (
     <View
-      results={data}
+      data={data}
       iracingId={iracingId}
       simpleData={simpleData}
       season={season}
