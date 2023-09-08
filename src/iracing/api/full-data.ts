@@ -9,6 +9,7 @@ import {
 
 import { getLoggedInIracingAPIClient } from "../client.js";
 import { getRaceResult } from "./results.js";
+import { parseResults } from "../parse-results/index.js";
 
 export const getFullSeasonData = async ({
   customerId,
@@ -95,10 +96,12 @@ export const getFullSeasonData = async ({
       }
     }
 
+    const data = parseResults(results, customerId);
+
     setFullData(
       { customerId, year, season, categoryId },
       {
-        data: results,
+        data,
         isFetching: false,
         isFetched: true,
       }
