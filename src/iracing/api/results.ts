@@ -6,12 +6,12 @@ export const getRaceResult = async (subsessionId: string) => {
   try {
     // console.log("getRaceResult", subsessionId);
 
-    const savedResult = getResult(subsessionId);
+    // const savedResult = getResult(subsessionId);
 
-    if (savedResult) {
-      console.log("returning saved result", subsessionId);
-      return savedResult;
-    }
+    // if (savedResult) {
+    //   console.log("returning saved result", subsessionId);
+    //   return savedResult;
+    // }
 
     const ir = await getLoggedInIracingAPIClient();
 
@@ -24,7 +24,7 @@ export const getRaceResult = async (subsessionId: string) => {
       return null;
     }
 
-    setResult(subsessionId, result);
+    // setResult(subsessionId, result);
 
     return result;
   } catch (e) {
