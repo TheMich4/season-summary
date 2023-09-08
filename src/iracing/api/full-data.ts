@@ -121,7 +121,7 @@ export const getFullSeasonData = async ({
       season,
       categoryId
     );
-    console.log(e);
+    console.error(e);
 
     setFullData(
       { customerId, year, season, categoryId },

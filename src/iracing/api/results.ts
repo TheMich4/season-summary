@@ -28,7 +28,8 @@ export const getRaceResult = async (subsessionId: string) => {
 
     return result;
   } catch (e) {
-    console.log("getRaceResult", subsessionId, e);
+    console.log("getRaceResult", subsessionId);
+    console.error(e);
     return { error: e };
   }
 };
