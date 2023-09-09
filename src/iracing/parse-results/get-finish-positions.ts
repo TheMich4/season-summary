@@ -4,7 +4,7 @@ export const getFinishPositions = (
 ) => {
   return {
     ...currentFinishPositions,
-    [raceResult.finishPosition + 1]:
-      (currentFinishPositions[raceResult.finishPosition + 1] ?? 0) + 1,
+    [raceResult.finishPositionInClass + 1]:
+      (currentFinishPositions[raceResult.finishPositionInClass + 1] ?? 0) + 1,
   };
 };
