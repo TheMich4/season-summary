@@ -18,6 +18,10 @@ export const parseResults = (results: Array<any>, iracingId: string) => {
   return results?.reduce((acc, result, index) => {
     const raceResult = getDriverResult(result, iracingId);
 
+    if (!raceResult) {
+      return acc;
+    }
+
     return {
       finishPositions: getFinishPositions(acc.finishPositions, raceResult),
       incidents: getIncidentsData(acc.incidents, raceResult, result),
