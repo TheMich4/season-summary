@@ -25,8 +25,8 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
       <div className="flex flex-row gap-2">
         <div
           className={cn(
-            "w-12 self-center text-center text-3xl font-bold dark:text-primary",
-            finishPosition === 1 && "text-yellow-400 dark:text-yellow-400",
+            "w-12 self-center text-center text-3xl font-bold text-foreground",
+            finishPosition === 1 && "text-primary dark:text-primary",
             finishPosition === 2 && "text-gray-400 dark:text-gray-400",
             finishPosition === 3 && "text-yellow-600 dark:text-yellow-600"
           )}
