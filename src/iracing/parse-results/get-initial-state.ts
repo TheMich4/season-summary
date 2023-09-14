@@ -26,7 +26,9 @@ export const getInitialState = () => {
     raceResults: [],
     safetyRatingPoints: [],
     stats: {
+      laps: 0,
       races: 0,
+      top5: 0,
       wins: 0,
     },
     finishPositions: {},
