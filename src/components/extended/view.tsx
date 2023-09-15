@@ -85,23 +85,23 @@ export const View = ({
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:flex-row">
               <SimpleStat
                 label="Races"
-                value={simpleData.memberRecap.starts}
-                previous={simpleData.previousSeasonStats.starts}
+                value={data.stats.races}
+                // previous={simpleData.previousSeasonStats.starts}
               />
               <SimpleStat
                 label="Wins"
-                value={simpleData.memberRecap.wins}
-                previous={simpleData.previousSeasonStats.wins}
+                value={data.stats.wins}
+                // previous={simpleData.previousSeasonStats.wins}
               />
               <SimpleStat
                 label="Top 5"
-                value={simpleData.memberRecap.top5}
-                previous={simpleData.previousSeasonStats.top5}
+                value={data.stats.top5}
+                // previous={simpleData.previousSeasonStats.top5}
               />
               <SimpleStat
                 label="Laps"
-                value={simpleData.memberRecap.laps}
-                previous={simpleData.previousSeasonStats.laps}
+                value={data.stats.laps}
+                // previous={simpleData.previousSeasonStats.laps}
               />
             </div>
             <SeriesStats racesPerSeries={data.racesPerSeries} />
