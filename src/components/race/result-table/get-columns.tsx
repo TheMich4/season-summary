@@ -5,7 +5,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 
 const columnHelper = createColumnHelper<any>();
 
-export const getColumns = (result) => [
+export const getColumns = (result: any) => [
   columnHelper.accessor("finishPosition", {
     cell: ({ getValue }) => getValue() + 1,
     header: "Pos",

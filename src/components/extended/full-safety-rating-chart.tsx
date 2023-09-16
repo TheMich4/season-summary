@@ -41,7 +41,6 @@ const CustomTooltip = ({
 export const FullSafetyRatingChart = ({
   dataPoints,
 }: FullSafetyRatingChartProps) => {
-  console.log({ dataPoints });
   const theme = useTailwindTheme();
 
   const data = useMemo(() => {

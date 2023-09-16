@@ -70,6 +70,10 @@ export const IratingChart = ({
     [chartData]
   );
   const { min, max } = useMemo(() => {
+    if (!data) {
+      return { min: 0, max: 0 };
+    }
+
     const values = Math.min(...data.map((d) => d.value));
     const min = Math.min(values);
     const max = Math.max(values);
