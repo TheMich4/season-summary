@@ -121,7 +121,7 @@ export const Profile = async ({
       <Suspense fallback={<></>}>
         <FullDataManager
           apiUrl={env.API_URL}
-          iracingId={iracingId}
+          iracingId={parseInt(iracingId, 10)}
           year={year}
           season={season}
           category={category}

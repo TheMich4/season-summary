@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+interface FavoriteProps {
+  memberRecap: any;
+}
+
 export const FavoriteItem = ({
   imageSrc,
   type,
@@ -26,7 +30,7 @@ export const FavoriteItem = ({
   );
 };
 
-export const Favorite = ({ memberRecap = {} }) => {
+export const Favorite = ({ memberRecap = {} }: FavoriteProps) => {
   if (!memberRecap.favoriteCar || !memberRecap.favoriteTrack) return null;
 
   return (

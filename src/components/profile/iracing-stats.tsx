@@ -1,11 +1,24 @@
 "use client";
 
 import { Frown } from "lucide-react";
-import { type Result } from "iracing-api/lib/types/results";
-import { useMemo } from "react";
 import { Stat } from "./stat";
-import { useConfig } from "../providers/config-provider";
 import { categoryToName } from "@/config/category";
+import { useConfig } from "../providers/config-provider";
+// TODO: Type from iracing-api
+// import { type Result } from "iracing-api/lib/types/results";
+import { useMemo } from "react";
+
+interface Result {
+  [key: string]: any;
+}
+
+interface IracingStatsProps {
+  seasonResults: Array<Result>;
+  chartData: any;
+  firstRace: Result | undefined;
+  lastRace: Result | undefined;
+  iracingId: string;
+}
 
 // TODO: Fix when iracing-api type is updated
 // TODO: Refactor
@@ -13,18 +26,19 @@ const getPlayerRaceResult = (result: Result, iracingId: string) => {
   if (!result) return undefined;
 
   const raceResult = result.sessionResults.find(
-    (sr) => sr.simsessionType === 3
+    (sr: any) => sr.simsessionType === 3
   );
 
   const playerResult = raceResult?.results.find(
-    (r) => `${r.custId}` === iracingId
+    (r: any) => `${r.custId}` === iracingId
   );
 
   if (playerResult) return playerResult;
 
   // Team event
   return raceResult?.results.flatMap(
-    (r) => r.driverResults?.find((dr) => `${dr.custId}` === iracingId) ?? []
+    (r: any) =>
+      r.driverResults?.find((dr: any) => `${dr.custId}` === iracingId) ?? []
   )?.[0];
 };
 
@@ -34,13 +48,7 @@ export const IracingStats = ({
   firstRace,
   lastRace,
   iracingId,
-}: {
-  seasonResults;
-  chartData;
-  firstRace: Result | undefined;
-  lastRace: Result | undefined;
-  iracingId: string;
-}) => {
+}: IracingStatsProps) => {
   const { category } = useConfig();
 
   const { busiestDay, mostRaces } = useMemo(() => {
@@ -73,11 +81,11 @@ export const IracingStats = ({
 
   const { startIR, finishIR, delta } = useMemo(() => {
     const startIR =
-      getPlayerRaceResult(firstRace, iracingId)?.oldiRating ??
+      (firstRace && getPlayerRaceResult(firstRace, iracingId)?.oldiRating) ??
       chartData[0]?.value ??
       "Unknown";
     const finishIR =
-      getPlayerRaceResult(lastRace, iracingId)?.newiRating ??
+      (lastRace && getPlayerRaceResult(lastRace, iracingId)?.newiRating) ??
       chartData[chartData.length - 1]?.value ??
       "Unknown";
     const delta = finishIR - startIR ?? 0;

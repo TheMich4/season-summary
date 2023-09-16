@@ -1,6 +1,7 @@
 "use client";
 
 import { CarStats } from "./car-stats";
+import { Category } from "@/config/category";
 import { CategoryDropdown } from "../profile/category-dropdown";
 import { FinishPositions } from "./finish-positions";
 import { FullIratingChart } from "./full-irating-chart";
@@ -18,6 +19,15 @@ import { SeriesStats } from "./series-stats";
 import { SimpleStat } from "./simple-stat";
 import { TrackStats } from "./track-stats";
 
+interface ViewProps {
+  category: Category;
+  data: any;
+  iracingId: string;
+  season: string;
+  simpleData: any;
+  year: string;
+}
+
 export const View = ({
   data,
   iracingId,
@@ -25,12 +35,7 @@ export const View = ({
   season,
   year,
   category,
-}) => {
-  // console.log({
-  //   data,
-  //   simpleData,
-  // });
-
+}: ViewProps) => {
   if (!data) {
     return null;
   }

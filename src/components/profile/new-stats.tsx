@@ -3,14 +3,30 @@
 import { Stat } from "./stat";
 import { useMemo } from "react";
 
-const keyToName = {
-  bestStart: "Best Start",
-  worstStart: "Worst Start",
-  bestFinish: "Best Finish",
-  worstFinish: "Worst Finish",
-  mostIncidents: "Most Incidents",
-  avgIncidents: "Avg Incidents",
-};
+const keyToName = new Proxy(
+  {
+    bestStart: "Best Start",
+    worstStart: "Worst Start",
+    bestFinish: "Best Finish",
+    worstFinish: "Worst Finish",
+    mostIncidents: "Most Incidents",
+    avgIncidents: "Avg Incidents",
+  } as const,
+  {
+    get: (target, prop: string) => {
+      return target[prop as keyof Stats] ?? prop;
+    },
+  }
+);
+
+interface Stats {
+  bestStart: number | null;
+  worstStart: number | null;
+  bestFinish: number | null;
+  worstFinish: number | null;
+  mostIncidents: number | null;
+  avgIncidents: number;
+}
 
 export const NewStats = ({
   seasonResults = [],
@@ -18,7 +34,7 @@ export const NewStats = ({
   // TODO: types
   seasonResults: Array<any>;
 }) => {
-  const stats = useMemo(() => {
+  const stats: Stats = useMemo(() => {
     return seasonResults.reduce(
       (acc, result, index) => {
         const start = result.startingPositionInClass + 1;
@@ -72,9 +88,9 @@ export const NewStats = ({
 
   return (
     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-6">
-      {Object.entries(stats).map(([key, value]) => {
-        return <Stat name={keyToName[key]} value={value} key={key} />;
-      })}
+      {Object.entries(stats).map(([key, value]) => (
+        <Stat name={keyToName[key as keyof Stats]} value={value} key={key} />
+      ))}
     </div>
   );
 };

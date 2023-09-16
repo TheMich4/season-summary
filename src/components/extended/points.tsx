@@ -1,4 +1,13 @@
-export const Points = ({ pointsData }: { pointsData: Racord<string, any> }) => {
+interface PointsProps {
+  pointsData: {
+    average: number;
+    lowest: number;
+    highest: number;
+    races: number;
+  };
+}
+
+export const Points = ({ pointsData }: PointsProps) => {
   return (
     <div className="flex flex-col gap-1 rounded-md border p-4">
       <p className="pb-2 text-base font-normal tracking-tight">

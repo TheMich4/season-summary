@@ -1,10 +1,20 @@
 "use client";
 
 import { Button } from "../ui/button";
+import { Category } from "@/config/category";
 import { ToastAction } from "../ui/toast";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
+
+interface FullDataToasterProps {
+  iracingId: number;
+  year: number;
+  season: number;
+  category: string;
+  isFetching: boolean;
+  isFetched: Category;
+}
 
 export const FullDataToaster = ({
   iracingId,
@@ -13,7 +23,7 @@ export const FullDataToaster = ({
   category,
   isFetching,
   isFetched,
-}) => {
+}: FullDataToasterProps) => {
   const { toast } = useToast();
   const router = useRouter();
 

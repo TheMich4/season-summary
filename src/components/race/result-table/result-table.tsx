@@ -15,13 +15,18 @@ import {
 } from "@tanstack/react-table";
 
 import { getColumns } from "./get-columns";
+import { useMemo } from "react";
 
-export const ResultTable = ({ result }) => {
+// TODO: Add type from iracing-api
+export const ResultTable = ({ result }: { result: Record<string, any> }) => {
+  const columns = useMemo(() => getColumns(result), [result]);
+
   const table = useReactTable({
     data:
-      result.sessionResults.find((r) => r.simsessionTypeName === "Race")
-        ?.results ?? [],
-    columns: getColumns(result),
+      result.sessionResults.find(
+        (r: Record<string, any>) => r.simsessionTypeName === "Race"
+      )?.results ?? [],
+    columns,
     getCoreRowModel: getCoreRowModel(),
   });
 

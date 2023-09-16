@@ -1,4 +1,4 @@
-import { categoryToId, categoryToName } from "@/config/category";
+import { Category, categoryToId, categoryToName } from "@/config/category";
 
 import { CategoryDropdown } from "@/components/profile/category-dropdown";
 import { SeasonSwitch } from "@/components/profile/season-switch";
@@ -6,12 +6,19 @@ import { View } from "@/components/extended/view";
 import { env } from "@/env.mjs";
 import { url } from "@/config/site";
 
+interface ExtendedProfileProps {
+  iracingId: string;
+  season: string;
+  year: string;
+  category: Category;
+}
+
 export const ExtendedProfile = async ({
   iracingId,
   season,
   year,
   category,
-}) => {
+}: ExtendedProfileProps) => {
   const response = await fetch(
     `${env.API_URL}get-full-data?iracingId=${iracingId}&year=${year}&season=${season}&categoryId=${categoryToId[category]}`,
     {

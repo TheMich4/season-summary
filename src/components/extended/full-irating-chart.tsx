@@ -34,7 +34,11 @@ const CustomTooltip = ({
   return null;
 };
 
-export const FullIratingChart = ({ dataPoints }) => {
+export const FullIratingChart = ({
+  dataPoints,
+}: {
+  dataPoints: Array<number>;
+}) => {
   const theme = useTailwindTheme();
 
   const data = useMemo(() => {

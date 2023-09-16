@@ -1,6 +1,6 @@
+import { Categories, Category } from "@/config/category";
 import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
-import { Categories } from "@/config/category";
 import { ConfigProvider } from "@/components/providers/config-provider";
 import { ExtendedProfile } from "@/displays/extended-profile";
 import { ProfileLoader } from "@/components/profile/profile-loader";
@@ -58,7 +58,7 @@ export default function ExtendedPage({
             iracingId={iracingId}
             year={year}
             season={season}
-            category={category}
+            category={category as Category}
           />
         </ConfigProvider>
       </Suspense>

@@ -2,7 +2,13 @@
 
 import { useMemo } from "react";
 
-export const TrackStats = ({ racesPerTrack }) => {
+interface TrackStatsProps {
+  racesPerTrack: {
+    [trackName: string]: number;
+  };
+}
+
+export const TrackStats = ({ racesPerTrack }: TrackStatsProps) => {
   const { count, data } = useMemo(() => {
     return {
       count: Object.values(racesPerTrack).length,

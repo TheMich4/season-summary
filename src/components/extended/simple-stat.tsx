@@ -1,11 +1,18 @@
 import { Delta } from "../common/Delta";
 
+interface SimpleStatProps {
+  label: string;
+  value: string | number;
+  previous?: number | null;
+  invert?: boolean;
+}
+
 export const SimpleStat = ({
   label,
   value,
   previous = null,
   invert = false,
-}) => {
+}: SimpleStatProps) => {
   return (
     <div className="flex w-full flex-col rounded-md border p-4 text-start">
       <div className="pb-2 text-base font-normal tracking-tight">{label}</div>

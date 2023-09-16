@@ -12,6 +12,10 @@ import {
 import { useMemo } from "react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 
+interface IncidentsGraphProps {
+  dataPoints: Array<number>;
+}
+
 const CustomTooltip = ({
   active,
   payload,
@@ -32,7 +36,7 @@ const CustomTooltip = ({
 
   return null;
 };
-export const IncidentsGraph = ({ dataPoints }) => {
+export const IncidentsGraph = ({ dataPoints }: IncidentsGraphProps) => {
   const theme = useTailwindTheme();
 
   const data = useMemo(() => {
