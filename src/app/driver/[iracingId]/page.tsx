@@ -1,6 +1,6 @@
+import { Categories, Category } from "@/config/category";
 import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
-import { Categories } from "@/config/category";
 import { ConfigProvider } from "@/components/providers/config-provider";
 import { Profile } from "@/displays/profile";
 import { ProfileLoader } from "@/components/profile/profile-loader";
@@ -34,7 +34,7 @@ export default function DriverPage({
             iracingId={iracingId}
             year={Number(year)}
             season={Number(season)}
-            category={category}
+            category={category as Category}
           />
         </ConfigProvider>
       </Suspense>

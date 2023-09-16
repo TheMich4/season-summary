@@ -3,7 +3,11 @@ import { ResultTable } from "@/components/race/result-table/result-table";
 import { getRaceResult } from "@/server/get-race-result";
 import { siteConfig } from "@/config/site";
 
-export const Result = async ({ subsessionId }) => {
+interface ResultProps {
+  subsessionId: string;
+}
+
+export const Result = async ({ subsessionId }: ResultProps) => {
   const result = await getRaceResult(subsessionId);
 
   if (!result) {

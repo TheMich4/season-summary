@@ -6,13 +6,21 @@ import { cn } from "@/lib/utils";
 import { useMemo } from "react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 
+interface FinishPositions {
+  [position: string]: number;
+}
+
+interface FinishPositionsProps {
+  finishPositions: FinishPositions;
+}
+
 const PositionList = ({
   active,
   finishPositions,
   payload,
 }: {
   active: boolean;
-  finishPositions: Record<string, number>;
+  finishPositions: FinishPositions;
   payload: any;
 }) => {
   if (!active || !payload) {
@@ -53,7 +61,9 @@ const PositionChart = ({
   const theme = useTailwindTheme();
 
   const data = useMemo(() => {
-    const positions = Object.keys(finishPositions);
+    const positions = Object.keys(finishPositions).map((week) =>
+      parseInt(week, 10)
+    );
     return Array.from({ length: positions[positions.length - 1] }, (_, i) => {
       const week = i + 1;
       return {
@@ -83,11 +93,7 @@ const PositionChart = ({
   );
 };
 
-export const FinishPositions = ({
-  finishPositions,
-}: {
-  finishPositions: Record<string, number>;
-}) => {
+export const FinishPositions = ({ finishPositions }: FinishPositionsProps) => {
   const bestFinish = useMemo(() => {
     return Math.min(
       ...Object.keys(finishPositions).map((week) => parseInt(week, 10))

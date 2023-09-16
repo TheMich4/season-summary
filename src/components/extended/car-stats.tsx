@@ -2,7 +2,13 @@
 
 import { useMemo } from "react";
 
-export const CarStats = ({ racesPerCar }) => {
+interface CarStatsProps {
+  racesPerCar: {
+    [carName: string]: number;
+  };
+}
+
+export const CarStats = ({ racesPerCar }: CarStatsProps) => {
   const { count, data } = useMemo(() => {
     return {
       count: Object.values(racesPerCar).length,

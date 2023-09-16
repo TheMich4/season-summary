@@ -10,9 +10,12 @@ import {
 } from "recharts";
 
 import { Delta } from "../common/Delta";
-import { Skeleton } from "../ui/skeleton";
 import { useMemo } from "react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
+
+interface FullSafetyRatingChartProps {
+  dataPoints: Array<number>;
+}
 
 const CustomTooltip = ({
   active,
@@ -35,7 +38,10 @@ const CustomTooltip = ({
   return null;
 };
 
-export const FullSafetyRatingChart = ({ dataPoints }) => {
+export const FullSafetyRatingChart = ({
+  dataPoints,
+}: FullSafetyRatingChartProps) => {
+  console.log({ dataPoints });
   const theme = useTailwindTheme();
 
   const data = useMemo(() => {
