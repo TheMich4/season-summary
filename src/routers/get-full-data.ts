@@ -25,8 +25,6 @@ export const getFullDataRoute = async (req: Request, res: Response) => {
     parseInt(categoryId, 10)
   );
 
-  console.log({ data: fullData?.data });
-
   if (!fullData) {
     res.send({
       error: "START_FETCHING",

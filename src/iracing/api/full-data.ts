@@ -39,8 +39,6 @@ export const getFullSeasonData = async ({
     return null;
   }
 
-  console.log({ lr: seasonData.lastRace });
-
   try {
     if (seasonData.data) {
       return { data: seasonData.data, error: null };
@@ -101,7 +99,7 @@ export const getFullSeasonData = async ({
         results.push(result);
       }
 
-      // await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
 
       return result;
     };
