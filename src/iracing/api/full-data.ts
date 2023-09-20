@@ -1,48 +1,65 @@
-import {
-  FullDataParams,
-  getFullData,
-  isFullDataFetched,
-  isFullDataFetching,
-  setFullData,
-  setFullDataFetching,
-} from "../data/full-data.js";
-
 import { getLoggedInIracingAPIClient } from "../client.js";
 import { getRaceResult } from "./results.js";
+import { getSeasonData } from "../../db/actions/get-season-data.js";
 import { parseResults } from "../parse-results/index.js";
+import { prisma } from "../../db/index.js";
 
 export const getFullSeasonData = async ({
   customerId,
   year,
   season,
   categoryId,
-}: FullDataParams) => {
+}: {
+  customerId: string;
+  year: string;
+  season: string;
+  categoryId: string;
+}) => {
+  console.log("getFullSeasonData", customerId, year, season, categoryId);
+
+  if (!customerId || !year || !season || !categoryId) {
+    return null;
+  }
+
+  const seasonData = await getSeasonData(
+    parseInt(customerId, 10),
+    parseInt(year, 10),
+    parseInt(season, 10),
+    parseInt(categoryId, 10)
+  );
+
+  if (!seasonData) {
+    console.log(
+      "Failed to get seasonData",
+      customerId,
+      year,
+      season,
+      categoryId
+    );
+    return null;
+  }
+
+  console.log({ lr: seasonData.lastRace });
+
   try {
-    console.log("getFullSeasonData", customerId, year, season, categoryId);
-
-    if (!customerId || !year || !season || !categoryId) {
-      return null;
+    if (seasonData.data) {
+      return { data: seasonData.data, error: null };
     }
 
-    if (isFullDataFetched({ customerId, year, season, categoryId })) {
-      console.log("returning already fetched data");
-      return {
-        data: getFullData({ customerId, year, season, categoryId }),
-        error: null,
-      };
-    }
-
-    if (isFullDataFetching({ customerId, year, season, categoryId })) {
-      console.log("data is still fetching");
-      return {
-        data: null,
-        error: "FETCHING",
-      };
+    if (seasonData.isPending) {
+      return { data: null, error: "FETCHING" };
     }
 
     const ir = await getLoggedInIracingAPIClient();
 
-    setFullDataFetching({ customerId, year, season, categoryId });
+    await prisma.seasonData.update({
+      where: {
+        id: seasonData.id,
+      },
+      data: {
+        isPending: true,
+      },
+    });
 
     const races = await ir.searchSeries({
       seasonYear: parseInt(year),
@@ -54,14 +71,16 @@ export const getFullSeasonData = async ({
     });
 
     if (!races?.length) {
-      setFullData(
-        { customerId, year, season, categoryId },
-        {
+      await prisma.seasonData.update({
+        where: {
+          id: seasonData.id,
+        },
+        data: {
+          isPending: false,
           data: [],
-          isFetching: false,
-          isFetched: true,
-        }
-      );
+        },
+      });
+
       return { data: [], error: "NO_DATA" };
     }
 
@@ -82,12 +101,13 @@ export const getFullSeasonData = async ({
         results.push(result);
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      // await new Promise((resolve) => setTimeout(resolve, 3000));
 
       return result;
     };
 
     // TODO: Temporary try second time
+    // TODO: Start from seasonData.lastRace + 1
     for (const race of races) {
       const r = await getResult(race.subsessionId);
 
@@ -96,16 +116,21 @@ export const getFullSeasonData = async ({
       }
     }
 
+    // TODO: Add db data
     const data = parseResults(results, customerId);
 
-    setFullData(
-      { customerId, year, season, categoryId },
-      {
+    const lastRace = results[results.length - 1]?.raceSummary.subsessionId;
+
+    await prisma.seasonData.update({
+      where: {
+        id: seasonData.id,
+      },
+      data: {
+        isPending: false,
         data,
-        isFetching: false,
-        isFetched: true,
-      }
-    );
+        lastRace: lastRace && `${lastRace}`,
+      },
+    });
 
     console.log(
       "!!! done getting full data",
@@ -115,7 +140,7 @@ export const getFullSeasonData = async ({
       categoryId
     );
 
-    return { data: results, error: null };
+    return { data, error: null };
   } catch (e) {
     console.log(
       "!!! failed getting full seasonData for",
@@ -126,14 +151,15 @@ export const getFullSeasonData = async ({
     );
     console.error(e);
 
-    setFullData(
-      { customerId, year, season, categoryId },
-      {
-        data: null,
-        isFetching: false,
-        isFetched: false,
-      }
-    );
+    await prisma.seasonData.update({
+      where: {
+        id: seasonData.id,
+      },
+      data: {
+        isPending: false,
+        data: [],
+      },
+    });
 
     return { data: null, error: e };
   }

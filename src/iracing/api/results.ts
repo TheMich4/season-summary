@@ -1,4 +1,4 @@
-import { getResult, setResult } from "../data/results.js";
+// import { getResult, setResult } from "../data/results.js";
 
 import { getLoggedInIracingAPIClient } from "../client.js";
 

@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  relationMode = "prisma"
+  url          = env("DATABASE_URL")
+}
+
+model User {
+  iracingId  Int      @id
+
+  seasonData SeasonData[]
+}
+
+
+model Season {
+  id         Int     @id @default(autoincrement())
+
+  category   Int
+  isOver     Boolean @default(false)
+  season     Int
+  year       Int
+
+  seasonData SeasonData[]
+
+  @@unique([year, season, category])
+}
+
+model SeasonData {
+  id         Int      @id @default(autoincrement())
+
+  data       Json?
+  isPending  Boolean  @default(false)
+  lastRace   String?
+
+  lastUpdate DateTime @default(now())
+
+  seasonId   Int
+  userId     Int
+
+  season     Season  @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  user       User    @relation(fields: [userId], references: [iracingId], onDelete: Cascade)
+
+  @@index([seasonId])
+  @@index([userId])
+  @@unique([seasonId, userId])
+}

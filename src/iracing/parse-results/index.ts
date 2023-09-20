@@ -14,7 +14,13 @@ import { getSOFData } from "./get-sof-data.js";
 import { getSafetyRatingPoints } from "./get-safety-rating-points.js";
 import { getStats } from "./get-stats.js";
 
-export const parseResults = (results: Array<any>, iracingId: string) => {
+export const parseResults = (
+  // TODO: add type
+  results: Array<any>,
+  iracingId: string,
+  // TODO: add type
+  initialData = undefined
+) => {
   return results?.reduce((acc, result, index) => {
     const raceResult = getDriverResult(result, iracingId);
 
@@ -41,5 +47,5 @@ export const parseResults = (results: Array<any>, iracingId: string) => {
       sof: getSOFData(acc.sof, raceResult, result),
       stats: getStats(acc.stats, raceResult, index),
     };
-  }, getInitialState());
+  }, initialData ?? getInitialState());
 };
