@@ -47,12 +47,10 @@ export const getFullDataStatusRoute = async (req: Request, res: Response) => {
     isFetching: seasonDataStatus.isPending,
   });
 
-  if (!seasonDataStatus.lastRace) {
-    await getFullSeasonData({
-      customerId: iracingId,
-      year,
-      season,
-      categoryId,
-    });
-  }
+  await getFullSeasonData({
+    customerId: iracingId,
+    year,
+    season,
+    categoryId,
+  });
 };

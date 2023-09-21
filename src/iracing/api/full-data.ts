@@ -40,10 +40,6 @@ export const getFullSeasonData = async ({
   }
 
   try {
-    if (seasonData.data) {
-      return { data: seasonData.data, error: null };
-    }
-
     if (seasonData.isPending) {
       return { data: null, error: "FETCHING" };
     }
@@ -81,9 +77,13 @@ export const getFullSeasonData = async ({
 
       return { data: [], error: "NO_DATA" };
     }
+    const raceIndex = races.findIndex(
+      (r) => `${r.subsessionId}` === seasonData.lastRace
+    );
+    const newRaces = raceIndex === -1 ? races : races.slice(raceIndex + 1);
 
     console.log(
-      `Getting ${races.length} races for`,
+      `Getting ${newRaces.length} of ${races.length} races for`,
       customerId,
       year,
       season,
@@ -99,14 +99,13 @@ export const getFullSeasonData = async ({
         results.push(result);
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      // await new Promise((resolve) => setTimeout(resolve, 3000));
 
       return result;
     };
 
     // TODO: Temporary try second time
-    // TODO: Start from seasonData.lastRace + 1
-    for (const race of races) {
+    for (const race of newRaces) {
       const r = await getResult(race.subsessionId);
 
       if (!r) {
@@ -114,10 +113,11 @@ export const getFullSeasonData = async ({
       }
     }
 
-    // TODO: Add db data
-    const data = parseResults(results, customerId);
+    const data = parseResults(results, customerId, seasonData.data);
 
-    const lastRace = results[results.length - 1]?.raceSummary.subsessionId;
+    const lastRace =
+      results[results.length - 1]?.raceSummary.subsessionId ??
+      seasonData.lastRace;
 
     await prisma.seasonData.update({
       where: {

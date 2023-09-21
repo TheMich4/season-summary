@@ -19,9 +19,9 @@ export const parseResults = (
   results: Array<any>,
   iracingId: string,
   // TODO: add type
-  initialData = undefined
+  initialData: any = undefined
 ) => {
-  return results?.reduce((acc, result, index) => {
+  return results?.reduce((acc, result) => {
     const raceResult = getDriverResult(result, iracingId);
 
     if (!raceResult) {
@@ -45,7 +45,7 @@ export const parseResults = (
         raceResult
       ),
       sof: getSOFData(acc.sof, raceResult, result),
-      stats: getStats(acc.stats, raceResult, index),
+      stats: getStats(acc.stats, raceResult),
     };
   }, initialData ?? getInitialState());
 };
