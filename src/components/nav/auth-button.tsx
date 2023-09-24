@@ -34,8 +34,8 @@ export const AuthButton = () => {
         <DropdownMenuLabel>
           {sessionData.user?.name ?? "My Account"}
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>Settings</DropdownMenuItem>
+        {/* <DropdownMenuSeparator />
+        <DropdownMenuItem>Settings</DropdownMenuItem> */}
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut()}>Sign out</DropdownMenuItem>
       </DropdownMenuContent>
