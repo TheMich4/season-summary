@@ -71,7 +71,7 @@ export const getFullSeasonData = async ({
         },
         data: {
           isPending: false,
-          data: [],
+          data: undefined,
         },
       });
 
@@ -155,7 +155,7 @@ export const getFullSeasonData = async ({
       },
       data: {
         isPending: false,
-        data: [],
+        data: undefined,
       },
     });
 
