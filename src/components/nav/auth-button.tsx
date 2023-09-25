@@ -16,8 +16,6 @@ import { Button } from "../ui/button";
 export const AuthButton = () => {
   const { data: sessionData } = useSession();
 
-  console.log({ sessionData });
-
   if (!sessionData) return <Button onClick={() => signIn()}>Sign in</Button>;
 
   return (
