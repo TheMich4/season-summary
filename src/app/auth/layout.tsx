@@ -1,9 +1,9 @@
-import "../styles/globals.css";
+import "../../styles/globals.css";
 
+import { AuthProvider } from "@/components/providers/auth-provider";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/nav/site-header";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -43,17 +43,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
           "scrollbar-thumb-foreground scrollbar-track-background dark:scrollbar-thumb-primary scrollbar-thin min-h-full"
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <VisitedProvider>
+        <AuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
               <div className="flex-1">{children}</div>
-
-              <Toaster />
             </div>
             <TailwindIndicator />
-          </VisitedProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </AuthProvider>
 
         <GoogleAnalytics />
       </body>

@@ -1,3 +1,4 @@
+import { AuthButton } from "./auth-button";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { MainNav } from "./main-nav";
@@ -58,6 +59,8 @@ export function SiteHeader() {
                 className="min-w-32 h-9 min-w-[120px] rounded-md border transition duration-200 ease-in-out hover:scale-105"
               />
             </a> */}
+
+            <AuthButton />
           </nav>
         </div>
       </div>
