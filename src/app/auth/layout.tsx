@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../../styles/globals.css";
 
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { GoogleAnalytics } from "@/components/google-analytics";
@@ -45,14 +45,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <VisitedProvider>
-              <div className="relative flex min-h-screen flex-col">
-                <div className="flex-1">{children}</div>
-
-                <Toaster />
-              </div>
-              <TailwindIndicator />
-            </VisitedProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <div className="flex-1">{children}</div>
+            </div>
+            <TailwindIndicator />
           </ThemeProvider>
         </AuthProvider>
 
