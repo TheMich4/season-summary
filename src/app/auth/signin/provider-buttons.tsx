@@ -15,13 +15,14 @@ export const ProviderButtons = ({
 }) => {
   return (
     <div className="py-2">
-      {Object.values(providers).map((provider) => (
-        <div key={provider.name}>
-          <Button onClick={() => signIn(provider.id)} className="w-full">
-            Sign in with {provider.name}
-          </Button>
-        </div>
-      ))}
+      {providers &&
+        Object.values(providers).map((provider) => (
+          <div key={provider.name}>
+            <Button onClick={() => signIn(provider.id)} className="w-full">
+              Sign in with {provider.name}
+            </Button>
+          </div>
+        ))}
     </div>
   );
 };
