@@ -12,6 +12,7 @@ import {
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export const AuthButton = () => {
   const { data: sessionData } = useSession();
@@ -32,8 +33,12 @@ export const AuthButton = () => {
         <DropdownMenuLabel>
           {sessionData.user?.name ?? "My Account"}
         </DropdownMenuLabel>
-        {/* <DropdownMenuSeparator />
-        <DropdownMenuItem>Settings</DropdownMenuItem> */}
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem>
+          <Link href="/profile/settings">Settings</Link>
+        </DropdownMenuItem>
+
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut()}>Sign out</DropdownMenuItem>
       </DropdownMenuContent>
