@@ -14,7 +14,7 @@ export const ProviderButtons = ({
   > | null;
 }) => {
   return (
-    <div>
+    <div className="py-2">
       {Object.values(providers).map((provider) => (
         <div key={provider.name}>
           <Button onClick={() => signIn(provider.id)} className="w-full">
