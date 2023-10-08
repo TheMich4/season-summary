@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+import { Settings } from "./settings";
 import { authOptions } from "@/config/auth-options";
 import { getServerSession } from "next-auth";
-import { siteConfig } from "@/config/site";
 
 export default async function ProfileSettings() {
   const session = await getServerSession(authOptions);
@@ -31,12 +31,7 @@ export default async function ProfileSettings() {
         </div>
       </div>
 
-      <div>
-        <h2 className="text-2xl font-bold">Settings</h2>
-        {/* <p className="text-gray-500">
-          Manage your account settings and set e-mail preferences.
-        </p> */}
-      </div>
+      <Settings user={user} />
     </main>
   );
 }
