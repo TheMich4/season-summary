@@ -7,6 +7,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 
@@ -22,12 +23,17 @@ const formSchema = z.object({
   iracingId: z.string(),
 });
 
-export const Settings = ({ user }: { user: User }) => {
+export const Settings = ({
+  userSettings,
+}: {
+  userSettings: { iracingId: string | null } | null;
+}) => {
   const [saving, setSaving] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      iracingId: "",
+      iracingId: userSettings?.iracingId ?? "",
     },
   });
 
@@ -53,6 +59,7 @@ export const Settings = ({ user }: { user: User }) => {
             name="iracingId"
             render={({ field }) => (
               <FormItem>
+                <FormLabel htmlFor="iracingId">iRacing ID:</FormLabel>
                 <FormControl>
                   <Input placeholder="Your iRacing ID" {...field}></Input>
                 </FormControl>

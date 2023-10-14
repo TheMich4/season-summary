@@ -1,9 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { Settings } from "./settings";
-import { User } from "@prisma/client";
 import { authOptions } from "@/config/auth-options";
 import { getServerSession } from "next-auth";
+import { getUserSettings } from "@/server/get-user-settings";
 
 export default async function ProfileSettings() {
   const session = await getServerSession(authOptions);
@@ -19,6 +19,8 @@ export default async function ProfileSettings() {
 
   const { user } = session;
 
+  const userSettings = await getUserSettings(user.id);
+
   return (
     <main className="container grid min-h-full items-start justify-start gap-6 pb-8 pt-6 md:gap-10 md:py-12">
       <div className="flex flex-row items-center gap-4">
@@ -32,7 +34,7 @@ export default async function ProfileSettings() {
         </div>
       </div>
 
-      <Settings user={user as User} />
+      <Settings userSettings={userSettings} />
     </main>
   );
 }
