@@ -4,17 +4,13 @@ import { Settings } from "./settings";
 import { authOptions } from "@/config/auth-options";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
+import { redirect } from "next/navigation";
 
 export default async function ProfileSettings() {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
+    return redirect("/");
   }
 
   const { user } = session;
