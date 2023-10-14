@@ -36,11 +36,15 @@ export const AuthButton = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem>
-          <Link href="/profile/settings">Settings</Link>
+          <Link href="/profile/settings" className="w-full">
+            Settings
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => signOut()}>Sign out</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => signOut()} className="w-full">
+          Sign out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -54,7 +54,7 @@ export const IracingIdInput = () => {
           control={form.control}
           name="searchTerm"
           render={({ field }) => (
-            <FormItem className="min-w-64 w-full">
+            <FormItem className="w-full">
               <FormControl>
                 <Input
                   placeholder="Search for iRacing profile"
