@@ -1,3 +1,4 @@
+import { AuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
@@ -9,6 +10,7 @@ export const authOptions = {
   callbacks: {
     session: async ({ session, token }) => {
       if (session?.user) {
+        // @ts-ignore
         session.user.id = token.uid;
       }
       return session;
@@ -32,4 +34,4 @@ export const authOptions = {
   session: {
     strategy: "jwt",
   },
-};
+} as AuthOptions;

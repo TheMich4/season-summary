@@ -12,7 +12,6 @@ export const setCurrentUserIracingId = async (iracingId: string) => {
     redirect("/");
   }
 
-  console.log({ session, iracingId });
   return await prisma.user.update({
     where: {
       id: session.user.id,

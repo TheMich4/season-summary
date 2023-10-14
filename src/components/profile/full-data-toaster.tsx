@@ -51,7 +51,7 @@ export const FullDataToaster = ({
         ),
       });
     }
-  }, [isFetching, isFetched]);
+  }, [isFetching, isFetched, toast, router, URL]);
 
   if (isFetched) {
     return (
