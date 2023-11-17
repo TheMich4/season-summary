@@ -1,7 +1,4 @@
 import IracingAPI from "iracing-api";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const IRACING_EMAIL = process.env.IRACING_EMAIL!;
 const IRACING_PASSWORD = process.env.IRACING_PASSWORD!;

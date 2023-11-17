@@ -9,6 +9,8 @@ export const getSeasonData = async (
 ) => {
   const seasonId = await getSeasonId(year, season, category);
 
+  console.log({ seasonId });
+
   return await prisma.seasonData.findFirst({
     where: {
       seasonId,

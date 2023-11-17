@@ -1,19 +1,18 @@
-import { Request, Response } from "express";
-
 import { getFullSeasonData } from "../iracing/api/full-data.js";
 import { getSeasonDataStatus } from "../db/actions/get-season-data-status.js";
 import { getSeasonId } from "../db/actions/get-season-id.js";
 import { upsertSeason } from "../db/actions/upsert-season.js";
 
-export const getFullDataStatusRoute = async (req: Request, res: Response) => {
-  const iracingId = req.query.iracingId as string;
-  const year = req.query.year as string;
-  const season = req.query.season as string;
-  const categoryId = req.query.categoryId as string;
+export const getFullDataStatusRoute = async (request) => {
+  const { searchParams } = new URL(request.url);
+
+  const iracingId = searchParams.get("iracingId");
+  const year = searchParams.get("year");
+  const season = searchParams.get("season");
+  const categoryId = searchParams.get("categoryId");
 
   if (!iracingId || !year || !season || !categoryId) {
-    res.send({ error: "missing params" });
-    return;
+    return new Response("missing params", { status: 400 });
   }
 
   let seasonId = await getSeasonId(
@@ -37,20 +36,23 @@ export const getFullDataStatusRoute = async (req: Request, res: Response) => {
     seasonId
   );
 
-  res.send({
-    error: null,
-    params: { iracingId, year, season, categoryId },
-    isFetched:
-      seasonDataStatus &&
-      seasonDataStatus.lastRace &&
-      !seasonDataStatus.isPending,
-    isFetching: seasonDataStatus.isPending,
-  });
-
-  await getFullSeasonData({
+  getFullSeasonData({
     customerId: iracingId,
     year,
     season,
     categoryId,
   });
+
+  return new Response(
+    JSON.stringify({
+      error: null,
+      params: { iracingId, year, season, categoryId },
+      isFetched:
+        seasonDataStatus &&
+        seasonDataStatus.lastRace &&
+        !seasonDataStatus.isPending,
+      isFetching: seasonDataStatus.isPending,
+    }),
+    { status: 200 }
+  );
 };

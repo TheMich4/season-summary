@@ -1,19 +1,18 @@
-import { Request, Response } from "express";
-
 // import { getFullData } from "../iracing/data/full-data.js";
 import { getFullSeasonData } from "../iracing/api/full-data.js";
 import { getSeasonData } from "../db/actions/get-season-data.js";
 import { upsertSeason } from "../db/actions/upsert-season.js";
 
-export const getFullDataRoute = async (req: Request, res: Response) => {
-  const iracingId = req.query.iracingId as string;
-  const year = req.query.year as string;
-  const season = req.query.season as string;
-  const categoryId = req.query.categoryId as string;
+export const getFullDataRoute = async (request) => {
+  const { searchParams } = new URL(request.url);
+
+  const iracingId = searchParams.get("iracingId");
+  const year = searchParams.get("year");
+  const season = searchParams.get("season");
+  const categoryId = searchParams.get("categoryId");
 
   if (!iracingId || !year || !season || !categoryId) {
-    res.send({ error: "missing params" });
-    return;
+    return new Response("missing params", { status: 400 });
   }
 
   console.log("/get-full-data", { iracingId, year, season, categoryId });
@@ -25,26 +24,32 @@ export const getFullDataRoute = async (req: Request, res: Response) => {
     parseInt(categoryId, 10)
   );
 
+  console.log({ fullData });
+
   if (!fullData) {
-    res.send({
-      error: "START_FETCHING",
-      params: { iracingId, year, season, categoryId },
+    getFullSeasonData({
+      customerId: iracingId,
+      year,
+      season,
+      categoryId,
     });
+
+    return new Response(
+      JSON.stringify({
+        error: "START_FETCHING",
+        params: { iracingId, year, season, categoryId },
+      })
+    );
   }
 
   if (fullData?.isPending || fullData?.lastRace || fullData?.data) {
-    res.send({
-      error: null,
-      params: { iracingId, year, season, categoryId },
-      ...fullData,
-    });
-    return;
+    return new Response(
+      JSON.stringify({
+        error: null,
+        params: { iracingId, year, season, categoryId },
+        ...fullData,
+      }),
+      { status: 200 }
+    );
   }
-
-  await getFullSeasonData({
-    customerId: iracingId,
-    year,
-    season,
-    categoryId,
-  });
 };
