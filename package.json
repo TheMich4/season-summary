@@ -5,6 +5,7 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
+    "build": "bun build src/index.ts",
     "dev": "bun --hot run src/index.ts",
     "start": "bun run src/index.ts"
   },
