@@ -2,6 +2,7 @@
 import { getFullSeasonData } from "../iracing/api/full-data.js";
 import { getSeasonData } from "../db/actions/get-season-data.js";
 import { upsertSeason } from "../db/actions/upsert-season.js";
+import { upsertUser } from "../db/actions/upsert-user.js";
 
 export const getFullDataRoute = async (request) => {
   const { searchParams } = new URL(request.url);
