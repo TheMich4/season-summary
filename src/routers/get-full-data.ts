@@ -24,8 +24,6 @@ export const getFullDataRoute = async (request) => {
     parseInt(categoryId, 10)
   );
 
-  console.log({ fullData });
-
   if (!fullData) {
     getFullSeasonData({
       customerId: iracingId,
