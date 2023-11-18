@@ -28,7 +28,10 @@ export const getNew = async (request: Request, server: Server) => {
     });
   }
 
-  return new Response(JSON.stringify(seasonData?.data), {
-    status: 200,
-  });
+  return new Response(
+    JSON.stringify({ data: seasonData?.data, status: "DONE" }),
+    {
+      status: 200,
+    }
+  );
 };
