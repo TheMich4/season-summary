@@ -1,6 +1,6 @@
 import { Server } from "bun";
-import { getParams } from "../utils/get-params";
-import { getSeasonData } from "../db/actions/get-season-data";
+import { getParams } from "../../utils/get-params";
+import { getSeasonData } from "../../db/actions/get-season-data";
 
 export const getNew = async (request: Request, server: Server) => {
   const { iracingId, year, season, categoryId } = getParams(request);

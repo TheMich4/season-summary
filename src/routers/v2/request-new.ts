@@ -1,7 +1,7 @@
 import { Server } from "bun";
-import { getNewFullData } from "../iracing/api/new-full-data";
-import { getParams } from "../utils/get-params";
-import { getSeasonData } from "../db/actions/get-season-data";
+import { getNewFullData } from "../../iracing/api/new-full-data";
+import { getParams } from "../../utils/get-params";
+import { getSeasonData } from "../../db/actions/get-season-data";
 
 // TODO: Add handling if season is over and data was fetched after season end
 export const requestNew = async (request: Request, server: Server) => {
