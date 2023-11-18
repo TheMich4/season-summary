@@ -16,9 +16,6 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "dependencies": {
     "@prisma/client": "5.3.1",
     "iracing-api": "^0.2.4",
