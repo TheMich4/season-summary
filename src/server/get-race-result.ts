@@ -1,18 +1,12 @@
 "use server";
 
-import { getLoggedInIracingAPIClient } from "./store/iracing-api";
+import { env } from "process";
 
 export const getRaceResult = async (subsessionId: string | number) => {
-  const ir = await getLoggedInIracingAPIClient();
+  const response = await fetch(
+    `${env.API_URL}v2/get-race-result?subsessionId=${subsessionId}`
+  );
+  const { data } = await response.json();
 
-  const result = await ir.getResult({
-    subsessionId: parseInt(subsessionId as string, 10),
-  });
-
-  // Get only race results
-  if (result?.eventType !== 5) {
-    return null;
-  }
-
-  return result;
+  return data;
 };

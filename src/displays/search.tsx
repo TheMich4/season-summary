@@ -46,6 +46,7 @@ export const Search = () => {
     setSearchResults([]);
     setSearchError("");
     setLoading(true);
+
     const results = await iracingSearch(searchTerm)
       .catch(() => {
         setSearchError("No profiles found");
