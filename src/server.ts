@@ -8,7 +8,12 @@ export const createServer = () => {
     fetch(request, server) {
       const url = new URL(request.url);
 
-      return routeHandler[url.pathname](request, server);
+      const pathname =
+        url.pathname.charAt(url.pathname.length - 1) === "/"
+          ? url.pathname.slice(0, -1)
+          : url.pathname;
+
+      return routeHandler[pathname](request, server);
     },
     websocket,
   });

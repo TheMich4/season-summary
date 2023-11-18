@@ -14,10 +14,10 @@ export const routeHandler = new Proxy(
     ["/get-full-data-status"]: getFullDataStatusRoute,
 
     ["/v2/get-full"]: getNew,
-    ["/v2/get-race-result"]: getRaceResult,
     ["/v2/request-full"]: requestNew,
 
     ["/v2/get-iracing-data"]: getIracingData,
+    ["/v2/get-race-result"]: getRaceResult,
     ["/v2/search-drivers"]: searchDrivers,
 
     ["/ws"]: handleWebsocketUpgrade,
