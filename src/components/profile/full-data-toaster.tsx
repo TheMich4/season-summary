@@ -1,11 +1,11 @@
 "use client";
 
+import { Category, categoryToId } from "@/config/category";
 import { updateToast, useToast } from "../ui/use-toast";
 import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "../ui/button";
 import { ToastAction } from "../ui/toast";
-import { categoryToId } from "@/config/category";
 import { useRouter } from "next/navigation";
 import useWebSocket from "react-use-websocket";
 
@@ -35,7 +35,9 @@ export const FullDataToaster = ({
   wsUrl,
 }: FullDataToasterProps) => {
   const URL = `/driver/${iracingId}/full?year=${year}&season=${season}&category=${category}`;
-  const SOCKET_URL = `${wsUrl}?iracingId=${iracingId}&year=${year}&season=${season}&categoryId=${categoryToId[category]}`;
+  const SOCKET_URL = `${wsUrl}?iracingId=${iracingId}&year=${year}&season=${season}&categoryId=${
+    categoryToId[category as Category]
+  }`;
 
   const { toast } = useToast();
   const router = useRouter();
