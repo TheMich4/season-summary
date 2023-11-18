@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun --hot run src/index.ts",
-    "start": "bun run src/index.ts",
-    "postinstall": "bun prisma generate"
+    "start": "bun run src/index.ts"
   },
   "devDependencies": {
     "bun-types": "latest",
