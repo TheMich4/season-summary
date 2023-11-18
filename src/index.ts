@@ -1,6 +1,7 @@
 import { routeHandler } from "./route-handler";
 
 const server = Bun.serve({
+  hostname: "::",
   port: process.env.PORT,
   fetch(request, response) {
     const url = new URL(request.url);
