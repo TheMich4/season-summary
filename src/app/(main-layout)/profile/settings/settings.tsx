@@ -39,7 +39,6 @@ export const Settings = ({
 
   const onSubmit = async ({ iracingId }: z.infer<typeof formSchema>) => {
     setSaving(true);
-    console.log({ iracingId });
 
     await setCurrentUserIracingId(iracingId);
 

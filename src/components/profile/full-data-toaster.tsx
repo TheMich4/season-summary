@@ -1,19 +1,30 @@
 "use client";
 
+import { updateToast, useToast } from "../ui/use-toast";
+import { useEffect, useMemo, useState } from "react";
+
 import { Button } from "../ui/button";
-import { Category } from "@/config/category";
 import { ToastAction } from "../ui/toast";
-import { useEffect } from "react";
+import { categoryToId } from "@/config/category";
 import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
+import useWebSocket from "react-use-websocket";
+
+const useDataWebSocket = (socketUrl: string) => {
+  const { lastMessage } = useWebSocket(socketUrl);
+
+  return useMemo(() => {
+    if (!lastMessage) return { status: undefined };
+
+    return JSON.parse(lastMessage.data);
+  }, [lastMessage]);
+};
 
 interface FullDataToasterProps {
   iracingId: number;
   year: number;
   season: number;
   category: string;
-  isFetching: boolean;
-  isFetched: Category;
+  wsUrl: string;
 }
 
 export const FullDataToaster = ({
@@ -21,22 +32,34 @@ export const FullDataToaster = ({
   year,
   season,
   category,
-  isFetching,
-  isFetched,
+  wsUrl,
 }: FullDataToasterProps) => {
+  const URL = `/driver/${iracingId}/full?year=${year}&season=${season}&category=${category}`;
+  const SOCKET_URL = `${wsUrl}?iracingId=${iracingId}&year=${year}&season=${season}&categoryId=${categoryToId[category]}`;
+
   const { toast } = useToast();
   const router = useRouter();
+  const [toastId, setToastId] = useState<string | undefined>(undefined);
 
-  const URL = `/driver/${iracingId}/full?year=${year}&season=${season}&category=${category}`;
+  const { status, message } = useDataWebSocket(SOCKET_URL);
 
   useEffect(() => {
-    if (isFetching || (!isFetching && !isFetched)) {
-      toast({
-        title: "Your full season data is being prepared!",
-        description: "Come back in a few minutes!",
-      });
+    if (status === "PROGRESS") {
+      const percentage = Math.ceil((message?.fetched / message?.races) * 100);
+      const description = `Prepared ${message?.fetched} of ${message?.races} races. ${percentage}% done.`;
+
+      if (toastId) {
+        updateToast({ id: toastId, description });
+      } else {
+        const { id } = toast({
+          duration: Infinity,
+          title: "Your full season data is being prepared!",
+          description,
+        });
+        setToastId(id);
+      }
     }
-    if (isFetched) {
+    if (status === "DONE") {
       toast({
         title: "Your full season data is ready!",
         description:
@@ -51,9 +74,9 @@ export const FullDataToaster = ({
         ),
       });
     }
-  }, [isFetching, isFetched, toast, router, URL]);
+  }, [status, message?.fetched, message?.races, toast, toastId, router, URL]);
 
-  if (isFetched) {
+  if (status === "DONE") {
     return (
       <Button onClick={() => router.push(URL)}>
         More advanced season stats
