@@ -17,7 +17,7 @@ export default function Home() {
       <IracingIdInput />
       <VisitedList />
 
-      <div className="text-balance flex flex-col items-center rounded-md border p-2 text-center text-sm">
+      <div className="text-balance flex flex-col items-center rounded-md border bg-background/40 p-2 text-center text-sm">
         <p className="mb-1 font-bold">This page is still in development.</p>
         <p>
           If you have any feedback or ideas, please let me know on{" "}

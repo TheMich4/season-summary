@@ -31,7 +31,7 @@ export const ResultTable = ({ result }: { result: Record<string, any> }) => {
   });
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border bg-background/40">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

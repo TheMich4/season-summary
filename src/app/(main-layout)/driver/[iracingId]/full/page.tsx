@@ -28,7 +28,7 @@ export default function ExtendedPage({
 }: DriverPageProps) {
   return (
     <div className="container flex w-full flex-col items-center justify-center gap-4 py-4">
-      <div className="text-balance flex w-full flex-col justify-center rounded-md border  border-red-500 p-2 text-center">
+      <div className="text-balance flex w-full flex-col justify-center rounded-md border border-red-500 bg-background/40 p-2 text-center">
         <p className="mb-1 font-bold text-red-500">
           This page is experimental!
         </p>
