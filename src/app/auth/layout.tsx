@@ -40,7 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(
           inter.className,
-          "scrollbar-thumb-foreground scrollbar-track-background dark:scrollbar-thumb-primary scrollbar-thin min-h-full"
+          "scrollbar-thumb-foreground scrollbar-track-background dark:scrollbar-thumb-primary scrollbar-thin min-h-full my-gradient"
         )}
       >
         <AuthProvider>
