@@ -14,7 +14,7 @@ export const SimpleStat = ({
   invert = false,
 }: SimpleStatProps) => {
   return (
-    <div className="flex w-full flex-col rounded-md border p-4 text-start">
+    <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
       <div className="pb-2 text-base font-normal tracking-tight">{label}</div>
       <div className="flex flex-row items-baseline gap-1 text-2xl font-bold">
         <p>{value}</p>

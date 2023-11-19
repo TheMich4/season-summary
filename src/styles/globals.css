@@ -66,3 +66,7 @@
 .text-balance {
   text-wrap: balance;
 }
+
+.my-gradient {
+  @apply bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-primary/5 to-background;
+}

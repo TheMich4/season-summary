@@ -59,7 +59,7 @@ export const ProfileHeader = ({
         </div>
       </div>
 
-      <TooltipProvider>
+      {/* <TooltipProvider>
         <Tooltip>
           <TooltipTrigger className="self-center md:self-end">
             <div className="text-xs text-gray-400">{`Last updated: ${lastFetchString}`}</div>
@@ -68,7 +68,7 @@ export const ProfileHeader = ({
             <p>Your data is updated at most one time in 24 hours.</p>
           </TooltipContent>
         </Tooltip>
-      </TooltipProvider>
+      </TooltipProvider> */}
     </div>
   );
 };

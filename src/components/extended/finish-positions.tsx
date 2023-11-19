@@ -101,7 +101,7 @@ export const FinishPositions = ({ finishPositions }: FinishPositionsProps) => {
   }, [finishPositions]);
 
   return (
-    <div className="flex w-full flex-col rounded-md border p-4 text-start">
+    <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
       <p className="pb-2 text-base font-normal tracking-tight">Best finish</p>
       <p className="text-2xl font-bold">{bestFinish}</p>
       <p className="text-xs text-muted-foreground">

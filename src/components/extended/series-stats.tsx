@@ -25,7 +25,7 @@ export const SeriesStats = ({ racesPerSeries }: SeriesStatsProps) => {
   }, [racesPerSeries]);
 
   return (
-    <div className="flex w-full flex-col gap-2 rounded-md border p-4 text-start">
+    <div className="flex w-full flex-col gap-2 rounded-md border bg-background/40 p-4 text-start">
       <p className="text-2xl font-semibold leading-none tracking-tight">
         Most raced series
       </p>

@@ -144,12 +144,19 @@ const updateToast = (props: ToasterToast) => {
   });
 };
 
+const dismissToast = (toastId?: string) => {
+  dispatch({
+    type: "DISMISS_TOAST",
+    toastId,
+  });
+};
+
 function toast({ ...props }: Toast) {
   const id = genId();
 
   const update = (props: ToasterToast) => updateToast({ ...props, id });
 
-  const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id });
+  const dismiss = () => dismissToast(id);
 
   dispatch({
     type: "ADD_TOAST",
@@ -190,4 +197,4 @@ function useToast() {
   };
 }
 
-export { useToast, toast, updateToast };
+export { useToast, toast, updateToast, dismissToast };

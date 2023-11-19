@@ -17,7 +17,7 @@ export const ProfileCard = ({
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-row justify-between rounded-md border p-2">
+    <div className="flex flex-row justify-between rounded-md border bg-background/40 p-2">
       <div className="flex flex-row gap-2">
         <User className="h-6 w-6 self-center dark:text-primary" />
         <div className="flex flex-col">

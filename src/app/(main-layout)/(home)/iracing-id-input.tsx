@@ -57,6 +57,7 @@ export const IracingIdInput = () => {
             <FormItem className="w-full">
               <FormControl>
                 <Input
+                  className="bg-background/40"
                   placeholder="Search for iRacing profile"
                   {...field}
                 ></Input>

@@ -83,7 +83,7 @@ export const IratingChart = ({
   if (!chartData?.length || chartData.length === 1) return null;
 
   return (
-    <div className="flex w-full max-w-full self-center rounded-md border bg-card sm:w-full sm:max-w-md md:max-w-full">
+    <div className="flex w-full max-w-full self-center rounded-md border bg-background/40 sm:w-full sm:max-w-md md:max-w-full">
       <ResponsiveContainer height={200}>
         <LineChart height={250} data={data}>
           <Line
