@@ -30,8 +30,8 @@ const PositionList = ({
   return (
     <div className="flex flex-col rounded-md border bg-background p-2">
       <div className="mb-1 grid grid-cols-2 items-baseline gap-2">
-        <p className="font-bold">WEEK</p>
-        <p className="font-bold">RACES</p>
+        <p className="font-bold">POSITION</p>
+        <p className="font-bold">FINISHES</p>
       </div>
       {Object.entries(finishPositions).map(([position, numberOfRaces]) => (
         <div className="grid grid-cols-2 items-baseline gap-2" key={position}>
@@ -64,13 +64,13 @@ const PositionChart = ({
     const positions = Object.keys(finishPositions).map((week) =>
       parseInt(week, 10)
     );
-    return Array.from({ length: positions[positions.length - 1] }, (_, i) => {
-      const week = i + 1;
-      return {
-        name: week,
-        races: finishPositions[week] || 0,
-      };
-    });
+    return Array.from(
+      { length: positions[positions.length - 1] },
+      (_, position) => ({
+        name: position,
+        races: finishPositions[position] || 0,
+      })
+    ).slice(1);
   }, [finishPositions]);
 
   return (
