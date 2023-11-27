@@ -13,6 +13,8 @@ export const createServer = () => {
           ? url.pathname.slice(0, -1)
           : url.pathname;
 
+      console.log("Request to: ", pathname);
+
       return routeHandler[pathname](request, server);
     },
     websocket,

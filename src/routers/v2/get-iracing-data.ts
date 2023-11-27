@@ -103,8 +103,6 @@ export const getIracingData = async (request: Request) => {
       previousSeasonRecap?.stats as any
     );
 
-    console.log({ memberData });
-
     return new Response(
       JSON.stringify({
         memberData: memberData?.members?.[0],
