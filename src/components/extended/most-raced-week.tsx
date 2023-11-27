@@ -18,10 +18,12 @@ const WeekChart = ({
       const week = i + 1;
       return {
         name: week,
-        races: racesPerWeek[week] || 0,
+        races: racesPerWeek[i] || 0,
       };
     });
   }, [racesPerWeek]);
+
+  console.log({ data, racesPerWeek });
 
   return (
     <ResponsiveContainer width="100%" height={80}>
@@ -67,11 +69,11 @@ const WeekList = ({
           <p
             className={cn(
               "flex justify-center text-muted-foreground",
-              `${payload[0]?.payload.name}` === week &&
+              `${payload[0]?.payload.name}` === `${parseInt(week, 10) + 1}` &&
                 "font-bold text-foreground"
             )}
           >
-            {week}
+            {`${parseInt(week, 10) + 1}`}
           </p>
           <p className="flex justify-center font-bold dark:text-primary">
             {numberOfRaces}
@@ -92,7 +94,7 @@ export const MostRacedWeek = ({
       (acc, [week, numberOfRaces]) => {
         if (numberOfRaces > acc.numberOfRaces) {
           return {
-            week,
+            week: `${parseInt(week) + 1}`,
             numberOfRaces,
           };
         }
