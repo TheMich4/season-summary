@@ -74,6 +74,7 @@ model User {
   emailVerified DateTime?
   image         String?
   iracingId     String?
+  isAdmin       Boolean   @default(false)
 
   accounts      Account[]
   sessions      Session[]
