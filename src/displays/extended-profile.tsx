@@ -1,4 +1,4 @@
-import { Category, categoryToId, categoryToName } from "@/config/category";
+import { Category, categoryToId } from "@/config/category";
 
 import { CategoryDropdown } from "@/components/profile/category-dropdown";
 import { ExtendedPending } from "@/components/extended/extended-pending";
@@ -29,6 +29,11 @@ export const ExtendedProfile = async ({
 
   const { status, data } = await response.json();
 
+  if (status === "NOT_FOUND") {
+    const URL = `${env.API_URL}v2/request-full?iracingId=${iracingId}&year=${year}&season=${season}&categoryId=${categoryToId[category]}`;
+    await fetch(URL, { cache: "no-cache" });
+  }
+
   if (status === "NOT_FOUND" || status === "PENDING") {
     return (
       <ExtendedPending
@@ -37,6 +42,7 @@ export const ExtendedProfile = async ({
         year={year}
         category={category}
         status={status}
+        wsUrl={env.WS_URL}
       />
     );
   }
