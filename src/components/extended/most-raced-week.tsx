@@ -23,8 +23,6 @@ const WeekChart = ({
     });
   }, [racesPerWeek]);
 
-  console.log({ data, racesPerWeek });
-
   return (
     <ResponsiveContainer width="100%" height={80}>
       <BarChart data={data}>

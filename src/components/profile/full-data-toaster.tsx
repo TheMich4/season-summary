@@ -1,23 +1,12 @@
 "use client";
 
-import { Category, categoryToId } from "@/config/category";
 import { updateToast, useToast } from "../ui/use-toast";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "../ui/button";
 import { ToastAction } from "../ui/toast";
+import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { useRouter } from "next/navigation";
-import useWebSocket from "react-use-websocket";
-
-const useDataWebSocket = (socketUrl: string) => {
-  const { lastMessage } = useWebSocket(socketUrl);
-
-  return useMemo(() => {
-    if (!lastMessage) return { status: undefined };
-
-    return JSON.parse(lastMessage.data);
-  }, [lastMessage]);
-};
 
 interface FullDataToasterProps {
   iracingId: number;
@@ -35,15 +24,18 @@ export const FullDataToaster = ({
   wsUrl,
 }: FullDataToasterProps) => {
   const URL = `/driver/${iracingId}/full?year=${year}&season=${season}&category=${category}`;
-  const SOCKET_URL = `${wsUrl}?iracingId=${iracingId}&year=${year}&season=${season}&categoryId=${
-    categoryToId[category as Category]
-  }`;
 
   const { toast } = useToast();
   const router = useRouter();
   const [toastId, setToastId] = useState<string | undefined>(undefined);
 
-  const { status, message } = useDataWebSocket(SOCKET_URL);
+  const { status, message } = useDataWebSocket({
+    iracingId,
+    year,
+    season,
+    category,
+    wsUrl,
+  });
 
   useEffect(() => {
     if (status === "PROGRESS") {
