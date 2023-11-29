@@ -50,6 +50,7 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
       <Link
         href={`/result/${result.subsessionId}`}
         className="ml-2 self-center"
+        prefetch={false}
       >
         <Button size="sm" variant="ghost">
           <ChevronRight className="h-4 w-4 dark:text-primary" />
