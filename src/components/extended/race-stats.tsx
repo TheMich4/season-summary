@@ -1,10 +1,8 @@
 export const RaceStats = ({ raceData }: Record<string, any>) => {
   return (
     <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
-      <div className="pb-2 text-base font-normal tracking-tight">
-        Qualifying
-      </div>
-      <div className="grid grid-cols-2 gap-1">
+      <div className="pb-2 text-base font-normal tracking-tight">Race</div>
+      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
         <div className="flex flex-row items-baseline gap-1">
           <p className="text-2xl font-bold">{raceData.lowest}</p>
           <p className="text-xs text-muted-foreground">best</p>

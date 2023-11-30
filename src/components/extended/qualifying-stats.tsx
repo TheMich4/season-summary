@@ -4,7 +4,7 @@ export const QualifyingStats = ({ qualiData }: Record<string, any>) => {
       <div className="pb-2 text-base font-normal tracking-tight">
         Qualifying
       </div>
-      <div className="grid grid-cols-2 gap-1">
+      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
         <div className="flex flex-row items-baseline gap-1">
           <p className="text-2xl font-bold">{qualiData.lowest}</p>
           <p className="text-xs text-muted-foreground">best</p>
