@@ -1,7 +1,7 @@
 "use client";
 
-import { Category, categoryToId, categoryToName } from "@/config/category";
-import { use, useEffect, useMemo } from "react";
+import { Category, categoryToName } from "@/config/category";
+import { useEffect, useMemo } from "react";
 
 import { CategoryDropdown } from "../profile/category-dropdown";
 import { SeasonSwitch } from "../profile/season-switch";

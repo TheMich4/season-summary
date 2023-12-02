@@ -39,8 +39,10 @@ export const FullDataToaster = ({
 
   useEffect(() => {
     if (status === "PROGRESS") {
-      const percentage = Math.ceil((message?.fetched / message?.races) * 100);
-      const description = `Prepared ${message?.fetched} of ${message?.races} races. ${percentage}% done.`;
+      const oldRaces = message?.races - message?.newRaces;
+      const fetchedRaces = oldRaces + message?.fetched;
+      const percentage = Math.ceil((fetchedRaces / message?.races) * 100);
+      const description = `Prepared ${fetchedRaces} of ${message?.races} races. ${percentage}% done.`;
 
       if (toastId) {
         updateToast({ id: toastId, description });
@@ -68,7 +70,16 @@ export const FullDataToaster = ({
         ),
       });
     }
-  }, [status, message?.fetched, message?.races, toast, toastId, router, URL]);
+  }, [
+    status,
+    message?.newRaces,
+    message?.fetched,
+    message?.races,
+    toast,
+    toastId,
+    router,
+    URL,
+  ]);
 
   if (status === "DONE") {
     return (

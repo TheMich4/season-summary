@@ -2,7 +2,9 @@ import { Category, categoryToId } from "@/config/category";
 
 import { CategoryDropdown } from "@/components/profile/category-dropdown";
 import { ExtendedPending } from "@/components/extended/extended-pending";
+import { ProfileUpdater } from "@/components/extended/profile-updater";
 import { SeasonSwitch } from "@/components/profile/season-switch";
+import { Suspense } from "react";
 import { View } from "@/components/extended/view";
 import { env } from "@/env.mjs";
 import { url } from "@/config/site";
@@ -77,13 +79,24 @@ export const ExtendedProfile = async ({
   const { data: simpleData } = await simpleResponse.json();
 
   return (
-    <View
-      data={data}
-      iracingId={iracingId}
-      simpleData={simpleData}
-      season={season}
-      year={year}
-      category={category}
-    />
+    <>
+      <View
+        data={data}
+        iracingId={iracingId}
+        simpleData={simpleData}
+        season={season}
+        year={year}
+        category={category}
+      />
+
+      <Suspense fallback={null}>
+        <ProfileUpdater
+          iracingId={+iracingId}
+          year={+year}
+          season={+season}
+          category={category}
+        />
+      </Suspense>
+    </>
   );
 };
