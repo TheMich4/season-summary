@@ -78,7 +78,11 @@ const PositionChart = ({
       <BarChart data={data}>
         <Bar dataKey="races" fill={theme.colors?.primary.DEFAULT} />
         <Tooltip
-          cursor={false}
+          cursor={{
+            strokeWidth: 0,
+            fillOpacity: 0.1,
+            fill: theme.colors?.primary.DEFAULT,
+          }}
           content={
             <PositionList
               finishPositions={finishPositions}

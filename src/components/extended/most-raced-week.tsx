@@ -28,7 +28,11 @@ const WeekChart = ({
       <BarChart data={data}>
         <Bar dataKey="races" fill={theme.colors?.primary.DEFAULT} />
         <Tooltip
-          cursor={false}
+          cursor={{
+            strokeWidth: 0,
+            fillOpacity: 0.1,
+            fill: theme.colors?.primary.DEFAULT,
+          }}
           content={
             <WeekList
               racesPerWeek={racesPerWeek}
