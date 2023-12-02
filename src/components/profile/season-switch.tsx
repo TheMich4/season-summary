@@ -45,7 +45,7 @@ export const SeasonSwitch = ({
     <div className="flex flex-row items-center justify-center gap-2 rounded-md">
       <Link href={getPreviousSeason()} prefetch={false}>
         <Button
-          className="dark:bg-background/40"
+          className="bg-background/40"
           size="xs"
           variant="outline"
           disabled={year === 2010 && season === 1}
@@ -62,7 +62,7 @@ export const SeasonSwitch = ({
 
       <Link href={getNextSeason()} prefetch={false}>
         <Button
-          className="dark:bg-background/40"
+          className="bg-background/40"
           size="xs"
           variant="outline"
           disabled={
