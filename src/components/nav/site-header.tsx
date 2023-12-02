@@ -45,21 +45,6 @@ export function SiteHeader() {
             </Link>
 
             <ThemeSwitch />
-
-            {/* <a
-              href="https://www.buymeacoffee.com/dyczkowski"
-              target="_blank"
-              className="h-9 min-w-[120px]"
-              rel="noreferrer"
-            >
-              eslint-disable-next-line @next/next/no-img-element
-              <img
-                src="https://cdn.buymeacoffee.com/buttons/v2/default-black.png"
-                alt="Buy Me A Coffee"
-                className="min-w-32 h-9 min-w-[120px] rounded-md border transition duration-200 ease-in-out hover:scale-105"
-              />
-            </a> */}
-
             <AuthButton />
           </nav>
         </div>

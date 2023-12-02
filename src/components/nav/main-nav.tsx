@@ -6,6 +6,7 @@ import { MobileNavMenu } from "./mobile-nav-menu";
 import { NavItem } from "./types";
 import { NavLink } from "./nav-link";
 import { ProfileNavLink } from "./profile-nav-link";
+import { Suspense } from "react";
 import { siteConfig } from "@/config/site";
 
 export interface MainNavProps {
@@ -27,7 +28,9 @@ export function MainNav({ items }: MainNavProps) {
         {items?.map(
           (item, index) => item.href && <NavLink key={index} item={item} />
         )}
-        <ProfileNavLink />
+        <Suspense fallback={null}>
+          <ProfileNavLink />
+        </Suspense>
       </nav>
     </div>
   );
