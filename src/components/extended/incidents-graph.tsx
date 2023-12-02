@@ -25,7 +25,7 @@ const CustomTooltip = ({
 }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="grid grid-cols-2 gap-2 rounded-md border bg-background p-2 text-muted-foreground">
+      <div className="grid grid-cols-2 gap-2 rounded-md border bg-background/80 p-2 text-muted-foreground backdrop-blur">
         <div>
           <div className="text-xs">INCIDENTS</div>
           <div className="font-bold text-foreground">{payload[0].value}</div>

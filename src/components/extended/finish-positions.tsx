@@ -28,7 +28,7 @@ const PositionList = ({
   }
 
   return (
-    <div className="flex flex-col rounded-md border bg-background p-2">
+    <div className="flex flex-col rounded-md border bg-background/80 p-2 backdrop-blur">
       <div className="mb-1 grid grid-cols-2 items-baseline gap-2">
         <p className="font-bold">POSITION</p>
         <p className="font-bold">FINISHES</p>

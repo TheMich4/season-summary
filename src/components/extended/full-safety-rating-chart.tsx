@@ -26,7 +26,7 @@ const CustomTooltip = ({
 }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="grid grid-cols-2 gap-2 rounded-md border bg-background p-2 text-muted-foreground">
+      <div className="grid grid-cols-2 gap-2 rounded-md border bg-background/80 p-2 text-muted-foreground backdrop-blur">
         <div>
           <div className="text-xs">SR</div>
           <div className="font-bold text-foreground">{payload[0].value}</div>
@@ -72,7 +72,7 @@ export const FullSafetyRatingChart = ({
         </p>
       </p>
       <p className="mb-2 text-xs text-muted-foreground">
-        How your iRating developed over the season.
+        How your safety rating developed over the season.
       </p>
       <div className="flex h-full w-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">
         <ResponsiveContainer height={150}>
