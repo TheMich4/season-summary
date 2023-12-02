@@ -9,10 +9,10 @@ import { RaceList } from "@/components/profile/race-list";
 import { Favorite } from "@/components/profile/favorite";
 import { ProfileHeader } from "@/components/profile/profile-header";
 import { NewStats } from "@/components/profile/new-stats";
-import { url } from "@/config/site";
 import { FullDataManager } from "@/components/profile/full-data-manager";
 import { env } from "@/env.mjs";
 import { Suspense } from "react";
+import { getIracingData } from "@/server/get-iracing-data";
 
 interface ProfileProps {
   iracingId: string;
@@ -27,10 +27,7 @@ export const Profile = async ({
   year,
   category,
 }: ProfileProps) => {
-  const response = await fetch(
-    `${url}/api/season-data?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
-  );
-  const { data, lastFetch } = await response.json();
+  const data = await getIracingData(iracingId, year, season, category);
 
   if (!data || data.error) {
     return (
@@ -94,7 +91,6 @@ export const Profile = async ({
         season={season}
         year={year}
         category={category}
-        lastFetch={lastFetch}
       />
 
       <MemberRecap

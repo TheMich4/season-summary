@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
-
 import { CategoryDropdown } from "./category-dropdown";
 import { SeasonSwitch } from "./season-switch";
-import { useMemo } from "react";
 
 interface ProfileHeaderProps {
   memberData: any;
@@ -17,7 +9,6 @@ interface ProfileHeaderProps {
   season: number;
   year: number;
   category: string;
-  lastFetch: string;
 }
 
 export const ProfileHeader = ({
@@ -26,13 +17,7 @@ export const ProfileHeader = ({
   season,
   year,
   category,
-  lastFetch,
 }: ProfileHeaderProps) => {
-  const lastFetchString = useMemo(
-    () => new Date(lastFetch).toLocaleString(),
-    [lastFetch]
-  );
-
   return (
     <div className="flex w-full flex-col">
       <div className="mb-2 grid w-full grid-cols-1 gap-2 md:grid-cols-3">
@@ -58,17 +43,6 @@ export const ProfileHeader = ({
           <CategoryDropdown />
         </div>
       </div>
-
-      {/* <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger className="self-center md:self-end">
-            <div className="text-xs text-gray-400">{`Last updated: ${lastFetchString}`}</div>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Your data is updated at most one time in 24 hours.</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider> */}
     </div>
   );
 };

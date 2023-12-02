@@ -7,6 +7,7 @@ import { SeasonSwitch } from "@/components/profile/season-switch";
 import { Suspense } from "react";
 import { View } from "@/components/extended/view";
 import { env } from "@/env.mjs";
+import { getIracingData } from "@/server/get-iracing-data";
 import { url } from "@/config/site";
 
 interface ExtendedProfileProps {
@@ -72,11 +73,7 @@ export const ExtendedProfile = async ({
     );
   }
 
-  const simpleResponse = await fetch(
-    `${url}/api/season-data?iracingId=${iracingId}&year=${year}&season=${season}&category=${category}`
-  );
-
-  const { data: simpleData } = await simpleResponse.json();
+  const simpleData = await getIracingData(iracingId, +year, +season, category);
 
   return (
     <>
