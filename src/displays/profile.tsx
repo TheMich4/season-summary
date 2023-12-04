@@ -107,7 +107,7 @@ export const Profile = async ({
         lastRace={lastRace}
         iracingId={iracingId}
       />
-      <NewStats seasonResults={seasonResults} />
+      {seasonResults.length > 0 && <NewStats seasonResults={seasonResults} />}
       <RaceList
         seasonResults={seasonResults}
         iracingId={iracingId}
