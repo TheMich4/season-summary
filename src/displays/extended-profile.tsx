@@ -50,7 +50,7 @@ export const ExtendedProfile = async ({
     );
   }
 
-  if (data?.length === 0) {
+  if (!data || data?.length === 0) {
     return (
       <div className="flex w-full flex-col items-center justify-center gap-2 text-center">
         <div className="grid w-full grid-cols-1 md:grid-cols-3">
@@ -67,7 +67,7 @@ export const ExtendedProfile = async ({
           </div>
         </div>
         <p className="font-semibold">
-          No data {category} found for this season.
+          No {category} data found for this season.
         </p>
       </div>
     );
