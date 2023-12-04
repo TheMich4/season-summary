@@ -1,5 +1,6 @@
 import { IracingIdInput } from "./(home)/iracing-id-input";
 import { VisitedList } from "./(home)/visited-list";
+import { YourProfile } from "./(home)/your-profile";
 import { env } from "@/env.mjs";
 import { siteConfig } from "@/config/site";
 
@@ -16,6 +17,7 @@ export default function Home() {
       </div>
 
       <IracingIdInput />
+      <YourProfile />
       <VisitedList apiUrl={env.API_URL} />
 
       <div className="text-balance flex flex-col items-center rounded-md border bg-background/40 p-2 text-center text-sm">
