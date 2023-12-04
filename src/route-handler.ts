@@ -1,3 +1,4 @@
+import { getAvatars } from "./routers/v2/get-avatars";
 import { getFullDataRoute } from "./routers/get-full-data";
 import { getFullDataStatusRoute } from "./routers/get-full-data-status";
 import { getIracingData } from "./routers/v2/get-iracing-data";
@@ -19,6 +20,8 @@ export const routeHandler = new Proxy(
     ["/v2/get-iracing-data"]: getIracingData,
     ["/v2/get-race-result"]: getRaceResult,
     ["/v2/search-drivers"]: searchDrivers,
+
+    ["/v2/get-avatars"]: getAvatars,
 
     ["/ws"]: handleWebsocketUpgrade,
   },
