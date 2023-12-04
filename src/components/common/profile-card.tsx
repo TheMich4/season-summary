@@ -1,5 +1,6 @@
 "use client";
 
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import { ChevronRight, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -18,8 +19,14 @@ export const ProfileCard = ({
 
   return (
     <div className="flex flex-row justify-between rounded-md border bg-background/40 p-2">
-      <div className="flex flex-row gap-2">
-        <User className="h-6 w-6 self-center dark:text-primary" />
+      <div className="flex flex-row items-center gap-2">
+        <Avatar className="h-8 w-8 cursor-pointer">
+          {/* <AvatarImage src={sessionData?.user?.image ?? ""} /> */}
+          <AvatarFallback>
+            <User className="h-6 w-6 self-center dark:text-primary" />
+            {/* {sessionData?.user?.name?.charAt(0) ?? <User className="h-6 w-6 self-center dark:text-primary" />} */}
+          </AvatarFallback>
+        </Avatar>
         <div className="flex flex-col">
           <div className="font-bold">
             {name ? name : <Skeleton className="h-4 w-32" />}
