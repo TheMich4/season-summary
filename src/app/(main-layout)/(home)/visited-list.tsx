@@ -1,10 +1,35 @@
 "use client";
 
 import { ProfileCard } from "@/components/common/profile-card";
+import { useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useVisited } from "@/components/providers/visited-provider";
 
-export const VisitedList = () => {
+interface VisitedListProps {
+  apiUrl: string;
+}
+
+export const VisitedList = ({ apiUrl }: VisitedListProps) => {
   const { visited } = useVisited();
+
+  const url = useMemo(
+    () =>
+      `${apiUrl}v2/get-avatars?ids=${visited
+        .map(({ iracingId }) => iracingId)
+        .join(",")}`,
+    [apiUrl, visited]
+  );
+
+  const { data } = useQuery({
+    queryKey: ["visitedAvatars"],
+    queryFn: () => fetch(url).then((r) => r.json()),
+    enabled: visited.length > 0,
+    staleTime: 60 * 60 * 1000,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    retry: false,
+  });
 
   if (!visited.length) return null;
 
@@ -18,7 +43,12 @@ export const VisitedList = () => {
           .filter(({ iracingId, name }) => iracingId && name)
           .slice(0, 10)
           .map(({ iracingId, name }) => (
-            <ProfileCard key={iracingId} iracingId={iracingId} name={name} />
+            <ProfileCard
+              avatarUrl={data?.[iracingId]}
+              key={iracingId}
+              iracingId={iracingId}
+              name={name}
+            />
           ))}
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ChevronRight, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -11,20 +11,21 @@ import { usePathname } from "next/navigation";
 export const ProfileCard = ({
   name,
   iracingId,
+  avatarUrl,
 }: {
   name?: string;
   iracingId?: number | string;
+  avatarUrl?: string;
 }) => {
   const pathname = usePathname();
 
   return (
     <div className="flex flex-row justify-between rounded-md border bg-background/40 p-2">
       <div className="flex flex-row items-center gap-2">
-        <Avatar className="h-8 w-8 cursor-pointer">
-          {/* <AvatarImage src={sessionData?.user?.image ?? ""} /> */}
+        <Avatar className="h-8 w-8">
+          <AvatarImage src={avatarUrl ?? ""} />
           <AvatarFallback>
             <User className="h-6 w-6 self-center dark:text-primary" />
-            {/* {sessionData?.user?.name?.charAt(0) ?? <User className="h-6 w-6 self-center dark:text-primary" />} */}
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col">

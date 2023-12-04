@@ -6,8 +6,6 @@ import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Toaster } from "@/components/ui/toaster";
-import { VisitedProvider } from "@/components/providers/visited-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
