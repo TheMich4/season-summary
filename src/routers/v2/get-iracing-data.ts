@@ -52,7 +52,7 @@ export const getIracingData = async (request: Request) => {
       seasonResults,
       previousSeasonRecap,
     ] = await Promise.all([
-      ir.getMemberData({ customerIds: [parseInt(iracingId, 10)] }),
+      ir.getMemberData({ customerIds: [iracingId] }),
       ir.getMemberRecap({
         customerId: parseInt(iracingId, 10),
         year: parseInt(year, 10),
@@ -60,7 +60,7 @@ export const getIracingData = async (request: Request) => {
       }),
       ir.getMemberChartData({
         customerId: parseInt(iracingId, 10),
-        chartType: 1,
+        chartType: "1",
         categoryId: parseInt(categoryId, 10),
       }),
       ir.searchSeries({

@@ -12,8 +12,6 @@ export const handleWebsocketUpgrade = (request: Request, server: Server) => {
     return new Response("missing params", { status: 400 });
   }
 
-  console.log("websocket upgrade");
-
   const success = server.upgrade(request, {
     data: { iracingId, year, season, categoryId },
   });

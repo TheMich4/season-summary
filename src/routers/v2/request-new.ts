@@ -6,7 +6,6 @@ import { getSeasonData } from "../../db/actions/get-season-data";
 // TODO: Add handling if season is over and data was fetched after season end
 export const requestNew = async (request: Request, server: Server) => {
   const { iracingId, year, season, categoryId } = getParams(request);
-  console.log("requestNew", iracingId, year, season, categoryId);
 
   if (!iracingId || !year || !season || !categoryId) {
     return new Response("missing params", { status: 400 });

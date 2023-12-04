@@ -3,7 +3,7 @@ import { getWSChannelFromData } from "./utils/get-ws-channel";
 
 export const websocket = {
   open: (ws: WS) => {
-    console.log("ws open");
+    // console.log("ws open");
     const channel = getWSChannelFromData(ws.data);
 
     if (channel) {
@@ -11,9 +11,9 @@ export const websocket = {
     }
   },
   message: (ws: WS, message: string | Buffer) => {
-    console.log("ws message");
+    // console.log("ws message");
   },
   close: (ws: WS) => {
-    console.log("ws close");
+    // console.log("ws close");
   },
 };
