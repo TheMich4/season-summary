@@ -12,6 +12,9 @@ export const env = createEnv({
     // GITHUB_ID: z.string(),
     // GITHUB_SECRET: z.string(),
   },
-  client: {},
+  client: {
+    NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1),
+    NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1),
+  },
   runtimeEnv: process.env,
 });

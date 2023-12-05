@@ -1,10 +1,16 @@
 import "../../styles/globals.css";
 
+import {
+  PHProvider,
+  PostHogPageView,
+} from "@/components/providers/ph-provider";
+
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { SiteHeader } from "@/components/nav/site-header";
+import { Suspense } from "react";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -42,27 +48,33 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+      <Suspense>
+        <PostHogPageView />
+      </Suspense>
+
       <body
         className={cn(
           inter.className,
           "scrollbar-thumb-foreground scrollbar-track-background dark:scrollbar-thumb-primary scrollbar-thin min-h-full my-gradient"
         )}
       >
-        <AuthProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <QueryProvider>
-              <VisitedProvider>
-                <div className="relative flex min-h-screen flex-col">
-                  <SiteHeader />
-                  <div className="flex-1">{children}</div>
+        <PHProvider>
+          <AuthProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <QueryProvider>
+                <VisitedProvider>
+                  <div className="relative flex min-h-screen flex-col">
+                    <SiteHeader />
+                    <div className="flex-1">{children}</div>
 
-                  <Toaster />
-                </div>
-                <TailwindIndicator />
-              </VisitedProvider>
-            </QueryProvider>
-          </ThemeProvider>
-        </AuthProvider>
+                    <Toaster />
+                  </div>
+                  <TailwindIndicator />
+                </VisitedProvider>
+              </QueryProvider>
+            </ThemeProvider>
+          </AuthProvider>
+        </PHProvider>
       </body>
     </html>
   );
