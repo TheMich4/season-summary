@@ -2,11 +2,12 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ChevronRight, User } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
-import { usePathname } from "next/navigation";
+import { getProfileUrl } from "@/server/get-profile-url";
 
 export const ProfileCard = ({
   name,
@@ -17,7 +18,13 @@ export const ProfileCard = ({
   iracingId?: number | string;
   avatarUrl?: string;
 }) => {
+  const router = useRouter();
   const pathname = usePathname();
+
+  const handleClick = async () => {
+    const url = iracingId ? await getProfileUrl(`${iracingId}`) : pathname;
+    router.push(url);
+  };
 
   return (
     <div className="flex flex-row justify-between rounded-md border bg-background/40 p-2">
@@ -42,10 +49,7 @@ export const ProfileCard = ({
         </div>
       </div>
       <div className="flex items-center">
-        <Link
-          href={iracingId ? `/driver/${iracingId}` : pathname}
-          className="ml-2"
-        >
+        <Link href={"#"} className="ml-2" onClick={handleClick}>
           <Button size="sm" variant="ghost">
             <ChevronRight className="h-4 w-4 dark:text-primary" />
           </Button>
