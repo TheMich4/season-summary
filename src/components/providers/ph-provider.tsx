@@ -3,13 +3,12 @@
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { PostHogProvider } from "posthog-js/react";
-import { env } from "@/env.mjs";
 import posthog from "posthog-js";
 import { useEffect } from "react";
 
 if (typeof window !== "undefined") {
-  posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: env.NEXT_PUBLIC_POSTHOG_HOST,
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST!,
     capture_pageview: false, // Disable automatic pageview capture, as we capture manually
   });
 }
