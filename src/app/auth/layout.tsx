@@ -1,7 +1,6 @@
 import "../../styles/globals.css";
 
 import { AuthProvider } from "@/components/providers/auth-provider";
-import { GoogleAnalytics } from "@/components/google-analytics";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
@@ -53,8 +52,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <TailwindIndicator />
           </ThemeProvider>
         </AuthProvider>
-
-        <GoogleAnalytics />
       </body>
     </html>
   );

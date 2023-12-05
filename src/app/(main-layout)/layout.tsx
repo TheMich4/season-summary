@@ -1,7 +1,6 @@
 import "../../styles/globals.css";
 
 import { AuthProvider } from "@/components/providers/auth-provider";
-import { GoogleAnalytics } from "@/components/google-analytics";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { QueryProvider } from "@/components/providers/query-provider";
@@ -64,8 +63,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </QueryProvider>
           </ThemeProvider>
         </AuthProvider>
-
-        <GoogleAnalytics />
       </body>
     </html>
   );

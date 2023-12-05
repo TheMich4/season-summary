@@ -12,8 +12,6 @@ export const env = createEnv({
     // GITHUB_ID: z.string(),
     // GITHUB_SECRET: z.string(),
   },
-  client: {
-    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().optional(),
-  },
+  client: {},
   runtimeEnv: process.env,
 });
