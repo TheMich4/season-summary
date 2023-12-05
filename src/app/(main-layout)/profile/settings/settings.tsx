@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { User } from "@prisma/client";
 import { setCurrentUserIracingId } from "@/server/set-current-user-iracing-id";
@@ -21,26 +22,32 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
   iracingId: z.string(),
+  preferFull: z.boolean(),
 });
 
 export const Settings = ({
   userSettings,
 }: {
-  userSettings: { iracingId: string | null } | null;
+  userSettings: { iracingId: string | null; preferFull: boolean } | null;
 }) => {
   const [saving, setSaving] = useState(false);
+  console.log({ userSettings });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       iracingId: userSettings?.iracingId ?? "",
+      preferFull: userSettings?.preferFull ?? false,
     },
   });
 
-  const onSubmit = async ({ iracingId }: z.infer<typeof formSchema>) => {
+  const onSubmit = async ({
+    iracingId,
+    preferFull,
+  }: z.infer<typeof formSchema>) => {
     setSaving(true);
 
-    await setCurrentUserIracingId(iracingId);
+    await setCurrentUserIracingId(iracingId, preferFull);
 
     setSaving(false);
   };
@@ -51,7 +58,7 @@ export const Settings = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-2"
+          className="flex flex-col gap-4"
         >
           <FormField
             control={form.control}
@@ -61,6 +68,25 @@ export const Settings = ({
                 <FormLabel htmlFor="iracingId">iRacing ID:</FormLabel>
                 <FormControl>
                   <Input placeholder="Your iRacing ID" {...field}></Input>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="preferFull"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center gap-2">
+                <FormLabel htmlFor="preferFull">
+                  Prefer detailed stats page:
+                </FormLabel>
+                <FormControl>
+                  <Checkbox
+                    className="!mt-0"
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

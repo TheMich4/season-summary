@@ -11,6 +11,7 @@ export const getUserSettings = async (userId?: string) => {
     },
     select: {
       iracingId: true,
+      preferFull: true,
     },
   });
 

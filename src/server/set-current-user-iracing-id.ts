@@ -5,7 +5,10 @@ import { authOptions, prisma } from "@/config/auth-options";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-export const setCurrentUserIracingId = async (iracingId: string) => {
+export const setCurrentUserIracingId = async (
+  iracingId: string,
+  preferFull: boolean
+) => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
@@ -18,6 +21,7 @@ export const setCurrentUserIracingId = async (iracingId: string) => {
     },
     data: {
       iracingId: iracingId ? iracingId : null,
+      preferFull,
     },
   });
 };
