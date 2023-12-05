@@ -40,8 +40,8 @@ export const YourProfile = async () => {
       <div className="grid grid-cols-1 gap-2 py-2 md:grid-cols-2">
         <Suspense
           fallback={
-            <div>
-              <Loader2 className="h-6 w-6 animate-spin self-center dark:text-primary" />
+            <div className="flex flex-row gap-2">
+              <Loader2 className="h-6 w-6 animate-spin self-center text-xs dark:text-primary" />
               Loading...
             </div>
           }

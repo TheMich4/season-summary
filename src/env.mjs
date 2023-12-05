@@ -13,8 +13,8 @@ export const env = createEnv({
     // GITHUB_SECRET: z.string(),
   },
   client: {
-    NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1),
-    NEXT_PUBLIC_POSTHOG_HOST: z.string().min(1),
+    // NEXT_PUBLIC_POSTHOG_KEY: z.string(),
+    // NEXT_PUBLIC_POSTHOG_HOST: z.string(),
   },
   runtimeEnv: process.env,
 });
