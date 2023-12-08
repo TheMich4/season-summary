@@ -14,11 +14,15 @@ export const ProviderButtons = ({
   > | null;
 }) => {
   return (
-    <div className="py-2">
+    <div className="flex flex-col gap-2 py-2">
       {providers &&
         Object.values(providers).map((provider) => (
           <div key={provider.name}>
-            <Button onClick={() => signIn(provider.id)} className="w-full">
+            <Button
+              onClick={() => signIn(provider.id)}
+              className="w-full"
+              variant="outline"
+            >
               Sign in with {provider.name}
             </Button>
           </div>

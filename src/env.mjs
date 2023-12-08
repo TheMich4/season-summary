@@ -11,6 +11,8 @@ export const env = createEnv({
     // NEXT_AUTH_SECRET: z.string(),
     // GITHUB_ID: z.string(),
     // GITHUB_SECRET: z.string(),
+    DISCORD_CLIENT_ID: z.string().min(1),
+    DISCORD_CLIENT_SECRET: z.string().min(1),
     UPLOADTHING_SECRET: z.string().min(1),
     UPLOADTHING_APP_ID: z.string().min(1),
   },
