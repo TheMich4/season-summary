@@ -14,7 +14,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { User } from "@prisma/client";
 import { setCurrentUserIracingId } from "@/server/set-current-user-iracing-id";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -31,7 +30,6 @@ export const Settings = ({
   userSettings: { iracingId: string | null; preferFull: boolean } | null;
 }) => {
   const [saving, setSaving] = useState(false);
-  console.log({ userSettings });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

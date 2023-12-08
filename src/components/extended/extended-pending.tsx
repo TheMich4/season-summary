@@ -32,8 +32,6 @@ export const ExtendedPending = ({
     wsUrl,
   });
 
-  console.log({ status, wsStatus, message });
-
   useEffect(() => {
     if (wsStatus === "DONE") {
       window.location.reload();
