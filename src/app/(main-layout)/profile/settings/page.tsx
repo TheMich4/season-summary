@@ -1,7 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-import { AvatarUploader } from "./_components/avatar-uploader";
 import { Settings } from "./settings";
+import { UserAvatar } from "./_components/user-avatar";
 import { authOptions } from "@/config/auth-options";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
@@ -21,11 +19,7 @@ export default async function ProfileSettings() {
   return (
     <main className="container grid min-h-full items-start justify-start gap-6 pb-8 pt-6 md:gap-10 md:py-12">
       <div className="flex flex-row items-center gap-4">
-        <Avatar className="h-24 w-24 rounded-md">
-          <AvatarImage src={user.image ?? ""} />
-          <AvatarFallback>{user?.name?.charAt(0) ?? "U"}</AvatarFallback>
-        </Avatar>
-        <AvatarUploader />
+        <UserAvatar />
         <div>
           <p className="text-2xl font-bold">{user.name}</p>
           <p>{user.email}</p>

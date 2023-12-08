@@ -3,15 +3,18 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { updateUserAvatar } from "@/server/update-user-avatar";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useUploadThing } from "@/lib/uploadthing";
 
 export const AvatarUploader = () => {
   const [isUploading, setIsUploading] = useState(false);
+  const { update } = useSession();
 
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: async ([{ url }]) => {
       await updateUserAvatar(url);
+      await update({ image: url });
       setIsUploading(false);
     },
     onUploadError: () => {
