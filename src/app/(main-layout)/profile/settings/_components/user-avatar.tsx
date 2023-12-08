@@ -10,11 +10,11 @@ export const UserAvatar = () => {
 
   return (
     <>
-      <Avatar className="h-24 w-24 rounded-md">
+      <Avatar className="h-24 w-24 rounded-full">
+        <AvatarUploader />
         <AvatarImage src={session?.user.image ?? ""} />
         <AvatarFallback>{session?.user?.name?.charAt(0) ?? "U"}</AvatarFallback>
       </Avatar>
-      <AvatarUploader />
     </>
   );
 };

@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Upload } from "lucide-react";
 import { updateUserAvatar } from "@/server/update-user-avatar";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
@@ -36,14 +37,17 @@ export const AvatarUploader = () => {
   };
 
   return (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="avatar">Avatar</Label>
+    <div className="group">
       <Input
-        id="picture"
+        className="absolute left-0 top-0 h-full w-full cursor-pointer opacity-0"
+        id="avatar"
         type="file"
         onChange={handleUpload}
         disabled={isUploading}
       />
+      <div className="absolute bottom-0 left-0 flex h-8 w-full cursor-pointer justify-center bg-black/80 p-2 opacity-0 group-hover:opacity-100">
+        <Upload className="h-4 w-4 font-bold text-primary" />
+      </div>
     </div>
   );
 };
