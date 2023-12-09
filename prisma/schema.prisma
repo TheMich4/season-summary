@@ -73,6 +73,7 @@ model User {
   image         String?
   iracingId     String?
   isAdmin       Boolean   @default(false)
+  preferFull    Boolean   @default(false)
 }
 
 model VerificationToken {

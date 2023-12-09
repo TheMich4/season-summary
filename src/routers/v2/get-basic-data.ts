@@ -1,0 +1,58 @@
+import { getLoggedInIracingAPIClient } from "../../iracing/client";
+import { getPreviousSeason } from "../../utils/get-previous-season";
+
+export const getBasicData = async (request: Request) => {
+  const { searchParams } = new URL(request.url);
+  const iracingId = searchParams.get("iracingId");
+
+  if (!iracingId) {
+    return new Response("missing params", { status: 400 });
+  }
+
+  const ir = await getLoggedInIracingAPIClient();
+
+  const currentSeason = [
+    +process.env.CURRENT_YEAR!,
+    +process.env.CURRENT_SEASON!,
+  ];
+
+  const previousSeason = getPreviousSeason(...currentSeason);
+  console.log({ currentSeason, previousSeason });
+
+  const [memberRecap, previousMemberRecap] = await Promise.all([
+    ir.getMemberRecap({
+      customerId: +iracingId,
+      year: +process.env.CURRENT_YEAR!,
+      season: +process.env.CURRENT_SEASON!,
+    }),
+    ir.getMemberRecap({
+      customerId: +iracingId,
+      year: previousSeason.year,
+      season: previousSeason.season,
+    }),
+  ]);
+
+  return new Response(
+    JSON.stringify({
+      current: {
+        wins: memberRecap?.stats.wins ?? 0,
+        starts: memberRecap?.stats.starts ?? 0,
+        top5: memberRecap?.stats.top5 ?? 0,
+        laps: memberRecap?.stats.laps ?? 0,
+        avgStartPosition: memberRecap?.stats.avgStartPosition ?? 0,
+        avgFinishPosition: memberRecap?.stats.avgFinishPosition ?? 0,
+      },
+      previous: {
+        wins: previousMemberRecap?.stats.wins ?? 0,
+        starts: previousMemberRecap?.stats.starts ?? 0,
+        top5: previousMemberRecap?.stats.top5 ?? 0,
+        laps: previousMemberRecap?.stats.laps ?? 0,
+        avgStartPosition: previousMemberRecap?.stats.avgStartPosition ?? 0,
+        avgFinishPosition: previousMemberRecap?.stats.avgFinishPosition ?? 0,
+      },
+    }),
+    {
+      status: 200,
+    }
+  );
+};
