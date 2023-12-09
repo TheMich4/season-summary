@@ -4,8 +4,6 @@ export const getAvatars = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   const ids = searchParams.get("ids")?.split(",") || [];
 
-  console.log("ids", ids);
-
   if (!ids.length) {
     return new Response("missing params", { status: 400 });
   }

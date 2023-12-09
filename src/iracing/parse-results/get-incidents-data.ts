@@ -3,7 +3,6 @@ export const getIncidentsData = (
   raceResult: any,
   result: any
 ) => {
-  // TODO: Add incidents per corner
   const { incidents, lapsComplete } = raceResult;
   const { cornersPerLap } = result;
 
