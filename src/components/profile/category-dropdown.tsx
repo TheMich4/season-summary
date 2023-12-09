@@ -13,7 +13,6 @@ import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { useConfig } from "../providers/config-provider";
 
-// TODO: Add loader
 export const CategoryDropdown = () => {
   const { category, updateConfig } = useConfig();
 

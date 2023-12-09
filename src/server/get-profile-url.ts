@@ -8,5 +8,9 @@ export const getProfileUrl = async (iracingId: string) => {
   const session = await getServerSession(authOptions);
   const userSettings = await getUserSettings(session?.user?.id);
 
-  return `/driver/${iracingId}` + (userSettings?.preferFull ? "/full" : "");
+  return (
+    `/driver/${iracingId}` +
+    (userSettings?.preferFull ? "/full" : "") +
+    `?category=${userSettings?.favoriteCategory}`
+  );
 };

@@ -5,6 +5,9 @@ import { ConfigProvider } from "@/components/providers/config-provider";
 import { Profile } from "@/displays/profile";
 import { ProfileLoader } from "@/components/profile/profile-loader";
 import { Suspense } from "react";
+import { authOptions } from "@/config/auth-options";
+import { getServerSession } from "next-auth";
+import { getUserSettings } from "@/server/get-user-settings";
 
 interface DriverPageProps {
   params: {
@@ -17,7 +20,7 @@ interface DriverPageProps {
   };
 }
 
-export default function DriverPage({
+export default async function DriverPage({
   params: { iracingId },
   searchParams: {
     year = `${DEFAULT_YEAR}`,
@@ -25,6 +28,10 @@ export default function DriverPage({
     category = Categories.ROAD,
   },
 }: DriverPageProps) {
+  const session = await getServerSession(authOptions);
+  const userSettings =
+    session?.user && (await getUserSettings(session?.user?.id));
+
   return (
     <div className="container flex w-full items-center justify-center gap-2 py-4">
       <Suspense fallback={<ProfileLoader iracingId={iracingId} />}>
@@ -34,7 +41,7 @@ export default function DriverPage({
             iracingId={iracingId}
             year={Number(year)}
             season={Number(season)}
-            category={category as Category}
+            category={(userSettings?.favoriteCategory ?? category) as Category}
           />
         </ConfigProvider>
       </Suspense>

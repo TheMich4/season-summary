@@ -11,7 +11,6 @@ export const setCurrentUserConfig = async (
   preferFull: boolean,
   favoriteCategory: Category
 ) => {
-  console.log({ favoriteCategory });
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {

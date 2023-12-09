@@ -45,8 +45,6 @@ export const Settings = ({
 }) => {
   const [saving, setSaving] = useState(false);
 
-  console.log(userSettings);
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

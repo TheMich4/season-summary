@@ -1,6 +1,6 @@
 "use client";
 
-import { Categories, type Category } from "@/config/category";
+import { Categories, categoryToName, type Category } from "@/config/category";
 import {
   DEFAULT_CATEGORY,
   DEFAULT_SEASON,
@@ -16,13 +16,13 @@ import {
 } from "react";
 
 interface Config {
-  category: Category;
+  category?: Category;
   year: number;
   season: number;
 }
 
 const DEFAULT_CONFIG = {
-  category: DEFAULT_CATEGORY,
+  category: undefined,
   year: DEFAULT_YEAR,
   season: DEFAULT_SEASON,
 };
@@ -32,7 +32,6 @@ export const ConfigContext = createContext({
   updateConfig: (config: Partial<Config>) => {},
 });
 
-// TODO: Add saving favorite category
 export const ConfigProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -45,13 +44,28 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
 
   // Navigate on change
   useEffect(() => {
-    const year = Number(searchParams.get("year")) || config.year;
-    const season = Number(searchParams.get("season")) || config.season;
-    const category = config.category;
+    const year = searchParams.get("year")
+      ? Number(searchParams.get("year"))
+      : config.year;
+    const season = searchParams.get("season")
+      ? Number(searchParams.get("season"))
+      : config.season;
+    const category = config.category ?? searchParams.get("category");
 
     router.push(`?year=${year}&season=${season}&category=${category}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config.category]);
+
+  useEffect(() => {
+    const newCategory = searchParams.get("category") as Category;
+    if (
+      newCategory !== config.category &&
+      Object.values(Categories).some((c) => c === newCategory)
+    ) {
+      updateConfig({ category: newCategory });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams.get("category")]);
 
   return (
     <ConfigContext.Provider value={{ ...config, updateConfig }}>
