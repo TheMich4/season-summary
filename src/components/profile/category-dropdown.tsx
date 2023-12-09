@@ -29,7 +29,7 @@ export const CategoryDropdown = () => {
         )}
       >
         <ChevronDown className="h-5 w-5" />
-        {categoryToName[category]}
+        {category && categoryToName[category]}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>

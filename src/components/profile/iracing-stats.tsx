@@ -96,7 +96,9 @@ export const IracingStats = ({
   if (!seasonResults?.length)
     return (
       <span className="flex flex-row gap-2 self-center text-center text-xl">
-        <span>{`You don't have any ${categoryToName[category]} data for this season`}</span>
+        <span>{`You don't have any ${
+          category && categoryToName[category]
+        } data for this season`}</span>
         <Frown className="h-5 w-5 self-center" />
       </span>
     );

@@ -16,13 +16,13 @@ import {
 } from "react";
 
 interface Config {
-  category?: Category;
+  category: Category | undefined;
   year: number;
   season: number;
 }
 
 const DEFAULT_CONFIG = {
-  category: undefined,
+  category: undefined as Category | undefined,
   year: DEFAULT_YEAR,
   season: DEFAULT_SEASON,
 };
