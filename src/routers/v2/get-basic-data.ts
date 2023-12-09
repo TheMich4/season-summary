@@ -4,6 +4,7 @@ import { getPreviousSeason } from "../../utils/get-previous-season";
 export const getBasicData = async (request: Request) => {
   const { searchParams } = new URL(request.url);
   const iracingId = searchParams.get("iracingId");
+  // const categoryId = searchParams.get("categoryId");
 
   if (!iracingId) {
     return new Response("missing params", { status: 400 });
@@ -17,7 +18,6 @@ export const getBasicData = async (request: Request) => {
   ];
 
   const previousSeason = getPreviousSeason(...currentSeason);
-  console.log({ currentSeason, previousSeason });
 
   const [memberRecap, previousMemberRecap] = await Promise.all([
     ir.getMemberRecap({
