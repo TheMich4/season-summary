@@ -1,7 +1,9 @@
 import { Loader2 } from "lucide-react";
 import { ProfileCard } from "@/components/common/profile-card";
+import { SimpleStat } from "@/components/extended/simple-stat";
 import { Suspense } from "react";
 import { authOptions } from "@/config/auth-options";
+import { env } from "@/env.mjs";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
 
@@ -15,6 +17,57 @@ const NoProfile = () => {
   );
 };
 
+// TODO: Stats for favorite category
+// TODO: Add skeleton
+// TODO: Add ir and sr
+const Stats = async ({ iracingId }: { iracingId: string }) => {
+  const response = await fetch(
+    `${env.API_URL}v2/get-basic-data?iracingId=${iracingId}`
+  );
+  const stats = await response.json();
+
+  console.log(await stats);
+
+  return (
+    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6">
+      <SimpleStat
+        label="Races"
+        value={stats.current.starts}
+        previous={stats.previous.starts}
+      />
+      <SimpleStat
+        label="Wins"
+        value={stats.current.wins}
+        previous={stats.previous.wins}
+      />
+      <SimpleStat
+        label="Top 5"
+        value={stats.current.top5}
+        previous={stats.previous.top5}
+      />
+      <SimpleStat
+        label="Laps"
+        value={stats.current.laps}
+        previous={stats.previous.laps}
+      />
+      <SimpleStat
+        label="Avg Start"
+        value={stats.current.avgStartPosition}
+        previous={stats.previous.avgStartPosition}
+        ignorePreviousIfZero
+      />
+      <SimpleStat
+        label="Avg Finish"
+        value={stats.current.avgFinishPosition}
+        previous={stats.previous.avgFinishPosition}
+        ignorePreviousIfZero
+      />
+      {/* <SimpleStat label="iRating" value="0" />
+      <SimpleStat label="SR" value="0" /> */}
+    </div>
+  );
+};
+
 const Profile = async () => {
   const session = await getServerSession(authOptions);
   const userSettings = session && (await getUserSettings(session.user.id));
@@ -23,11 +76,18 @@ const Profile = async () => {
     return <NoProfile />;
   }
   return (
-    <ProfileCard
-      iracingId={userSettings.iracingId}
-      avatarUrl={session.user.image}
-      name={session.user.name}
-    />
+    <>
+      <div className="col-span-2 flex w-full flex-col gap-2">
+        <ProfileCard
+          iracingId={userSettings.iracingId}
+          avatarUrl={session.user.image}
+          name={session.user.name}
+        />
+        <Suspense fallback={null}>
+          <Stats iracingId={userSettings.iracingId} />
+        </Suspense>
+      </div>
+    </>
   );
 };
 

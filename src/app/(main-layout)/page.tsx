@@ -2,7 +2,6 @@ import { IracingIdInput } from "./(home)/iracing-id-input";
 import { VisitedList } from "./(home)/visited-list";
 import { YourProfile } from "./(home)/your-profile";
 import { env } from "@/env.mjs";
-import { siteConfig } from "@/config/site";
 
 export default function Home() {
   return (
@@ -19,34 +18,6 @@ export default function Home() {
       <IracingIdInput />
       <YourProfile />
       <VisitedList apiUrl={env.API_URL} />
-
-      <div className="text-balance flex flex-col items-center rounded-md border bg-background/40 p-2 text-center text-sm">
-        <p className="mb-1 font-bold">This page is still in development.</p>
-        <p>
-          If you have any feedback or ideas, please let me know on{" "}
-          <a
-            href={siteConfig.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-primary"
-          >
-            Github
-          </a>
-          .
-        </p>
-        <p>
-          Or contact me on{" "}
-          <a
-            href={siteConfig.links.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-primary"
-          >
-            Twitter
-          </a>
-          .
-        </p>
-      </div>
     </main>
   );
 }
