@@ -3,6 +3,7 @@ import { Category, categoryToId } from "@/config/category";
 import { Loader2 } from "lucide-react";
 import { ProfileCard } from "@/components/common/profile-card";
 import { SimpleStat } from "@/components/extended/simple-stat";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 import { authOptions } from "@/config/auth-options";
 import { env } from "@/env.mjs";
@@ -89,7 +90,23 @@ const Profile = async () => {
           avatarUrl={session.user.image}
           name={session.user.name}
         />
-        <Suspense fallback={null}>
+        <Suspense
+          fallback={
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6">
+              {Array(6)
+                .fill(null)
+                .map((_, i) => (
+                  <div
+                    key={i}
+                    className="flex w-full flex-col gap-4 rounded-md border bg-background/40 p-4 text-start"
+                  >
+                    <Skeleton className="h-6 w-12 pb-2 text-base font-normal tracking-tight" />
+                    <Skeleton className="h-6 w-20" />
+                  </div>
+                ))}
+            </div>
+          }
+        >
           <Stats
             iracingId={userSettings.iracingId}
             category={userSettings.favoriteCategory as Category}
