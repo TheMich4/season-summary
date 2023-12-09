@@ -53,7 +53,7 @@ export const ExtendedProfile = async ({
   if (!data || data?.length === 0) {
     return (
       <div className="flex w-full flex-col items-center justify-center gap-2 text-center">
-        <div className="grid w-full grid-cols-1 md:grid-cols-3">
+        <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-3">
           <div className="md:col-start-2">
             <SeasonSwitch
               iracingId={iracingId}
