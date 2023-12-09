@@ -2,13 +2,16 @@
 
 import { authOptions, prisma } from "@/config/auth-options";
 
+import { Category } from "@/config/category";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
-export const setCurrentUserIracingId = async (
+export const setCurrentUserConfig = async (
   iracingId: string,
-  preferFull: boolean
+  preferFull: boolean,
+  favoriteCategory: Category
 ) => {
+  console.log({ favoriteCategory });
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
@@ -22,6 +25,7 @@ export const setCurrentUserIracingId = async (
     data: {
       iracingId: iracingId ? iracingId : null,
       preferFull,
+      favoriteCategory,
     },
   });
 };

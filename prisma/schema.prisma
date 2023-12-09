@@ -66,16 +66,17 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  isAdmin       Boolean   @default(false)
-  iracingId     String?
-  preferFull    Boolean   @default(false)
-  accounts      Account[]
-  sessions      Session[]
+  id                String    @id @default(cuid())
+  name              String?
+  email             String?   @unique
+  emailVerified     DateTime?
+  image             String?
+  isAdmin           Boolean   @default(false)
+  iracingId         String?
+  preferFull        Boolean   @default(false)
+  favoriteCategory  String @default("road")
+  accounts          Account[]
+  sessions          Session[]
 }
 
 model VerificationToken {

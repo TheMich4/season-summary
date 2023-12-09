@@ -2,6 +2,14 @@
 
 import * as z from "zod";
 
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Categories, Category, categoryToName } from "@/config/category";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Form,
   FormControl,
@@ -11,10 +19,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { setCurrentUserIracingId } from "@/server/set-current-user-iracing-id";
+import { cn } from "@/lib/utils";
+import { setCurrentUserConfig } from "@/server/set-current-user-config";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,30 +31,39 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const formSchema = z.object({
   iracingId: z.string(),
   preferFull: z.boolean(),
+  category: z.string(),
 });
 
 export const Settings = ({
   userSettings,
 }: {
-  userSettings: { iracingId: string | null; preferFull: boolean } | null;
+  userSettings: {
+    iracingId: string | null;
+    preferFull: boolean;
+    favoriteCategory: string;
+  } | null;
 }) => {
   const [saving, setSaving] = useState(false);
+
+  console.log(userSettings);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       iracingId: userSettings?.iracingId ?? "",
       preferFull: userSettings?.preferFull ?? false,
+      category: userSettings?.favoriteCategory ?? Categories.ROAD,
     },
   });
 
   const onSubmit = async ({
     iracingId,
     preferFull,
+    category,
   }: z.infer<typeof formSchema>) => {
     setSaving(true);
 
-    await setCurrentUserIracingId(iracingId, preferFull);
+    await setCurrentUserConfig(iracingId, preferFull, category as Category);
 
     setSaving(false);
   };
@@ -67,7 +85,6 @@ export const Settings = ({
                 <FormControl>
                   <Input placeholder="Your iRacing ID" {...field}></Input>
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />
@@ -86,10 +103,47 @@ export const Settings = ({
                     onCheckedChange={field.onChange}
                   />
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />
+
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center gap-2">
+                <FormLabel htmlFor="preferFull">Favorite category:</FormLabel>
+                <FormControl>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger
+                      className={cn(
+                        buttonVariants({ variant: "outline", size: "xs" }),
+                        "gap-1 dark:bg-background/40"
+                      )}
+                    >
+                      <ChevronDown className="h-5 w-5" />
+                      {categoryToName[field.value as Category]}
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent>
+                      {Object.entries(categoryToName).map(([cat, catName]) => (
+                        <DropdownMenuItem asChild key={catName}>
+                          <span
+                            onClick={() =>
+                              form.setValue("category", cat as Category)
+                            }
+                          >
+                            {catName}
+                          </span>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
           <Button type="submit" className="w-full md:w-44" disabled={saving}>
             Save settings
           </Button>
