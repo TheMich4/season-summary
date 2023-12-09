@@ -26,8 +26,6 @@ const Stats = async ({ iracingId }: { iracingId: string }) => {
   );
   const stats = await response.json();
 
-  console.log(await stats);
-
   return (
     <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6">
       <SimpleStat
