@@ -4,6 +4,7 @@ import * as z from "zod";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Categories, Category, categoryToName } from "@/config/category";
+import { ChevronDown, Loader2 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +21,6 @@ import {
 } from "@/components/ui/form";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import { ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { setCurrentUserConfig } from "@/server/set-current-user-config";
@@ -142,7 +142,12 @@ export const Settings = ({
             )}
           />
 
-          <Button type="submit" className="w-full md:w-44" disabled={saving}>
+          <Button
+            type="submit"
+            className="w-full md:w-44 flex flex-row gap-2 "
+            disabled={saving}
+          >
+            {saving && <Loader2 className="animate-spin" />}
             Save settings
           </Button>
         </form>

@@ -43,7 +43,7 @@ export const CarStats = ({ racesPerCar }: CarStatsProps) => {
             <p className="min-w-[19px] font-bold dark:text-primary">
               {numberOfRaces}
             </p>
-            <p className="text-xs text-muted-foreground">at</p>
+            <p className="text-xs text-muted-foreground">in</p>
             <p className="text-sm">{carName}</p>
           </div>
         ))}
