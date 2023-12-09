@@ -1,3 +1,5 @@
+import { Category, categoryToId } from "@/config/category";
+
 import { Loader2 } from "lucide-react";
 import { ProfileCard } from "@/components/common/profile-card";
 import { SimpleStat } from "@/components/extended/simple-stat";
@@ -20,9 +22,15 @@ const NoProfile = () => {
 // TODO: Stats for favorite category
 // TODO: Add skeleton
 // TODO: Add ir and sr
-const Stats = async ({ iracingId }: { iracingId: string }) => {
+const Stats = async ({
+  iracingId,
+  category,
+}: {
+  iracingId: string;
+  category: Category;
+}) => {
   const response = await fetch(
-    `${env.API_URL}v2/get-basic-data?iracingId=${iracingId}`
+    `${env.API_URL}v2/get-basic-data?iracingId=${iracingId}&categoryId=${categoryToId[category]}`
   );
   const stats = await response.json();
 
@@ -82,7 +90,10 @@ const Profile = async () => {
           name={session.user.name}
         />
         <Suspense fallback={null}>
-          <Stats iracingId={userSettings.iracingId} />
+          <Stats
+            iracingId={userSettings.iracingId}
+            category={userSettings.favoriteCategory as Category}
+          />
         </Suspense>
       </div>
     </>
