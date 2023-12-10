@@ -62,12 +62,14 @@ const Stats = async ({
         value={stats.current.avgStartPosition}
         previous={stats.previous.avgStartPosition}
         ignorePreviousIfZero
+        invert
       />
       <SimpleStat
         label="Avg Finish"
         value={stats.current.avgFinishPosition}
         previous={stats.previous.avgFinishPosition}
         ignorePreviousIfZero
+        invert
       />
       {/* <SimpleStat label="iRating" value="0" />
       <SimpleStat label="SR" value="0" /> */}
