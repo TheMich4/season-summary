@@ -1,4 +1,4 @@
 export const currentSeason = {
-  year: 2023,
-  season: 4,
+  year: 2024,
+  season: 1,
 };
