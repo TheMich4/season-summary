@@ -123,7 +123,7 @@ const Profile = async () => {
 
 export const YourProfile = async () => {
   return (
-    <div>
+    <div className="w-full md:w-[720px] lg:w-[820px]">
       <div className="text-center text-2xl font-bold md:text-start">
         Your Profile:
       </div>

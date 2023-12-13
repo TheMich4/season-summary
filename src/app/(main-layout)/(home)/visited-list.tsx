@@ -34,7 +34,7 @@ export const VisitedList = ({ apiUrl }: VisitedListProps) => {
   if (!visited.length) return null;
 
   return (
-    <div>
+    <div className="w-full md:w-[720px] lg:w-[820px]">
       <div className="text-center text-2xl font-bold md:text-start">
         Recently Visited:
       </div>
