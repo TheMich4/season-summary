@@ -17,7 +17,6 @@ export const SimpleStat = ({
   ignorePreviousIfZero = false,
   ignorePreviousIfValueZero = false,
 }: SimpleStatProps) => {
-  console.log({ value });
   return (
     <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
       <div className="pb-2 text-base font-normal tracking-tight">{label}</div>
