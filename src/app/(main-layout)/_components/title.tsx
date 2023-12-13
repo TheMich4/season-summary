@@ -34,7 +34,7 @@ export const Title = () => {
           } else {
             textIndex.set(textIndex.get() + 1);
             setMotionClassName(
-              "first-letter:text-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl inline-block"
+              "first-letter:text-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl inline-block font-black"
             );
           }
           updatedThisRound.set(true);
