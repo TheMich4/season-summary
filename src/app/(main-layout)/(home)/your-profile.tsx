@@ -62,6 +62,7 @@ const Stats = async ({
         value={stats.current.avgStartPosition}
         previous={stats.previous.avgStartPosition}
         ignorePreviousIfZero
+        ignorePreviousIfValueZero
         invert
       />
       <SimpleStat
@@ -69,6 +70,7 @@ const Stats = async ({
         value={stats.current.avgFinishPosition}
         previous={stats.previous.avgFinishPosition}
         ignorePreviousIfZero
+        ignorePreviousIfValueZero
         invert
       />
       {/* <SimpleStat label="iRating" value="0" />

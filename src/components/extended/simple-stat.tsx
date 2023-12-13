@@ -6,6 +6,7 @@ interface SimpleStatProps {
   previous?: number | null;
   invert?: boolean;
   ignorePreviousIfZero?: boolean;
+  ignorePreviousIfValueZero?: boolean;
 }
 
 export const SimpleStat = ({
@@ -14,13 +15,17 @@ export const SimpleStat = ({
   previous = undefined,
   invert = false,
   ignorePreviousIfZero = false,
+  ignorePreviousIfValueZero = false,
 }: SimpleStatProps) => {
+  console.log({ value });
   return (
     <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
       <div className="pb-2 text-base font-normal tracking-tight">{label}</div>
       <div className="flex flex-row items-baseline gap-1 text-2xl font-bold">
         <p>{value}</p>
-        {previous !== undefined && !(ignorePreviousIfZero && previous === 0) ? (
+        {previous !== undefined &&
+        !(ignorePreviousIfZero && previous === 0) &&
+        !(ignorePreviousIfValueZero && value === 0) ? (
           <p className="text-sm">
             <Delta
               value={value as number}
