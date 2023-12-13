@@ -4,20 +4,21 @@ import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export const Title = () => {
+  const isInitialRender = useMotionValue(true);
   const textIndex = useMotionValue(0);
   const texts = ["eason", "12024"];
   const baseText = useTransform(textIndex, (latest) => texts[latest] || "");
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.round(latest));
   const displayText = useTransform(rounded, (latest) =>
-    baseText.get().slice(0, latest)
+    isInitialRender.get() === true ? texts[0] : baseText.get().slice(0, latest)
   );
   const updatedThisRound = useMotionValue(true);
 
   const [motionClassName, setMotionClassName] = useState("inline-block");
 
   useEffect(() => {
-    animate(count, 60, {
+    animate(count, 30, {
       type: "tween",
       duration: 5,
       ease: "easeIn",
@@ -25,6 +26,9 @@ export const Title = () => {
       repeatType: "reverse",
       repeatDelay: 0.1,
       onUpdate(latest) {
+        if (isInitialRender.get() === true && latest > 5) {
+          isInitialRender.set(false);
+        }
         if (updatedThisRound.get() === true && latest > 0) {
           updatedThisRound.set(false);
         } else if (updatedThisRound.get() === false && latest === 0) {
