@@ -6,6 +6,7 @@ import { ProfileUpdater } from "@/components/extended/profile-updater";
 import { SeasonSwitch } from "@/components/profile/season-switch";
 import { Suspense } from "react";
 import { View } from "@/components/extended/view";
+import { VisitedManager } from "@/components/profile/visited-manager";
 import { env } from "@/env.mjs";
 import { getIracingData } from "@/server/get-iracing-data";
 import { url } from "@/config/site";
@@ -77,6 +78,11 @@ export const ExtendedProfile = async ({
 
   return (
     <>
+      <VisitedManager
+        iracingId={iracingId}
+        displayName={data.raceResults[0]?.displayName}
+      />
+
       <View
         data={data}
         iracingId={iracingId}
