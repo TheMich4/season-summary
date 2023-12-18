@@ -10,7 +10,7 @@ export const UserAvatar = () => {
 
   return (
     <>
-      <Avatar className="h-24 w-24 rounded-full">
+      <Avatar className="h-20 w-20 rounded-full">
         <AvatarUploader />
         <AvatarImage src={session?.user.image ?? ""} />
         <AvatarFallback>{session?.user?.name?.charAt(0) ?? "U"}</AvatarFallback>

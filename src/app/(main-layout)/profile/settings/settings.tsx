@@ -22,6 +22,7 @@ import {
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
 import { setCurrentUserConfig } from "@/server/set-current-user-config";
 import { useForm } from "react-hook-form";
@@ -67,7 +68,7 @@ export const Settings = ({
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       <p className="text-xl font-bold">Settings</p>
       <Form {...form}>
         <form
@@ -81,25 +82,11 @@ export const Settings = ({
               <FormItem>
                 <FormLabel htmlFor="iracingId">iRacing ID:</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your iRacing ID" {...field}></Input>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="preferFull"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center gap-2">
-                <FormLabel htmlFor="preferFull">
-                  Prefer detailed stats page:
-                </FormLabel>
-                <FormControl>
-                  <Checkbox
-                    className="!mt-0"
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
+                  <Input
+                    className="dark:bg-background/40"
+                    placeholder="Your iRacing ID"
+                    {...field}
+                  ></Input>
                 </FormControl>
               </FormItem>
             )}
@@ -109,14 +96,14 @@ export const Settings = ({
             control={form.control}
             name="category"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center gap-2">
+              <FormItem className="flex flex-col">
                 <FormLabel htmlFor="preferFull">Favorite category:</FormLabel>
                 <FormControl>
                   <DropdownMenu>
                     <DropdownMenuTrigger
                       className={cn(
                         buttonVariants({ variant: "outline", size: "xs" }),
-                        "gap-1 dark:bg-background/40"
+                        "gap-1 dark:bg-background/40 h-10 mt-2"
                       )}
                     >
                       <ChevronDown className="h-5 w-5" />
@@ -142,9 +129,28 @@ export const Settings = ({
             )}
           />
 
+          <FormField
+            control={form.control}
+            name="preferFull"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center gap-2 text-center">
+                <FormControl>
+                  <Switch
+                    className="!mt-0"
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormLabel htmlFor="preferFull" className="!m-0">
+                  Prefer detailed stats page:
+                </FormLabel>
+              </FormItem>
+            )}
+          />
+
           <Button
             type="submit"
-            className="w-full md:w-44 flex flex-row gap-2 "
+            className="mt-8 flex w-full flex-row gap-2"
             disabled={saving}
           >
             {saving && <Loader2 className="animate-spin" />}

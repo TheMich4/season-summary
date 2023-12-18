@@ -17,16 +17,18 @@ export default async function ProfileSettings() {
   const userSettings = await getUserSettings(user.id);
 
   return (
-    <main className="container grid min-h-full items-start justify-start gap-6 pb-8 pt-6 md:gap-10 md:py-12">
-      <div className="flex flex-row items-center gap-4">
-        <UserAvatar />
-        <div>
-          <p className="text-2xl font-bold">{user.name}</p>
-          <p>{user.email}</p>
+    <main className="container flex min-h-full w-full  flex-col items-center justify-start gap-6 py-4">
+      <div className="flex w-full flex-col items-center justify-start gap-6 rounded-md border bg-background/40 p-4 text-card-foreground md:w-[500px]">
+        <div className="flex w-full flex-row items-center gap-4">
+          <UserAvatar />
+          <div>
+            <p className="text-2xl font-bold">{user.name}</p>
+            <p>{user.email}</p>
+          </div>
         </div>
-      </div>
 
-      <Settings userSettings={userSettings} />
+        <Settings userSettings={userSettings} />
+      </div>
     </main>
   );
 }
