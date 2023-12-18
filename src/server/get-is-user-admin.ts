@@ -6,7 +6,7 @@ export const getIsUserAdmin = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
-    return null;
+    return false;
   }
 
   const data = await prisma.user.findFirst({
