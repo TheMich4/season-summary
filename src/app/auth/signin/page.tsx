@@ -20,7 +20,7 @@ export default async function SignInPage() {
         <Card className="w-full max-w-lg bg-background/40">
           <CardHeader>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
-              Welcome to{" "}
+              Welcome to <br className="block sm:hidden" />
               <span className="dark:text-primary">Season Summary</span>!
             </h2>
             <p className="mt-4 text-center text-sm text-muted-foreground">

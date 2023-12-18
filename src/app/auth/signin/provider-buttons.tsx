@@ -4,6 +4,19 @@ import { ClientSafeProvider, LiteralUnion, signIn } from "next-auth/react";
 
 import { BuiltInProviderType } from "next-auth/providers/index";
 import { Button } from "@/components/ui/button";
+import { Github } from "lucide-react";
+import { RxDiscordLogo } from "react-icons/rx";
+
+const IconClassName = "w-4 h-4 mr-2";
+
+const ProviderIcon = ({ provider }: { provider: string }) => {
+  console.log(provider);
+  if (provider === "GitHub") return <Github className={IconClassName} />;
+  if (provider === "Discord")
+    return <RxDiscordLogo className={IconClassName} />;
+
+  return null;
+};
 
 export const ProviderButtons = ({
   providers,
@@ -23,6 +36,7 @@ export const ProviderButtons = ({
               className="w-full"
               variant="outline"
             >
+              <ProviderIcon provider={provider.name} />
               Sign in with {provider.name}
             </Button>
           </div>
