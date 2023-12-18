@@ -1,4 +1,5 @@
 import { AuthButton } from "./auth-button";
+import { FaXTwitter } from "react-icons/fa6";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { MainNav } from "./main-nav";
@@ -13,38 +14,40 @@ export function SiteHeader() {
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center gap-2">
-            <Link
-              href={siteConfig.links.twitter}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden md:block"
-            >
-              <div
-                className={buttonVariants({
-                  size: "sm",
-                  variant: "ghost",
-                })}
+            <div className="flex flex-row gap-0">
+              <Link
+                href={siteConfig.links.twitter}
+                target="_blank"
+                rel="noreferrer"
+                className="hidden md:block"
               >
-                <Icons.twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </div>
-            </Link>
-            <Link
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden md:block"
-            >
-              <div
-                className={buttonVariants({
-                  size: "sm",
-                  variant: "ghost",
-                })}
+                <div
+                  className={buttonVariants({
+                    size: "sm",
+                    variant: "ghost",
+                  })}
+                >
+                  <FaXTwitter className="h-5 w-5" />
+                  <span className="sr-only">Twitter</span>
+                </div>
+              </Link>
+              <Link
+                href={siteConfig.links.github}
+                target="_blank"
+                rel="noreferrer"
+                className="hidden md:block"
               >
-                <Icons.gitHub className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
-              </div>
-            </Link>
+                <div
+                  className={buttonVariants({
+                    size: "sm",
+                    variant: "ghost",
+                  })}
+                >
+                  <Icons.gitHub className="h-5 w-5" />
+                  <span className="sr-only">GitHub</span>
+                </div>
+              </Link>
+            </div>
 
             <ThemeSwitch />
             <AuthButton />
