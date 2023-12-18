@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ChevronRight, User } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
+import { Badge } from "../ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -37,15 +38,15 @@ export const ProfileCard = ({
         </Avatar>
         <div className="flex flex-col">
           <div className="font-bold">
-            {name ? name : <Skeleton className="h-4 w-32" />}
+            {name ?? <Skeleton className="h-4 w-32" />}
           </div>
-          <div className="text-xs italic dark:text-primary/80">
-            {iracingId ? (
-              `(${iracingId})`
-            ) : (
-              <Skeleton className="mt-2 h-3 w-16" />
-            )}
-          </div>
+          {iracingId ? (
+            <Badge className="w-fit" size="xs" variant="secondary">
+              {iracingId}
+            </Badge>
+          ) : (
+            <Skeleton className="mt-2 h-3 w-16" />
+          )}
         </div>
       </div>
       <div className="flex items-center">
