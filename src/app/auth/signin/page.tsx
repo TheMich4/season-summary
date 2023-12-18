@@ -24,7 +24,7 @@ export default async function SignInPage() {
               <span className="dark:text-primary">Season Summary</span>!
             </h2>
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              We're glad to have you here. Please login to your account.
+              {"We're glad to have you here. Please login to your account."}
             </p>
           </CardHeader>
           <CardContent className="mt-8 space-y-4">
