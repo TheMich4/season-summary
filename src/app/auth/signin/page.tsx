@@ -1,5 +1,6 @@
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
 import { ProviderButtons } from "./provider-buttons";
-import { Separator } from "@/components/ui/separator";
 import { authOptions } from "@/config/auth-options";
 import { getProviders } from "next-auth/react";
 import { getServerSession } from "next-auth";
@@ -14,14 +15,22 @@ export default async function SignInPage() {
   }
 
   return (
-    <main className="flex min-h-full items-center justify-center gap-6 pb-8 pt-6 md:gap-10 md:py-12">
-      <div className="flex min-w-[400px] flex-col gap-2 rounded-md border bg-background/40 p-4">
-        <div className="flex flex-row items-baseline gap-1">
-          <p>{"Log in to "}</p>
-          <p className="text-lg font-bold dark:text-primary">Season Summary</p>
-        </div>
-        <Separator />
-        <ProviderButtons providers={providers} />
+    <main className="flex min-h-full w-full py-4">
+      <div className="flex w-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+        <Card className="w-full max-w-lg bg-background/40">
+          <CardHeader>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
+              Welcome to{" "}
+              <span className="dark:text-primary">Season Summary</span>!
+            </h2>
+            <p className="mt-4 text-center text-sm text-muted-foreground">
+              We're glad to have you here. Please login to your account.
+            </p>
+          </CardHeader>
+          <CardContent className="mt-8 space-y-4">
+            <ProviderButtons providers={providers} />
+          </CardContent>
+        </Card>
       </div>
     </main>
   );
