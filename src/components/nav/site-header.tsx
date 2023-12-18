@@ -5,9 +5,12 @@ import Link from "next/link";
 import { MainNav } from "./main-nav";
 import { ThemeSwitch } from "./theme-switch";
 import { buttonVariants } from "@/components/ui/button";
+import { getIsUserAdmin } from "@/server/get-is-user-admin";
 import { siteConfig } from "@/config/site";
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const isAdmin = await getIsUserAdmin();
+
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/50 backdrop-blur">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
@@ -50,7 +53,7 @@ export function SiteHeader() {
             </div>
 
             <ThemeSwitch />
-            <AuthButton />
+            <AuthButton isAdmin={isAdmin} />
           </nav>
         </div>
       </div>

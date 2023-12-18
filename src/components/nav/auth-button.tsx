@@ -14,7 +14,11 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { User } from "lucide-react";
 
-export const AuthButton = () => {
+interface AuthButtonProps {
+  isAdmin: boolean;
+}
+
+export const AuthButton = ({ isAdmin }: AuthButtonProps) => {
   const { data: sessionData } = useSession();
 
   return (
@@ -34,6 +38,13 @@ export const AuthButton = () => {
               {sessionData.user?.name ?? "My Account"}
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
+            {isAdmin && (
+              <DropdownMenuItem>
+                <Link href="/admin" className="w-full">
+                  Admin Page
+                </Link>
+              </DropdownMenuItem>
+            )}
             <DropdownMenuItem>
               <Link href="/profile/settings" className="w-full">
                 Settings

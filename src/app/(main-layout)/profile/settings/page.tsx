@@ -17,7 +17,7 @@ export default async function ProfileSettings() {
   const userSettings = await getUserSettings(user.id);
 
   return (
-    <main className="container flex min-h-full w-full  flex-col items-center justify-start gap-6 py-4">
+    <main className="container flex min-h-full w-full flex-col items-center justify-start gap-6 py-4">
       <div className="flex w-full flex-col items-center justify-start gap-6 rounded-md border bg-background/40 p-4 text-card-foreground md:w-[500px]">
         <div className="flex w-full flex-row items-center gap-4">
           <UserAvatar />
