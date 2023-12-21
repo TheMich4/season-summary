@@ -10,6 +10,7 @@ export const getAdminSummary = async () => {
         favoriteCategory: true,
         preferFull: true,
         isAdmin: true,
+        iracingId: true,
         _all: true,
       },
     }),

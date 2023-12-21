@@ -1,6 +1,15 @@
 import { SimpleStat } from "@/components/extended/simple-stat";
 import { getAdminSummary } from "@/server/get-admin-summary";
 
+const userStatToLabel = {
+  _all: "Total users",
+  emailVerified: "Email verified",
+  favoriteCategory: "Favorite category",
+  preferFull: "Prefer full",
+  isAdmin: "Admins",
+  iracingId: "iRacing ID set",
+};
+
 export const Summary = async () => {
   const summaryData = await getAdminSummary();
 
@@ -10,14 +19,10 @@ export const Summary = async () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 ">
         {Object.entries(summaryData.userCount).map(([label, value]) => (
           <SimpleStat
-            label={
-              label === "_all"
-                ? "Total users"
-                : label.replace(/([A-Z])/g, " $1")
-            }
+            label={userStatToLabel[label] ?? "unkown"}
             value={value}
             key={label}
           />
