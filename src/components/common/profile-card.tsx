@@ -41,7 +41,11 @@ export const ProfileCard = ({
             {name ?? <Skeleton className="h-4 w-32" />}
           </div>
           {iracingId ? (
-            <Badge className="w-fit text-primary" size="xs" variant="secondary">
+            <Badge
+              className="w-fit dark:text-primary"
+              size="xs"
+              variant="secondary"
+            >
               {iracingId}
             </Badge>
           ) : (
