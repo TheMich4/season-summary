@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import { MainNavProps } from "./main-nav";
 import { Menu } from "lucide-react";
+import { ScheduleNavLink } from "./schedule-nav-link";
 import { Suspense } from "react";
 import { authOptions } from "@/config/auth-options";
 import { buttonVariants } from "@/components/ui/button";
@@ -70,6 +71,19 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
           <Suspense fallback={null}>
             <ProfileNavLink />
           </Suspense>
+
+          <DropdownMenuSeparator />
+
+          <DropdownMenuItem>
+            <Link href="https://schedule.dyczkowski.dev/">
+              <div className="flex flex-row items-center gap-1 text-primary">
+                <span>Schedule</span>
+                <div className="flex h-[12px] items-center justify-center self-center rounded-sm bg-primary px-1 py-0 text-[0.5rem] text-black">
+                  alpha
+                </div>
+              </div>
+            </Link>
+          </DropdownMenuItem>
 
           <DropdownMenuSeparator />
 
