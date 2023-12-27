@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { NavItem } from "./types";
+import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-export const NavLink = ({ item }: { item: NavItem }) => {
+export const NavLink = ({
+  children,
+  item,
+}: {
+  children?: ReactNode;
+  item: NavItem;
+}) => {
   if (!item.href) {
     return null;
   }
@@ -15,7 +22,7 @@ export const NavLink = ({ item }: { item: NavItem }) => {
         item.disabled && "cursor-not-allowed opacity-80"
       )}
     >
-      {item.title}
+      {children ?? item.title}
     </Link>
   );
 };
