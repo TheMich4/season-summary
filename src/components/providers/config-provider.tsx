@@ -50,7 +50,7 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
     const season = searchParams.get("season")
       ? Number(searchParams.get("season"))
       : config.season;
-    const category = config.category ?? searchParams.get("category");
+    const category = config.category ?? searchParams.get("category") ?? "road";
 
     router.push(`?year=${year}&season=${season}&category=${category}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps

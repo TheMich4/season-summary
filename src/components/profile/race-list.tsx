@@ -90,7 +90,7 @@ export const RaceList = ({
           numberOfPages === 0 && "pb-2"
         )}
       >
-        Your {categoryToName[category].toLowerCase()} races this season:
+        Your {categoryToName[category]?.toLowerCase()} races this season:
       </span>
 
       <div className="flex flex-col justify-center gap-1 sm:flex-row">

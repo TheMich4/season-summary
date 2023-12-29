@@ -10,7 +10,6 @@ import { RxDiscordLogo } from "react-icons/rx";
 const IconClassName = "w-4 h-4 mr-2";
 
 const ProviderIcon = ({ provider }: { provider: string }) => {
-  console.log(provider);
   if (provider === "GitHub") return <Github className={IconClassName} />;
   if (provider === "Discord")
     return <RxDiscordLogo className={IconClassName} />;

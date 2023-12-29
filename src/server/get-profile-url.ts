@@ -11,6 +11,6 @@ export const getProfileUrl = async (iracingId: string) => {
   return (
     `/driver/${iracingId}` +
     (userSettings?.preferFull ? "/full" : "") +
-    `?category=${userSettings?.favoriteCategory}`
+    `?category=${userSettings?.favoriteCategory ?? "road"}`
   );
 };
