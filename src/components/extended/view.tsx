@@ -18,6 +18,7 @@ import { SeasonSwitch } from "../profile/season-switch";
 import { SeriesStats } from "./series-stats";
 import { SimpleStat } from "./simple-stat";
 import { TrackStats } from "./track-stats";
+import { ActivityHeatMap } from "./activity-heat-map";
 
 interface ViewProps {
   category: Category;
@@ -74,6 +75,7 @@ export const View = ({
         <div className="lg:col-span-5">
           <div className="grid gap-4 lg:grid-cols-3">
             <div className="flex flex-col gap-4 lg:col-span-2">
+              <ActivityHeatMap raceResults={simpleData.seasonResults} />
               <MostRacedWeek racesPerWeek={data.racesPerWeek} />
               <FinishPositions finishPositions={data.finishPositions} />
               <IncidentsGraph dataPoints={data.incidents.incidentPoints} />
