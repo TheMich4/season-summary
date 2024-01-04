@@ -15,6 +15,7 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: z.string().min(1),
     UPLOADTHING_SECRET: z.string().min(1),
     UPLOADTHING_APP_ID: z.string().min(1),
+    MAINTENANCE: z.string().transform((v) => v === "true"),
   },
   client: {
     // NEXT_PUBLIC_POSTHOG_KEY: z.string(),

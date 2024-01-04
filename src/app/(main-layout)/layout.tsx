@@ -17,6 +17,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { VisitedProvider } from "@/components/providers/visited-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+import { env } from "@/env.mjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,6 +47,21 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  if (env.MAINTENANCE) {
+    return (
+      <html lang="en">
+        <body className="my-gradient flex min-h-screen flex-col items-center justify-center text-center">
+          <h1 className="text-4xl font-bold">Maintenance</h1>
+          <p className="text-lg">
+            {"We are currently performing maintenance. "}
+            <br className="visible sm:hidden" />
+            {"Please check back later"}.
+          </p>
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en">
       <Suspense>
