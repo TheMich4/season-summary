@@ -15,8 +15,20 @@ interface ActivityHeatMapProps {
 }
 
 const THEME: ThemeInput = {
-  light: ["rgba(0,0,0,0.05)", "hsl(47.9, 95.8%, 53.1%)"],
-  dark: ["rgba(0,0,0,0.4)", "hsl(47.9, 95.8%, 53.1%)"],
+  light: [
+    "rgba(250, 250, 250, 0.60)",
+    "rgba(250, 204, 21, 0.25)",
+    "rgba(250, 204, 21, 0.50)",
+    "rgba(250, 204, 21, 0.75)",
+    "rgba(250, 204, 21, 1)",
+  ],
+  dark: [
+    "rgba(0, 0, 0, 0.4)",
+    "rgba(250, 204, 21, 0.25)",
+    "rgba(250, 204, 21, 0.50)",
+    "rgba(250, 204, 21, 0.75)",
+    "rgba(250, 204, 21, 1)",
+  ],
 };
 
 const getSeasonDateRange = (year: string, season: string) => {
@@ -75,7 +87,9 @@ export const ActivityHeatMap = ({
         count,
         level: getLevel(count as number, max),
       }))
-      .sort((a, b) => new Date(a.date) - new Date(b.date)) as Activity[];
+      .sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      ) as Activity[];
   }, [raceResults, seasonDateRange]);
 
   if (!seasonDateRange) {
