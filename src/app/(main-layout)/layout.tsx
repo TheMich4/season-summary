@@ -18,6 +18,7 @@ import { VisitedProvider } from "@/components/providers/visited-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { env } from "@/env.mjs";
+import { Footer } from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   <div className="relative flex min-h-screen flex-col">
                     <SiteHeader />
                     <div className="flex-1">{children}</div>
+                    <Footer />
 
                     <Toaster />
                   </div>
