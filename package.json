@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun --hot run src/index.ts",
-    "start": "bun run src/index.ts"
+    "start": "bun run src/index.ts",
+    "data:regenerate": "bun run src/data-regenerate/index.ts"
   },
   "devDependencies": {
     "bun-types": "latest",
