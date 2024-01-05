@@ -75,7 +75,7 @@ export const Search = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSearch)}
-          className="flex w-full flex-col gap-1 self-center sm:max-w-[570px] sm:flex-row"
+          className="flex w-full flex-col gap-2 self-center sm:max-w-[570px] sm:flex-row"
         >
           <FormField
             control={form.control}
@@ -84,6 +84,7 @@ export const Search = () => {
               <FormItem className="w-full">
                 <FormControl>
                   <Input
+                    className="bg-background/40"
                     placeholder="Search for iRacing profile"
                     {...field}
                   ></Input>
