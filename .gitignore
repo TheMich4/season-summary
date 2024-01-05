@@ -175,4 +175,4 @@ dist
 .DS_Store
 
 build
-src/data-regenerate/data
+src/maintenance/data
