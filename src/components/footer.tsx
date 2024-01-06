@@ -4,20 +4,10 @@ import { FaXTwitter } from "react-icons/fa6";
 
 export const Footer = () => {
   return (
-    <footer className="flex h-14 w-full items-center justify-between bg-background/60 px-4 text-foreground backdrop-blur">
-      <div className="flex items-center space-x-4">
-        <Icons.home className="h-5 w-5" />
-      </div>
-      <div>
-        <p className="text-sm">© Michał Dyczkowski All rights reserved.</p>
-      </div>
-      <div className="flex space-x-4">
-        <Link className="text-white hover:text-gray-300" href="#">
-          <FaXTwitter className="h-5 w-5" />
-        </Link>
-        <Link className="text-white hover:text-gray-300" href="#">
-          <Icons.gitHub className="h-5 w-5" />
-        </Link>
+    <footer className="flex h-14 w-full flex-row items-center justify-center gap-2 bg-background/60 px-4 text-foreground backdrop-blur">
+      <div className="flex flex-row items-baseline gap-2 text-base">
+        <p className="font-bold dark:text-primary">dyczkowski.dev</p>
+        <p className="text-sm">All rights reserved.</p>
       </div>
     </footer>
   );
