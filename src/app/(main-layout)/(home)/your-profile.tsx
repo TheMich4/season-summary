@@ -23,6 +23,7 @@ const NoProfile = () => {
 // TODO: Stats for favorite category
 // TODO: Add skeleton
 // TODO: Add ir and sr
+// TODO: Add caching for 1h
 const Stats = async ({
   iracingId,
   category,
