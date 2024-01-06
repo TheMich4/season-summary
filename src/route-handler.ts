@@ -1,7 +1,5 @@
 import { getAvatars } from "./routers/v2/get-avatars";
 import { getBasicData } from "./routers/v2/get-basic-data";
-import { getFullDataRoute } from "./routers/get-full-data";
-import { getFullDataStatusRoute } from "./routers/get-full-data-status";
 import { getIracingData } from "./routers/v2/get-iracing-data";
 import { getNew } from "./routers/v2/get-new";
 import { getRaceResult } from "./routers/v2/get-race-result";
@@ -12,8 +10,8 @@ import { searchDrivers } from "./routers/v2/search-drivers";
 export const routeHandler = new Proxy(
   {
     ["/"]: () => new Response("season-summary-api", { status: 200 }),
-    ["/get-full-data"]: getFullDataRoute,
-    ["/get-full-data-status"]: getFullDataStatusRoute,
+    // ["/get-full-data"]: getFullDataRoute,
+    // ["/get-full-data-status"]: getFullDataStatusRoute,
 
     ["/v2/get-full"]: getNew,
     ["/v2/request-full"]: requestNew,
