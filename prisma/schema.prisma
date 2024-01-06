@@ -21,7 +21,7 @@ model Season {
 
 model SeasonData {
   id         Int      @id @default(autoincrement())
-  data       Json?
+  data       Data?
   isPending  Boolean  @default(false)
   lastRace   String?
   lastUpdate DateTime @default(now())
@@ -32,6 +32,17 @@ model SeasonData {
   @@unique([seasonId, userId])
   @@index([seasonId])
   @@index([userId])
+}
+
+model Data {
+  id         Int      @id @default(autoincrement())
+  lastUpdate DateTime @default(now())
+
+  json Json?
+
+  seasonDataId Int @unique
+
+  seasonData SeasonData @relation(fields: [seasonDataId], references: [id], onDelete: Cascade)
 }
 
 model IracingUser {

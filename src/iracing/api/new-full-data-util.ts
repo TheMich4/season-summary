@@ -53,6 +53,9 @@ export const getNewFullDataUtil = async ({
       update: {
         isPending: true,
       },
+      include: {
+        data: true,
+      },
     });
 
     const ir = await getLoggedInIracingAPIClient();
@@ -130,7 +133,7 @@ export const getNewFullDataUtil = async ({
       });
     }
 
-    const data = parseResults(results, iracingId, seasonData.data);
+    const json = parseResults(results, iracingId, seasonData.data?.json);
     const lastRace =
       results[results.length - 1]?.raceSummary.subsessionId ??
       seasonData.lastRace;
@@ -141,7 +144,19 @@ export const getNewFullDataUtil = async ({
       },
       data: {
         isPending: false,
-        data,
+        data: {
+          upsert: {
+            where: {
+              id: seasonData.data?.id,
+            },
+            create: {
+              json,
+            },
+            update: {
+              json,
+            },
+          },
+        },
         lastRace: lastRace && `${lastRace}`,
       },
     });

@@ -18,5 +18,8 @@ export const getSeasonData = async (
       seasonId,
       userId: iracingId,
     },
+    include: {
+      data: true,
+    },
   });
 };
