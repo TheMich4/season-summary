@@ -18,7 +18,7 @@ export const NavLink = ({
     <Link
       href={item.href}
       className={cn(
-        "flex items-center text-lg font-semibold text-muted-foreground sm:text-sm",
+        "flex items-center text-lg font-semibold sm:text-sm text-nowrap text-muted-foreground hover:text-foreground",
         item.disabled && "cursor-not-allowed opacity-80"
       )}
     >

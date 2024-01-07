@@ -50,9 +50,10 @@ export async function SiteHeader() {
                   <span className="sr-only">GitHub</span>
                 </div>
               </Link>
+
+              <ThemeSwitch />
             </div>
 
-            <ThemeSwitch />
             <AuthButton isAdmin={isAdmin} />
           </nav>
         </div>

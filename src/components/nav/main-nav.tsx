@@ -20,7 +20,10 @@ export function MainNav({ items }: MainNavProps) {
       <MobileNavMenu items={items} />
       <Link href="/" className="flex items-center space-x-2 dark:text-primary">
         <Icons.home className="h-6 w-6 " />
-        <span className="inline-block font-bold">{siteConfig.name}</span>
+        {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
+        <span className="text-nowrap inline-block font-bold">
+          {siteConfig.name}
+        </span>
       </Link>
       <nav className="hidden gap-6 md:flex">
         {items?.map(
