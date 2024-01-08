@@ -17,7 +17,7 @@ const filePath2 = `src/maintenance/data/season-data-${new Date().toISOString()}.
 // console.log(`Writing data to file (${filePath2})...`);
 // await Bun.write(filePath2, JSON.stringify(data, null, 2));
 
-console.log("Cleaning season data");
-await prisma.seasonData.deleteMany();
+// console.log("Cleaning season data");
+// await prisma.seasonData.deleteMany();
 
 await regenerateSeasonData(data);

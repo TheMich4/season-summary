@@ -20,12 +20,12 @@ export const getBasicData = async (request: Request) => {
   const previousSeason = getPreviousSeason(...currentSeason);
 
   const [memberRecap, previousMemberRecap] = await Promise.all([
-    ir.getMemberRecap({
+    ir.stats.getMemberRecap({
       customerId: +iracingId,
       year: +process.env.CURRENT_YEAR!,
       season: +process.env.CURRENT_SEASON!,
     }),
-    ir.getMemberRecap({
+    ir.stats.getMemberRecap({
       customerId: +iracingId,
       year: previousSeason.year,
       season: previousSeason.season,

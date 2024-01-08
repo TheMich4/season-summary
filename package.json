@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@prisma/client": "5.3.1",
-    "iracing-api": "^0.3.1",
+    "iracing-api": "0.4.0",
     "typescript": "^5.0.0"
   }
 }

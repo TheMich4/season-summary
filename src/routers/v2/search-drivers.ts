@@ -9,7 +9,7 @@ export const searchDrivers = async (request: Request) => {
   }
 
   const ir = await getLoggedInIracingAPIClient();
-  const drivers = await ir.getDrivers({ searchTerm });
+  const drivers = await ir.lookup.getDrivers({ searchTerm });
 
   return new Response(JSON.stringify({ drivers }), { status: 200 });
 };

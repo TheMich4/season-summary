@@ -52,18 +52,18 @@ export const getIracingData = async (request: Request) => {
       seasonResults,
       previousSeasonRecap,
     ] = await Promise.all([
-      ir.getMemberData({ customerIds: [iracingId] }),
-      ir.getMemberRecap({
+      ir.member.getMemberData({ customerIds: [iracingId] }),
+      ir.stats.getMemberRecap({
         customerId: parseInt(iracingId, 10),
         year: parseInt(year, 10),
         season: parseInt(season, 10),
       }),
-      ir.getMemberChartData({
+      ir.member.getMemberChartData({
         customerId: parseInt(iracingId, 10),
         chartType: "1",
         categoryId: parseInt(categoryId, 10),
       }),
-      ir.searchSeries({
+      ir.results.searchSeries({
         seasonYear: parseInt(year, 10),
         seasonQuarter: parseInt(season, 10),
         customerId: parseInt(iracingId, 10),
@@ -71,7 +71,7 @@ export const getIracingData = async (request: Request) => {
         eventTypes: [5],
         categoryIds: [parseInt(categoryId, 10)],
       }),
-      ir.getMemberRecap({
+      ir.stats.getMemberRecap({
         customerId: parseInt(iracingId, 10),
         year: previousYear,
         season: previousSeason,
@@ -88,14 +88,14 @@ export const getIracingData = async (request: Request) => {
     const firstRace =
       firstRaceDate &&
       seasonResults?.[0] &&
-      (await ir.getResult({
+      (await ir.results.getResult({
         subsessionId: seasonResults[0].subsessionId,
       }));
 
     const lastRace =
       lastRaceDate &&
       seasonResults?.[seasonResults?.length - 1] &&
-      (await ir.getResult({
+      (await ir.results.getResult({
         subsessionId: seasonResults?.[seasonResults?.length - 1].subsessionId,
       }));
 

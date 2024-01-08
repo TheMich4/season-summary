@@ -60,7 +60,7 @@ export const getNewFullDataUtil = async ({
 
     const ir = await getLoggedInIracingAPIClient();
 
-    const races = await ir.searchSeries({
+    const races = await ir.results.searchSeries({
       seasonYear: parseInt(year, 10),
       seasonQuarter: parseInt(season, 10),
       customerId: parseInt(iracingId, 10),
@@ -112,7 +112,7 @@ export const getNewFullDataUtil = async ({
       }
 
       await new Promise((resolve) =>
-        setTimeout(resolve, +process.env.FETCH_INTERVAL! || 3000)
+        setTimeout(resolve, +process.env.FETCH_INTERVAL! || 100)
       );
 
       return result;

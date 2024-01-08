@@ -10,6 +10,11 @@ export const regenerateSeasonData = async (
   >
 ) => {
   console.time("regenerateSeasonData");
+  let i = 0;
+  const users = Object.values(data).reduce((acc, { userIds }) => {
+    return (acc += userIds.length);
+  }, 0);
+
   for (const [key, { season, userIds }] of Object.entries(data)) {
     console.time(key);
     console.log(
@@ -17,7 +22,7 @@ export const regenerateSeasonData = async (
     );
 
     for (const userId of userIds) {
-      console.log(`   => Regenerating for user ${userId}...`);
+      console.log(`   => Regenerating for user ${userId}... (${i}/${users}))`);
       await getNewFullDataUtil({
         iracingId: userId.toString(),
         year: season.year.toString(),
@@ -25,12 +30,15 @@ export const regenerateSeasonData = async (
         categoryId: season.category.toString(),
         sendMessage: (status, message) => {
           status === "PROGRESS" &&
-            message.fetched % 5 === 0 &&
+            (message.fetched % 5 === 0 ||
+              message.fetched === message.newRaces) &&
             console.log(
               `      => ${message.fetched} of ${message.newRaces} fetched`
             );
         },
       });
+
+      i++;
     }
 
     console.timeEnd(key);

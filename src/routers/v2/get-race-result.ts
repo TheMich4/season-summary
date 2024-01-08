@@ -10,7 +10,7 @@ export const getRaceResult = async (request: Request) => {
 
   const ir = await getLoggedInIracingAPIClient();
 
-  const result = await ir.getResult({
+  const result = await ir.results.getResult({
     subsessionId: parseInt(subsessionId, 10),
   });
 

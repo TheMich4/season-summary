@@ -55,7 +55,7 @@ export const getFullSeasonData = async ({
       },
     });
 
-    const races = await ir.searchSeries({
+    const races = await ir.results.searchSeries({
       seasonYear: parseInt(year),
       seasonQuarter: parseInt(season),
       customerId: parseInt(customerId),

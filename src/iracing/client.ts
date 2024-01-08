@@ -8,7 +8,11 @@ let lastLogin: Date | undefined = undefined;
 
 export const getLoggedInIracingAPIClient = async () => {
   if (!ir) {
-    ir = new IracingAPI();
+    ir = new IracingAPI({
+      logger: true,
+      manageRateLimit: true,
+      rateLimitPadding: 10,
+    });
   }
 
   // Re-login every hour
