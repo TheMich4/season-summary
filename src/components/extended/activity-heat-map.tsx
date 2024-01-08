@@ -70,7 +70,7 @@ export const ActivityHeatMap = ({
   );
 
   const data = useMemo(() => {
-    const racesPerDate = raceResults.reduce((acc, result) => {
+    const racesPerDate = raceResults?.reduce((acc, result) => {
       const date = result.startTime.split("T")[0];
 
       return {
@@ -81,7 +81,7 @@ export const ActivityHeatMap = ({
 
     const max = Math.max(...(Object.values(racesPerDate) as number[]));
 
-    return Object.entries(racesPerDate)
+    return Object.entries(racesPerDate ?? {})
       .map(([date, count]) => ({
         date,
         count,
