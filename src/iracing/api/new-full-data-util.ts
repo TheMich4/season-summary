@@ -5,6 +5,25 @@ import { prisma } from "../../db";
 import { upsertSeason } from "../../db/actions/upsert-season";
 import { upsertUser } from "../../db/actions/upsert-user";
 
+let currentRequests = 0;
+
+// TODO: Improve this to calculate timeout based on currentRequests
+const getTimeout = () => {
+  if (currentRequests >= 10) {
+    return 5000;
+  }
+
+  if (currentRequests >= 5) {
+    return 2000;
+  }
+
+  if (currentRequests >= 3) {
+    return 1000;
+  }
+
+  return +process.env.DEFAULT_FETCH_INTERVAL! || 100;
+};
+
 export const getNewFullDataUtil = async ({
   iracingId,
   year,
@@ -24,6 +43,8 @@ export const getNewFullDataUtil = async ({
     if (!iracingId || !year || !season || !categoryId) {
       return null;
     }
+
+    currentRequests++;
 
     console.log("getNewFullData", iracingId, year, season, categoryId);
 
@@ -87,6 +108,7 @@ export const getNewFullDataUtil = async ({
         newRaces: 0,
         fetched: 0,
       });
+      currentRequests--;
       return;
     }
 
@@ -111,9 +133,9 @@ export const getNewFullDataUtil = async ({
         results.push(result);
       }
 
-      await new Promise((resolve) =>
-        setTimeout(resolve, +process.env.FETCH_INTERVAL! || 100)
-      );
+      const timeout = getTimeout();
+
+      await new Promise((resolve) => setTimeout(resolve, timeout));
 
       return result;
     };
@@ -166,7 +188,9 @@ export const getNewFullDataUtil = async ({
       newRaces: newRaces.length,
       fetched: results.length,
     });
+    currentRequests--;
   } catch (e) {
+    currentRequests--;
     sendMessage?.("ERROR", e);
   }
 };
