@@ -2,11 +2,19 @@
 
 import { SEASON_DATE_RANGES } from "@/config/iracing";
 import { useTheme } from "next-themes";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import ActivityCalendar, {
   ThemeInput,
   type Activity,
+  BlockElement,
 } from "react-activity-calendar";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+import { TooltipPortal } from "@radix-ui/react-tooltip";
 
 interface ActivityHeatMapProps {
   raceResults: any[];
@@ -57,6 +65,18 @@ const getInitialRacesPerDate = (seasonDateRange?: {
   };
 };
 
+const ActivityTooltip = ({ count, date }: Activity) => {
+  return (
+    <TooltipContent className="rounded-md border bg-background/80 p-2 backdrop-blur">
+      <span className="font-bold">{count}</span>
+      <span className="text-sm">
+        {" races on "}
+        {new Date(date).toLocaleDateString()}
+      </span>
+    </TooltipContent>
+  );
+};
+
 export const ActivityHeatMap = ({
   raceResults,
   season,
@@ -92,6 +112,19 @@ export const ActivityHeatMap = ({
       ) as Activity[];
   }, [raceResults, seasonDateRange]);
 
+  const renderBlock = useCallback((block: BlockElement, activity: Activity) => {
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>{block}</TooltipTrigger>
+          <TooltipPortal>
+            <ActivityTooltip {...activity} />
+          </TooltipPortal>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }, []);
+
   if (!seasonDateRange) {
     return null;
   }
@@ -108,6 +141,7 @@ export const ActivityHeatMap = ({
         hideColorLegend
         hideMonthLabels
         hideTotalCount
+        renderBlock={renderBlock}
       />
     </div>
   );
