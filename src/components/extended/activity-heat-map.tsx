@@ -114,7 +114,7 @@ export const ActivityHeatMap = ({
 
   const renderBlock = useCallback((block: BlockElement, activity: Activity) => {
     return (
-      <TooltipProvider>
+      <TooltipProvider delayDuration={50}>
         <Tooltip>
           <TooltipTrigger asChild>{block}</TooltipTrigger>
           <TooltipPortal>
