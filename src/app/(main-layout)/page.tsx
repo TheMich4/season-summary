@@ -1,8 +1,8 @@
-import { IracingIdInput } from "./(home)/iracing-id-input";
 import { Title } from "./_components/title";
 import { VisitedList } from "./(home)/visited-list";
 import { YourProfile } from "./(home)/your-profile";
 import { env } from "@/env.mjs";
+import { HomePageSearch } from "./_components/home-page-search";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
         </p>
       </div>
 
-      <IracingIdInput />
+      <HomePageSearch />
       <YourProfile />
       <VisitedList apiUrl={env.API_URL} />
     </main>

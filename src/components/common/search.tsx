@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { useCallback, useEffect, useState } from "react";
-import { SidebarDivider } from "./sidebar-divider";
 import {
   CommandDialog,
   CommandEmpty,
@@ -18,12 +17,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { getProfileUrl } from "@/server/get-profile-url";
 import posthog from "posthog-js";
 
-interface SidebarSearchProps {
+interface SearchProps {
   iracingId?: string | null;
   session?: Session | null;
+  placeholder?: string;
 }
 
-export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
+export const Search = ({ iracingId, session, placeholder }: SearchProps) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -83,7 +83,7 @@ export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
         onClick={() => setOpen(true)}
         className="relative w-full justify-between rounded-md bg-background/40 text-sm font-normal text-muted-foreground shadow-none"
       >
-        <span className="inline-flex">Search...</span>
+        <span className="inline-flex">{placeholder ?? "Search..."}</span>
         <kbd className="pointer-events-none -mr-2 hidden h-5 select-none items-center gap-1 self-center rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
@@ -139,8 +139,6 @@ export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
           </CommandGroup>
         </CommandList>
       </CommandDialog>
-
-      <SidebarDivider />
     </>
   );
 };
