@@ -4,6 +4,8 @@ import { getServerSession } from "next-auth";
 import { SidebarSectionLabel } from "./sidebar-section-label";
 import { SidebarDivider } from "./sidebar-divider";
 import { SidebarProfileCard } from "./sidebar-profile-card";
+import { Input } from "@/components/ui/input";
+import { SidebarYourProfile } from "./sidebar-your-profile";
 
 export const Sidebar = async () => {
   const session = await getServerSession(authOptions);
@@ -15,16 +17,14 @@ export const Sidebar = async () => {
 
   return (
     <div className="hidden h-full min-h-full w-[250px] flex-col gap-2 border-r bg-background/50 p-4 backdrop-blur 2xl:flex">
-      <p className="font-bold">{session?.user?.name}</p>
+      <Input placeholder="Search" />
 
       <SidebarDivider />
 
-      <SidebarSectionLabel>Your Profile</SidebarSectionLabel>
-
-      <SidebarProfileCard
-        name={session?.user?.name}
+      <SidebarYourProfile
+        avatarUrl={session.user.image}
+        name={session.user.name}
         iracingId={userSettings?.iracingId}
-        avatarUrl={session?.user?.image}
       />
     </div>
   );
