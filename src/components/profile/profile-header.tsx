@@ -25,9 +25,9 @@ export const ProfileHeader = ({
           <p className="text-ellipsis text-3xl font-extrabold leading-tight tracking-tighter">
             {memberData?.displayName ?? ""}
           </p>
-          <p className="flex items-center justify-center self-center text-sm text-foreground/80 dark:text-primary sm:self-auto">
+          {/* <p className="flex items-center justify-center self-center text-sm text-foreground/80 dark:text-primary sm:self-auto">
             ({memberData?.clubName ?? ""})
-          </p>
+          </p> */}
         </div>
 
         <div className="order-1 flex justify-center md:order-2">
