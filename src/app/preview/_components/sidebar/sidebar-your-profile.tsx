@@ -22,8 +22,6 @@ export const SidebarYourProfile = async () => {
 
   return (
     <>
-      <SidebarDivider />
-
       <SidebarSectionLabel>Your Profile</SidebarSectionLabel>
 
       <SidebarProfileCard
@@ -31,6 +29,8 @@ export const SidebarYourProfile = async () => {
         iracingId={userSettings?.iracingId}
         avatarUrl={session.user.avatarUrl}
       />
+
+      <SidebarDivider />
     </>
   );
 };
