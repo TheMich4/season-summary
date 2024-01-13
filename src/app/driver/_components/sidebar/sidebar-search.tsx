@@ -16,6 +16,7 @@ import { Session } from "next-auth";
 import { signIn } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { getProfileUrl } from "@/server/get-profile-url";
+import posthog from "posthog-js";
 
 interface SidebarSearchProps {
   iracingId?: string | null;
@@ -33,7 +34,6 @@ export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
     async (id?: string) => {
       const url = id ? await getProfileUrl(id) : pathname;
       router.push(url);
-      setOpen(false);
     },
     [pathname, router]
   );
@@ -47,6 +47,13 @@ export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
       goToProfile(value);
     }
   }, [goToProfile, router, value]);
+
+  const runCommand = useCallback((command: () => unknown) => {
+    posthog.capture("search-command");
+
+    setOpen(false);
+    command();
+  }, []);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -94,7 +101,7 @@ export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
           {value && (
             <CommandGroup heading="Search">
               <CommandItem
-                onSelect={handleSearch}
+                onSelect={() => runCommand(handleSearch)}
               >{`Search for ${value}...`}</CommandItem>
             </CommandGroup>
           )}
@@ -103,9 +110,7 @@ export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
             {iracingId && (
               <CommandItem
                 value="Your profile"
-                onSelect={async () => {
-                  goToProfile(iracingId);
-                }}
+                onSelect={() => runCommand(() => goToProfile(iracingId))}
               >
                 <User className="mr-2 h-6 w-6" />
                 Your Profile
@@ -114,14 +119,19 @@ export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
             {session && (
               <CommandItem
                 value="Settings"
-                onSelect={() => router.push("/profile/settings")}
+                onSelect={() =>
+                  runCommand(() => router.push("/profile/settings"))
+                }
               >
                 <Settings className="mr-2 h-6 w-6" />
                 Settings
               </CommandItem>
             )}
             {!session && (
-              <CommandItem value="Sign in" onSelect={() => signIn()}>
+              <CommandItem
+                value="Sign in"
+                onSelect={() => runCommand(() => signIn())}
+              >
                 <User className="mr-2 h-6 w-6" />
                 Sign In
               </CommandItem>
