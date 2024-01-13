@@ -13,6 +13,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 import Link from "next/link";
 import { User } from "lucide-react";
+import posthog from "posthog-js";
 
 interface AuthButtonProps {
   isAdmin: boolean;
@@ -51,12 +52,24 @@ export const AuthButton = ({ isAdmin }: AuthButtonProps) => {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => signOut()} className="w-full">
+            <DropdownMenuItem
+              onClick={() => {
+                posthog.capture("sign_out_click");
+                signOut();
+              }}
+              className="w-full"
+            >
               Sign out
             </DropdownMenuItem>
           </>
         ) : (
-          <DropdownMenuItem onClick={() => signIn()} className="w-full">
+          <DropdownMenuItem
+            onClick={() => {
+              posthog.capture("sign_in_click");
+              signIn();
+            }}
+            className="w-full"
+          >
             Sign in
           </DropdownMenuItem>
         )}

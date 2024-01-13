@@ -6,6 +6,7 @@ import { getProfileUrl } from "@/server/get-profile-url";
 import { ChevronRight, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import posthog from "posthog-js";
 import { useMemo } from "react";
 
 interface SidebarProfileCardProps {
@@ -32,6 +33,8 @@ export const SidebarProfileCard = ({
   }, [name]);
 
   const handleClick = async () => {
+    posthog.capture("sidebar_profile_card_click", { iracingId });
+
     const url = iracingId ? await getProfileUrl(iracingId) : pathname;
     router.push(url);
   };

@@ -12,9 +12,19 @@ import { Moon, Sun } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
+import { useCallback } from "react";
+import posthog from "posthog-js";
 
 export function ThemeSwitch() {
   const { setTheme } = useTheme();
+
+  const changeTheme = useCallback(
+    (theme: string) => {
+      posthog.capture("theme_change", { theme });
+      setTheme(theme);
+    },
+    [setTheme]
+  );
 
   return (
     <DropdownMenu>
@@ -26,13 +36,13 @@ export function ThemeSwitch() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => changeTheme("light")}>
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => changeTheme("dark")}>
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => changeTheme("system")}>
           System
         </DropdownMenuItem>
       </DropdownMenuContent>
