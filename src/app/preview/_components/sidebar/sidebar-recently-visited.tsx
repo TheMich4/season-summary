@@ -1,37 +1,39 @@
 "use client";
 
-import { ProfileCard } from "@/components/common/profile-card";
 import { useVisited } from "@/components/providers/visited-provider";
+import { SidebarSectionLabel } from "./sidebar-section-label";
+import { SidebarProfileCard } from "./sidebar-profile-card";
 import { useVisitedAvatars } from "@/hooks/use-visited-avatars";
 
-interface VisitedListProps {
+interface SidebarRecentlyVisitedProps {
   apiUrl: string;
 }
 
-export const VisitedList = ({ apiUrl }: VisitedListProps) => {
+export const SidebarRecentlyVisited = ({
+  apiUrl,
+}: SidebarRecentlyVisitedProps) => {
   const { visited } = useVisited();
   const avatars = useVisitedAvatars(apiUrl, visited);
 
   if (!visited.length) return null;
 
   return (
-    <div className="w-full md:w-[720px] lg:w-[820px]">
-      <div className="text-center text-2xl font-bold md:text-start">
-        Recently Visited:
-      </div>
-      <div className="grid grid-cols-1 gap-2 py-2 md:grid-cols-2">
+    <>
+      <SidebarSectionLabel>Recently Visited</SidebarSectionLabel>
+
+      <div className="flex flex-col gap-2">
         {visited
           .filter(({ iracingId, name }) => iracingId && name)
-          .slice(0, 10)
+          .slice(0, 5)
           .map(({ iracingId, name }) => (
-            <ProfileCard
+            <SidebarProfileCard
               avatarUrl={avatars?.[iracingId]}
               key={iracingId}
-              iracingId={iracingId}
               name={name}
+              iracingId={iracingId}
             />
           ))}
       </div>
-    </div>
+    </>
   );
 };

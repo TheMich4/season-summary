@@ -17,8 +17,6 @@ export const SidebarProfileCard = ({
   iracingId,
   avatarUrl,
 }: SidebarProfileCardProps) => {
-  console.log({ name, iracingId, avatarUrl });
-
   const displayName = useMemo(() => {
     const nameSplit = name.split(" ");
     return nameSplit.reduce((acc, curr, i) => {
@@ -41,13 +39,12 @@ export const SidebarProfileCard = ({
         </Avatar>
 
         <div className="text-nowrap font-semibold">{displayName}</div>
-
-        <Link href="#" onClick={handleClick}>
-          <Button size="sm" variant="ghost">
-            <ChevronRight className="h-4 w-4 dark:text-primary" />
-          </Button>
-        </Link>
       </div>
+      <Link href="#" onClick={handleClick}>
+        <Button size="sm" variant="ghost">
+          <ChevronRight className="h-4 w-4 dark:text-primary" />
+        </Button>
+      </Link>
     </div>
   );
 };
