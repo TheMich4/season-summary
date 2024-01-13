@@ -16,7 +16,7 @@ export const SidebarYourProfile = async () => {
   const session = await getServerSession(authOptions);
   const userSettings = await getUserSettings(session?.user?.id);
 
-  if (!session) {
+  if (!session || !userSettings?.iracingId) {
     return null;
   }
 
