@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SidebarDivider } from "./sidebar-divider";
 import {
   CommandDialog,
@@ -48,14 +48,38 @@ export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
     }
   }, [goToProfile, router, value]);
 
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if ((e.key === "k" && (e.metaKey || e.ctrlKey)) || e.key === "/") {
+        if (
+          (e.target instanceof HTMLElement && e.target.isContentEditable) ||
+          e.target instanceof HTMLInputElement ||
+          e.target instanceof HTMLTextAreaElement ||
+          e.target instanceof HTMLSelectElement
+        ) {
+          return;
+        }
+
+        e.preventDefault();
+        setOpen((open) => !open);
+      }
+    };
+
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
+
   return (
     <>
       <Button
         variant="outline"
         onClick={() => setOpen(true)}
-        className="relative w-full justify-start rounded-[0.5rem] bg-background/40 text-sm font-normal text-muted-foreground shadow-none"
+        className="relative w-full justify-between rounded-md bg-background/40 text-sm font-normal text-muted-foreground shadow-none"
       >
         <span className="inline-flex">Search...</span>
+        <kbd className="pointer-events-none -mr-2 hidden h-5 select-none items-center gap-1 self-center rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+          <span className="text-xs">⌘</span>K
+        </kbd>
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
