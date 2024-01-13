@@ -20,6 +20,7 @@ import { siteConfig } from "@/config/site";
 import { env } from "@/env.mjs";
 import { Footer } from "@/components/footer";
 import { Maintenance } from "@/components/maintenance";
+import { Sidebar } from "./_components/sidebar/sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -62,27 +63,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(
           inter.className,
-          "scrollbar-thumb-foreground scrollbar-track-background dark:scrollbar-thumb-primary scrollbar-thin min-h-full my-gradient"
+          "h-screen max-h-screen my-gradient flex flex-col overflow-hidden "
         )}
       >
-        <PHProvider>
-          <AuthProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <QueryProvider>
-                <VisitedProvider>
-                  <div className="relative flex min-h-screen flex-col">
-                    <SiteHeader />
-                    <div className="flex-1">{children}</div>
-                    <Footer />
+        <AuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <SiteHeader fullWidth />
+            <div className="flex h-full w-full flex-row overflow-hidden">
+              <Sidebar />
 
-                    <Toaster />
-                  </div>
-                  <TailwindIndicator />
-                </VisitedProvider>
-              </QueryProvider>
-            </ThemeProvider>
-          </AuthProvider>
-        </PHProvider>
+              <div className="h-full max-h-full w-full overflow-auto scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground dark:scrollbar-thumb-primary">
+                {children}
+              </div>
+            </div>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

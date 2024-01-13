@@ -9,7 +9,6 @@ import { View } from "@/components/extended/view";
 import { VisitedManager } from "@/components/profile/visited-manager";
 import { env } from "@/env.mjs";
 import { getIracingData } from "@/server/get-iracing-data";
-import { url } from "@/config/site";
 
 interface ExtendedProfileProps {
   iracingId: string;

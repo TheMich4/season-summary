@@ -7,13 +7,23 @@ import { ThemeSwitch } from "./theme-switch";
 import { buttonVariants } from "@/components/ui/button";
 import { getIsUserAdmin } from "@/server/get-is-user-admin";
 import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
-export async function SiteHeader() {
+interface SiteHeaderProps {
+  fullWidth?: boolean;
+}
+
+export async function SiteHeader({ fullWidth = false }: SiteHeaderProps) {
   const isAdmin = await getIsUserAdmin();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/50 backdrop-blur">
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
+      <div
+        className={cn(
+          "flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0",
+          fullWidth ? "px-4" : "container"
+        )}
+      >
         <MainNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center gap-2">
