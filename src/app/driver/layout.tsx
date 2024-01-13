@@ -83,6 +83,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
                     <Toaster />
                   </div>
+
+                  <TailwindIndicator />
                 </VisitedProvider>
               </QueryProvider>
             </ThemeProvider>
