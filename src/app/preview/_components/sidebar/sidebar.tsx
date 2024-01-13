@@ -8,11 +8,11 @@ import { env } from "@/env.mjs";
 export const Sidebar = async () => {
   return (
     <div className="custom-scrollbar hidden h-full min-h-full w-[300px] flex-col gap-2 overflow-auto border-r bg-background/50 p-4 backdrop-blur 2xl:flex">
-      <Input placeholder="Search" />
+      {/* <Input placeholder="Search" /> */}
 
       <SidebarYourProfile />
 
-      <SidebarDivider />
+      {/* <SidebarDivider /> */}
 
       <SidebarRecentlyVisited apiUrl={env.API_URL} />
     </div>
