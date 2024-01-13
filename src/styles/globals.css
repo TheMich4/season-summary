@@ -70,3 +70,7 @@
 .my-gradient {
   @apply bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-primary/5 to-background;
 }
+
+.custom-scrollbar {
+  @apply scrollbar-thumb-foreground scrollbar-track-background dark:scrollbar-thumb-primary scrollbar-thin;
+}
