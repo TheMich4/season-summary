@@ -27,7 +27,7 @@ export const SidebarYourProfile = async () => {
       <SidebarProfileCard
         name={session.user.name}
         iracingId={userSettings?.iracingId}
-        avatarUrl={session.user.avatarUrl}
+        avatarUrl={session.user.image}
       />
 
       <SidebarDivider />
