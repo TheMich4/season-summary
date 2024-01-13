@@ -7,16 +7,17 @@ import { SidebarDivider } from "./sidebar-divider";
 
 interface SidebarYourProfileProps {
   name: string;
-  iracingId?: string;
+  iracingId?: string | null;
   avatarUrl?: string;
 }
 
 // TODO: Add no profile card
-export const SidebarYourProfile = async () => {
-  const session = await getServerSession(authOptions);
-  const userSettings = await getUserSettings(session?.user?.id);
-
-  if (!session || !userSettings?.iracingId) {
+export const SidebarYourProfile = async ({
+  name,
+  iracingId,
+  avatarUrl,
+}: SidebarYourProfileProps) => {
+  if (!iracingId) {
     return null;
   }
 
@@ -25,9 +26,9 @@ export const SidebarYourProfile = async () => {
       <SidebarSectionLabel>Your Profile</SidebarSectionLabel>
 
       <SidebarProfileCard
-        name={session.user.name}
-        iracingId={userSettings?.iracingId}
-        avatarUrl={session.user.image}
+        name={name}
+        iracingId={iracingId}
+        avatarUrl={avatarUrl}
       />
 
       <SidebarDivider />

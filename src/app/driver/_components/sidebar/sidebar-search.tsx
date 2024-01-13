@@ -1,0 +1,112 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { useCallback, useState } from "react";
+import { SidebarDivider } from "./sidebar-divider";
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { Settings, User } from "lucide-react";
+import { Session } from "next-auth";
+import { signIn } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
+import { getProfileUrl } from "@/server/get-profile-url";
+
+interface SidebarSearchProps {
+  iracingId?: string | null;
+  session?: Session | null;
+}
+
+export const SidebarSearch = ({ iracingId, session }: SidebarSearchProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+
+  const goToProfile = useCallback(
+    async (id?: string) => {
+      const url = id ? await getProfileUrl(id) : pathname;
+      router.push(url);
+      setOpen(false);
+    },
+    [pathname, router]
+  );
+
+  const handleSearch = useCallback(() => {
+    if (!value) return;
+
+    if (isNaN(Number(value))) {
+      router.push(`/search?q=${value}`);
+    } else {
+      goToProfile(value);
+    }
+  }, [goToProfile, router, value]);
+
+  return (
+    <>
+      <Button
+        variant="outline"
+        onClick={() => setOpen(true)}
+        className="relative w-full justify-start rounded-[0.5rem] bg-background/40 text-sm font-normal text-muted-foreground shadow-none"
+      >
+        <span className="inline-flex">Search...</span>
+      </Button>
+
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandInput
+          placeholder="Type to search for profile..."
+          value={value}
+          onValueChange={setValue}
+        />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+
+          {value && (
+            <CommandGroup heading="Search">
+              <CommandItem
+                onSelect={handleSearch}
+              >{`Search for ${value}...`}</CommandItem>
+            </CommandGroup>
+          )}
+
+          <CommandGroup heading="User">
+            {iracingId && (
+              <CommandItem
+                value="Your profile"
+                onSelect={async () => {
+                  goToProfile(iracingId);
+                }}
+              >
+                <User className="mr-2 h-6 w-6" />
+                Your Profile
+              </CommandItem>
+            )}
+            {session && (
+              <CommandItem
+                value="Settings"
+                onSelect={() => router.push("/profile/settings")}
+              >
+                <Settings className="mr-2 h-6 w-6" />
+                Settings
+              </CommandItem>
+            )}
+            {!session && (
+              <CommandItem value="Sign in" onSelect={() => signIn()}>
+                <User className="mr-2 h-6 w-6" />
+                Sign In
+              </CommandItem>
+            )}
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
+
+      <SidebarDivider />
+    </>
+  );
+};

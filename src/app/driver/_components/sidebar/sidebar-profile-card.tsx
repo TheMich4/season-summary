@@ -32,7 +32,7 @@ export const SidebarProfileCard = ({
   }, [name]);
 
   const handleClick = async () => {
-    const url = iracingId ? await getProfileUrl(`${iracingId}`) : pathname;
+    const url = iracingId ? await getProfileUrl(iracingId) : pathname;
     router.push(url);
   };
 

@@ -9,7 +9,6 @@ import {
 import Link from "next/link";
 import { MainNavProps } from "./main-nav";
 import { Menu } from "lucide-react";
-import { ScheduleNavLink } from "./schedule-nav-link";
 import { Suspense } from "react";
 import { authOptions } from "@/config/auth-options";
 import { buttonVariants } from "@/components/ui/button";
@@ -17,10 +16,14 @@ import { cn } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
 import { siteConfig } from "@/config/site";
+import { getProfileUrl } from "@/server/get-profile-url";
 
 export const ProfileNavLink = async () => {
   const session = await getServerSession(authOptions);
   const userSettings = await getUserSettings(session?.user?.id);
+  const url = userSettings?.iracingId
+    ? await getProfileUrl(userSettings.iracingId)
+    : "#";
 
   if (!userSettings?.iracingId) {
     return null;
@@ -28,12 +31,7 @@ export const ProfileNavLink = async () => {
 
   return (
     <DropdownMenuItem>
-      <Link
-        className="w-full p-1"
-        href={
-          userSettings?.iracingId ? `/driver/${userSettings.iracingId}` : ""
-        }
-      >
+      <Link className="w-full p-1" href={url}>
         Your Profile
       </Link>
     </DropdownMenuItem>
