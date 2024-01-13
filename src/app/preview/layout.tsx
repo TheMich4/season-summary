@@ -66,18 +66,28 @@ export default function RootLayout({ children }: RootLayoutProps) {
           "h-screen max-h-screen my-gradient flex flex-col overflow-hidden "
         )}
       >
-        <AuthProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <SiteHeader fullWidth />
-            <div className="flex h-full w-full flex-row overflow-hidden">
-              <Sidebar />
+        <PHProvider>
+          <AuthProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <QueryProvider>
+                <VisitedProvider>
+                  <SiteHeader fullWidth />
+                  <div className="flex h-full w-full flex-row overflow-hidden">
+                    <Sidebar />
 
-              <div className="h-full max-h-full w-full overflow-auto scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground dark:scrollbar-thumb-primary">
-                {children}
-              </div>
-            </div>
-          </ThemeProvider>
-        </AuthProvider>
+                    <div className="flex h-full max-h-full w-full flex-col justify-between overflow-auto scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground dark:scrollbar-thumb-primary">
+                      {children}
+
+                      <Footer />
+                    </div>
+
+                    <Toaster />
+                  </div>
+                </VisitedProvider>
+              </QueryProvider>
+            </ThemeProvider>
+          </AuthProvider>
+        </PHProvider>
       </body>
     </html>
   );
