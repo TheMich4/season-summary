@@ -79,7 +79,7 @@ export const ExtendedProfile = async ({
     <>
       <VisitedManager
         iracingId={iracingId}
-        displayName={data.raceResults[0]?.displayName}
+        displayName={simpleData.memberData?.displayName}
       />
 
       <View
