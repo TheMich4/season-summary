@@ -43,7 +43,7 @@ model Data {
 
   seasonDataId Int @unique
 
-  seasonData SeasonData @relation(fields: [seasonDataId], references: [id], onDelete: Cascade)
+  seasonData SeasonData? @relation(fields: [seasonDataId], references: [id], onDelete: Cascade)
 }
 
 model IracingUser {
