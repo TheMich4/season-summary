@@ -9,5 +9,7 @@ export const DriverSummaryDataList = async ({
 }: DriverSummaryDataListProps) => {
   const seasons = await getDriverSeasons(iracingId);
 
+  console.log({ seasons });
+
   return <div>LIST</div>;
 };
