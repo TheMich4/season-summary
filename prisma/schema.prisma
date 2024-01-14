@@ -91,4 +91,6 @@ model Data {
   lastUpdate   DateTime @default(now())
   json         Json?
   seasonDataId Int      @unique
+  stats        Json?
+  finalIRating Int?
 }
