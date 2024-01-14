@@ -63,9 +63,12 @@ const CategoryStats = ({
   if (!data) return <div>No data for this season</div>;
 
   return (
-    <div className="flex flex-row justify-between gap-2 rounded-md border bg-background/40 p-2">
+    <div className="flex flex-row justify-between gap-2">
       <div className="flex flex-col gap-2">
-        <Badge variant="secondary" className="w-fit rounded-md">
+        <Badge
+          variant="secondary"
+          className="w-fit rounded-md bg-background/40"
+        >
           {categoryToName[category]}
         </Badge>
 
@@ -88,13 +91,13 @@ const CategoryStats = ({
         </div>
       </div>
 
-      <div className="flex items-center">
+      {/* <div className="flex items-center">
         <Link href={"#"} onClick={handleClick}>
-          <Button size="sm" variant="ghost">
+          <Button size="sm" variant="secondary" className="bg-background/40">
             <ChevronRight className="h-4 w-4" />
           </Button>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -109,7 +112,7 @@ export const DataListSeason = ({
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       {Object.entries(data).map(([category, categoryData]) => (
         <CategoryStats
           data={categoryData}

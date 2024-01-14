@@ -18,17 +18,21 @@ export const DriverSummaryDataList = async ({
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <Accordion type="multiple">
+      <Accordion type="multiple" className="flex flex-col gap-1">
         {seasons?.map(({ season, data }) => {
-          const key = `${season?.season}-${season?.year}-${season?.category}`;
+          const key = `${season?.season}-${season?.year}`;
 
           return (
-            <AccordionItem key={key} value={key} className="border-b-0">
-              <AccordionTrigger>
+            <AccordionItem
+              key={key}
+              value={key}
+              className="bg-background/40 rounded-md px-4 py-2 border"
+            >
+              <AccordionTrigger className="py-0">
                 <span>{`${season.year} S${season.season}`}</span>
               </AccordionTrigger>
 
-              <AccordionContent>
+              <AccordionContent className="mt-4">
                 <DataListSeason
                   season={season}
                   data={data}
