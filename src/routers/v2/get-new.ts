@@ -29,7 +29,13 @@ export const getNew = async (request: Request, server: Server) => {
   }
 
   return new Response(
-    JSON.stringify({ data: seasonData?.data?.json, status: "DONE" }),
+    JSON.stringify({
+      data: seasonData.data && {
+        ...(seasonData.data.json as any),
+        stats: seasonData.data.stats,
+      },
+      status: "DONE",
+    }),
     {
       status: 200,
     }

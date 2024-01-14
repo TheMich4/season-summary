@@ -35,10 +35,11 @@ model SeasonData {
 }
 
 model Data {
-  id         Int      @id @default(autoincrement())
-  lastUpdate DateTime @default(now())
-
-  json Json?
+  id           Int      @id @default(autoincrement())
+  lastUpdate   DateTime @default(now())
+  json         Json?
+  stats        Json?
+  finalIRating Int?
 
   seasonDataId Int @unique
 

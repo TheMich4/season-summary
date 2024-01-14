@@ -155,7 +155,18 @@ export const getNewFullDataUtil = async ({
       });
     }
 
-    const json = parseResults(results, iracingId, seasonData.data?.json);
+    const fullDataJson = seasonData.data && {
+      ...(seasonData.data.json as any),
+      stats: seasonData.data.stats,
+      finalIRating: seasonData.data.finalIRating,
+    };
+
+    const { stats, finalIRating, ...json } = parseResults(
+      results,
+      iracingId,
+      fullDataJson
+    );
+
     const lastRace =
       results[results.length - 1]?.raceSummary.subsessionId ??
       seasonData.lastRace;
@@ -172,10 +183,14 @@ export const getNewFullDataUtil = async ({
               id: seasonData.data?.id,
             },
             create: {
+              finalIRating,
               json,
+              stats,
             },
             update: {
+              finalIRating,
               json,
+              stats,
             },
           },
         },

@@ -8,8 +8,8 @@ import { regenerateSeasonData } from "./regenerate-season-data";
 const file = Bun.file("src/maintenance/data/season-data.json");
 const data = await file.json();
 
-const filePath = `src/maintenance/data/season-data.json`;
-const filePath2 = `src/maintenance/data/season-data-${new Date().toISOString()}.json`;
+// const filePath = `src/maintenance/data/season-data.json`;
+// const filePath2 = `src/maintenance/data/season-data-${new Date().toISOString()}.json`;
 
 // console.log(`Writing data to file (${filePath})...`);
 // await Bun.write(filePath, JSON.stringify(data, null, 2));
@@ -17,7 +17,7 @@ const filePath2 = `src/maintenance/data/season-data-${new Date().toISOString()}.
 // console.log(`Writing data to file (${filePath2})...`);
 // await Bun.write(filePath2, JSON.stringify(data, null, 2));
 
-// console.log("Cleaning season data");
-// await prisma.seasonData.deleteMany();
+console.log("Cleaning season data");
+await prisma.seasonData.deleteMany();
 
-await regenerateSeasonData(data);
+// await regenerateSeasonData(data);

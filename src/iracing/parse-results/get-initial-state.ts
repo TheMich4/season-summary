@@ -1,5 +1,6 @@
 export const getInitialState = () => {
   return {
+    carData: {},
     incidents: {
       incidentsPerCorner: {
         count: 0, // Corner count
@@ -32,6 +33,7 @@ export const getInitialState = () => {
       wins: 0,
     },
     finishPositions: {},
+    seriesData: {},
     sof: {
       average: 0,
       highest: null,
@@ -65,6 +67,17 @@ export const getInitialState = () => {
       podiums: 0,
       bestGain: 0,
       worstLoss: 0,
+    },
+    trackData: {},
+    iRatingData: {
+      start: null,
+      end: null,
+      points: [],
+    },
+    safetyRatingData: {
+      start: null,
+      end: null,
+      points: [],
     },
   };
 };
