@@ -63,8 +63,8 @@ const CategoryStats = ({
   if (!data) return <div>No data for this season</div>;
 
   return (
-    <div className="flex flex-row justify-between gap-2">
-      <div className="flex flex-col gap-2">
+    <div className="flex w-full flex-row justify-between gap-2">
+      <div className="flex w-full flex-col gap-2">
         <Badge
           variant="secondary"
           className="w-fit rounded-md bg-background/40"
@@ -72,20 +72,20 @@ const CategoryStats = ({
           {categoryToName[category]}
         </Badge>
 
-        <div className="flex flex-row gap-2">
+        <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 md:flex md:flex-row">
           {stats.map(({ label, value }) => (
             <SimpleStat
               label={label}
               value={value}
               key={label}
-              className="w-28"
+              className="w-full md:w-28"
             />
           ))}
           {data.finalIRating > 0 && (
             <SimpleStat
               label="iRating"
               value={data.finalIRating}
-              className="w-28"
+              className="w-full md:w-28"
             />
           )}
         </div>
