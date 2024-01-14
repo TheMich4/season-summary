@@ -2,8 +2,13 @@
 
 import { SimpleStat } from "@/components/extended/simple-stat";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Category, categoryToName } from "@/config/category";
-import { useMemo } from "react";
+import { getProfileUrl } from "@/server/get-profile-url";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useMemo } from "react";
 
 interface CategoryData {
   finalIRating: number;
@@ -13,14 +18,25 @@ interface CategoryData {
 interface DataListSeasonProps {
   data: Record<Category, CategoryData | undefined>;
   season: { season: number; year: number };
+  iracingId: string;
 }
 
 interface CategoryStatsProps {
   data: CategoryData | undefined;
   category: Category;
+  iracingId: string;
+  season: { season: number; year: number };
 }
 
-const CategoryStats = ({ data, category }: CategoryStatsProps) => {
+const CategoryStats = ({
+  data,
+  category,
+  iracingId,
+  season,
+}: CategoryStatsProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const stats = useMemo(() => {
     if (!data) return [];
 
@@ -32,13 +48,22 @@ const CategoryStats = ({ data, category }: CategoryStatsProps) => {
     ];
   }, [data?.stats]);
 
+  const handleClick = useCallback(async () => {
+    const url = iracingId
+      ? await getProfileUrl(`${iracingId}`, {
+          category,
+          season: season.season,
+          year: season.year,
+        })
+      : pathname;
+    router.push(url);
+  }, [iracingId, router, pathname, category]);
+
   // TODO: Add no data component
   if (!data) return <div>No data for this season</div>;
 
-  console.log({ data, category, x: Object.entries(data) });
-
   return (
-    <div className="flex flex-row gap-2 rounded-md border bg-background/40 p-2 ">
+    <div className="flex flex-row justify-between gap-2 rounded-md border bg-background/40 p-2">
       <div className="flex flex-col gap-2">
         <Badge variant="secondary" className="w-fit rounded-md">
           {categoryToName[category]}
@@ -60,11 +85,23 @@ const CategoryStats = ({ data, category }: CategoryStatsProps) => {
           />
         </div>
       </div>
+
+      <div className="flex items-center">
+        <Link href={"#"} className="ml-2" onClick={handleClick}>
+          <Button size="sm" variant="ghost">
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };
 
-export const DataListSeason = ({ season, data }: DataListSeasonProps) => {
+export const DataListSeason = ({
+  season,
+  data,
+  iracingId,
+}: DataListSeasonProps) => {
   return (
     <div className="flex flex-col gap-2">
       {Object.entries(data).map(([category, categoryData]) => (
@@ -72,6 +109,8 @@ export const DataListSeason = ({ season, data }: DataListSeasonProps) => {
           data={categoryData}
           category={category as Category}
           key={category}
+          season={season}
+          iracingId={iracingId}
         />
       ))}
     </div>

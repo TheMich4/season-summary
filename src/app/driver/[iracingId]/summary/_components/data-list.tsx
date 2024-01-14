@@ -29,7 +29,11 @@ export const DriverSummaryDataList = async ({
               </AccordionTrigger>
 
               <AccordionContent>
-                <DataListSeason season={season} data={data} />
+                <DataListSeason
+                  season={season}
+                  data={data}
+                  iracingId={iracingId}
+                />
               </AccordionContent>
             </AccordionItem>
           );
