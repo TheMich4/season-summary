@@ -104,6 +104,10 @@ export const DataListSeason = ({
   data,
   iracingId,
 }: DataListSeasonProps) => {
+  if (!data || Object.keys(data).length === 0) {
+    return <div>No data for this season.</div>;
+  }
+
   return (
     <div className="flex flex-col gap-2">
       {Object.entries(data).map(([category, categoryData]) => (
