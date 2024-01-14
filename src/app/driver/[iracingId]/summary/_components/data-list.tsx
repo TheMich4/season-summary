@@ -23,7 +23,7 @@ export const DriverSummaryDataList = async ({
           const key = `${season?.season}-${season?.year}-${season?.category}`;
 
           return (
-            <AccordionItem key={key} value={key}>
+            <AccordionItem key={key} value={key} className="border-b-0">
               <AccordionTrigger>
                 <span>{`${season.year} S${season.season}`}</span>
               </AccordionTrigger>

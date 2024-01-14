@@ -81,5 +81,11 @@ export const getDriverSeasons = async (iracingId: string) => {
     };
   }, {} as Record<string, any>);
 
-  return Object.values(grouped);
+  return Object.values(grouped).sort((a, b) => {
+    if (a.season.year > b.season.year) return -1;
+    if (a.season.year < b.season.year) return 1;
+    if (a.season.season > b.season.season) return -1;
+    if (a.season.season < b.season.season) return 1;
+    return 0;
+  });
 };
