@@ -78,16 +78,18 @@ const CategoryStats = ({
               className="w-28"
             />
           ))}
-          <SimpleStat
-            label="iRating"
-            value={data.finalIRating}
-            className="w-28"
-          />
+          {data.finalIRating > 0 && (
+            <SimpleStat
+              label="iRating"
+              value={data.finalIRating}
+              className="w-28"
+            />
+          )}
         </div>
       </div>
 
       <div className="flex items-center">
-        <Link href={"#"} className="ml-2" onClick={handleClick}>
+        <Link href={"#"} onClick={handleClick}>
           <Button size="sm" variant="ghost">
             <ChevronRight className="h-4 w-4" />
           </Button>
