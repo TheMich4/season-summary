@@ -64,7 +64,7 @@ export const getDriverSeasons = async (iracingId: string) => {
   const grouped = parsedData.reduce((acc, curr) => {
     const { season, data } = curr;
     const key = `${season.season}-${season.year}`;
-    const category = categoryIdToKey[season.category];
+    const category = categoryIdToKey[season.category as 1 | 2 | 3 | 4];
 
     if (!category) return acc;
 
