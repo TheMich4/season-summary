@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Delta } from "../common/Delta";
 
 interface SimpleStatProps {
@@ -7,6 +8,7 @@ interface SimpleStatProps {
   invert?: boolean;
   ignorePreviousIfZero?: boolean;
   ignorePreviousIfValueZero?: boolean;
+  className?: string;
 }
 
 export const SimpleStat = ({
@@ -16,9 +18,15 @@ export const SimpleStat = ({
   invert = false,
   ignorePreviousIfZero = false,
   ignorePreviousIfValueZero = false,
+  className = "",
 }: SimpleStatProps) => {
   return (
-    <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
+    <div
+      className={cn(
+        "flex w-full flex-col rounded-md border bg-background/40 p-4 text-start",
+        className
+      )}
+    >
       <div className="pb-2 text-base font-normal tracking-tight">{label}</div>
       <div className="flex flex-row items-baseline gap-1 text-2xl font-bold">
         <p>{value}</p>

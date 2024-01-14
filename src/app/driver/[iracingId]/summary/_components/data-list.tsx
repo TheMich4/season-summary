@@ -16,8 +16,6 @@ export const DriverSummaryDataList = async ({
 }: DriverSummaryDataListProps) => {
   const seasons = await getDriverSeasons(iracingId);
 
-  console.log({ seasons });
-
   return (
     <div className="flex w-full flex-col gap-2">
       <Accordion type="multiple">

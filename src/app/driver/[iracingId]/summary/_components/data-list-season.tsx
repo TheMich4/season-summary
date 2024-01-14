@@ -1,8 +1,9 @@
+"use client";
+
+import { SimpleStat } from "@/components/extended/simple-stat";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Category, categoryToName } from "@/config/category";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { useMemo } from "react";
 
 interface CategoryData {
   finalIRating: number;
@@ -20,21 +21,50 @@ interface CategoryStatsProps {
 }
 
 const CategoryStats = ({ data, category }: CategoryStatsProps) => {
-  // TODO: Add no data component
-  if (!data) return null;
+  const stats = useMemo(() => {
+    if (!data) return [];
 
-  console.log({ data, category });
+    return [
+      { label: "Races", value: data.stats.races },
+      { label: "Wins", value: data.stats.wins },
+      { label: "Top 5", value: data.stats.top5 },
+      { label: "Laps", value: data.stats.laps },
+    ];
+  }, [data?.stats]);
+
+  // TODO: Add no data component
+  if (!data) return <div>No data for this season</div>;
+
+  console.log({ data, category, x: Object.entries(data) });
 
   return (
-    <div className="rounded-md border p-2">
-      <Badge variant="secondary">{categoryToName[category]}</Badge>
+    <div className="flex flex-row gap-2 rounded-md border bg-background/40 p-2 ">
+      <div className="flex flex-col gap-2">
+        <Badge variant="secondary" className="w-fit rounded-md">
+          {categoryToName[category]}
+        </Badge>
+
+        <div className="flex flex-row gap-2">
+          {stats.map(({ label, value }) => (
+            <SimpleStat
+              label={label}
+              value={value}
+              key={label}
+              className="w-28"
+            />
+          ))}
+          <SimpleStat
+            label="iRating"
+            value={data.finalIRating}
+            className="w-28"
+          />
+        </div>
+      </div>
     </div>
   );
 };
 
 export const DataListSeason = ({ season, data }: DataListSeasonProps) => {
-  console.log({ season, data });
-
   return (
     <div className="flex flex-col gap-2">
       {Object.entries(data).map(([category, categoryData]) => (
