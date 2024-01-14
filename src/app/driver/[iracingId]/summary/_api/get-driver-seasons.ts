@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/config/auth-options";
+import { categoryIdToKey } from "@/config/category";
 
 const omit = (obj: Record<string, any> | undefined, keys: string[]) => {
   if (!obj) return obj;
@@ -47,7 +48,7 @@ export const getDriverSeasons = async (iracingId: string) => {
     },
   });
 
-  return seasonData.map((sd) => {
+  const parsedData = seasonData.map((sd) => {
     const season = seasons.find((s) => s.id === sd.seasonId) as Record<
       string,
       any
@@ -55,8 +56,30 @@ export const getDriverSeasons = async (iracingId: string) => {
     const d = data.find((d) => d.seasonDataId === sd.id) as Record<string, any>;
 
     return {
-      season: omit(season, ["id"]),
+      season: omit(season, ["id"]) as Record<string, any>,
       data: omit(d, ["seasonDataId"]),
     };
   });
+
+  const grouped = parsedData.reduce((acc, curr) => {
+    const { season, data } = curr;
+    const key = `${season.season}-${season.year}`;
+    const category = categoryIdToKey[season.category];
+
+    if (!category) return acc;
+
+    return {
+      ...acc,
+      [key]: {
+        ...acc[key],
+        season: omit(season, ["category"]),
+        data: {
+          ...acc[key]?.data,
+          [category]: data,
+        },
+      },
+    };
+  }, {} as Record<string, any>);
+
+  return Object.values(grouped);
 };

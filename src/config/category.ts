@@ -12,6 +12,13 @@ export const categoryToId = {
   dirt_road: 4,
 };
 
+export const categoryIdToKey = {
+  1: "oval",
+  2: "road",
+  3: "dirt_oval",
+  4: "dirt_road",
+};
+
 export const categoryToName = {
   oval: "Oval",
   road: "Road",
