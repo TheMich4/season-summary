@@ -52,6 +52,7 @@
 @layer base {
   * {
     @apply border-border;
+    @apply min-w-0;
   }
 
   *::selection {

@@ -9,18 +9,18 @@ import {
 } from "../ui/dialog";
 
 import { useMemo } from "react";
+import { AssetDataTable } from "./data-table";
 
 interface CarStatsProps {
   racesPerCar: {
     [carName: string]: number;
   };
+  carData: AssetData;
 }
 
 const Data = ({
-  count,
   data,
 }: {
-  count: number;
   data: Array<{
     carName: string;
     numberOfRaces: number;
@@ -44,7 +44,7 @@ const Data = ({
   );
 };
 
-export const CarStats = ({ racesPerCar }: CarStatsProps) => {
+export const CarStats = ({ racesPerCar, carData }: CarStatsProps) => {
   const { count, data, slicedData } = useMemo(() => {
     const data = Object.entries(racesPerCar)
       .map(([carName, numberOfRaces]) => {
@@ -75,13 +75,14 @@ export const CarStats = ({ racesPerCar }: CarStatsProps) => {
             </p>
             different tracks this season.
           </div>
-          <Data count={count} data={slicedData} />
+          <Data data={slicedData} />
         </div>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="lg:max-w-[1000px] xl:max-w-[1200px] 2xl:max-[1500px]">
         <DialogHeader className="flex flex-col gap-4">
           <DialogTitle>Most raced cars</DialogTitle>
-          <Data count={count} data={data} />
+          {/* <Data data={data} /> */}
+          <AssetDataTable data={carData} />
         </DialogHeader>
       </DialogContent>
     </Dialog>

@@ -116,7 +116,7 @@ export const View = ({
               />
             </div>
             <SeriesStats racesPerSeries={data.racesPerSeries} />
-            <CarStats racesPerCar={data.racesPerCar} />
+            <CarStats racesPerCar={data.racesPerCar} carData={data.carData} />
             <TrackStats racesPerTrack={data.racesPerTrack} />
             <div className="grid grid-cols-2 gap-4">
               <QualifyingStats qualiData={data.quali} />
