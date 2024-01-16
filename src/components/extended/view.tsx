@@ -115,9 +115,15 @@ export const View = ({
                 // previous={simpleData.previousSeasonStats.laps}
               />
             </div>
-            <SeriesStats racesPerSeries={data.racesPerSeries} />
+            <SeriesStats
+              racesPerSeries={data.racesPerSeries}
+              seriesData={data.seriesData}
+            />
             <CarStats racesPerCar={data.racesPerCar} carData={data.carData} />
-            <TrackStats racesPerTrack={data.racesPerTrack} />
+            <TrackStats
+              racesPerTrack={data.racesPerTrack}
+              trackData={data.trackData}
+            />
             <div className="grid grid-cols-2 gap-4">
               <QualifyingStats qualiData={data.quali} />
               <RaceStats raceData={data.race} />

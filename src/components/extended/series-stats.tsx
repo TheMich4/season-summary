@@ -3,18 +3,19 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
 
 import { useMemo } from "react";
+import { AssetDataTable } from "./data-table";
 
 interface SeriesStatsProps {
   racesPerSeries: {
     [seriesName: string]: number;
   };
+  seriesData: AssetData;
 }
 
 const Data = ({
@@ -45,7 +46,10 @@ const Data = ({
   );
 };
 
-export const SeriesStats = ({ racesPerSeries }: SeriesStatsProps) => {
+export const SeriesStats = ({
+  racesPerSeries,
+  seriesData,
+}: SeriesStatsProps) => {
   const { count, data, slicedData } = useMemo(() => {
     const data = Object.entries(racesPerSeries)
       .map(([seriesName, numberOfRaces]) => {
@@ -79,10 +83,11 @@ export const SeriesStats = ({ racesPerSeries }: SeriesStatsProps) => {
           <Data count={count} data={slicedData} />
         </div>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="2xl:max-[1500px] lg:max-w-[1000px] xl:max-w-[1200px]">
         <DialogHeader className="flex flex-col gap-4">
           <DialogTitle>Most raced series</DialogTitle>
-          <Data count={count} data={data} />
+          {/* <Data count={count} data={data} /> */}
+          <AssetDataTable data={seriesData} />
         </DialogHeader>
       </DialogContent>
     </Dialog>
