@@ -85,7 +85,7 @@ export const SeriesStats = ({
       </DialogTrigger>
       <DialogContent className="2xl:max-[1500px] lg:max-w-[1000px] xl:max-w-[1200px]">
         <DialogHeader className="flex flex-col gap-4">
-          <DialogTitle>Most raced series</DialogTitle>
+          <DialogTitle>Series stats</DialogTitle>
           {/* <Data count={count} data={data} /> */}
           <AssetDataTable data={seriesData} />
         </DialogHeader>
