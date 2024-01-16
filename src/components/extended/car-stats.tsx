@@ -78,7 +78,7 @@ export const CarStats = ({ racesPerCar, carData }: CarStatsProps) => {
           <Data data={slicedData} />
         </div>
       </DialogTrigger>
-      <DialogContent className="lg:max-w-[1000px] xl:max-w-[1200px] 2xl:max-[1500px]">
+      <DialogContent className="2xl:max-[1500px] lg:max-w-[1000px] xl:max-w-[1200px]">
         <DialogHeader className="flex flex-col gap-4">
           <DialogTitle>Most raced cars</DialogTitle>
           {/* <Data data={data} /> */}

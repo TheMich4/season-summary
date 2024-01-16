@@ -17,21 +17,24 @@ import {
 } from "../ui/table";
 
 interface DataTableProps {
-  data: Asset[];
+  data: AssetData[];
 }
 
 interface AssetDataTableProps {
   data: AssetData;
 }
 
-const columns: ColumnDef<Asset>[] = [
-  { accessorKey: "races", header: "Races" },
+const columns: ColumnDef<AssetData>[] = [
   { accessorKey: "name", header: "Name" },
+  { accessorKey: "races", header: "Races" },
   { accessorKey: "wins", header: "Wins" },
   { accessorKey: "podiums", header: "Podiums" },
   { accessorKey: "best", header: "Best Finish" },
   { accessorKey: "worst", header: "Worst Finish" },
-  { accessorKey: "average", header: "Average Finish" },
+  {
+    accessorFn: ({ average }: AssetData) => average.toFixed(2),
+    header: "Avg. Finish",
+  },
   { accessorKey: "bestGain", header: "Most Gained" },
   { accessorKey: "iRatingDiff", header: "Gained iRating" },
   { accessorKey: "incidents", header: "Incidents" },
