@@ -29,8 +29,8 @@ const columns: ColumnDef<AssetData>[] = [
   { accessorKey: "races", header: "Races" },
   { accessorKey: "wins", header: "Wins" },
   { accessorKey: "podiums", header: "Podiums" },
-  { accessorKey: "best", header: "Best Finish" },
-  { accessorKey: "worst", header: "Worst Finish" },
+  { accessorFn: ({ best }: AssetData) => best + 1, header: "Best Finish" },
+  { accessorFn: ({ worst }: AssetData) => worst + 1, header: "Worst Finish" },
   {
     accessorFn: ({ average }: AssetData) => average.toFixed(2),
     header: "Avg. Finish",
