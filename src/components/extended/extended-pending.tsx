@@ -39,10 +39,12 @@ export const ExtendedPending = ({
   }, [wsStatus]);
 
   const description = useMemo(() => {
-    if (!message || !message?.fetched) return "Requesting data...";
+    if (!message || !message?.count) return "Requesting data...";
 
-    const percentage = Math.ceil((message?.fetched / message?.races) * 100);
-    return `Prepared ${message?.fetched} of ${message?.races} races. ${percentage}% done.`;
+    const { fetched, races } = message.count;
+
+    const percentage = Math.ceil((fetched / races) * 100);
+    return `Prepared ${fetched} of ${races} races. ${percentage}% done.`;
   }, [message]);
 
   return (

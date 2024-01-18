@@ -28,10 +28,10 @@ export const ProfileRefresher = ({
   });
 
   useEffect(() => {
-    if (wsStatus === "DONE" && message?.newRaces > 0) {
+    if (wsStatus === "DONE" && message?.count?.newRaces > 0) {
       window.location.reload();
     }
-  }, [message?.newRaces, wsStatus]);
+  }, [message?.count?.newRaces, wsStatus]);
 
   return null;
 };
