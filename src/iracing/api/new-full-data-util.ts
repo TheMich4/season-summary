@@ -104,9 +104,7 @@ export const getNewFullDataUtil = async ({
       });
 
       sendMessage?.("DONE", {
-        races: 0,
-        newRaces: 0,
-        fetched: 0,
+        count: { races: 0, newRaces: 0, fetched: 0 },
       });
       currentRequests--;
       return;
@@ -117,9 +115,7 @@ export const getNewFullDataUtil = async ({
     );
     const newRaces = raceIndex === -1 ? races : races.slice(raceIndex + 1);
     sendMessage?.("PROGRESS", {
-      races: races.length,
-      newRaces: newRaces.length,
-      fetched: 0,
+      count: { races: races.length, newRaces: newRaces.length, fetched: 0 },
     });
 
     console.log(`Getting ${newRaces.length} new races for`, iracingId);
@@ -149,9 +145,11 @@ export const getNewFullDataUtil = async ({
       }
 
       sendMessage?.("PROGRESS", {
-        races: races.length,
-        newRaces: newRaces.length,
-        fetched: results.length,
+        count: {
+          races: races.length,
+          newRaces: newRaces.length,
+          fetched: results.length,
+        },
       });
     }
 
@@ -199,9 +197,11 @@ export const getNewFullDataUtil = async ({
     });
 
     sendMessage?.("DONE", {
-      races: races.length,
-      newRaces: newRaces.length,
-      fetched: results.length,
+      count: {
+        races: races.length,
+        newRaces: newRaces.length,
+        fetched: results.length,
+      },
     });
     currentRequests--;
   } catch (e) {

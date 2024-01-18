@@ -30,10 +30,10 @@ export const regenerateSeasonData = async (
         categoryId: season.category.toString(),
         sendMessage: (status, message) => {
           status === "PROGRESS" &&
-            (message.fetched % 5 === 0 ||
-              message.fetched === message.newRaces) &&
+            (message.count.fetched % 5 === 0 ||
+              message.count.fetched === message.count.newRaces) &&
             console.log(
-              `      => ${message.fetched} of ${message.newRaces} fetched`
+              `      => ${message.count.fetched} of ${message.count.newRaces} fetched`
             );
         },
       });
