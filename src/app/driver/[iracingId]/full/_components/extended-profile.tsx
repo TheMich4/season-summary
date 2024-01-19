@@ -1,14 +1,14 @@
 import { Category, categoryToId } from "@/config/category";
 
-import { CategoryDropdown } from "@/components/profile/category-dropdown";
-import { ExtendedPending } from "@/components/extended/extended-pending";
-import { ProfileUpdater } from "@/components/extended/profile-updater";
-import { SeasonSwitch } from "@/components/profile/season-switch";
+import { ExtendedPending } from "./extended/extended-pending";
+import { ProfileUpdater } from "./extended/profile-updater";
 import { Suspense } from "react";
-import { View } from "@/components/extended/view";
-import { VisitedManager } from "@/components/profile/visited-manager";
+import { View } from "./extended/view";
 import { env } from "@/env.mjs";
 import { getIracingData } from "@/server/get-iracing-data";
+import { SeasonSwitch } from "../../_components/profile/season-switch";
+import { CategoryDropdown } from "../../_components/profile/category-dropdown";
+import { VisitedManager } from "../../_components/profile/visited-manager";
 
 interface ExtendedProfileProps {
   iracingId: string;

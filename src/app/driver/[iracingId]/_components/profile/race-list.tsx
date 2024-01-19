@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, buttonVariants } from "../ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Category, categoryToName } from "@/config/category";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import {
@@ -8,7 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { useEffect, useMemo, useState } from "react";
 
 import Link from "next/link";

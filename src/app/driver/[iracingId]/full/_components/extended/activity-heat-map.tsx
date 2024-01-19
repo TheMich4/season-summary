@@ -13,7 +13,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../ui/tooltip";
+} from "@/components/ui/tooltip";
 import { TooltipPortal } from "@radix-ui/react-tooltip";
 
 interface ActivityHeatMapProps {

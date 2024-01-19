@@ -2,7 +2,6 @@
 
 import { CarStats } from "./car-stats";
 import { Category } from "@/config/category";
-import { CategoryDropdown } from "../profile/category-dropdown";
 import { FinishPositions } from "./finish-positions";
 import { FullIratingChart } from "./full-irating-chart";
 import { FullSafetyRatingChart } from "./full-safety-rating-chart";
@@ -11,14 +10,15 @@ import { IncidentsGraph } from "./incidents-graph";
 import { MostRacedWeek } from "./most-raced-week";
 import { Points } from "./points";
 import { QualifyingStats } from "./qualifying-stats";
-import { RaceList } from "../profile/race-list";
 import { RaceStats } from "./race-stats";
 import { SOF } from "./sof";
-import { SeasonSwitch } from "../profile/season-switch";
 import { SeriesStats } from "./series-stats";
 import { SimpleStat } from "./simple-stat";
 import { TrackStats } from "./track-stats";
 import { ActivityHeatMap } from "./activity-heat-map";
+import { SeasonSwitch } from "../../../_components/profile/season-switch";
+import { CategoryDropdown } from "../../../_components/profile/category-dropdown";
+import { RaceList } from "../../../_components/profile/race-list";
 
 interface ViewProps {
   category: Category;

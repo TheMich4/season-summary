@@ -1,10 +1,10 @@
 "use client";
 
-import { updateToast, useToast } from "../ui/use-toast";
+import { updateToast, useToast } from "@/components/ui/use-toast";
 import { useEffect, useState } from "react";
 
-import { Button } from "../ui/button";
-import { ToastAction } from "../ui/toast";
+import { Button } from "@/components/ui/button";
+import { ToastAction } from "@/components/ui/toast";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { useRouter } from "next/navigation";
 

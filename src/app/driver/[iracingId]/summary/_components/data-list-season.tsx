@@ -1,6 +1,5 @@
 "use client";
 
-import { SimpleStat } from "@/components/extended/simple-stat";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Category, categoryToName } from "@/config/category";
@@ -9,6 +8,7 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
+import { SimpleStat } from "../../full/_components/extended/simple-stat";
 
 interface CategoryData {
   finalIRating: number;

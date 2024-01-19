@@ -1,7 +1,7 @@
-import { RaceSummary } from "@/components/race/race-summary";
-import { ResultTable } from "@/components/race/result-table/result-table";
 import { getRaceResult } from "@/server/get-race-result";
 import { siteConfig } from "@/config/site";
+import { RaceSummary } from "./race-summary";
+import { ResultTable } from "./result-table/result-table";
 
 interface ResultProps {
   subsessionId: string;

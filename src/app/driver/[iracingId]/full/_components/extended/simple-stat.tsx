@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Delta } from "@/components/delta";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useMemo, type ReactNode } from "react";
 import { Counter } from "@/components/counter";
 

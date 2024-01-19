@@ -3,10 +3,10 @@
 import { Category, categoryToName } from "@/config/category";
 import { useEffect, useMemo } from "react";
 
-import { CategoryDropdown } from "../profile/category-dropdown";
-import { SeasonSwitch } from "../profile/season-switch";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { SimpleStat } from "./simple-stat";
+import { SeasonSwitch } from "../../../_components/profile/season-switch";
+import { CategoryDropdown } from "../../../_components/profile/category-dropdown";
 
 interface Props {
   iracingId: string;

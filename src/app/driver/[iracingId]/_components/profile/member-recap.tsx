@@ -1,8 +1,7 @@
 "use client";
 
 import { recapKeyToInvert, recapKeyToName } from "@/config/recap";
-
-import { Stat } from "@/components/profile/stat";
+import { Stat } from "./stat";
 
 interface MemberRecapProps {
   memberRecap?: Record<string, string | number>;

@@ -3,8 +3,8 @@ import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
 import { ConfigProvider } from "@/components/providers/config-provider";
 import { ExtendedProfile } from "./_components/extended-profile";
-import { ProfileLoader } from "@/components/profile/profile-loader";
 import { Suspense } from "react";
+import { ProfileLoader } from "../_components/profile/profile-loader";
 
 interface DriverPageProps {
   params: {

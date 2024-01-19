@@ -3,7 +3,7 @@
 import { Frown } from "lucide-react";
 import { Stat } from "./stat";
 import { categoryToName } from "@/config/category";
-import { useConfig } from "../providers/config-provider";
+import { useConfig } from "@/components/providers/config-provider";
 // TODO: Type from iracing-api
 // import { type Result } from "iracing-api/lib/types/results";
 import { useMemo } from "react";

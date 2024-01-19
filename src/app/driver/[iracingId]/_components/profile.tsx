@@ -1,18 +1,18 @@
 import { type Category } from "@/config/category";
 import { Frown } from "lucide-react";
-import { VisitedManager } from "@/components/profile/visited-manager";
-import { MemberRecap } from "@/components/profile/member-recap";
-import { IratingChart } from "@/components/profile/irating-chart";
-import { IracingStats } from "@/components/profile/iracing-stats";
-import { RaceList } from "@/components/profile/race-list";
-import { Favorite } from "@/components/profile/favorite";
-import { ProfileHeader } from "@/components/profile/profile-header";
-import { NewStats } from "@/components/profile/new-stats";
-import { FullDataManager } from "@/components/profile/full-data-manager";
 import { env } from "@/env.mjs";
 import { Suspense } from "react";
 import { getIracingData } from "@/server/get-iracing-data";
-import { SeasonSwitch } from "@/components/profile/season-switch";
+import { SeasonSwitch } from "./profile/season-switch";
+import { VisitedManager } from "./profile/visited-manager";
+import { ProfileHeader } from "./profile/profile-header";
+import { MemberRecap } from "./profile/member-recap";
+import { Favorite } from "./profile/favorite";
+import { IratingChart } from "./profile/irating-chart";
+import { IracingStats } from "./profile/iracing-stats";
+import { NewStats } from "./profile/new-stats";
+import { RaceList } from "./profile/race-list";
+import { FullDataManager } from "./profile/full-data-manager";
 
 interface ProfileProps {
   iracingId: string;

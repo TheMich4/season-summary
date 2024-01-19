@@ -6,12 +6,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 
 import { ChevronDown } from "lucide-react";
-import { buttonVariants } from "../ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useConfig } from "../providers/config-provider";
+import { useConfig } from "@/components/providers/config-provider";
 
 export const CategoryDropdown = () => {
   const { category, updateConfig } = useConfig();
