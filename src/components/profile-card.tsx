@@ -31,7 +31,7 @@ export const ProfileCard = ({
     <div className="flex flex-row justify-between rounded-md border bg-background/40 p-2">
       <div className="flex flex-row items-center gap-2">
         <Avatar className="size-8">
-          {/* <AvatarImage src={avatarUrl ?? ""} /> */}
+          <AvatarImage src={avatarUrl ?? ""} />
           <AvatarFallback>
             <User className="size-6 self-center dark:text-primary" />
           </AvatarFallback>
