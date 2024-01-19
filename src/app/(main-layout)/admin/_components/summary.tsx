@@ -1,4 +1,4 @@
-import { SimpleStat } from "@/app/driver/[iracingId]/full/_components/extended/simple-stat";
+import { StatBox } from "@/components/stat-box";
 import { getAdminSummary } from "@/server/get-admin-summary";
 
 const userStatToLabel: Record<string, string> = {
@@ -21,7 +21,7 @@ export const Summary = async () => {
     <div className="flex flex-col gap-2">
       <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6 ">
         {Object.entries(summaryData.userCount).map(([label, value]) => (
-          <SimpleStat
+          <StatBox
             label={userStatToLabel[label] ?? "Unknown"}
             value={value}
             key={label}

@@ -1,14 +1,11 @@
 "use client";
 
+import { StatBox } from "@/components/stat-box";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Category, categoryToName } from "@/config/category";
 import { getProfileUrl } from "@/server/get-profile-url";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
-import { SimpleStat } from "../../full/_components/extended/simple-stat";
 
 interface CategoryData {
   finalIRating: number;
@@ -74,7 +71,7 @@ const CategoryStats = ({
 
         <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 md:flex md:flex-row">
           {stats.map(({ label, value }) => (
-            <SimpleStat
+            <StatBox
               label={label}
               value={value}
               key={label}
@@ -82,7 +79,7 @@ const CategoryStats = ({
             />
           ))}
           {data.finalIRating > 0 && (
-            <SimpleStat
+            <StatBox
               label="iRating"
               value={data.finalIRating}
               className="w-full md:w-28"

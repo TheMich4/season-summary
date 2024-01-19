@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useMemo, type ReactNode } from "react";
 import { Counter } from "@/components/counter";
 
-interface SimpleStatProps {
+interface StatBoxProps {
   label: string;
   value?: string | number | ReactNode;
   previous?: number | null;
@@ -16,7 +16,7 @@ interface SimpleStatProps {
   useCounter?: boolean;
 }
 
-export const SimpleStat = ({
+export const StatBox = ({
   label,
   value,
   previous = undefined,
@@ -26,7 +26,7 @@ export const SimpleStat = ({
   className = "",
   withSkeleton = false,
   useCounter = false,
-}: SimpleStatProps) => {
+}: StatBoxProps) => {
   const parsedValue = useMemo(() => {
     if (value === undefined) {
       if (withSkeleton) return <Skeleton className="h-8 w-16" />;

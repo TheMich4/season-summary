@@ -13,12 +13,12 @@ import { QualifyingStats } from "./qualifying-stats";
 import { RaceStats } from "./race-stats";
 import { SOF } from "./sof";
 import { SeriesStats } from "./series-stats";
-import { SimpleStat } from "./simple-stat";
 import { TrackStats } from "./track-stats";
 import { ActivityHeatMap } from "./activity-heat-map";
 import { SeasonSwitch } from "../../../_components/profile/season-switch";
 import { CategoryDropdown } from "../../../_components/profile/category-dropdown";
 import { RaceList } from "../../../_components/profile/race-list";
+import { StatBox } from "@/components/stat-box";
 
 interface ViewProps {
   category: Category;
@@ -94,22 +94,22 @@ export const View = ({
         <div className="grid lg:col-span-5 lg:grid-cols-2">
           <div className="col-span-2 flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:flex-row">
-              <SimpleStat
+              <StatBox
                 label="Races"
                 value={data.stats.races}
                 // previous={simpleData.previousSeasonStats.starts}
               />
-              <SimpleStat
+              <StatBox
                 label="Wins"
                 value={data.stats.wins}
                 // previous={simpleData.previousSeasonStats.wins}
               />
-              <SimpleStat
+              <StatBox
                 label="Top 5"
                 value={data.stats.top5}
                 // previous={simpleData.previousSeasonStats.top5}
               />
-              <SimpleStat
+              <StatBox
                 label="Laps"
                 value={data.stats.laps}
                 // previous={simpleData.previousSeasonStats.laps}
