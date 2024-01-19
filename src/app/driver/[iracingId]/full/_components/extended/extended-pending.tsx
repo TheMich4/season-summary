@@ -4,9 +4,9 @@ import { Category, categoryToName } from "@/config/category";
 import { useEffect, useMemo } from "react";
 
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
-import { SimpleStat } from "./simple-stat";
 import { SeasonSwitch } from "../../../_components/profile/season-switch";
 import { CategoryDropdown } from "../../../_components/profile/category-dropdown";
+import { StatBox } from "@/components/stat-box";
 
 interface Props {
   iracingId: string;
@@ -28,7 +28,7 @@ interface PendingStatsProps {
 
 const PendingStat = ({ label, value }: { label: string; value?: number }) => {
   return (
-    <SimpleStat
+    <StatBox
       label={label}
       value={value}
       className="w-full md:w-28"

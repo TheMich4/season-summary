@@ -8,7 +8,7 @@ import { authOptions } from "@/config/auth-options";
 import { env } from "@/env.mjs";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
-import { SimpleStat } from "@/app/driver/[iracingId]/full/_components/extended/simple-stat";
+import { StatBox } from "@/components/stat-box";
 
 const NoProfile = () => {
   return (
@@ -38,27 +38,27 @@ const Stats = async ({
 
   return (
     <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6">
-      <SimpleStat
+      <StatBox
         label="Races"
         value={stats.current.starts}
         previous={stats.previous.starts}
       />
-      <SimpleStat
+      <StatBox
         label="Wins"
         value={stats.current.wins}
         previous={stats.previous.wins}
       />
-      <SimpleStat
+      <StatBox
         label="Top 5"
         value={stats.current.top5}
         previous={stats.previous.top5}
       />
-      <SimpleStat
+      <StatBox
         label="Laps"
         value={stats.current.laps}
         previous={stats.previous.laps}
       />
-      <SimpleStat
+      <StatBox
         label="Avg Start"
         value={stats.current.avgStartPosition}
         previous={stats.previous.avgStartPosition}
@@ -66,7 +66,7 @@ const Stats = async ({
         ignorePreviousIfValueZero
         invert
       />
-      <SimpleStat
+      <StatBox
         label="Avg Finish"
         value={stats.current.avgFinishPosition}
         previous={stats.previous.avgFinishPosition}
@@ -74,8 +74,8 @@ const Stats = async ({
         ignorePreviousIfValueZero
         invert
       />
-      {/* <SimpleStat label="iRating" value="0" />
-      <SimpleStat label="SR" value="0" /> */}
+      {/* <StatBox label="iRating" value="0" />
+      <StatBox label="SR" value="0" /> */}
     </div>
   );
 };
