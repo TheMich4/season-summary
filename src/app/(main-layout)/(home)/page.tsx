@@ -1,8 +1,8 @@
 import { Title } from "./_components/title";
-import { VisitedList } from "./(home)/visited-list";
-import { YourProfile } from "./(home)/your-profile";
 import { env } from "@/env.mjs";
-import { HomePageSearch } from "./_components/home-page-search";
+import { Search } from "./_components/search";
+import { YourProfile } from "./_components/your-profile";
+import { VisitedList } from "./_components/visited-list";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
         </p>
       </div>
 
-      <HomePageSearch />
+      <Search />
       <YourProfile />
       <VisitedList apiUrl={env.API_URL} />
     </main>
