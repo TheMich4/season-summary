@@ -78,12 +78,12 @@ export const CarStats = ({ racesPerCar, carData }: CarStatsProps) => {
           <Data data={slicedData} />
         </div>
       </DialogTrigger>
-      <DialogContent className="2xl:max-[1500px] lg:max-w-[1000px] xl:max-w-[1200px]">
+      <DialogContent className="2xl:max-[1500px] h-full max-h-[80%] overflow-hidden lg:max-w-[1000px] xl:max-w-[1200px]">
         <DialogHeader className="flex flex-col gap-4">
           <DialogTitle>Car stats</DialogTitle>
-          {/* <Data data={data} /> */}
-          <AssetDataTable data={carData} />
         </DialogHeader>
+
+        <AssetDataTable data={carData} />
       </DialogContent>
     </Dialog>
   );

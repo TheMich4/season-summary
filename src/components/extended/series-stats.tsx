@@ -83,12 +83,12 @@ export const SeriesStats = ({
           <Data count={count} data={slicedData} />
         </div>
       </DialogTrigger>
-      <DialogContent className="2xl:max-[1500px] lg:max-w-[1000px] xl:max-w-[1200px]">
+      <DialogContent className="2xl:max-[1500px] h-full max-h-[80%] overflow-hidden lg:max-w-[1000px] xl:max-w-[1200px]">
         <DialogHeader className="flex flex-col gap-4">
           <DialogTitle>Series stats</DialogTitle>
-          {/* <Data count={count} data={data} /> */}
-          <AssetDataTable data={seriesData} />
         </DialogHeader>
+
+        <AssetDataTable data={seriesData} />
       </DialogContent>
     </Dialog>
   );
