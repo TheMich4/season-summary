@@ -136,6 +136,17 @@ export const getNewFullDataUtil = async ({
       return result;
     };
 
+    const currentStats = (seasonData.data?.stats ?? {}) as Record<
+      string,
+      number
+    >;
+    let data = {
+      races: currentStats.races ?? 0,
+      wins: currentStats.wins ?? 0,
+      top5: currentStats.top5 ?? 0,
+      laps: currentStats.laps ?? 0,
+    };
+
     // TODO: Temporary try second time
     for (const race of newRaces) {
       const r = await getResult(race.subsessionId);
@@ -144,12 +155,20 @@ export const getNewFullDataUtil = async ({
         await getResult(race.subsessionId);
       }
 
+      data = {
+        races: data.races + 1,
+        wins: data.wins + (race.finishPositionInClass === 0 ? 1 : 0),
+        top5: data.top5 + (race.finishPositionInClass < 5 ? 1 : 0),
+        laps: data.laps + race.lapsComplete,
+      };
+
       sendMessage?.("PROGRESS", {
         count: {
           races: races.length,
           newRaces: newRaces.length,
           fetched: results.length,
         },
+        stats: data,
       });
     }
 
@@ -202,6 +221,7 @@ export const getNewFullDataUtil = async ({
         newRaces: newRaces.length,
         fetched: results.length,
       },
+      stats: data,
     });
     currentRequests--;
   } catch (e) {
