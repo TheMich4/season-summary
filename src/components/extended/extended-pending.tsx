@@ -7,6 +7,7 @@ import { CategoryDropdown } from "../profile/category-dropdown";
 import { SeasonSwitch } from "../profile/season-switch";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { SimpleStat } from "./simple-stat";
+import { Counter } from "../common/counter";
 
 interface Props {
   iracingId: string;
@@ -26,33 +27,29 @@ interface PendingStatsProps {
   };
 }
 
+const PendingStat = ({ label, value }: { label: string; value?: number }) => {
+  const ValueComponent = useMemo(() => {
+    if (value === undefined) return undefined;
+    return <Counter value={value} />;
+  }, [value]);
+
+  return (
+    <SimpleStat
+      label={label}
+      value={ValueComponent}
+      className="w-full md:w-28"
+      withSkeleton
+    />
+  );
+};
+
 const PendingStats = ({ stats }: PendingStatsProps) => {
   return (
     <div className="mt-2 grid w-[240px] grid-cols-2 justify-center gap-2 md:flex md:w-fit md:flex-row">
-      <SimpleStat
-        label="Races"
-        value={stats?.races}
-        className="w-full md:w-28"
-        withSkeleton
-      />
-      <SimpleStat
-        label="Wins"
-        value={stats?.wins}
-        className="w-full md:w-28"
-        withSkeleton
-      />
-      <SimpleStat
-        label="Top 5"
-        value={stats?.top5}
-        className="w-full md:w-28"
-        withSkeleton
-      />
-      <SimpleStat
-        label="Laps"
-        value={stats?.laps}
-        className="w-full md:w-28"
-        withSkeleton
-      />
+      <PendingStat label="Races" value={stats?.races} />
+      <PendingStat label="Wins" value={stats?.wins} />
+      <PendingStat label="Top 5" value={stats?.top5} />
+      <PendingStat label="Laps" value={stats?.laps} />
     </div>
   );
 };

@@ -1,10 +1,11 @@
 import { cn } from "@/lib/utils";
 import { Delta } from "../common/Delta";
 import { Skeleton } from "../ui/skeleton";
+import { type ReactNode } from "react";
 
 interface SimpleStatProps {
   label: string;
-  value?: string | number;
+  value?: string | number | ReactNode;
   previous?: number | null;
   invert?: boolean;
   ignorePreviousIfZero?: boolean;
