@@ -15,7 +15,9 @@ export default function Home() {
       </div>
 
       <Search />
+
       <YourProfile />
+
       <VisitedList apiUrl={env.API_URL} />
     </main>
   );

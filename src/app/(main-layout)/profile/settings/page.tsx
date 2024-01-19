@@ -1,4 +1,4 @@
-import { Settings } from "./settings";
+import { Settings } from "./_components/settings";
 import { UserAvatar } from "./_components/user-avatar";
 import { authOptions } from "@/config/auth-options";
 import { getServerSession } from "next-auth";

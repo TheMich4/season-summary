@@ -1,9 +1,8 @@
 import { type Category } from "@/config/category";
 import { Frown } from "lucide-react";
-import { SeasonSwitch } from "../components/profile/season-switch";
-import { VisitedManager } from "../components/profile/visited-manager";
-import { MemberRecap } from "../components/profile/member-recap";
-import { IratingChart } from "../components/profile/irating-chart";
+import { VisitedManager } from "@/components/profile/visited-manager";
+import { MemberRecap } from "@/components/profile/member-recap";
+import { IratingChart } from "@/components/profile/irating-chart";
 import { IracingStats } from "@/components/profile/iracing-stats";
 import { RaceList } from "@/components/profile/race-list";
 import { Favorite } from "@/components/profile/favorite";
@@ -13,6 +12,7 @@ import { FullDataManager } from "@/components/profile/full-data-manager";
 import { env } from "@/env.mjs";
 import { Suspense } from "react";
 import { getIracingData } from "@/server/get-iracing-data";
+import { SeasonSwitch } from "@/components/profile/season-switch";
 
 interface ProfileProps {
   iracingId: string;

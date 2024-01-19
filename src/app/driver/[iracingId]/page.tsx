@@ -2,7 +2,7 @@ import { Categories, Category } from "@/config/category";
 import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
 import { ConfigProvider } from "@/components/providers/config-provider";
-import { Profile } from "@/displays/profile";
+import { Profile } from "./_components/profile";
 import { ProfileLoader } from "@/components/profile/profile-loader";
 import { Suspense } from "react";
 import { authOptions } from "@/config/auth-options";
