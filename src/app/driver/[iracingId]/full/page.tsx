@@ -2,10 +2,9 @@ import { Categories, Category } from "@/config/category";
 import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
 import { ConfigProvider } from "@/components/providers/config-provider";
-import { ExtendedProfile } from "@/displays/extended-profile";
-import { ProfileLoader } from "@/components/profile/profile-loader";
+import { ExtendedProfile } from "./_components/extended-profile";
 import { Suspense } from "react";
-import { siteConfig } from "@/config/site";
+import { ProfileLoader } from "../_components/profile/profile-loader";
 
 interface DriverPageProps {
   params: {

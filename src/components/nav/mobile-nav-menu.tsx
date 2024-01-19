@@ -74,7 +74,7 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
 
           <DropdownMenuItem>
             <Link href="https://schedule.dyczkowski.dev/">
-              <div className="flex flex-row items-center gap-1 text-primary">
+              <div className="flex flex-row items-center gap-1 dark:text-primary">
                 <span>Schedule</span>
                 <div className="flex h-[12px] items-center justify-center self-center rounded-sm bg-primary px-1 py-0 text-[0.5rem] text-black">
                   alpha

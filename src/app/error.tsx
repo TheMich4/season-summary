@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import posthog from "posthog-js";
 import { useEffect } from "react";
 
 export default function Error({
@@ -13,6 +14,7 @@ export default function Error({
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error);
+    posthog.capture("error", error);
   }, [error]);
 
   return (

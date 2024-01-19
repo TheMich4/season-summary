@@ -1,4 +1,4 @@
-import { Search } from "@/displays/search";
+import { Search } from "./_components/search";
 
 export default function SearchPage() {
   return (

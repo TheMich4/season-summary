@@ -1,4 +1,4 @@
-import { Result } from "@/displays/result";
+import { Result } from "./_components/result";
 import { Suspense } from "react";
 
 interface ResultPageProps {

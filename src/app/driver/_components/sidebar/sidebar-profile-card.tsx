@@ -42,10 +42,10 @@ export const SidebarProfileCard = ({
   return (
     <div className="flex flex-row items-center justify-between gap-2 rounded-md border bg-background/40 p-2">
       <div className="flex flex-row items-center gap-2">
-        <Avatar className="h-[28px] w-[28px]">
+        <Avatar className="size-[28px]">
           <AvatarImage src={avatarUrl ?? ""} />
           <AvatarFallback>
-            <User className="h-5 w-5 self-center dark:text-primary" />
+            <User className="size-5 self-center dark:text-primary" />
           </AvatarFallback>
         </Avatar>
 
@@ -53,7 +53,7 @@ export const SidebarProfileCard = ({
       </div>
       <Link href="#" onClick={handleClick}>
         <Button size="sm" variant="ghost">
-          <ChevronRight className="h-4 w-4 dark:text-primary" />
+          <ChevronRight className="size-4 dark:text-primary" />
         </Button>
       </Link>
     </div>

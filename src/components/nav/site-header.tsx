@@ -40,7 +40,7 @@ export async function SiteHeader({ fullWidth = false }: SiteHeaderProps) {
                     variant: "ghost",
                   })}
                 >
-                  <FaXTwitter className="h-5 w-5" />
+                  <FaXTwitter className="size-5" />
                   <span className="sr-only">Twitter</span>
                 </div>
               </Link>
@@ -56,7 +56,7 @@ export async function SiteHeader({ fullWidth = false }: SiteHeaderProps) {
                     variant: "ghost",
                   })}
                 >
-                  <Icons.gitHub className="h-5 w-5" />
+                  <Icons.gitHub className="size-5" />
                   <span className="sr-only">GitHub</span>
                 </div>
               </Link>

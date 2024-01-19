@@ -1,6 +1,5 @@
 "use client";
 
-import { SimpleStat } from "@/components/extended/simple-stat";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Category, categoryToName } from "@/config/category";
@@ -9,6 +8,7 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
+import { SimpleStat } from "../../full/_components/extended/simple-stat";
 
 interface CategoryData {
   finalIRating: number;
@@ -46,7 +46,7 @@ const CategoryStats = ({
       { label: "Top 5", value: data.stats.top5 },
       { label: "Laps", value: data.stats.laps },
     ];
-  }, [data?.stats]);
+  }, [data]);
 
   const handleClick = useCallback(async () => {
     const url = iracingId
@@ -57,7 +57,7 @@ const CategoryStats = ({
         })
       : pathname;
     router.push(url);
-  }, [iracingId, router, pathname, category]);
+  }, [iracingId, category, season.season, season.year, pathname, router]);
 
   // TODO: Add no data component
   if (!data) return <div>No data for this season</div>;

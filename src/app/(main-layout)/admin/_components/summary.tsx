@@ -1,4 +1,4 @@
-import { SimpleStat } from "@/components/extended/simple-stat";
+import { SimpleStat } from "@/app/driver/[iracingId]/full/_components/extended/simple-stat";
 import { getAdminSummary } from "@/server/get-admin-summary";
 
 const userStatToLabel: Record<string, string> = {

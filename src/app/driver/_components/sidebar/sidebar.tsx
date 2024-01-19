@@ -5,7 +5,7 @@ import { env } from "@/env.mjs";
 import { getUserSettings } from "@/server/get-user-settings";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/config/auth-options";
-import { Search } from "@/components/common/search";
+import { Search } from "@/components/search";
 
 // TODO: Add favorites
 export const Sidebar = async () => {

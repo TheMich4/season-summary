@@ -39,14 +39,14 @@ export const AvatarUploader = () => {
   return (
     <div className="group">
       <Input
-        className="absolute left-0 top-0 h-full w-full cursor-pointer opacity-0"
+        className="absolute left-0 top-0 size-full cursor-pointer opacity-0"
         id="avatar"
         type="file"
         onChange={handleUpload}
         disabled={isUploading}
       />
       <div className="absolute bottom-0 left-0 flex h-8 w-full cursor-pointer justify-center bg-black/80 p-2 opacity-0 group-hover:opacity-100">
-        <Upload className="h-4 w-4 font-bold text-primary" />
+        <Upload className="size-4 font-bold text-primary" />
       </div>
     </div>
   );

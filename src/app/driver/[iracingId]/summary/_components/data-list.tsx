@@ -26,7 +26,7 @@ export const DriverSummaryDataList = async ({
             <AccordionItem
               key={key}
               value={key}
-              className="bg-background/40 rounded-md px-4 py-2 border"
+              className="rounded-md border bg-background/40 px-4 py-2"
             >
               <AccordionTrigger className="py-0">
                 <span>{`${season.year} S${season.season}`}</span>

@@ -2,12 +2,12 @@ import { Categories, Category } from "@/config/category";
 import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
 import { ConfigProvider } from "@/components/providers/config-provider";
-import { Profile } from "@/displays/profile";
-import { ProfileLoader } from "@/components/profile/profile-loader";
+import { Profile } from "./_components/profile";
 import { Suspense } from "react";
 import { authOptions } from "@/config/auth-options";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
+import { ProfileLoader } from "./_components/profile/profile-loader";
 
 interface DriverPageProps {
   params: {

@@ -3,5 +3,5 @@ interface SidebarSectionLabelProps {
 }
 
 export const SidebarSectionLabel = ({ children }: SidebarSectionLabelProps) => {
-  return <div className="text-sm ml-2">{children}:</div>;
+  return <div className="ml-2 text-sm">{children}:</div>;
 };
