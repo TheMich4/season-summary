@@ -26,5 +26,5 @@ export const useDataWebSocket = ({
     if (!lastMessage) return { status: undefined };
 
     return JSON.parse(lastMessage.data);
-  }, [lastMessage]);
+  }, [lastMessage?.timeStamp]);
 };

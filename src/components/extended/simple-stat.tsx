@@ -1,14 +1,16 @@
 import { cn } from "@/lib/utils";
 import { Delta } from "../common/Delta";
+import { Skeleton } from "../ui/skeleton";
 
 interface SimpleStatProps {
   label: string;
-  value: string | number;
+  value?: string | number;
   previous?: number | null;
   invert?: boolean;
   ignorePreviousIfZero?: boolean;
   ignorePreviousIfValueZero?: boolean;
   className?: string;
+  withSkeleton?: boolean;
 }
 
 export const SimpleStat = ({
@@ -19,6 +21,7 @@ export const SimpleStat = ({
   ignorePreviousIfZero = false,
   ignorePreviousIfValueZero = false,
   className = "",
+  withSkeleton = false,
 }: SimpleStatProps) => {
   return (
     <div
@@ -29,7 +32,11 @@ export const SimpleStat = ({
     >
       <div className="pb-2 text-base font-normal tracking-tight">{label}</div>
       <div className="flex flex-row items-baseline gap-1 text-2xl font-bold">
-        <p>{value}</p>
+        <p>
+          {value !== undefined
+            ? value
+            : withSkeleton && <Skeleton className="h-8 w-16" />}
+        </p>
         {previous !== undefined &&
         !(ignorePreviousIfZero && previous === 0) &&
         !(ignorePreviousIfValueZero && value === 0) ? (

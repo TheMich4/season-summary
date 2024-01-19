@@ -6,6 +6,7 @@ import { useEffect, useMemo } from "react";
 import { CategoryDropdown } from "../profile/category-dropdown";
 import { SeasonSwitch } from "../profile/season-switch";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
+import { SimpleStat } from "./simple-stat";
 
 interface Props {
   iracingId: string;
@@ -15,6 +16,46 @@ interface Props {
   status: string;
   wsUrl: string;
 }
+
+interface PendingStatsProps {
+  stats?: {
+    races: number;
+    wins: number;
+    top5: number;
+    laps: number;
+  };
+}
+
+const PendingStats = ({ stats }: PendingStatsProps) => {
+  return (
+    <div className="mt-2 grid w-[240px] grid-cols-2 justify-center gap-2 md:flex md:w-fit md:flex-row">
+      <SimpleStat
+        label="Races"
+        value={stats?.races}
+        className="w-full md:w-28"
+        withSkeleton
+      />
+      <SimpleStat
+        label="Wins"
+        value={stats?.wins}
+        className="w-full md:w-28"
+        withSkeleton
+      />
+      <SimpleStat
+        label="Top 5"
+        value={stats?.top5}
+        className="w-full md:w-28"
+        withSkeleton
+      />
+      <SimpleStat
+        label="Laps"
+        value={stats?.laps}
+        className="w-full md:w-28"
+        withSkeleton
+      />
+    </div>
+  );
+};
 
 export const ExtendedPending = ({
   iracingId,
@@ -67,6 +108,8 @@ export const ExtendedPending = ({
         this season.
       </p>
       <p className="text-muted-foreground">{description}</p>
+
+      <PendingStats stats={message?.stats} />
     </div>
   );
 };
