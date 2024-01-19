@@ -1,4 +1,4 @@
-import { Delta } from "../common/Delta";
+import { Delta } from "@/components/delta";
 import type { ReactNode } from "react";
 
 export const Stat = ({

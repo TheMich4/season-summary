@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
-import { Delta } from "../common/Delta";
+import { Delta } from "@/components/delta";
 import { Skeleton } from "../ui/skeleton";
 import { useMemo, type ReactNode } from "react";
-import { Counter } from "../common/counter";
+import { Counter } from "@/components/counter";
 
 interface SimpleStatProps {
   label: string;

@@ -1,7 +1,7 @@
 import { Category, categoryToId } from "@/config/category";
 
 import { Loader2 } from "lucide-react";
-import { ProfileCard } from "@/components/common/profile-card";
+import { ProfileCard } from "@/components/profile-card";
 import { SimpleStat } from "@/components/extended/simple-stat";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";

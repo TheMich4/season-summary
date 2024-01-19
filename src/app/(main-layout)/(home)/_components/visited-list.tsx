@@ -1,6 +1,6 @@
 "use client";
 
-import { ProfileCard } from "@/components/common/profile-card";
+import { ProfileCard } from "@/components/profile-card";
 import { useVisited } from "@/components/providers/visited-provider";
 import { useVisitedAvatars } from "@/hooks/use-visited-avatars";
 

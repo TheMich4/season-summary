@@ -9,7 +9,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { Delta } from "../common/Delta";
+import { Delta } from "@/components/delta";
 import { useMemo } from "react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 

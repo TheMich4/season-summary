@@ -1,4 +1,4 @@
-import { Delta } from "@/components/common/Delta";
+import { Delta } from "@/components/delta";
 import { Interval } from "./interval";
 import Link from "next/link";
 import { createColumnHelper } from "@tanstack/react-table";
