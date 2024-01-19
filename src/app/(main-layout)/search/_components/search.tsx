@@ -94,7 +94,7 @@ export const Search = () => {
             )}
           />
           <Button type="submit" className="w-full md:w-44" disabled={loading}>
-            {loading && <Loader2 className="mr-1 h-5 w-5 animate-spin" />}
+            {loading && <Loader2 className="mr-1 size-5 animate-spin" />}
             <span>{loading ? "Searching..." : "Search"}</span>
           </Button>
         </form>

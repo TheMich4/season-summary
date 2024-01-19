@@ -72,10 +72,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <QueryProvider>
                 <VisitedProvider>
                   <SiteHeader fullWidth />
-                  <div className="flex h-full w-full flex-row overflow-hidden">
+                  <div className="flex size-full flex-row overflow-hidden">
                     <Sidebar />
 
-                    <div className="flex h-full max-h-full w-full flex-col justify-between overflow-auto scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground dark:scrollbar-thumb-primary">
+                    <div className="flex size-full max-h-full flex-col justify-between overflow-auto scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground dark:scrollbar-thumb-primary">
                       {children}
 
                       <Footer />

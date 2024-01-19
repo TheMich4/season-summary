@@ -28,7 +28,7 @@ export const CategoryDropdown = () => {
           "gap-1 dark:bg-background/40"
         )}
       >
-        <ChevronDown className="h-5 w-5" />
+        <ChevronDown className="size-5" />
         {category && categoryToName[category]}
       </DropdownMenuTrigger>
 

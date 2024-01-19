@@ -74,7 +74,7 @@ export const FullSafetyRatingChart = ({
       <p className="mb-2 text-xs text-muted-foreground">
         How your safety rating developed over the season.
       </p>
-      <div className="flex h-full w-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">
+      <div className="flex size-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">
         <ResponsiveContainer height={150}>
           <LineChart height={150} data={data}>
             <Line

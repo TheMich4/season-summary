@@ -132,7 +132,7 @@ export const YourProfile = async () => {
         <Suspense
           fallback={
             <div className="flex flex-row gap-2">
-              <Loader2 className="h-6 w-6 animate-spin self-center text-xs dark:text-primary" />
+              <Loader2 className="size-6 animate-spin self-center text-xs dark:text-primary" />
               Loading...
             </div>
           }

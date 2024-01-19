@@ -104,7 +104,7 @@ export const Settings = ({
                         "gap-1 dark:bg-background/40 h-10 mt-2"
                       )}
                     >
-                      <ChevronDown className="h-5 w-5" />
+                      <ChevronDown className="size-5" />
                       {categoryToName[field.value as Category]}
                     </DropdownMenuTrigger>
 

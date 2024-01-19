@@ -25,10 +25,10 @@ export const AuthButton = ({ isAdmin }: AuthButtonProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar className="h-8 w-8 cursor-pointer">
+        <Avatar className="size-8 cursor-pointer">
           <AvatarImage src={sessionData?.user?.image ?? ""} />
           <AvatarFallback>
-            {sessionData?.user?.name?.charAt(0) ?? <User className="h-5 w-5" />}
+            {sessionData?.user?.name?.charAt(0) ?? <User className="size-5" />}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

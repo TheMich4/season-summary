@@ -50,7 +50,7 @@ export const SeasonSwitch = ({
           variant="outline"
           disabled={year === 2010 && season === 1}
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="size-4" />
         </Button>
       </Link>
 
@@ -69,7 +69,7 @@ export const SeasonSwitch = ({
             currentSeason.season === season && currentSeason.year === year
           }
         >
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="size-4" />
         </Button>
       </Link>
     </div>

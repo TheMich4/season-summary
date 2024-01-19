@@ -99,7 +99,7 @@ export const IracingStats = ({
         <span>{`You don't have any ${
           category && categoryToName[category]
         } data for this season`}</span>
-        <Frown className="h-5 w-5 self-center" />
+        <Frown className="size-5 self-center" />
       </span>
     );
 

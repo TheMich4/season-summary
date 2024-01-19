@@ -19,9 +19,9 @@ export function MainNav({ items }: MainNavProps) {
     <div className="flex justify-between gap-2 md:gap-10">
       <MobileNavMenu items={items} />
       <Link href="/" className="flex items-center space-x-2 dark:text-primary">
-        <Icons.home className="h-6 w-6 " />
+        <Icons.home className="size-6 " />
         {/* eslint-disable-next-line tailwindcss/no-custom-classname */}
-        <span className="text-nowrap inline-block font-bold">
+        <span className="inline-block text-nowrap font-bold">
           {siteConfig.name}
         </span>
       </Link>

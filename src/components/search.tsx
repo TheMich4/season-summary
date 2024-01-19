@@ -112,7 +112,7 @@ export const Search = ({ iracingId, session, placeholder }: SearchProps) => {
                 value="Your profile"
                 onSelect={() => runCommand(() => goToProfile(iracingId))}
               >
-                <User className="mr-2 h-6 w-6" />
+                <User className="mr-2 size-6" />
                 Your Profile
               </CommandItem>
             )}
@@ -123,7 +123,7 @@ export const Search = ({ iracingId, session, placeholder }: SearchProps) => {
                   runCommand(() => router.push("/profile/settings"))
                 }
               >
-                <Settings className="mr-2 h-6 w-6" />
+                <Settings className="mr-2 size-6" />
                 Settings
               </CommandItem>
             )}
@@ -132,7 +132,7 @@ export const Search = ({ iracingId, session, placeholder }: SearchProps) => {
                 value="Sign in"
                 onSelect={() => runCommand(() => signIn())}
               >
-                <User className="mr-2 h-6 w-6" />
+                <User className="mr-2 size-6" />
                 Sign In
               </CommandItem>
             )}

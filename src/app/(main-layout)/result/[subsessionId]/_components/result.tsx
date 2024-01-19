@@ -16,7 +16,7 @@ export const Result = async ({ subsessionId }: ResultProps) => {
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <div className="text-balance flex flex-col items-center rounded-md border bg-background/40 p-2 text-center text-sm">
+      <div className="flex flex-col items-center text-balance rounded-md border bg-background/40 p-2 text-center text-sm">
         <p className="mb-1 font-bold text-red-500">
           This page is a work in progress!
         </p>

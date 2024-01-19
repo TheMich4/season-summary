@@ -30,10 +30,10 @@ export const ProfileCard = ({
   return (
     <div className="flex flex-row justify-between rounded-md border bg-background/40 p-2">
       <div className="flex flex-row items-center gap-2">
-        <Avatar className="h-8 w-8">
+        <Avatar className="size-8">
           <AvatarImage src={avatarUrl ?? ""} />
           <AvatarFallback>
-            <User className="h-6 w-6 self-center dark:text-primary" />
+            <User className="size-6 self-center dark:text-primary" />
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col">
@@ -56,7 +56,7 @@ export const ProfileCard = ({
       <div className="flex items-center">
         <Link href={"#"} className="ml-2" onClick={handleClick}>
           <Button size="sm" variant="ghost">
-            <ChevronRight className="h-4 w-4 dark:text-primary" />
+            <ChevronRight className="size-4 dark:text-primary" />
           </Button>
         </Link>
       </div>

@@ -53,7 +53,7 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
         prefetch={false}
       >
         <Button size="sm" variant="ghost">
-          <ChevronRight className="h-4 w-4 dark:text-primary" />
+          <ChevronRight className="size-4 dark:text-primary" />
         </Button>
       </Link>
     </div>
@@ -106,7 +106,7 @@ export const RaceList = ({
             disabled={page === 0}
             onClick={() => setPage((prev) => prev - 1)}
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="size-4" />
           </Button>
           <Button
             size="xs"
@@ -114,7 +114,7 @@ export const RaceList = ({
             disabled={page === numberOfPages - 1}
             onClick={() => setPage((prev) => prev + 1)}
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="size-4" />
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger
@@ -123,7 +123,7 @@ export const RaceList = ({
                 "gap-1"
               )}
             >
-              <ChevronDown className="h-4 w-4" />
+              <ChevronDown className="size-4" />
               {racesPerPage} per page
             </DropdownMenuTrigger>
 

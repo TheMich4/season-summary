@@ -46,7 +46,7 @@ const CategoryStats = ({
       { label: "Top 5", value: data.stats.top5 },
       { label: "Laps", value: data.stats.laps },
     ];
-  }, [data?.stats]);
+  }, [data]);
 
   const handleClick = useCallback(async () => {
     const url = iracingId
@@ -57,7 +57,7 @@ const CategoryStats = ({
         })
       : pathname;
     router.push(url);
-  }, [iracingId, router, pathname, category]);
+  }, [iracingId, category, season.season, season.year, pathname, router]);
 
   // TODO: Add no data component
   if (!data) return <div>No data for this season</div>;
