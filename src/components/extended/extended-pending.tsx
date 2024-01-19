@@ -7,7 +7,6 @@ import { CategoryDropdown } from "../profile/category-dropdown";
 import { SeasonSwitch } from "../profile/season-switch";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { SimpleStat } from "./simple-stat";
-import { Counter } from "../common/counter";
 
 interface Props {
   iracingId: string;
@@ -28,17 +27,13 @@ interface PendingStatsProps {
 }
 
 const PendingStat = ({ label, value }: { label: string; value?: number }) => {
-  const ValueComponent = useMemo(() => {
-    if (value === undefined) return undefined;
-    return <Counter value={value} />;
-  }, [value]);
-
   return (
     <SimpleStat
       label={label}
-      value={ValueComponent}
+      value={value}
       className="w-full md:w-28"
       withSkeleton
+      useCounter
     />
   );
 };

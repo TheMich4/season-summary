@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Delta } from "../common/Delta";
 import { Skeleton } from "../ui/skeleton";
-import { type ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
+import { Counter } from "../common/counter";
 
 interface SimpleStatProps {
   label: string;
@@ -12,6 +13,7 @@ interface SimpleStatProps {
   ignorePreviousIfValueZero?: boolean;
   className?: string;
   withSkeleton?: boolean;
+  useCounter?: boolean;
 }
 
 export const SimpleStat = ({
@@ -23,7 +25,21 @@ export const SimpleStat = ({
   ignorePreviousIfValueZero = false,
   className = "",
   withSkeleton = false,
+  useCounter = false,
 }: SimpleStatProps) => {
+  const parsedValue = useMemo(() => {
+    if (value === undefined) {
+      if (withSkeleton) return <Skeleton className="h-8 w-16" />;
+      return null;
+    }
+
+    if (useCounter) {
+      return <Counter value={value as number} />;
+    }
+
+    return value;
+  }, [value, useCounter, withSkeleton]);
+
   return (
     <div
       className={cn(
@@ -33,11 +49,8 @@ export const SimpleStat = ({
     >
       <div className="pb-2 text-base font-normal tracking-tight">{label}</div>
       <div className="flex flex-row items-baseline gap-1 text-2xl font-bold">
-        <p>
-          {value !== undefined
-            ? value
-            : withSkeleton && <Skeleton className="h-8 w-16" />}
-        </p>
+        <p>{parsedValue}</p>
+
         {previous !== undefined &&
         !(ignorePreviousIfZero && previous === 0) &&
         !(ignorePreviousIfValueZero && value === 0) ? (
