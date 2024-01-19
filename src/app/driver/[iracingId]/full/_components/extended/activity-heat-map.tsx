@@ -99,7 +99,7 @@ export const ActivityHeatMap = ({
       };
     }, getInitialRacesPerDate(seasonDateRange));
 
-    const max = Math.max(...(Object.values(racesPerDate) as number[]));
+    const max = Math.max(...(Object.values(racesPerDate ?? {}) as number[]));
 
     return Object.entries(racesPerDate ?? {})
       .map(([date, count]) => ({
