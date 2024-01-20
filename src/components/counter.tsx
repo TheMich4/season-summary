@@ -8,6 +8,7 @@ interface CounterProps {
   direction?: "up" | "down";
   formatValue?: boolean;
   precision?: number;
+  disabled?: boolean;
 }
 
 export const Counter = ({
@@ -15,6 +16,7 @@ export const Counter = ({
   direction = "up",
   formatValue,
   precision = 0,
+  disabled = false,
 }: CounterProps) => {
   const ref = useRef<HTMLSpanElement>(null);
   const motionValue = useMotionValue(direction === "down" ? value : 0);
@@ -41,6 +43,10 @@ export const Counter = ({
       }),
     [springValue, formatValue, precision]
   );
+
+  if (disabled) {
+    return <span>{value.toFixed(precision)}</span>;
+  }
 
   return <span ref={ref} />;
 };

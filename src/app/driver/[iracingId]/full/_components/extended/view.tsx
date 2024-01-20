@@ -95,9 +95,9 @@ export const View = ({
               <IncidentsGraph dataPoints={data.incidents.incidentPoints} />
             </div>
             <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col">
-              <Incidents incidentData={data.incidents} />
-              <SOF sofData={data.sof} />
-              <Points pointsData={data.points} />
+              <Incidents incidentData={data.incidents} useCounter={!isDone} />
+              <SOF sofData={data.sof} useCounter={!isDone} />
+              <Points pointsData={data.points} useCounter={!isDone} />
             </div>
           </div>
         </div>

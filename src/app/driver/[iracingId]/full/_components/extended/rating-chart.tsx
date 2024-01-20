@@ -19,6 +19,7 @@ interface RatingChartProps {
   description: string;
   label: string;
   tooltipLabel: string;
+  useCounter?: boolean;
 }
 interface RatingChartTooltipProps {
   active: boolean;
@@ -48,6 +49,7 @@ export const RatingChart = ({
   description,
   label,
   tooltipLabel,
+  useCounter = false,
 }: RatingChartProps) => {
   const theme = useTailwindTheme();
 
@@ -75,6 +77,7 @@ export const RatingChart = ({
         <Counter
           value={dataPoints[dataPoints.length - 1]}
           precision={deltaPrecision}
+          disabled={!useCounter}
         />
         <p className="text-sm">
           <Delta
