@@ -20,6 +20,7 @@ import { CategoryDropdown } from "../../../_components/profile/category-dropdown
 import { RaceList } from "../../../_components/profile/race-list";
 import { StatBox } from "@/components/stat-box";
 import { RatingChart } from "./rating-chart";
+import { AssetStats } from "./asset-stats";
 
 interface ViewProps {
   category: Category;
@@ -111,14 +112,16 @@ export const View = ({
               <StatBox label="Top 5" value={data.stats.top5} />
               <StatBox label="Laps" value={data.stats.laps} />
             </div>
-            <SeriesStats
-              racesPerSeries={data.racesPerSeries}
-              seriesData={data.seriesData}
+            <AssetStats
+              name="series"
+              assetData={data.seriesData}
+              preposition="in"
             />
-            <CarStats racesPerCar={data.racesPerCar} carData={data.carData} />
-            <TrackStats
-              racesPerTrack={data.racesPerTrack}
-              trackData={data.trackData}
+            <AssetStats name="cars" assetData={data.carData} preposition="in" />
+            <AssetStats
+              name="tracks"
+              assetData={data.trackData}
+              preposition="at"
             />
             <div className="grid grid-cols-2 gap-4">
               <QualifyingStats qualiData={data.quali} />
