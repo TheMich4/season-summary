@@ -19,6 +19,7 @@ import { SeasonSwitch } from "../../../_components/profile/season-switch";
 import { CategoryDropdown } from "../../../_components/profile/category-dropdown";
 import { RaceList } from "../../../_components/profile/race-list";
 import { StatBox } from "@/components/stat-box";
+import { RatingChart } from "./rating-chart";
 
 interface ViewProps {
   category: Category;
@@ -68,8 +69,19 @@ export const View = ({
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <FullIratingChart dataPoints={data.iratingPoints} />
-        <FullSafetyRatingChart dataPoints={data.safetyRatingPoints} />
+        <RatingChart
+          dataPoints={data.iratingPoints}
+          label="iRating"
+          description="How your iRating developed over the season."
+          tooltipLabel="IRATING"
+        />
+        <RatingChart
+          dataPoints={data.safetyRatingPoints}
+          label="Safety Rating"
+          description="How your safety rating developed over the season."
+          deltaPrecision={2}
+          tooltipLabel="SR"
+        />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-10">
         <div className="lg:col-span-5">
