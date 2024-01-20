@@ -37,18 +37,18 @@ export const ExtendedProfile = async ({
     await fetch(URL, { cache: "no-cache" });
   }
 
-  if (status === "NOT_FOUND" || status === "PENDING") {
-    return (
-      <ExtendedPending
-        iracingId={iracingId}
-        season={season}
-        year={year}
-        category={category}
-        status={status}
-        wsUrl={env.WS_URL}
-      />
-    );
-  }
+  // if (status === "NOT_FOUND" || status === "PENDING") {
+  return (
+    <ExtendedPending
+      iracingId={iracingId}
+      season={season}
+      year={year}
+      category={category}
+      status={status}
+      wsUrl={env.WS_URL}
+    />
+  );
+  // }
 
   if (!data || data?.length === 0) {
     return (
