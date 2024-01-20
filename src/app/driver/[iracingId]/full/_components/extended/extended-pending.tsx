@@ -30,7 +30,7 @@ const PendingStat = ({ label, value }: { label: string; value?: number }) => {
   return (
     <StatBox
       label={label}
-      value={value}
+      value={value ?? 0}
       className="w-full md:w-28"
       withSkeleton
       useCounter

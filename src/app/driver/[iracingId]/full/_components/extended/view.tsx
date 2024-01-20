@@ -1,10 +1,7 @@
 "use client";
 
-import { CarStats } from "./car-stats";
 import { Category } from "@/config/category";
 import { FinishPositions } from "./finish-positions";
-import { FullIratingChart } from "./full-irating-chart";
-import { FullSafetyRatingChart } from "./full-safety-rating-chart";
 import { Incidents } from "./incidents";
 import { IncidentsGraph } from "./incidents-graph";
 import { MostRacedWeek } from "./most-raced-week";
@@ -12,8 +9,6 @@ import { Points } from "./points";
 import { QualifyingStats } from "./qualifying-stats";
 import { RaceStats } from "./race-stats";
 import { SOF } from "./sof";
-import { SeriesStats } from "./series-stats";
-import { TrackStats } from "./track-stats";
 import { ActivityHeatMap } from "./activity-heat-map";
 import { SeasonSwitch } from "../../../_components/profile/season-switch";
 import { CategoryDropdown } from "../../../_components/profile/category-dropdown";
