@@ -16,6 +16,7 @@ import { RaceList } from "../../../_components/profile/race-list";
 import { StatBox } from "@/components/stat-box";
 import { RatingChart } from "./rating-chart";
 import { AssetStats } from "./asset-stats";
+import { Loader2 } from "lucide-react";
 
 interface ViewProps {
   category: Category;
@@ -24,6 +25,7 @@ interface ViewProps {
   season: string;
   simpleData: any;
   year: string;
+  isDone?: boolean;
 }
 
 export const View = ({
@@ -33,9 +35,10 @@ export const View = ({
   season,
   year,
   category,
+  isDone = true,
 }: ViewProps) => {
   if (!data) {
-    return null;
+    return <Loader2 className="size-8 animate-spin dark:text-primary" />;
   }
 
   return (
@@ -70,6 +73,7 @@ export const View = ({
           label="iRating"
           description="How your iRating developed over the season."
           tooltipLabel="IRATING"
+          useCounter={!isDone}
         />
         <RatingChart
           dataPoints={data.safetyRatingPoints}
@@ -77,6 +81,7 @@ export const View = ({
           description="How your safety rating developed over the season."
           deltaPrecision={2}
           tooltipLabel="SR"
+          useCounter={!isDone}
         />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-10">
@@ -93,19 +98,35 @@ export const View = ({
               <IncidentsGraph dataPoints={data.incidents.incidentPoints} />
             </div>
             <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col">
-              <Incidents incidentData={data.incidents} />
-              <SOF sofData={data.sof} />
-              <Points pointsData={data.points} />
+              <Incidents incidentData={data.incidents} useCounter={!isDone} />
+              <SOF sofData={data.sof} useCounter={!isDone} />
+              <Points pointsData={data.points} useCounter={!isDone} />
             </div>
           </div>
         </div>
         <div className="grid lg:col-span-5 lg:grid-cols-2">
           <div className="col-span-2 flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:flex-row">
-              <StatBox label="Races" value={data.stats.races} />
-              <StatBox label="Wins" value={data.stats.wins} />
-              <StatBox label="Top 5" value={data.stats.top5} />
-              <StatBox label="Laps" value={data.stats.laps} />
+              <StatBox
+                label="Races"
+                value={data.stats.races}
+                useCounter={!isDone}
+              />
+              <StatBox
+                label="Wins"
+                value={data.stats.wins}
+                useCounter={!isDone}
+              />
+              <StatBox
+                label="Top 5"
+                value={data.stats.top5}
+                useCounter={!isDone}
+              />
+              <StatBox
+                label="Laps"
+                value={data.stats.laps}
+                useCounter={!isDone}
+              />
             </div>
             <AssetStats
               name="series"

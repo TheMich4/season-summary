@@ -21,7 +21,7 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
   const finishPosition = result.finishPositionInClass + 1;
 
   return (
-    <div className="flex flex-row justify-between rounded-md border bg-background/40 p-2">
+    <div className="flex flex-row justify-between rounded-md border bg-background/40 p-2 text-start">
       <div className="flex flex-row gap-2">
         <div
           className={cn(

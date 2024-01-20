@@ -1,36 +1,53 @@
+import { useMemo } from "react";
+import { Counter } from "./counter";
+import { cn } from "@/lib/utils";
+
 export const Delta = ({
   value,
   previous,
   invert = false,
-  parseResult = (result: number) => `${result}`,
+  precision = 0,
+  useCounter = false,
 }: {
   value: number;
   previous: number;
   invert?: boolean;
-  parseResult?: (result: number) => string;
+  precision?: number;
+  useCounter?: boolean;
 }) => {
-  const expectedHigh = invert ? previous : value;
-  const expectedLow = invert ? value : previous;
+  const { className, icon, counterValue } = useMemo(() => {
+    const expectedHigh = invert ? previous : value;
+    const expectedLow = invert ? value : previous;
 
-  if (expectedHigh > expectedLow) {
-    return (
-      <p className="flex flex-row text-green-500">
-        <p>↑</p>
-        {parseResult(expectedHigh - expectedLow)}
-      </p>
-    );
-  } else if (expectedHigh < expectedLow) {
-    return (
-      <p className="flex flex-row text-red-500">
-        <p>↓</p>
-        {parseResult(expectedLow - expectedHigh)}
-      </p>
-    );
-  }
+    if (expectedHigh > expectedLow) {
+      return {
+        className: "flex flex-row text-green-500",
+        icon: "↑",
+        counterValue: expectedHigh - expectedLow,
+      };
+    } else if (expectedHigh < expectedLow) {
+      return {
+        className: "flex flex-row text-red-500",
+        icon: "↓",
+        counterValue: expectedLow - expectedHigh,
+      };
+    }
+
+    return {
+      className: "text-gray-500",
+      icon: "=",
+      counterValue: 0,
+    };
+  }, [invert, previous, value]);
 
   return (
-    <p className="text-gray-500">
-      <p>=0</p>
+    <p className={cn("inline-block", className)}>
+      <p>{icon}</p>
+      <Counter
+        value={counterValue}
+        precision={precision}
+        disabled={!useCounter}
+      />
     </p>
   );
 };

@@ -131,7 +131,7 @@ export const ActivityHeatMap = ({
 
   return (
     <div className="flex w-full flex-col rounded-md border bg-background/40 p-4">
-      <p className="pb-2 text-base font-normal tracking-tight">Activity</p>
+      <p className="pb-2 text-start font-normal tracking-tight">Activity</p>
       <ActivityCalendar
         blockSize={14}
         colorScheme={resolvedTheme as "light" | "dark"}
