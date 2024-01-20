@@ -1,11 +1,12 @@
 "use client";
 
 import { Category, categoryToName } from "@/config/category";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { ExtendedProfileNoData } from "./extended-profile-no-data";
 import { View } from "./extended/view";
+import { updateToast, useToast } from "@/components/ui/use-toast";
 
 interface Props {
   iracingId: string;
@@ -24,6 +25,9 @@ export const ExtendedProfileManager = ({
   wsUrl,
   simpleData,
 }: Props) => {
+  const { toast } = useToast();
+  const [toastId, setToastId] = useState<string | undefined>(undefined);
+
   const { status: wsStatus, message } = useDataWebSocket({
     iracingId: parseInt(iracingId, 10),
     year: parseInt(year, 10),
@@ -36,12 +40,34 @@ export const ExtendedProfileManager = ({
     if (!message || !message?.count) return "Requesting data...";
 
     return undefined;
-
-    const { fetched, races } = message.count;
-
-    const percentage = Math.ceil((fetched / races) * 100);
-    return `Prepared ${fetched} of ${races} races. ${percentage}% done.`;
   }, [message]);
+
+  useEffect(() => {
+    console.log({ wsStatus, message });
+    if (wsStatus === "PROGRESS") {
+      const oldRaces = message?.count.races - message?.count.newRaces;
+      const fetchedRaces = oldRaces + message?.count.fetched;
+      const percentage = Math.ceil((fetchedRaces / message?.count.races) * 100);
+      const description = `Prepared ${fetchedRaces} of ${message?.count.races} races. ${percentage}% done.`;
+
+      if (toastId) {
+        updateToast({ id: toastId, description });
+      } else {
+        const { id } = toast({
+          duration: Infinity,
+          title: "Your full season data is being prepared!",
+          description,
+        });
+        setToastId(id);
+      }
+    } else if (wsStatus === "DONE" && toastId) {
+      updateToast({
+        id: toastId,
+        title: "Full data is now ready!",
+        description: "",
+      });
+    }
+  }, [message, toast, toastId, wsStatus]);
 
   if (wsStatus === "DONE" && !message?.data) {
     return (
