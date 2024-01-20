@@ -5,7 +5,7 @@ export const Incidents = ({
 }) => {
   return (
     <div className="flex flex-col gap-1 rounded-md border bg-background/40 p-4">
-      <p className="pb-2 text-base font-normal tracking-tight">Incidents</p>
+      <p className="pb-2 text-start font-normal tracking-tight">Incidents</p>
       <div className="flex flex-row items-baseline gap-1">
         <p className="text-2xl font-bold">
           {incidentData.incidentsPerRace.total}

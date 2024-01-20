@@ -10,7 +10,7 @@ interface PointsProps {
 export const Points = ({ pointsData }: PointsProps) => {
   return (
     <div className="flex flex-col gap-1 rounded-md border bg-background/40 p-4">
-      <p className="pb-2 text-base font-normal tracking-tight">
+      <p className="pb-2 text-start font-normal tracking-tight">
         Championship Points
       </p>
       <div className="flex flex-row items-baseline gap-1">
