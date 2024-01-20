@@ -4,24 +4,25 @@ import { Category, categoryToName } from "@/config/category";
 import { useMemo } from "react";
 
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
-import { View } from "./view";
+import { ExtendedProfileNoData } from "./extended-profile-no-data";
+import { View } from "./extended/view";
 
 interface Props {
   iracingId: string;
   season: string;
   year: string;
   category: Category;
-  status: string;
   wsUrl: string;
+  simpleData: any;
 }
 
-export const ExtendedPending = ({
+export const ExtendedProfileManager = ({
   iracingId,
   season,
   year,
   category,
-  status,
   wsUrl,
+  simpleData,
 }: Props) => {
   const { status: wsStatus, message } = useDataWebSocket({
     iracingId: parseInt(iracingId, 10),
@@ -31,14 +32,10 @@ export const ExtendedPending = ({
     wsUrl,
   });
 
-  // useEffect(() => {
-  //   if (wsStatus === "DONE") {
-  //     window.location.reload();
-  //   }
-  // }, [wsStatus]);
-
   const description = useMemo(() => {
     if (!message || !message?.count) return "Requesting data...";
+
+    return undefined;
 
     const { fetched, races } = message.count;
 
@@ -46,13 +43,30 @@ export const ExtendedPending = ({
     return `Prepared ${fetched} of ${races} races. ${percentage}% done.`;
   }, [message]);
 
+  console.log("ExtendedProfileManager", { wsStatus, message, description });
+
+  if (wsStatus === "DONE" && !message?.data) {
+    return (
+      <ExtendedProfileNoData
+        iracingId={iracingId}
+        season={season}
+        year={year}
+        category={category}
+      />
+    );
+  }
+
   return (
     <div className="flex w-full flex-col items-center justify-center gap-2 text-center">
-      <p className="font-semibold">
-        We are preparing your {categoryToName[category].toLowerCase()} data for
-        this season.
-      </p>
-      <p className="text-muted-foreground">{description}</p>
+      {description && (
+        <>
+          <p className="font-semibold">
+            We are preparing your {categoryToName[category].toLowerCase()} data
+            for this season.
+          </p>
+          <p className="text-muted-foreground">{description}</p>
+        </>
+      )}
 
       <View
         data={message?.data}
@@ -60,7 +74,7 @@ export const ExtendedPending = ({
         season={season}
         year={year}
         category={category}
-        simpleData={{}}
+        simpleData={simpleData}
       />
     </div>
   );
