@@ -147,12 +147,18 @@ export const getNewFullDataUtil = async ({
       laps: currentStats.laps ?? 0,
     };
 
+    let fullDataJson = seasonData.data && {
+      ...(seasonData.data.json as any),
+      stats: seasonData.data.stats,
+      finalIRating: seasonData.data.finalIRating,
+    };
+
     // TODO: Temporary try second time
     for (const race of newRaces) {
-      const r = await getResult(race.subsessionId);
+      let r = await getResult(race.subsessionId);
 
       if (!r) {
-        await getResult(race.subsessionId);
+        r = await getResult(race.subsessionId);
       }
 
       data = {
@@ -162,6 +168,8 @@ export const getNewFullDataUtil = async ({
         laps: data.laps + race.lapsComplete,
       };
 
+      fullDataJson = parseResults([r], iracingId, fullDataJson);
+
       sendMessage?.("PROGRESS", {
         count: {
           races: races.length,
@@ -169,20 +177,11 @@ export const getNewFullDataUtil = async ({
           fetched: results.length,
         },
         stats: data,
+        data: fullDataJson,
       });
     }
 
-    const fullDataJson = seasonData.data && {
-      ...(seasonData.data.json as any),
-      stats: seasonData.data.stats,
-      finalIRating: seasonData.data.finalIRating,
-    };
-
-    const { stats, finalIRating, ...json } = parseResults(
-      results,
-      iracingId,
-      fullDataJson
-    );
+    const { stats, finalIRating, ...json } = fullDataJson;
 
     const lastRace =
       results[results.length - 1]?.raceSummary.subsessionId ??
@@ -222,6 +221,7 @@ export const getNewFullDataUtil = async ({
         fetched: results.length,
       },
       stats: data,
+      data: fullDataJson,
     });
     currentRequests--;
   } catch (e) {
