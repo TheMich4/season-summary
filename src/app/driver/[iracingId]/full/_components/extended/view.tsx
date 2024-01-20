@@ -73,6 +73,7 @@ export const View = ({
           label="iRating"
           description="How your iRating developed over the season."
           tooltipLabel="IRATING"
+          useCounter={!isDone}
         />
         <RatingChart
           dataPoints={data.safetyRatingPoints}
@@ -80,6 +81,7 @@ export const View = ({
           description="How your safety rating developed over the season."
           deltaPrecision={2}
           tooltipLabel="SR"
+          useCounter={!isDone}
         />
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-10">
