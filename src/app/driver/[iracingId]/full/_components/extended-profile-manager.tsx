@@ -43,8 +43,6 @@ export const ExtendedProfileManager = ({
     return `Prepared ${fetched} of ${races} races. ${percentage}% done.`;
   }, [message]);
 
-  console.log("ExtendedProfileManager", { wsStatus, message, description });
-
   if (wsStatus === "DONE" && !message?.data) {
     return (
       <ExtendedProfileNoData
@@ -75,6 +73,7 @@ export const ExtendedProfileManager = ({
         year={year}
         category={category}
         simpleData={simpleData}
+        isDone={wsStatus === "DONE"}
       />
     </div>
   );

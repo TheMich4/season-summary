@@ -33,7 +33,7 @@ export const StatBox = ({
       return null;
     }
 
-    if (useCounter) {
+    if (useCounter && typeof value === "number" && value > 0) {
       return <Counter value={value as number} />;
     }
 
