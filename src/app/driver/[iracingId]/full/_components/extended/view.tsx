@@ -106,26 +106,10 @@ export const View = ({
         <div className="grid lg:col-span-5 lg:grid-cols-2">
           <div className="col-span-2 flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:flex-row">
-              <StatBox
-                label="Races"
-                value={data.stats.races}
-                // previous={simpleData.previousSeasonStats.starts}
-              />
-              <StatBox
-                label="Wins"
-                value={data.stats.wins}
-                // previous={simpleData.previousSeasonStats.wins}
-              />
-              <StatBox
-                label="Top 5"
-                value={data.stats.top5}
-                // previous={simpleData.previousSeasonStats.top5}
-              />
-              <StatBox
-                label="Laps"
-                value={data.stats.laps}
-                // previous={simpleData.previousSeasonStats.laps}
-              />
+              <StatBox label="Races" value={data.stats.races} />
+              <StatBox label="Wins" value={data.stats.wins} />
+              <StatBox label="Top 5" value={data.stats.top5} />
+              <StatBox label="Laps" value={data.stats.laps} />
             </div>
             <SeriesStats
               racesPerSeries={data.racesPerSeries}
