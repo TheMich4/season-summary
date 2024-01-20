@@ -6,9 +6,6 @@ import { getIratingPoints } from "./get-irating-points.js";
 import { getPointData } from "./get-point-data.js";
 import { getQualiData } from "./get-quali-data.js";
 import { getRaceData } from "./get-race-data.js";
-import { getRacesPerCar } from "./get-races-per-car.js";
-import { getRacesPerSeries } from "./get-races-per-series.js";
-import { getRacesPerTrack } from "./get-races-per-track.js";
 import { getRacesPerWeek } from "./get-races-per-week.js";
 import { getSOFData } from "./get-sof-data.js";
 import { getSafetyRatingPoints } from "./get-safety-rating-points.js";
@@ -56,9 +53,6 @@ export const parseResults = (
         raceResult
       ),
       iratingPoints: getIratingPoints(acc.iratingPoints, raceResult),
-      racesPerCar: getRacesPerCar(acc.racesPerCar, raceResult),
-      racesPerSeries: getRacesPerSeries(acc.racesPerSeries, result),
-      racesPerTrack: getRacesPerTrack(acc.racesPerTrack, result),
     };
   }, initialData ?? getInitialState());
 };
