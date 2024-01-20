@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Counter } from "./counter";
+import { cn } from "@/lib/utils";
 
 export const Delta = ({
   value,
@@ -40,7 +41,7 @@ export const Delta = ({
   }, [invert, previous, value]);
 
   return (
-    <p className={className}>
+    <p className={cn("inline-block", className)}>
       <p>{icon}</p>
       <Counter
         value={counterValue}

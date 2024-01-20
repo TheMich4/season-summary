@@ -48,5 +48,5 @@ export const Counter = ({
     return <span>{value.toFixed(precision)}</span>;
   }
 
-  return <span ref={ref} />;
+  return <span className="tabular-nums" ref={ref} />;
 };
