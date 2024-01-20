@@ -1,12 +1,13 @@
 "use client";
 
 import { Category, categoryToName } from "@/config/category";
-import { useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { ExtendedProfileNoData } from "./extended-profile-no-data";
 import { View } from "./extended/view";
 import { updateToast, useToast } from "@/components/ui/use-toast";
+import { CheckCircle2 } from "lucide-react";
 
 interface Props {
   iracingId: string;
@@ -43,8 +44,7 @@ export const ExtendedProfileManager = ({
   }, [message]);
 
   useEffect(() => {
-    console.log({ wsStatus, message });
-    if (wsStatus === "PROGRESS") {
+    if (wsStatus === "PROGRESS" && message?.count.fetched > 0) {
       const oldRaces = message?.count.races - message?.count.newRaces;
       const fetchedRaces = oldRaces + message?.count.fetched;
       const percentage = Math.ceil((fetchedRaces / message?.count.races) * 100);
@@ -57,14 +57,21 @@ export const ExtendedProfileManager = ({
           duration: Infinity,
           title: "Your full season data is being prepared!",
           description,
+          variant: "default",
         });
         setToastId(id);
       }
     } else if (wsStatus === "DONE" && toastId) {
       updateToast({
         id: toastId,
-        title: "Full data is now ready!",
+        title: (
+          <span className="flex flex-row items-center gap-2">
+            <CheckCircle2 className="size-6 text-green-700" />
+            {"Full data is now up to date!"}
+          </span>
+        ) as any,
         description: "",
+        variant: "success",
       });
     }
   }, [message, toast, toastId, wsStatus]);
