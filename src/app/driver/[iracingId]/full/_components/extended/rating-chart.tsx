@@ -83,7 +83,8 @@ export const RatingChart = ({
           <Delta
             value={dataPoints[dataPoints.length - 1]}
             previous={dataPoints[0]}
-            parseResult={(result: number) => result.toFixed(deltaPrecision)}
+            precision={deltaPrecision}
+            useCounter={useCounter}
           />
         </p>
       </p>
