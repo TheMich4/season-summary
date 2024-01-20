@@ -16,6 +16,7 @@ import { RaceList } from "../../../_components/profile/race-list";
 import { StatBox } from "@/components/stat-box";
 import { RatingChart } from "./rating-chart";
 import { AssetStats } from "./asset-stats";
+import { Loader2 } from "lucide-react";
 
 interface ViewProps {
   category: Category;
@@ -37,7 +38,7 @@ export const View = ({
   isDone = true,
 }: ViewProps) => {
   if (!data) {
-    return null;
+    return <Loader2 className="size-8 animate-spin dark:text-primary" />;
   }
 
   return (
