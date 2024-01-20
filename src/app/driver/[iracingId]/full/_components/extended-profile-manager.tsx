@@ -67,7 +67,7 @@ export const ExtendedProfileManager = ({
         title: (
           <span className="flex flex-row items-center gap-2">
             <CheckCircle2 className="size-6 text-green-700" />
-            {"Full data is now up to date!"}
+            {"Season data is now up to date!"}
           </span>
         ) as any,
         description: "",
