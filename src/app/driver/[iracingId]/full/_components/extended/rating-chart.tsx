@@ -1,5 +1,6 @@
 "use client";
 
+import { Counter } from "@/components/counter";
 import { Delta } from "@/components/delta";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 import { useMemo } from "react";
@@ -71,7 +72,10 @@ export const RatingChart = ({
     <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
       <p className="pb-2 text-base font-normal tracking-tight">{label}</p>
       <p className="flex flex-row items-baseline gap-1 text-2xl font-bold">
-        {dataPoints[dataPoints.length - 1]}
+        <Counter
+          value={dataPoints[dataPoints.length - 1]}
+          precision={deltaPrecision}
+        />
         <p className="text-sm">
           <Delta
             value={dataPoints[dataPoints.length - 1]}
