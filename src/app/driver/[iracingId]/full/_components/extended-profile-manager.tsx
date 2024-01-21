@@ -6,7 +6,7 @@ import { ReactNode, useEffect, useMemo, useState } from "react";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { ExtendedProfileNoData } from "./extended-profile-no-data";
 import { View } from "./extended/view";
-import { updateToast, useToast } from "@/components/ui/use-toast";
+import { dismissToast, updateToast, useToast } from "@/components/ui/use-toast";
 import { CheckCircle2 } from "lucide-react";
 import { SeasonSwitch } from "../../_components/profile/season-switch";
 import { CategoryDropdown } from "../../_components/profile/category-dropdown";
@@ -80,6 +80,10 @@ export const ExtendedProfileManager = ({
       });
     }
   }, [message, toast, toastId, wsStatus]);
+
+  // Reason: Its supposed to only run when page is changed
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => () => dismissToast(toastId), []);
 
   if (wsStatus === "DONE" && !message?.data) {
     return (
