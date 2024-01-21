@@ -50,19 +50,22 @@ export const ExtendedProfileManager = ({
       const oldRaces = message?.count.races - message?.count.newRaces;
       const fetchedRaces = oldRaces + message?.count.fetched;
       const percentage = Math.ceil((fetchedRaces / message?.count.races) * 100);
+      const title = "Your full season data is being prepared!";
       const description =
         percentage === 100
           ? "Finishing up."
           : `Prepared ${fetchedRaces} of ${message?.count.races} races. ${percentage}% done.`;
+      const duration = Infinity;
+      const variant = "default";
 
       if (toastId) {
-        updateToast({ id: toastId, description });
+        updateToast({ id: toastId, title, description, duration, variant });
       } else {
         const { id } = toast({
-          duration: Infinity,
-          title: "Your full season data is being prepared!",
+          duration,
+          title,
           description,
-          variant: "default",
+          variant,
         });
         setToastId(id);
       }
@@ -77,6 +80,7 @@ export const ExtendedProfileManager = ({
         ) as any,
         description: "",
         variant: "success",
+        duration: 5000,
       });
     }
   }, [message, toast, toastId, wsStatus]);
