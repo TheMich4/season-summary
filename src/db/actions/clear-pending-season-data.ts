@@ -1,9 +1,14 @@
 import { prisma } from "..";
 
 export const clearPendingSeasonData = async () => {
-  const { count } = await prisma.seasonData.deleteMany({
-    where: { isPending: true },
-  });
+  try {
+    const { count } = await prisma.seasonData.deleteMany({
+      where: { isPending: true },
+    });
 
-  console.log(`Deleted ${count} pending season data`);
+    console.log(`Deleted ${count} pending season data`);
+  } catch (e) {
+    console.error("Error in clearing pending season data");
+    console.error(e);
+  }
 };
