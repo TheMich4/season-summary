@@ -8,8 +8,8 @@ import { ExtendedProfileNoData } from "./extended-profile-no-data";
 import { View } from "./extended/view";
 import { dismissToast, updateToast, useToast } from "@/components/ui/use-toast";
 import { CheckCircle2 } from "lucide-react";
-import { SeasonSwitch } from "../_components-old/profile/season-switch";
-import { CategoryDropdown } from "../_components-old/profile/category-dropdown";
+import { SeasonSwitch } from "./season-switch";
+import { CategoryDropdown } from "./category-dropdown";
 
 interface Props {
   iracingId: string;

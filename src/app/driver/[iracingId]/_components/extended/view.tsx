@@ -14,9 +14,9 @@ import { StatBox } from "@/components/stat-box";
 import { RatingChart } from "./rating-chart";
 import { AssetStats } from "./asset-stats";
 import { Loader2 } from "lucide-react";
-import { SeasonSwitch } from "../../_components-old/profile/season-switch";
-import { CategoryDropdown } from "../../_components-old/profile/category-dropdown";
-import { RaceList } from "../../_components-old/profile/race-list";
+import { SeasonSwitch } from "../season-switch";
+import { CategoryDropdown } from "../category-dropdown";
+import { RaceList } from "../race-list";
 
 interface ViewProps {
   category: Category;

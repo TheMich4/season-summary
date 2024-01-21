@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { env } from "@/env.mjs";
 import { getIracingData } from "@/server/get-iracing-data";
 import { ExtendedProfileManager } from "./extended-profile-manager";
-import { VisitedManager } from "../_components-old/profile/visited-manager";
+import { VisitedManager } from "./visited-manager";
 
 interface ExtendedProfileProps {
   iracingId: string;
