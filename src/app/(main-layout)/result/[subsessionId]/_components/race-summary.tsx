@@ -1,4 +1,4 @@
-import { Stat } from "@/app/driver/[iracingId]/_components/profile/stat";
+import { StatBox } from "@/components/stat-box";
 
 // TODO: type from iracing-api
 interface Result {
@@ -12,10 +12,10 @@ interface RaceSummaryProps {
 export const RaceSummary = ({ result }: RaceSummaryProps) => {
   return (
     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-4">
-      <Stat name="Laps" value={result.raceSummary.lapsComplete} />
-      <Stat name="SOF" value={result.raceSummary.fieldStrength} />
-      <Stat name="Lead Changes" value={result.raceSummary.numLeadChanges} />
-      <Stat name="Cautions" value={result.raceSummary.numCautions} />
+      <StatBox label="Laps" value={result.raceSummary.lapsComplete} />
+      <StatBox label="SOF" value={result.raceSummary.fieldStrength} />
+      <StatBox label="Lead Changes" value={result.raceSummary.numLeadChanges} />
+      <StatBox label="Cautions" value={result.raceSummary.numCautions} />
     </div>
   );
 };
