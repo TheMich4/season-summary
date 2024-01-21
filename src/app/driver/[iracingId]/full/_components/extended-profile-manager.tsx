@@ -8,6 +8,8 @@ import { ExtendedProfileNoData } from "./extended-profile-no-data";
 import { View } from "./extended/view";
 import { updateToast, useToast } from "@/components/ui/use-toast";
 import { CheckCircle2 } from "lucide-react";
+import { SeasonSwitch } from "../../_components/profile/season-switch";
+import { CategoryDropdown } from "../../_components/profile/category-dropdown";
 
 interface Props {
   iracingId: string;
@@ -48,7 +50,10 @@ export const ExtendedProfileManager = ({
       const oldRaces = message?.count.races - message?.count.newRaces;
       const fetchedRaces = oldRaces + message?.count.fetched;
       const percentage = Math.ceil((fetchedRaces / message?.count.races) * 100);
-      const description = `Prepared ${fetchedRaces} of ${message?.count.races} races. ${percentage}% done.`;
+      const description =
+        percentage === 100
+          ? "Finishing up."
+          : `Prepared ${fetchedRaces} of ${message?.count.races} races. ${percentage}% done.`;
 
       if (toastId) {
         updateToast({ id: toastId, description });
@@ -91,6 +96,19 @@ export const ExtendedProfileManager = ({
     <div className="flex w-full flex-col items-center justify-center gap-2 text-center">
       {description && (
         <>
+          <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-3">
+            <div className="md:col-start-2">
+              <SeasonSwitch
+                iracingId={iracingId}
+                season={+season}
+                year={+year}
+                category={category}
+              />
+            </div>
+            <div className="order-2 flex items-center justify-self-center md:order-3 md:justify-self-end">
+              <CategoryDropdown />
+            </div>
+          </div>
           <p className="font-semibold">
             We are preparing your {categoryToName[category].toLowerCase()} data
             for this season.
