@@ -41,7 +41,7 @@ export const Delta = ({
   }, [invert, previous, value]);
 
   return (
-    <p className={cn("inline-block", className)}>
+    <p className={cn("flex flex-row", className)}>
       <p>{icon}</p>
       <Counter
         value={counterValue}
