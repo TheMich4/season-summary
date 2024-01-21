@@ -1,4 +1,4 @@
-import { Stat } from "@/app/driver/[iracingId]/_components/profile/stat";
+import { Stat } from "@/app/driver/[iracingId]/_components-old/profile/stat";
 
 // TODO: type from iracing-api
 interface Result {

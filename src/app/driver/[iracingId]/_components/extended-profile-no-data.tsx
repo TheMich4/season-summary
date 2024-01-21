@@ -1,6 +1,6 @@
 import { Category } from "@/config/category";
-import { CategoryDropdown } from "../../_components/profile/category-dropdown";
-import { SeasonSwitch } from "../../_components/profile/season-switch";
+import { SeasonSwitch } from "../_components-old/profile/season-switch";
+import { CategoryDropdown } from "../_components-old/profile/category-dropdown";
 
 interface ExtendedProfileNoDataProps {
   iracingId: string;

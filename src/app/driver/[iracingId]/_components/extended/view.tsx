@@ -10,13 +10,13 @@ import { QualifyingStats } from "./qualifying-stats";
 import { RaceStats } from "./race-stats";
 import { SOF } from "./sof";
 import { ActivityHeatMap } from "./activity-heat-map";
-import { SeasonSwitch } from "../../../_components/profile/season-switch";
-import { CategoryDropdown } from "../../../_components/profile/category-dropdown";
-import { RaceList } from "../../../_components/profile/race-list";
 import { StatBox } from "@/components/stat-box";
 import { RatingChart } from "./rating-chart";
 import { AssetStats } from "./asset-stats";
 import { Loader2 } from "lucide-react";
+import { SeasonSwitch } from "../../_components-old/profile/season-switch";
+import { CategoryDropdown } from "../../_components-old/profile/category-dropdown";
+import { RaceList } from "../../_components-old/profile/race-list";
 
 interface ViewProps {
   category: Category;

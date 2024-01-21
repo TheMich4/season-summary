@@ -1,15 +1,15 @@
 "use client";
 
 import { Category, categoryToName } from "@/config/category";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { ExtendedProfileNoData } from "./extended-profile-no-data";
 import { View } from "./extended/view";
 import { dismissToast, updateToast, useToast } from "@/components/ui/use-toast";
 import { CheckCircle2 } from "lucide-react";
-import { SeasonSwitch } from "../../_components/profile/season-switch";
-import { CategoryDropdown } from "../../_components/profile/category-dropdown";
+import { SeasonSwitch } from "../_components-old/profile/season-switch";
+import { CategoryDropdown } from "../_components-old/profile/category-dropdown";
 
 interface Props {
   iracingId: string;

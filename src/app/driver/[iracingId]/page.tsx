@@ -2,12 +2,9 @@ import { Categories, Category } from "@/config/category";
 import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
 import { ConfigProvider } from "@/components/providers/config-provider";
-import { Profile } from "./_components/profile";
+import { ExtendedProfile } from "./_components/extended-profile";
 import { Suspense } from "react";
-import { authOptions } from "@/config/auth-options";
-import { getServerSession } from "next-auth";
-import { getUserSettings } from "@/server/get-user-settings";
-import { ProfileLoader } from "./_components/profile/profile-loader";
+import { ProfileLoader } from "./_components-old/profile/profile-loader";
 
 interface DriverPageProps {
   params: {
@@ -20,7 +17,7 @@ interface DriverPageProps {
   };
 }
 
-export default async function DriverPage({
+export default function ExtendedPage({
   params: { iracingId },
   searchParams: {
     year = `${DEFAULT_YEAR}`,
@@ -28,20 +25,16 @@ export default async function DriverPage({
     category = Categories.ROAD,
   },
 }: DriverPageProps) {
-  const session = await getServerSession(authOptions);
-  const userSettings =
-    session?.user && (await getUserSettings(session?.user?.id));
-
   return (
-    <div className="container flex w-full items-center justify-center gap-2 py-4">
+    <div className="container flex w-full flex-col items-center justify-center gap-4 py-4">
       <Suspense fallback={<ProfileLoader iracingId={iracingId} />}>
         <ConfigProvider>
           {/* @ts-ignore Server component */}
-          <Profile
+          <ExtendedProfile
             iracingId={iracingId}
-            year={Number(year)}
-            season={Number(season)}
-            category={(userSettings?.favoriteCategory ?? category) as Category}
+            year={year}
+            season={season}
+            category={category as Category}
           />
         </ConfigProvider>
       </Suspense>
