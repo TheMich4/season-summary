@@ -31,24 +31,28 @@ export const getBasicData = async (request: Request) => {
       season: previousSeason.season,
     }),
   ]);
+  
+  if (!memberRecap) {
+    return new Response("member not found", { status: 404 });
+  }
 
   return new Response(
     JSON.stringify({
       current: {
-        wins: memberRecap?.stats.wins ?? 0,
-        starts: memberRecap?.stats.starts ?? 0,
-        top5: memberRecap?.stats.top5 ?? 0,
-        laps: memberRecap?.stats.laps ?? 0,
-        avgStartPosition: memberRecap?.stats.avgStartPosition ?? 0,
-        avgFinishPosition: memberRecap?.stats.avgFinishPosition ?? 0,
+        wins: memberRecap?.stats?.wins ?? 0,
+        starts: memberRecap?.stats?.starts ?? 0,
+        top5: memberRecap?.stats?.top5 ?? 0,
+        laps: memberRecap?.stats?.laps ?? 0,
+        avgStartPosition: memberRecap?.stats?.avgStartPosition ?? 0,
+        avgFinishPosition: memberRecap?.stats?.avgFinishPosition ?? 0,
       },
       previous: {
-        wins: previousMemberRecap?.stats.wins ?? 0,
-        starts: previousMemberRecap?.stats.starts ?? 0,
-        top5: previousMemberRecap?.stats.top5 ?? 0,
-        laps: previousMemberRecap?.stats.laps ?? 0,
-        avgStartPosition: previousMemberRecap?.stats.avgStartPosition ?? 0,
-        avgFinishPosition: previousMemberRecap?.stats.avgFinishPosition ?? 0,
+        wins: previousMemberRecap?.stats?.wins ?? 0,
+        starts: previousMemberRecap?.stats?.starts ?? 0,
+        top5: previousMemberRecap?.stats?.top5 ?? 0,
+        laps: previousMemberRecap?.stats?.laps ?? 0,
+        avgStartPosition: previousMemberRecap?.stats?.avgStartPosition ?? 0,
+        avgFinishPosition: previousMemberRecap?.stats?.avgFinishPosition ?? 0,
       },
     }),
     {
