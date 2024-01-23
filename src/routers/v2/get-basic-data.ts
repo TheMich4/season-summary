@@ -31,9 +31,15 @@ export const getBasicData = async (request: Request) => {
       season: previousSeason.season,
     }),
   ]);
-  
+
+  console.log({ memberRecap, previousMemberRecap });
+
   if (!memberRecap) {
     return new Response("member not found", { status: 404 });
+  }
+  
+  if ((memberRecap as any).error) {
+    return new Response("iracing-maintenance", { status: 503 });
   }
 
   return new Response(
