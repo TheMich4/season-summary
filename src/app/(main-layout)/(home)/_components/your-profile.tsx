@@ -34,6 +34,9 @@ const Stats = async ({
   const response = await fetch(
     `${env.API_URL}v2/get-basic-data?iracingId=${iracingId}&categoryId=${categoryToId[category]}`
   );
+
+  if (response.status === 503) return null;
+
   const stats = await response.json();
 
   if (!stats) return null;
