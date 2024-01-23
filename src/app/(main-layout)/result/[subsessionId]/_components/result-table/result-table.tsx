@@ -19,13 +19,27 @@ import { useMemo } from "react";
 
 // TODO: Add type from iracing-api
 export const ResultTable = ({ result }: { result: Record<string, any> }) => {
-  const columns = useMemo(() => getColumns(result), [result]);
-
-  const table = useReactTable({
-    data:
+  const { columns, data } = useMemo(() => {
+    const data =
       result.sessionResults.find(
         (r: Record<string, any>) => r.simsessionTypeName === "Race"
-      )?.results ?? [],
+      )?.results ?? [];
+
+    const lapsPerClass = (data as any[])
+      .filter((r) => r.finishPositionInClass === 0)
+      .reduce(
+        (acc, r) => ({
+          ...acc,
+          [r.carClassId]: r.lapsComplete,
+        }),
+        {}
+      );
+
+    return { columns: getColumns(result, { lapsPerClass }), data };
+  }, [result]);
+
+  const table = useReactTable({
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });

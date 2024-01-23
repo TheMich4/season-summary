@@ -5,7 +5,10 @@ import { createColumnHelper } from "@tanstack/react-table";
 
 const columnHelper = createColumnHelper<any>();
 
-export const getColumns = (result: any) => [
+export const getColumns = (
+  result: any,
+  stats: { lapsPerClass: Record<string, number> }
+) => [
   columnHelper.accessor("finishPosition", {
     cell: ({ getValue }) => getValue() + 1,
     header: "Pos",
@@ -40,6 +43,8 @@ export const getColumns = (result: any) => [
       );
     },
   }),
+  // TODO: Render only if multiclass
+  columnHelper.accessor("carClassName", { header: "Class" }),
   columnHelper.accessor("carName", {
     header: "Car",
   }),
@@ -47,6 +52,7 @@ export const getColumns = (result: any) => [
     header: "Interval",
     cell: ({ getValue, row }) => (
       <Interval
+        position={row.original.finishPosition}
         interval={getValue()}
         totalLaps={result.raceSummary.lapsComplete}
         lapsComplete={row.original.lapsComplete}
@@ -55,7 +61,14 @@ export const getColumns = (result: any) => [
   }),
   columnHelper.accessor("classInterval", {
     header: "Class Interval",
-    cell: ({ getValue }) => <Interval interval={getValue()} />,
+    cell: ({ getValue, row }) => (
+      <Interval
+        interval={getValue()}
+        position={row.original.finishPositionInClass}
+        lapsComplete={row.original.lapsComplete}
+        totalLaps={stats.lapsPerClass[row.original.carClassId]}
+      />
+    ),
   }),
   columnHelper.accessor("incidents", {
     header: "Inc",
@@ -69,6 +82,21 @@ export const getColumns = (result: any) => [
           <Delta
             previous={row.original.oldiRating}
             value={row.original.newiRating}
+          />
+        </p>
+      </span>
+    ),
+  }),
+  columnHelper.accessor("newSubLevel", {
+    header: "SR",
+    cell: ({ getValue, row }) => (
+      <span className="flex flex-row items-baseline gap-2">
+        <p>{(getValue() / 100).toFixed(2)}</p>
+        <p className="text-xs">
+          <Delta
+            previous={row.original.oldSubLevel / 100}
+            value={row.original.newSubLevel / 100}
+            precision={2}
           />
         </p>
       </span>

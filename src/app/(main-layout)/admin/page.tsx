@@ -13,7 +13,9 @@ export default async function AdminPage() {
 
   return (
     <main className="container flex min-h-full w-full flex-col items-center justify-start gap-6 py-4">
-      <Suspense fallback={<Loader2 className="size-4" />}>
+      <Suspense
+        fallback={<Loader2 className="size-6 animate-spin text-primary" />}
+      >
         <Summary />
       </Suspense>
     </main>
