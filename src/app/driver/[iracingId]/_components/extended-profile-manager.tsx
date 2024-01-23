@@ -40,13 +40,19 @@ export const ExtendedProfileManager = ({
   });
 
   const description = useMemo(() => {
+    if (wsStatus === "DONE-MAINTENANCE") return undefined;
+
     if (!message || !message?.count) return "Requesting data...";
 
     return undefined;
-  }, [message]);
+  }, [wsStatus]);
 
   useEffect(() => {
-    if (wsStatus === "PROGRESS" && message?.count.fetched > 0) {
+    if (wsStatus === "DONE-MAINTENANCE") {
+      toast({
+        title: "iRacing is currently under maintenance.",
+      });
+    } else if (wsStatus === "PROGRESS" && message?.count.fetched > 0) {
       const oldRaces = message?.count.races - message?.count.newRaces;
       const fetchedRaces = oldRaces + message?.count.fetched;
       const percentage = Math.ceil((fetchedRaces / message?.count.races) * 100);
@@ -83,11 +89,15 @@ export const ExtendedProfileManager = ({
         duration: 5000,
       });
     }
-  }, [message, toast, toastId, wsStatus]);
+  }, [wsStatus, message?.count?.fetched, toast, toastId, wsStatus]);
 
   // Reason: Its supposed to only run when page is changed
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => () => dismissToast(toastId), []);
+
+  if (wsStatus === "DONE-MAINTENANCE") {
+    return <div>iRacing is currently under maintenance. Check back later.</div>;
+  }
 
   if (wsStatus === "DONE" && !message?.data) {
     return (
@@ -132,7 +142,7 @@ export const ExtendedProfileManager = ({
         year={year}
         category={category}
         simpleData={simpleData}
-        isDone={wsStatus === "DONE"}
+        isDone={wsStatus === "DONE" || wsStatus === "DONE-MAINTENANCE"}
       />
     </div>
   );
