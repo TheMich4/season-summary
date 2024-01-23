@@ -47,6 +47,7 @@ export const getColumns = (result: any) => [
     header: "Interval",
     cell: ({ getValue, row }) => (
       <Interval
+        position={row.original.finishPosition}
         interval={getValue()}
         totalLaps={result.raceSummary.lapsComplete}
         lapsComplete={row.original.lapsComplete}
@@ -55,7 +56,12 @@ export const getColumns = (result: any) => [
   }),
   columnHelper.accessor("classInterval", {
     header: "Class Interval",
-    cell: ({ getValue }) => <Interval interval={getValue()} />,
+    cell: ({ getValue, row }) => (
+      <Interval
+        interval={getValue()}
+        position={row.original.finishPositionInClass}
+      />
+    ),
   }),
   columnHelper.accessor("incidents", {
     header: "Inc",
