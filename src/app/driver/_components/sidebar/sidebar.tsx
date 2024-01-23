@@ -1,29 +1,45 @@
-import { SidebarDivider } from "./sidebar-divider";
-import { SidebarYourProfile } from "./sidebar-your-profile";
-import { SidebarRecentlyVisited } from "./sidebar-recently-visited";
-import { env } from "@/env.mjs";
-import { getUserSettings } from "@/server/get-user-settings";
 import { getServerSession } from "next-auth";
+import { SidebarContent } from "./sidebar-content";
+import { getUserSettings } from "@/server/get-user-settings";
 import { authOptions } from "@/config/auth-options";
-import { Search } from "@/components/search";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Icons } from "@/components/icons";
+import { siteConfig } from "@/config/site";
 
-// TODO: Add favorites
 export const Sidebar = async () => {
   const session = await getServerSession(authOptions);
   const userSettings = await getUserSettings(session?.user?.id);
 
   return (
-    <div className="custom-scrollbar hidden h-full min-h-full w-[300px] flex-col gap-2 overflow-auto border-r bg-background/50 p-4 backdrop-blur 2xl:flex">
-      <Search iracingId={userSettings?.iracingId} session={session} />
-      <SidebarDivider />
+    <div className="h-full min-h-full 2xl:w-[300px]">
+      <div className="hidden h-full border-r bg-background/50 p-4 backdrop-blur  2xl:flex">
+        <SidebarContent session={session} userSettings={userSettings} />
+      </div>
 
-      <SidebarYourProfile
-        name={session?.user.name}
-        iracingId={userSettings?.iracingId}
-        avatarUrl={session?.user.image}
-      />
-
-      <SidebarRecentlyVisited apiUrl={env.API_URL} />
+      {/* <div className="flex 2xl:hidden">
+        <Sheet>
+          <SheetTrigger>Open</SheetTrigger>
+          <SheetContent side="left">
+            <SheetHeader>
+              <SheetTitle className="flex flex-row gap-2 dark:text-primary">
+                <Icons.home className="size-6 " />
+                <span className="inline-block text-nowrap font-bold">
+                  {siteConfig.name}
+                </span>
+              </SheetTitle>
+            </SheetHeader>
+            <div className="py-8">
+              <SidebarContent session={session} userSettings={userSettings} />
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div> */}
     </div>
   );
 };
