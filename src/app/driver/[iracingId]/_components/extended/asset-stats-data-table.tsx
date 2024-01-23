@@ -104,10 +104,11 @@ export const AssetDataTable = ({ data }: AssetDataTableProps) => {
     [data]
   );
 
-  const newLocal =
-    "custom-scrollbar h-full w-full overflow-auto rounded-md border";
+  const className =
+    "overflow-hidden rounded-md border flex size-full min-h-0 max-h-full";
+
   return (
-    <div className={newLocal}>
+    <div className={className}>
       <DataTable data={assets} />
     </div>
   );

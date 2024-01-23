@@ -76,7 +76,7 @@ export const AssetStats = ({
           <Data data={data} preposition={preposition} />
         </div>
       </DialogTrigger>
-      <DialogContent className="2xl:max-[1500px] h-full max-h-[80%] overflow-hidden lg:max-w-[1000px] xl:max-w-[1200px]">
+      <DialogContent className="flex h-fit max-h-[80%] max-w-full flex-col overflow-hidden md:max-w-[80%] ">
         <DialogHeader className="flex flex-col gap-4">
           <DialogTitle>{`${name.charAt(0).toUpperCase()}${name.slice(
             1
