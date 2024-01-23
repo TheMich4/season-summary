@@ -87,4 +87,19 @@ export const getColumns = (
       </span>
     ),
   }),
+  columnHelper.accessor("newSubLevel", {
+    header: "SR",
+    cell: ({ getValue, row }) => (
+      <span className="flex flex-row items-baseline gap-2">
+        <p>{(getValue() / 100).toFixed(2)}</p>
+        <p className="text-xs">
+          <Delta
+            previous={row.original.oldSubLevel / 100}
+            value={row.original.newSubLevel / 100}
+            precision={2}
+          />
+        </p>
+      </span>
+    ),
+  }),
 ];
