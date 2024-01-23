@@ -79,6 +79,22 @@ export const getNewFullDataUtil = async ({
       },
     });
 
+    const currentStats = (seasonData.data?.stats ?? {}) as Record<
+      string,
+      number
+    >;
+    let data = {
+      races: currentStats.races ?? 0,
+      wins: currentStats.wins ?? 0,
+      top5: currentStats.top5 ?? 0,
+      laps: currentStats.laps ?? 0,
+    };
+    let fullDataJson = seasonData.data && {
+      ...(seasonData.data.json as any),
+      stats: seasonData.data.stats,
+      finalIRating: seasonData.data.finalIRating,
+    };
+
     const ir = await getLoggedInIracingAPIClient();
 
     const races = await ir.results.searchSeries({
@@ -89,6 +105,21 @@ export const getNewFullDataUtil = async ({
       eventTypes: [5],
       categoryIds: [parseInt(categoryId, 10)],
     });
+
+    if (races?.error === "Site Maintenance") {
+      await prisma.seasonData.update({
+        where: {
+          id: seasonData.id,
+        },
+        data: {
+          isPending: false,
+        },
+      });
+
+      sendMessage?.("DONE-MAINTENANCE", { stats: data, data: fullDataJson });
+      currentRequests--;
+      return;
+    }
 
     console.log(`Found ${races?.length} races`);
 
@@ -134,23 +165,6 @@ export const getNewFullDataUtil = async ({
       await new Promise((resolve) => setTimeout(resolve, timeout));
 
       return result;
-    };
-
-    const currentStats = (seasonData.data?.stats ?? {}) as Record<
-      string,
-      number
-    >;
-    let data = {
-      races: currentStats.races ?? 0,
-      wins: currentStats.wins ?? 0,
-      top5: currentStats.top5 ?? 0,
-      laps: currentStats.laps ?? 0,
-    };
-
-    let fullDataJson = seasonData.data && {
-      ...(seasonData.data.json as any),
-      stats: seasonData.data.stats,
-      finalIRating: seasonData.data.finalIRating,
     };
 
     // TODO: Temporary try second time
