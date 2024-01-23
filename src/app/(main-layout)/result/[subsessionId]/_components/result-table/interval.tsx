@@ -32,8 +32,8 @@ export const Interval = ({
   }
 
   if (interval === -1 && totalLaps && lapsComplete) {
-    return <p className="text-xs">-{totalLaps - lapsComplete} Laps</p>;
+    return <p className="text-xs">+{totalLaps - lapsComplete} Laps</p>;
   }
 
-  return <p className="text-xs">-{getIntervalString(interval)}</p>;
+  return <p className="text-xs">+{getIntervalString(interval)}</p>;
 };

@@ -5,7 +5,10 @@ import { createColumnHelper } from "@tanstack/react-table";
 
 const columnHelper = createColumnHelper<any>();
 
-export const getColumns = (result: any) => [
+export const getColumns = (
+  result: any,
+  stats: { lapsPerClass: Record<string, number> }
+) => [
   columnHelper.accessor("finishPosition", {
     cell: ({ getValue }) => getValue() + 1,
     header: "Pos",
@@ -60,6 +63,8 @@ export const getColumns = (result: any) => [
       <Interval
         interval={getValue()}
         position={row.original.finishPositionInClass}
+        lapsComplete={row.original.lapsComplete}
+        totalLaps={stats.lapsPerClass[row.original.carClassId]}
       />
     ),
   }),
