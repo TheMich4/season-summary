@@ -95,6 +95,7 @@ export const ExtendedProfileManager = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => () => dismissToast(toastId), []);
 
+  // TODO: Add maintenance stats
   if (wsStatus === "DONE-MAINTENANCE") {
     return <div>iRacing is currently under maintenance. Check back later.</div>;
   }
