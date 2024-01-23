@@ -43,6 +43,8 @@ export const getColumns = (
       );
     },
   }),
+  // TODO: Render only if multiclass
+  columnHelper.accessor("carClassName", { header: "Class" }),
   columnHelper.accessor("carName", {
     header: "Car",
   }),
