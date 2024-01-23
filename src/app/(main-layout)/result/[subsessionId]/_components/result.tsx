@@ -16,38 +16,8 @@ export const Result = async ({ subsessionId }: ResultProps) => {
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <div className="flex flex-col items-center text-balance rounded-md border bg-background/40 p-2 text-center text-sm">
-        <p className="mb-1 font-bold text-red-500">
-          This page is a work in progress!
-        </p>
-        <p>
-          If you have any feedback or ideas, please let me know on{" "}
-          <a
-            href={siteConfig.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-primary"
-          >
-            Github
-          </a>
-          .
-        </p>
-        <p>
-          Or contact me on{" "}
-          <a
-            href={siteConfig.links.twitter}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-primary"
-          >
-            Twitter
-          </a>
-          .
-        </p>
-      </div>
-
-      <div className="flex flex-col items-center justify-center gap-1 md:flex-row md:items-baseline">
-        <p className="text-2xl font-extrabold leading-tight tracking-tighter text-primary">
+      <div className="flex flex-col items-baseline justify-start gap-1">
+        <p className="text-2xl font-extrabold leading-tight tracking-tighter dark:text-primary">
           {result.seriesName}
         </p>
         <p>{result.track.trackName}</p>
