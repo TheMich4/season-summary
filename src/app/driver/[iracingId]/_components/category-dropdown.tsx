@@ -25,14 +25,14 @@ export const CategoryDropdown = () => {
       <DropdownMenuTrigger
         className={cn(
           buttonVariants({ variant: "outline", size: "xs" }),
-          "gap-1 dark:bg-background/40"
+          "gap-1 bg-background/40"
         )}
       >
         <ChevronDown className="size-5" />
         {category && categoryToName[category]}
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent>
+      <DropdownMenuContent className="light:bg-background">
         {Object.entries(categoryToName).map(([cat, catName]) => (
           <DropdownMenuItem asChild key={catName}>
             <span onClick={() => handleClick(cat as Category)}>{catName} </span>
