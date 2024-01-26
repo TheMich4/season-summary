@@ -21,7 +21,7 @@ export async function SiteHeader({ fullWidth = false }: SiteHeaderProps) {
       <div
         className={cn(
           "flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0",
-          fullWidth ? "px-4" : "container"
+          fullWidth ? "px-4" : "px-4 md:container"
         )}
       >
         <MainNav items={siteConfig.mainNav} />
