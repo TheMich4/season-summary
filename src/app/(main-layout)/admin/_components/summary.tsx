@@ -1,5 +1,5 @@
 import { StatBox } from "@/components/stat-box";
-import { getAdminSummary } from "@/server/get-admin-summary";
+import { api } from "@/trpc/server";
 
 const userStatToLabel: Record<string, string> = {
   _all: "Total users",
@@ -11,7 +11,7 @@ const userStatToLabel: Record<string, string> = {
 };
 
 export const Summary = async () => {
-  const summaryData = await getAdminSummary();
+  const summaryData = await api.admin.getSummary.query();
 
   if (!summaryData) {
     return <div>Failed loading</div>;

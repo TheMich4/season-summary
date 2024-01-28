@@ -5,23 +5,23 @@ import Link from "next/link";
 import { MainNav } from "./main-nav";
 import { ThemeSwitch } from "./theme-switch";
 import { buttonVariants } from "@/components/ui/button";
-import { getIsUserAdmin } from "@/server/get-is-user-admin";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { api } from "@/trpc/server";
 
 interface SiteHeaderProps {
   fullWidth?: boolean;
 }
 
 export async function SiteHeader({ fullWidth = false }: SiteHeaderProps) {
-  const isAdmin = await getIsUserAdmin();
+  const isAdmin = await api.user.isAdmin.query();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/50 backdrop-blur">
       <div
         className={cn(
           "flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0",
-          fullWidth ? "px-4" : "px-4 md:container"
+          fullWidth ? "px-4" : "px-4 md:container",
         )}
       >
         <MainNav items={siteConfig.mainNav} />

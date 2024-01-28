@@ -12,15 +12,12 @@ import { Menu } from "lucide-react";
 import { Suspense } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { getServerSession } from "next-auth";
-import { getUserSettings } from "@/server/get-user-settings";
 import { siteConfig } from "@/config/site";
 import { getProfileUrl } from "@/server/get-profile-url";
-import { authOptions } from "@/server/auth";
+import { api } from "@/trpc/server";
 
 export const ProfileNavLink = async () => {
-  const session = await getServerSession(authOptions);
-  const userSettings = await getUserSettings(session?.user?.id);
+  const userSettings = await api.user.getSettings.query();
   const url = userSettings?.iracingId
     ? await getProfileUrl(userSettings.iracingId)
     : "#";

@@ -6,9 +6,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 import { env } from "@/env";
 import { getServerSession } from "next-auth";
-import { getUserSettings } from "@/server/get-user-settings";
 import { StatBox } from "@/components/stat-box";
 import { authOptions } from "@/server/auth";
+import { api } from "@/trpc/server";
 
 const NoProfile = () => {
   return (
@@ -87,7 +87,7 @@ const Stats = async ({
 
 const Profile = async () => {
   const session = await getServerSession(authOptions);
-  const userSettings = session && (await getUserSettings(session.user.id));
+  const userSettings = await api.user.getSettings.query();
 
   if (!session || !userSettings?.iracingId) {
     return <NoProfile />;

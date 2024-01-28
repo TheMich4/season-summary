@@ -1,9 +1,7 @@
 "use server";
 
-import { getServerSession } from "next-auth";
-import { getUserSettings } from "./get-user-settings";
 import { type Category } from "@/config/category";
-import { authOptions } from "./auth";
+import { api } from "@/trpc/server";
 
 export const getProfileUrl = async (
   iracingId: string,
@@ -13,8 +11,7 @@ export const getProfileUrl = async (
     year: string | number;
   },
 ) => {
-  const session = await getServerSession(authOptions);
-  const userSettings = await getUserSettings(session?.user?.id);
+  const userSettings = await api.user.getSettings.query();
 
   return (
     `/driver/${iracingId}` +

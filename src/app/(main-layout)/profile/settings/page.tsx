@@ -1,9 +1,9 @@
 import { Settings } from "./_components/settings";
 import { UserAvatar } from "./_components/user-avatar";
 import { getServerSession } from "next-auth";
-import { getUserSettings } from "@/server/get-user-settings";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/server/auth";
+import { api } from "@/trpc/server";
 
 export default async function ProfileSettings() {
   const session = await getServerSession(authOptions);
@@ -12,9 +12,7 @@ export default async function ProfileSettings() {
     return redirect("/");
   }
 
-  const { user } = session;
-
-  const userSettings = await getUserSettings(user.id);
+  const userSettings = await api.user.getSettings.query();
 
   return (
     <main className="container flex min-h-full w-full flex-col items-center justify-start gap-6 py-4">
@@ -22,8 +20,8 @@ export default async function ProfileSettings() {
         <div className="flex w-full flex-row items-center gap-4">
           <UserAvatar />
           <div>
-            <p className="text-2xl font-bold">{user.name}</p>
-            <p>{user.email}</p>
+            <p className="text-2xl font-bold">{session.user.name}</p>
+            <p>{session.user.email}</p>
           </div>
         </div>
 

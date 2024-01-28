@@ -1,11 +1,11 @@
 import { Loader2 } from "lucide-react";
 import { Summary } from "./_components/summary";
 import { Suspense } from "react";
-import { getIsUserAdmin } from "@/server/get-is-user-admin";
 import { redirect } from "next/navigation";
+import { api } from "@/trpc/server";
 
 export default async function AdminPage() {
-  const isAdmin = await getIsUserAdmin();
+  const isAdmin = await api.user.isAdmin.query();
 
   if (!isAdmin) {
     return redirect("/");
