@@ -31,7 +31,8 @@ export const ExtendedProfileManager = ({
   const { toast } = useToast();
   const [toastId, setToastId] = useState<string | undefined>(undefined);
 
-  const { status: wsStatus, message } = useDataWebSocket({
+  const wsData = useDataWebSocket({
+    // const { status: wsStatus, message } = useDataWebSocket({
     iracingId: parseInt(iracingId, 10),
     year: parseInt(year, 10),
     season: parseInt(season, 10),
@@ -40,15 +41,18 @@ export const ExtendedProfileManager = ({
   });
 
   const description = useMemo(() => {
-    if (wsStatus === "DONE-MAINTENANCE") return undefined;
+    if (wsData?.status === "DONE-MAINTENANCE") return undefined;
 
-    if (!message?.count) return "Requesting data...";
+    if (!wsData?.message?.count) return "Requesting data...";
 
     return undefined;
-  }, [wsStatus]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wsData?.status]);
 
   useEffect(() => {
-    if (wsStatus === "DONE-MAINTENANCE") {
+    const { status: wsStatus, message } = wsData ?? ({} as any);
+
+    if (status === "DONE-MAINTENANCE") {
       toast({
         title: "iRacing is currently under maintenance.",
       });
@@ -89,18 +93,25 @@ export const ExtendedProfileManager = ({
         duration: 5000,
       });
     }
-  }, [wsStatus, message?.count?.fetched, toast, toastId, wsStatus]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    wsData?.status,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    (wsData?.message as any)?.count.fetched,
+    toast,
+    toastId,
+  ]);
 
   // Reason: Its supposed to only run when page is changed
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => () => dismissToast(toastId), []);
 
   // TODO: Add maintenance stats
-  if (wsStatus === "DONE-MAINTENANCE") {
+  if (wsData?.status === "DONE-MAINTENANCE") {
     return <div>iRacing is currently under maintenance. Check back later.</div>;
   }
 
-  if (wsStatus === "DONE" && !message?.data) {
+  if (wsData?.status === "DONE" && !wsData?.message?.data) {
     return (
       <ExtendedProfileNoData
         iracingId={iracingId}
@@ -137,13 +148,15 @@ export const ExtendedProfileManager = ({
       )}
 
       <View
-        data={message?.data}
+        data={wsData?.message?.data}
         iracingId={iracingId}
         season={season}
         year={year}
         category={category}
         simpleData={simpleData}
-        isDone={wsStatus === "DONE" || wsStatus === "DONE-MAINTENANCE"}
+        isDone={
+          wsData?.status === "DONE" || wsData?.status === "DONE-MAINTENANCE"
+        }
       />
     </div>
   );

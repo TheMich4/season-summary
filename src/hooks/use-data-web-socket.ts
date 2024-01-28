@@ -22,7 +22,9 @@ export const useDataWebSocket = ({
 
   const { lastMessage } = useWebSocket(SOCKET_URL);
 
-  return useMemo<Record<string, unknown> | undefined>(() => {
+  return useMemo<
+    { status: string; message?: Record<string, unknown> } | undefined
+  >(() => {
     if (!lastMessage) return { status: undefined };
 
     try {

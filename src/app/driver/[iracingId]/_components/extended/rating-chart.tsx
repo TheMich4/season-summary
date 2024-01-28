@@ -36,8 +36,8 @@ const RatingChartTooltip = ({ active, payload }: RatingChartTooltipProps) => {
   return (
     <div className="grid grid-cols-2 gap-2 rounded-md border bg-background/80 p-2 text-muted-foreground backdrop-blur">
       <div>
-        <div className="text-xs">{payload[0].payload.tooltip}</div>
-        <div className="font-bold text-foreground">{payload[0].value}</div>
+        <div className="text-xs">{payload[0]?.payload.tooltip}</div>
+        <div className="font-bold text-foreground">{payload[0]?.value}</div>
       </div>
     </div>
   );
@@ -75,14 +75,14 @@ export const RatingChart = ({
       <p className="pb-2 text-base font-normal tracking-tight">{label}</p>
       <p className="flex flex-row items-baseline gap-1 text-2xl font-bold">
         <Counter
-          value={dataPoints[dataPoints.length - 1]}
+          value={dataPoints[dataPoints.length - 1] ?? 0}
           precision={deltaPrecision}
           disabled={!useCounter}
         />
         <p className="text-sm">
           <Delta
-            value={dataPoints[dataPoints.length - 1]}
-            previous={dataPoints[0]}
+            value={dataPoints[dataPoints.length - 1] ?? 0}
+            previous={dataPoints[0] ?? 0}
             precision={deltaPrecision}
             useCounter={useCounter}
           />
