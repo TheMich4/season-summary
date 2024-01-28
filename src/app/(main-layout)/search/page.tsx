@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { Search } from "./_components/search";
 
 export default function SearchPage() {

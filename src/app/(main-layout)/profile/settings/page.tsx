@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { Settings } from "./_components/settings";
 import { UserAvatar } from "./_components/user-avatar";
 import { getServerSession } from "next-auth";

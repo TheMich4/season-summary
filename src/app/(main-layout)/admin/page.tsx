@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { Loader2 } from "lucide-react";
 import { Summary } from "./_components/summary";
 import { Suspense } from "react";
