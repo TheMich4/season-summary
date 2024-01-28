@@ -4,9 +4,9 @@ import { SEASON_DATE_RANGES } from "@/config/iracing";
 import { useTheme } from "next-themes";
 import { useCallback, useMemo } from "react";
 import ActivityCalendar, {
-  ThemeInput,
+  type ThemeInput,
   type Activity,
-  BlockElement,
+  type BlockElement,
 } from "react-activity-calendar";
 import {
   Tooltip,
@@ -99,7 +99,7 @@ export const ActivityHeatMap = ({
       };
     }, getInitialRacesPerDate(seasonDateRange));
 
-    const max = Math.max(...(Object.values(racesPerDate ?? {}) as number[]));
+    const max = Math.max(...(Object.values(racesPerDate ?? {})));
 
     return Object.entries(racesPerDate ?? {})
       .map(([date, count]) => ({

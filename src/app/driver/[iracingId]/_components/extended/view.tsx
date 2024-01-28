@@ -1,6 +1,6 @@
 "use client";
 
-import { Category } from "@/config/category";
+import { type Category } from "@/config/category";
 import { FinishPositions } from "./finish-positions";
 import { Incidents } from "./incidents";
 import { IncidentsGraph } from "./incidents-graph";

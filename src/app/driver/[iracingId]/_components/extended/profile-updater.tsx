@@ -1,6 +1,6 @@
 "use server";
 
-import { Category, categoryToId } from "@/config/category";
+import { type Category, categoryToId } from "@/config/category";
 
 import { ProfileRefresher } from "./profile-refresher";
 import { env } from "@/env";

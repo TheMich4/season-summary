@@ -12,9 +12,7 @@ interface AssetData {
   worst: number;
 }
 
-interface AssetsData {
-  [assetName: string]: AssetData;
-}
+type AssetsData = Record<string, AssetData>;
 
 interface Asset {
   name: string;

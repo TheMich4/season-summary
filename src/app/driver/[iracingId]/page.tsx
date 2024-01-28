@@ -1,4 +1,4 @@
-import { Categories, Category } from "@/config/category";
+import { Categories, type Category } from "@/config/category";
 import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 
 import { ConfigProvider } from "@/components/providers/config-provider";

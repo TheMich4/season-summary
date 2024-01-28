@@ -1,6 +1,6 @@
 "use client";
 
-import { Category, categoryToName } from "@/config/category";
+import { type Category, categoryToName } from "@/config/category";
 import { useEffect, useMemo, useState } from "react";
 
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
@@ -42,7 +42,7 @@ export const ExtendedProfileManager = ({
   const description = useMemo(() => {
     if (wsStatus === "DONE-MAINTENANCE") return undefined;
 
-    if (!message || !message?.count) return "Requesting data...";
+    if (!message?.count) return "Requesting data...";
 
     return undefined;
   }, [wsStatus]);

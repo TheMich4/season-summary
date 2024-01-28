@@ -2,9 +2,7 @@ import { StatBox } from "@/components/stat-box";
 import { getIntervalString } from "@/lib/interval";
 
 // TODO: type from iracing-api
-interface Result {
-  [key: string]: any;
-}
+type Result = Record<string, any>;
 
 interface RaceSummaryProps {
   result: Result;

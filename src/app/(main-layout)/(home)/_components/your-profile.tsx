@@ -1,4 +1,4 @@
-import { Category, categoryToId } from "@/config/category";
+import { type Category, categoryToId } from "@/config/category";
 
 import { Loader2 } from "lucide-react";
 import { ProfileCard } from "@/components/profile-card";

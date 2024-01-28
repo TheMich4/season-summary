@@ -1,4 +1,4 @@
-import { Category } from "@/config/category";
+import { type Category } from "@/config/category";
 
 import { ProfileUpdater } from "./extended/profile-updater";
 import { Suspense } from "react";

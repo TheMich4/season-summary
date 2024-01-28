@@ -1,4 +1,4 @@
-import { Category, categoryToId } from "@/config/category";
+import { type Category, categoryToId } from "@/config/category";
 
 import { useMemo } from "react";
 import useWebSocket from "react-use-websocket";

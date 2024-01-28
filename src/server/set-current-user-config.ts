@@ -1,6 +1,6 @@
 "use server";
 
-import { Category } from "@/config/category";
+import { type Category } from "@/config/category";
 import { api } from "@/trpc/server";
 
 export const setCurrentUserConfig = async (

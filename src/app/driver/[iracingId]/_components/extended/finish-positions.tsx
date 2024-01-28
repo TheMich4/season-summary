@@ -6,9 +6,7 @@ import { cn } from "@/lib/utils";
 import { useMemo } from "react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 
-interface FinishPositions {
-  [position: string]: number;
-}
+type FinishPositions = Record<string, number>;
 
 interface FinishPositionsProps {
   finishPositions: FinishPositions;

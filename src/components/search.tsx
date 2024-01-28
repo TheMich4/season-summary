@@ -11,7 +11,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Settings, User } from "lucide-react";
-import { Session } from "next-auth";
+import { type Session } from "next-auth";
 import { signIn } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { getProfileUrl } from "@/server/get-profile-url";

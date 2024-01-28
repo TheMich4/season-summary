@@ -8,7 +8,7 @@ export const userRouter = createTRPCRouter({
       select: { isAdmin: true },
     });
 
-    return (data?.isAdmin as boolean) ?? false;
+    return (data?.isAdmin!) ?? false;
   }),
   getSettings: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.db.user.findFirst({

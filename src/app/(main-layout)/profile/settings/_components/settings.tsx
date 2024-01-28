@@ -3,7 +3,7 @@
 import * as z from "zod";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Categories, Category, categoryToName } from "@/config/category";
+import { Categories, type Category, categoryToName } from "@/config/category";
 import { ChevronDown, Loader2 } from "lucide-react";
 import {
   DropdownMenu,

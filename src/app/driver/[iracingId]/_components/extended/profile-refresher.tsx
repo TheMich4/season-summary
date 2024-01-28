@@ -1,6 +1,6 @@
 "use client";
 
-import { Category } from "@/config/category";
+import { type Category } from "@/config/category";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { useEffect } from "react";
 

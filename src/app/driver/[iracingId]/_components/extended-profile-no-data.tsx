@@ -1,4 +1,4 @@
-import { Category } from "@/config/category";
+import { type Category } from "@/config/category";
 import { SeasonSwitch } from "./season-switch";
 import { CategoryDropdown } from "./category-dropdown";
 

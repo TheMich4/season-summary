@@ -1,8 +1,8 @@
 "use client";
 
-import { ClientSafeProvider, LiteralUnion, signIn } from "next-auth/react";
+import { type ClientSafeProvider, type LiteralUnion, signIn } from "next-auth/react";
 
-import { BuiltInProviderType } from "next-auth/providers/index";
+import { type BuiltInProviderType } from "next-auth/providers/index";
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
 import { RxDiscordLogo } from "react-icons/rx";

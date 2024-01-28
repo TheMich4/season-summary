@@ -34,7 +34,7 @@ export const StatBox = ({
     }
 
     if (useCounter && typeof value === "number" && value > 0) {
-      return <Counter value={value as number} />;
+      return <Counter value={value } />;
     }
 
     return value;
@@ -57,7 +57,7 @@ export const StatBox = ({
           <p className="text-sm">
             <Delta
               value={value as number}
-              previous={previous as number}
+              previous={previous!}
               invert={invert}
             />
           </p>
