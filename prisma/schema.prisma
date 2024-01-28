@@ -1,96 +1,97 @@
 generator client {
-  provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 model Season {
-  id       Int     @id @default(autoincrement())
-  isOver   Boolean @default(false)
-  season   Int
-  year     Int
-  category Int
+    id       Int     @id @default(autoincrement())
+    isOver   Boolean @default(false)
+    season   Int
+    year     Int
+    category Int
 
-  @@unique([year, season, category])
+    @@unique([year, season, category])
 }
 
 model SeasonData {
-  id         Int      @id @default(autoincrement())
-  isPending  Boolean  @default(false)
-  lastRace   String?
-  lastUpdate DateTime @default(now())
-  seasonId   Int
-  userId     Int
+    id         Int      @id @default(autoincrement())
+    isPending  Boolean  @default(false)
+    lastRace   String?
+    lastUpdate DateTime @default(now())
+    seasonId   Int
+    userId     Int
 
-  @@unique([seasonId, userId])
-  @@index([seasonId])
-  @@index([userId])
+    @@unique([seasonId, userId])
+    @@index([seasonId])
+    @@index([userId])
 }
 
 model IracingUser {
-  iracingId Int @id
+    iracingId Int @id
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id                String  @id @default(cuid())
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    session_state     String?
+    user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
-  @@index([userId])
+    @@unique([provider, providerAccountId])
+    @@index([userId])
 }
 
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId])
+    @@index([userId])
 }
 
 model User {
-  id               String    @id @default(cuid())
-  name             String?
-  email            String?   @unique
-  emailVerified    DateTime?
-  image            String?
-  isAdmin          Boolean   @default(false)
-  iracingId        String?
-  preferFull       Boolean   @default(false)
-  favoriteCategory String    @default("road")
-  accounts         Account[]
-  sessions         Session[]
+    id               String    @id @default(cuid())
+    name             String?
+    email            String?   @unique
+    emailVerified    DateTime?
+    image            String?
+    isAdmin          Boolean   @default(false)
+    iracingId        String?
+    preferFull       Boolean   @default(false)
+    favoriteCategory String    @default("road")
+    accounts         Account[]
+    sessions         Session[]
 }
 
 model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+    identifier String
+    token      String   @unique
+    expires    DateTime
 
-  @@unique([identifier, token])
+    @@unique([identifier, token])
 }
 
 model Data {
-  id           Int      @id @default(autoincrement())
-  lastUpdate   DateTime @default(now())
-  json         Json?
-  seasonDataId Int      @unique
-  stats        Json?
-  finalIRating Int?
+    id           Int      @id @default(autoincrement())
+    lastUpdate   DateTime @default(now())
+    json         Json?
+    seasonDataId Int      @unique
+    stats        Json?
+    finalIRating Int?
 }
