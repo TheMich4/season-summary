@@ -15,6 +15,7 @@ interface User {
 
 export const VisitedContext = createContext({
   visited: [] as Array<User>,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   addVisited: (user: User) => {},
 });
 
@@ -36,6 +37,7 @@ export const VisitedProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const visited = localStorage.getItem("visited");
     if (visited) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       setVisited(JSON.parse(visited));
     }
   }, []);

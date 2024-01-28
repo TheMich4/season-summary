@@ -13,6 +13,7 @@ export const SidebarRecentlyVisited = ({
   apiUrl,
 }: SidebarRecentlyVisitedProps) => {
   const { visited } = useVisited();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const avatars = useVisitedAvatars(apiUrl, visited);
 
   if (!visited.length) return null;
@@ -27,6 +28,7 @@ export const SidebarRecentlyVisited = ({
           .slice(0, 5)
           .map(({ iracingId, name }) => (
             <SidebarProfileCard
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
               avatarUrl={avatars?.[iracingId]}
               key={iracingId}
               name={name}

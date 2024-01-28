@@ -1,7 +1,7 @@
 "use client";
 
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 
 export const Title = () => {
   const isInitialRender = useMotionValue(true);
@@ -11,14 +11,14 @@ export const Title = () => {
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.round(latest));
   const displayText = useTransform(rounded, (latest) =>
-    isInitialRender.get() === true ? texts[0] : baseText.get().slice(0, latest)
+    isInitialRender.get() === true ? texts[0] : baseText.get().slice(0, latest),
   );
   const updatedThisRound = useMotionValue(true);
 
   const [motionClassName, setMotionClassName] = useState("inline-block");
 
   useEffect(() => {
-    animate(count, 30, {
+    void animate(count, 30, {
       type: "tween",
       duration: 5,
       ease: "easeIn",
@@ -38,7 +38,7 @@ export const Title = () => {
           } else {
             textIndex.set(textIndex.get() + 1);
             setMotionClassName(
-              "first-letter:text-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl inline-block font-black"
+              "first-letter:text-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl inline-block font-black",
             );
           }
           updatedThisRound.set(true);
@@ -53,7 +53,9 @@ export const Title = () => {
       {"Your iRacing"}
       <br className="block sm:hidden" />
       {" S"}
-      <motion.p className={motionClassName}>{displayText}</motion.p>
+      <motion.p className={motionClassName}>
+        {displayText as unknown as ReactNode}
+      </motion.p>
       {" Summary"}
     </h1>
   );

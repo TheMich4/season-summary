@@ -55,7 +55,7 @@ export const AuthButton = ({ isAdmin }: AuthButtonProps) => {
             <DropdownMenuItem
               onClick={() => {
                 posthog.capture("sign_out_click");
-                signOut();
+                void signOut();
               }}
               className="w-full"
             >
@@ -66,7 +66,7 @@ export const AuthButton = ({ isAdmin }: AuthButtonProps) => {
           <DropdownMenuItem
             onClick={() => {
               posthog.capture("sign_in_click");
-              signIn();
+              void signIn();
             }}
             className="w-full"
           >

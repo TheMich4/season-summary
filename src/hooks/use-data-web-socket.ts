@@ -22,9 +22,14 @@ export const useDataWebSocket = ({
 
   const { lastMessage } = useWebSocket(SOCKET_URL);
 
-  return useMemo(() => {
+  return useMemo<Record<string, unknown> | undefined>(() => {
     if (!lastMessage) return { status: undefined };
 
-    return JSON.parse(lastMessage.data);
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
+      return JSON.parse(lastMessage.data);
+    } catch (err) {
+      return undefined;
+    }
   }, [lastMessage]);
 };

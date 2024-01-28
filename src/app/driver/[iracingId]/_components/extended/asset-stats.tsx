@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { AssetDataTable } from "./asset-stats-data-table";
 import { useMemo } from "react";
+import { type AssetData } from "./types";
 
 interface AssetStatsProps {
   assetData: AssetData;
@@ -54,9 +55,9 @@ export const AssetStats = ({
         { count: 0, data: [] } as {
           count: number;
           data: Array<{ name: string; races: number }>;
-        }
+        },
       ),
-    [assetData]
+    [assetData],
   );
 
   return (
@@ -79,7 +80,7 @@ export const AssetStats = ({
       <DialogContent className="flex h-fit max-h-[80%] max-w-full flex-col overflow-hidden md:max-w-[80%] ">
         <DialogHeader className="flex flex-col gap-4">
           <DialogTitle>{`${name.charAt(0).toUpperCase()}${name.slice(
-            1
+            1,
           )} stats`}</DialogTitle>
         </DialogHeader>
 

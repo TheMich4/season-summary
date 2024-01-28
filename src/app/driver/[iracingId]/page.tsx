@@ -29,7 +29,6 @@ export default function ExtendedPage({
     <div className="flex w-full flex-col items-center justify-center gap-4 p-4 2xl:container">
       <Suspense fallback={<ProfileLoader iracingId={iracingId} />}>
         <ConfigProvider>
-          {/* @ts-ignore Server component */}
           <ExtendedProfile
             iracingId={iracingId}
             year={year}

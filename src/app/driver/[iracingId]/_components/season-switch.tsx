@@ -7,7 +7,6 @@ import Link from "next/link";
 const currentSeason = { season: DEFAULT_SEASON, year: DEFAULT_YEAR };
 
 export const SeasonSwitch = ({
-  iracingId,
   season,
   year,
   category,

@@ -35,7 +35,7 @@ export const Search = ({ iracingId, session, placeholder }: SearchProps) => {
       const url = id ? await getProfileUrl(id) : pathname;
       router.push(url);
     },
-    [pathname, router]
+    [pathname, router],
   );
 
   const handleSearch = useCallback(() => {
@@ -44,7 +44,7 @@ export const Search = ({ iracingId, session, placeholder }: SearchProps) => {
     if (isNaN(Number(value))) {
       router.push(`/search?q=${value}`);
     } else {
-      goToProfile(value);
+      void goToProfile(value);
     }
   }, [goToProfile, router, value]);
 

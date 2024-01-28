@@ -3,9 +3,9 @@ import { SidebarSectionLabel } from "./sidebar-section-label";
 import { SidebarDivider } from "./sidebar-divider";
 
 interface SidebarYourProfileProps {
-  name: string;
+  name?: string | null;
   iracingId?: string | null;
-  avatarUrl?: string;
+  avatarUrl?: string | null;
 }
 
 // TODO: Add no profile card

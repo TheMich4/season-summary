@@ -6,7 +6,7 @@ import { api } from "@/trpc/server";
 export const getProfileUrl = async (
   iracingId: string,
   options?: {
-    category: Category | string;
+    category: Category;
     season: string | number;
     year: string | number;
   },

@@ -1,5 +1,6 @@
 import resolveConfig from "tailwindcss/resolveConfig";
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import tailwindConfig from "../../tailwind.config";
 
 export const useTailwindTheme = () => {

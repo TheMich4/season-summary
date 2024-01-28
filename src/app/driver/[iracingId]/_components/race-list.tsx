@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 "use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -17,7 +20,9 @@ import { cn } from "@/lib/utils";
 const createResultUrl = (subsessionId: number, iracingId: string | number) =>
   `https://members.iracing.com/membersite/member/EventResult.do?subsessionid=${subsessionId}&custid=${iracingId}`;
 
-const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Race = ({ result }: { result: any; iracingId: string }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   const finishPosition = result.finishPositionInClass + 1;
 
   return (
@@ -28,7 +33,7 @@ const Race = ({ result, iracingId }: { result: any; iracingId: string }) => {
             "w-12 self-center text-center text-3xl font-bold text-foreground",
             finishPosition === 1 && "text-primary dark:text-primary",
             finishPosition === 2 && "text-gray-400 dark:text-gray-400",
-            finishPosition === 3 && "text-yellow-600 dark:text-yellow-600"
+            finishPosition === 3 && "text-yellow-600 dark:text-yellow-600",
           )}
         >
           {finishPosition}.
@@ -65,6 +70,7 @@ export const RaceList = ({
   iracingId,
   category,
 }: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   seasonResults: Array<any> | undefined;
   iracingId: string;
   category: Category;
@@ -87,7 +93,7 @@ export const RaceList = ({
       <span
         className={cn(
           "pt-2 text-center text-3xl font-bold",
-          numberOfPages === 0 && "pb-2"
+          numberOfPages === 0 && "pb-2",
         )}
       >
         Your {categoryToName[category]?.toLowerCase()} races this season:
@@ -120,7 +126,7 @@ export const RaceList = ({
             <DropdownMenuTrigger
               className={cn(
                 buttonVariants({ variant: "outline", size: "xs" }),
-                "gap-1"
+                "gap-1",
               )}
             >
               <ChevronDown className="size-4" />

@@ -1,12 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { Categories, categoryToName, type Category } from "@/config/category";
-import {
-  DEFAULT_CATEGORY,
-  DEFAULT_SEASON,
-  DEFAULT_YEAR,
-} from "@/config/iracing";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   type ReactNode,
   createContext,
@@ -29,6 +26,7 @@ const DEFAULT_CONFIG = {
 
 export const ConfigContext = createContext({
   ...DEFAULT_CONFIG,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   updateConfig: (config: Partial<Config>) => {},
 });
 

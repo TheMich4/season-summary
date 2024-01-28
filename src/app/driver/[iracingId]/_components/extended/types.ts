@@ -1,4 +1,4 @@
-interface AssetData {
+export interface AssetData {
   average: number;
   best: number;
   bestGain: number;
@@ -12,9 +12,9 @@ interface AssetData {
   worst: number;
 }
 
-type AssetsData = Record<string, AssetData>;
+export type AssetsData = Record<string, AssetData>;
 
-interface Asset {
+export interface Asset {
   name: string;
   data: AssetData;
 }

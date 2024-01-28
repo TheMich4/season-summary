@@ -13,8 +13,13 @@ export const AvatarUploader = () => {
   const { mutateAsync: updateUserAvatar } = api.user.updateAvatar.useMutation();
 
   const { startUpload } = useUploadThing("imageUploader", {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     onClientUploadComplete: async ([{ url }]) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       await updateUserAvatar({ avatarUrl: url });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       await update({ image: url });
       setIsUploading(false);
     },
@@ -33,7 +38,7 @@ export const AvatarUploader = () => {
 
     const file = event.target.files[0];
 
-    startUpload([file]);
+    file && void startUpload([file]);
   };
 
   return (

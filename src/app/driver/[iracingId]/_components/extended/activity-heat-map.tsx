@@ -86,21 +86,30 @@ export const ActivityHeatMap = ({
 
   const seasonDateRange = useMemo(
     () => getSeasonDateRange(year, season),
-    [season, year]
+    [season, year],
   );
 
   const data = useMemo(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const racesPerDate = raceResults?.reduce((acc, result) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       const date = result.startTime.split("T")[0];
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return {
         ...acc,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         [date]: (acc[date] ?? 0) + 1,
       };
     }, getInitialRacesPerDate(seasonDateRange));
 
-    const max = Math.max(...(Object.values(racesPerDate ?? {})));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    const max = Math.max(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      ...(Object.values(racesPerDate ?? {}) as unknown as number[]),
+    );
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return Object.entries(racesPerDate ?? {})
       .map(([date, count]) => ({
         date,
@@ -108,7 +117,7 @@ export const ActivityHeatMap = ({
         level: getLevel(count as number, max),
       }))
       .sort(
-        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
       ) as Activity[];
   }, [raceResults, seasonDateRange]);
 
