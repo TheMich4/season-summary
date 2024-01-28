@@ -1,8 +1,8 @@
 import { NavLink } from "./nav-link";
-import { authOptions } from "@/config/auth-options";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
 import { getProfileUrl } from "@/server/get-profile-url";
+import { authOptions } from "@/server/auth";
 
 export const ProfileNavLink = async () => {
   const session = await getServerSession(authOptions);

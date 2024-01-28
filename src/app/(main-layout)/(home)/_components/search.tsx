@@ -1,5 +1,5 @@
 import { Search as CommonSearch } from "@/components/search";
-import { authOptions } from "@/config/auth-options";
+import { authOptions } from "@/server/auth";
 import { getUserSettings } from "@/server/get-user-settings";
 import { getServerSession } from "next-auth";
 

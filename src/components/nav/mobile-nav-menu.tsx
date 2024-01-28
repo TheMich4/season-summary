@@ -10,13 +10,13 @@ import Link from "next/link";
 import { MainNavProps } from "./main-nav";
 import { Menu } from "lucide-react";
 import { Suspense } from "react";
-import { authOptions } from "@/config/auth-options";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
 import { siteConfig } from "@/config/site";
 import { getProfileUrl } from "@/server/get-profile-url";
+import { authOptions } from "@/server/auth";
 
 export const ProfileNavLink = async () => {
   const session = await getServerSession(authOptions);
@@ -58,13 +58,13 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
                     href={item.href}
                     className={cn(
                       "w-full p-1",
-                      item.disabled && "cursor-not-allowed opacity-80"
+                      item.disabled && "cursor-not-allowed opacity-80",
                     )}
                   >
                     {item.title}
                   </Link>
                 </DropdownMenuItem>
-              )
+              ),
           )}
           <Suspense fallback={null}>
             <ProfileNavLink />

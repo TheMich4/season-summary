@@ -2,7 +2,7 @@ import { Category } from "@/config/category";
 
 import { ProfileUpdater } from "./extended/profile-updater";
 import { Suspense } from "react";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 import { getIracingData } from "@/server/get-iracing-data";
 import { ExtendedProfileManager } from "./extended-profile-manager";
 import { VisitedManager } from "./visited-manager";

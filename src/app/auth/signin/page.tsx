@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { ProviderButtons } from "./provider-buttons";
-import { authOptions } from "@/config/auth-options";
 import { getProviders } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { authOptions } from "@/server/auth";
 
 export default async function SignInPage() {
   const session = await getServerSession(authOptions);

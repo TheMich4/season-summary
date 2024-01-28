@@ -17,7 +17,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { VisitedProvider } from "@/components/providers/visited-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 import { Footer } from "@/components/footer";
 import { Maintenance } from "@/components/maintenance";
 import { TRPCReactProvider } from "@/trpc/react";

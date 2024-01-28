@@ -1,15 +1,14 @@
 "use server";
 
-import { authOptions, prisma } from "@/config/auth-options";
-
 import { Category } from "@/config/category";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { authOptions } from "./auth";
 
 export const setCurrentUserConfig = async (
   iracingId: string,
   preferFull: boolean,
-  favoriteCategory: Category
+  favoriteCategory: Category,
 ) => {
   const session = await getServerSession(authOptions);
 

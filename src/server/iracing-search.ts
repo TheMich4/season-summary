@@ -1,6 +1,6 @@
 "use server";
 
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 
 export const iracingSearch = async (searchTerm: string) => {
   const response = await fetch(

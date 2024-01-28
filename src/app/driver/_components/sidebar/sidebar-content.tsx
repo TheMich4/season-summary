@@ -1,7 +1,7 @@
 import { SidebarDivider } from "./sidebar-divider";
 import { SidebarYourProfile } from "./sidebar-your-profile";
 import { SidebarRecentlyVisited } from "./sidebar-recently-visited";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 import { type Session } from "next-auth";
 import { Search } from "@/components/search";
 

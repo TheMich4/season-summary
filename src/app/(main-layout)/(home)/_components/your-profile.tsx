@@ -4,11 +4,11 @@ import { Loader2 } from "lucide-react";
 import { ProfileCard } from "@/components/profile-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
-import { authOptions } from "@/config/auth-options";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
 import { StatBox } from "@/components/stat-box";
+import { authOptions } from "@/server/auth";
 
 const NoProfile = () => {
   return (
@@ -32,7 +32,7 @@ const Stats = async ({
   category: Category;
 }) => {
   const response = await fetch(
-    `${env.API_URL}v2/get-basic-data?iracingId=${iracingId}&categoryId=${categoryToId[category]}`
+    `${env.API_URL}v2/get-basic-data?iracingId=${iracingId}&categoryId=${categoryToId[category]}`,
   );
 
   if (response.status === 503) return null;

@@ -1,9 +1,9 @@
 import { Settings } from "./_components/settings";
 import { UserAvatar } from "./_components/user-avatar";
-import { authOptions } from "@/config/auth-options";
 import { getServerSession } from "next-auth";
 import { getUserSettings } from "@/server/get-user-settings";
 import { redirect } from "next/navigation";
+import { authOptions } from "@/server/auth";
 
 export default async function ProfileSettings() {
   const session = await getServerSession(authOptions);

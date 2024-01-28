@@ -1,6 +1,5 @@
-import { authOptions, prisma } from "@/config/auth-options";
-
 import { getServerSession } from "next-auth";
+import { authOptions } from "./auth";
 
 export const getIsUserAdmin = async () => {
   const session = await getServerSession(authOptions);

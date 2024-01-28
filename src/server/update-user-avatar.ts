@@ -1,8 +1,7 @@
 "use server";
 
-import { authOptions, prisma } from "@/config/auth-options";
-
 import { getServerSession } from "next-auth";
+import { authOptions } from "./auth";
 
 export const updateUserAvatar = async (avatarUrl: string) => {
   const session = await getServerSession(authOptions);
