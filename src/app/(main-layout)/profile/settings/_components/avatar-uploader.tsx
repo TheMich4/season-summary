@@ -1,9 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Upload } from "lucide-react";
-import { updateUserAvatar } from "@/server/update-user-avatar";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useUploadThing } from "@/lib/uploadthing";
