@@ -1,12 +1,7 @@
 "use server";
 
-import { env } from "@/env";
+import { api } from "@/trpc/server";
 
 export const iracingSearch = async (searchTerm: string) => {
-  const response = await fetch(
-    `${env.API_URL}v2/search-drivers?searchTerm=${searchTerm}`
-  );
-  const { drivers } = await response.json();
-
-  return drivers;
+  return api.data.userSearch.query(searchTerm);
 };

@@ -5,14 +5,16 @@ import { Upload } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useUploadThing } from "@/lib/uploadthing";
+import { api } from "@/trpc/react";
 
 export const AvatarUploader = () => {
   const [isUploading, setIsUploading] = useState(false);
   const { update } = useSession();
+  const { mutateAsync: updateUserAvatar } = api.user.updateAvatar.useMutation();
 
   const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: async ([{ url }]) => {
-      await updateUserAvatar(url);
+      await updateUserAvatar({ avatarUrl: url });
       await update({ image: url });
       setIsUploading(false);
     },

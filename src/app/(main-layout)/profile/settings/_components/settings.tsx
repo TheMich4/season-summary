@@ -22,10 +22,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
-import { setCurrentUserConfig } from "@/server/set-current-user-config";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "@/trpc/react";
 
 const formSchema = z.object({
   iracingId: z.string(),
@@ -43,6 +43,7 @@ export const Settings = ({
   } | null;
 }) => {
   const [saving, setSaving] = useState(false);
+  const { mutateAsync: setConfig } = api.user.setConfig.useMutation();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -60,7 +61,7 @@ export const Settings = ({
   }: z.infer<typeof formSchema>) => {
     setSaving(true);
 
-    await setCurrentUserConfig(iracingId, preferFull, category as Category);
+    await setConfig({ iracingId, preferFull, favoriteCategory: category });
 
     setSaving(false);
   };
@@ -101,7 +102,7 @@ export const Settings = ({
                     <DropdownMenuTrigger
                       className={cn(
                         buttonVariants({ variant: "outline", size: "xs" }),
-                        "gap-1 dark:bg-background/40 h-10 mt-2"
+                        "mt-2 h-10 gap-1 dark:bg-background/40",
                       )}
                     >
                       <ChevronDown className="size-5" />

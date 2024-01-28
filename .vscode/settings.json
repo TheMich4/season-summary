@@ -1,7 +1,5 @@
 {
-  "cSpell.words": [
-    "iracing"
-  ],
+  "cSpell.words": ["iracing", "subsession", "TRPC"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true
 }

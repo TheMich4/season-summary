@@ -1,14 +1,13 @@
-import { getRaceResult } from "@/server/get-race-result";
-import { siteConfig } from "@/config/site";
 import { RaceSummary } from "./race-summary";
 import { ResultTable } from "./result-table/result-table";
+import { api } from "@/trpc/server";
 
 interface ResultProps {
   subsessionId: string;
 }
 
 export const Result = async ({ subsessionId }: ResultProps) => {
-  const result = await getRaceResult(subsessionId);
+  const result = await api.data.getRaceResult.query({ subsessionId });
 
   if (!result) {
     return <div>Failed to get result for session {subsessionId}</div>;
