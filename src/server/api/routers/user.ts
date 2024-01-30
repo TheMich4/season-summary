@@ -1,8 +1,14 @@
-import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "@/server/api/trpc";
 import { z } from "zod";
 
 export const userRouter = createTRPCRouter({
-  isAdmin: protectedProcedure.query(async ({ ctx }) => {
+  isAdmin: publicProcedure.query(async ({ ctx }) => {
+    if (!ctx.session?.user) return false;
+
     const data = await ctx.db.user.findFirst({
       where: { id: ctx.session.user.id },
       select: { isAdmin: true },
@@ -10,7 +16,9 @@ export const userRouter = createTRPCRouter({
 
     return data?.isAdmin ?? false;
   }),
-  getSettings: protectedProcedure.query(async ({ ctx }) => {
+  getSettings: publicProcedure.query(async ({ ctx }) => {
+    if (!ctx.session?.user) return null;
+
     return await ctx.db.user.findFirst({
       where: { id: ctx.session.user.id },
       select: {
