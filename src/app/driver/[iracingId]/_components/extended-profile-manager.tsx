@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
 import { ExtendedProfileNoData } from "./extended-profile-no-data";
 import { View } from "./extended/view";
-import { dismissToast, updateToast, useToast } from "@/components/ui/use-toast";
+import { updateToast, useToast } from "@/components/ui/use-toast";
 import { CheckCircle2 } from "lucide-react";
 import { SeasonSwitch } from "./season-switch";
 import { CategoryDropdown } from "./category-dropdown";
@@ -28,7 +28,7 @@ export const ExtendedProfileManager = ({
   wsUrl,
   simpleData,
 }: Props) => {
-  const { toast } = useToast();
+  const { toast, dismiss } = useToast();
   const [toastId, setToastId] = useState<string | undefined>(undefined);
 
   const wsData = useDataWebSocket({
@@ -52,7 +52,7 @@ export const ExtendedProfileManager = ({
   useEffect(() => {
     const { status: wsStatus, message } = wsData ?? ({} as any);
 
-    if (status === "DONE-MAINTENANCE") {
+    if (wsStatus === "DONE-MAINTENANCE") {
       toast({
         title: "iRacing is currently under maintenance.",
       });
@@ -67,7 +67,6 @@ export const ExtendedProfileManager = ({
           : `Prepared ${fetchedRaces} of ${message?.count.races} races. ${percentage}% done.`;
       const duration = Infinity;
       const variant = "default";
-
       if (toastId) {
         updateToast({ id: toastId, title, description, duration, variant });
       } else {
@@ -93,18 +92,11 @@ export const ExtendedProfileManager = ({
         duration: 5000,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    wsData?.status,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    (wsData?.message as any)?.count.fetched,
-    toast,
-    toastId,
-  ]);
+  }, [toastId, wsData, toast]);
 
   // Reason: Its supposed to only run when page is changed
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => () => dismissToast(toastId), []);
+  useEffect(() => () => dismiss(toastId), []);
 
   // TODO: Add maintenance stats
   if (wsData?.status === "DONE-MAINTENANCE") {
