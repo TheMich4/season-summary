@@ -1,14 +1,14 @@
-import { Category, categoryToId } from "@/config/category";
+import { type Category, categoryToId } from "@/config/category";
 
 import { Loader2 } from "lucide-react";
 import { ProfileCard } from "@/components/profile-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
-import { authOptions } from "@/config/auth-options";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 import { getServerSession } from "next-auth";
-import { getUserSettings } from "@/server/get-user-settings";
 import { StatBox } from "@/components/stat-box";
+import { authOptions } from "@/server/auth";
+import { api } from "@/trpc/server";
 
 const NoProfile = () => {
   return (
@@ -32,7 +32,7 @@ const Stats = async ({
   category: Category;
 }) => {
   const response = await fetch(
-    `${env.API_URL}v2/get-basic-data?iracingId=${iracingId}&categoryId=${categoryToId[category]}`
+    `${env.API_URL}v2/get-basic-data?iracingId=${iracingId}&categoryId=${categoryToId[category]}`,
   );
 
   if (response.status === 503) return null;
@@ -87,7 +87,7 @@ const Stats = async ({
 
 const Profile = async () => {
   const session = await getServerSession(authOptions);
-  const userSettings = session && (await getUserSettings(session.user.id));
+  const userSettings = await api.user.getSettings.query();
 
   if (!session || !userSettings?.iracingId) {
     return <NoProfile />;

@@ -1,5 +1,7 @@
+export const dynamic = "force-dynamic";
+
 import { Title } from "./_components/title";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 import { Search } from "./_components/search";
 import { YourProfile } from "./_components/your-profile";
 import { VisitedList } from "./_components/visited-list";

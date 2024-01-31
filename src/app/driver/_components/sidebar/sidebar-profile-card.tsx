@@ -10,9 +10,9 @@ import posthog from "posthog-js";
 import { useMemo } from "react";
 
 interface SidebarProfileCardProps {
-  name: string;
+  name?: string | null;
   iracingId: string;
-  avatarUrl?: string;
+  avatarUrl?: string | null;
 }
 
 export const SidebarProfileCard = ({
@@ -24,8 +24,8 @@ export const SidebarProfileCard = ({
   const pathname = usePathname();
 
   const displayName = useMemo(() => {
-    const nameSplit = name.split(" ");
-    return nameSplit.reduce((acc, curr, i) => {
+    const nameSplit = name?.split(" ");
+    return nameSplit?.reduce((acc, curr, i) => {
       if (i === nameSplit.length - 1) return `${acc} ${curr}`;
 
       return `${acc} ${curr.charAt(0)}.`;

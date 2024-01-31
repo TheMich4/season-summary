@@ -2,7 +2,7 @@
 
 import { StatBox } from "@/components/stat-box";
 import { Badge } from "@/components/ui/badge";
-import { Category, categoryToName } from "@/config/category";
+import { type Category, categoryToName } from "@/config/category";
 import { getProfileUrl } from "@/server/get-profile-url";
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";

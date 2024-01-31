@@ -1,6 +1,6 @@
 "use client";
 
-import { Category, categoryToName } from "@/config/category";
+import { type Category, categoryToName } from "@/config/category";
 import {
   DropdownMenu,
   DropdownMenuContent,

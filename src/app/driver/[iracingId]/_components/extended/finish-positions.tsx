@@ -6,9 +6,7 @@ import { cn } from "@/lib/utils";
 import { useMemo } from "react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 
-interface FinishPositions {
-  [position: string]: number;
-}
+type FinishPositions = Record<string, number>;
 
 interface FinishPositionsProps {
   finishPositions: FinishPositions;
@@ -39,7 +37,7 @@ const PositionList = ({
             className={cn(
               "flex justify-center text-muted-foreground",
               `${payload[0]?.payload.name}` === position &&
-                "font-bold text-foreground"
+                "font-bold text-foreground",
             )}
           >
             {position}
@@ -62,14 +60,14 @@ const PositionChart = ({
 
   const data = useMemo(() => {
     const positions = Object.keys(finishPositions).map((week) =>
-      parseInt(week, 10)
+      parseInt(week, 10),
     );
     return Array.from(
-      { length: positions[positions.length - 1] + 1 },
+      { length: positions?.[positions.length - 1] ?? -1 + 1 ?? 0 },
       (_, position) => ({
         name: position,
         races: finishPositions[position] || 0,
-      })
+      }),
     ).slice(1);
   }, [finishPositions]);
 
@@ -100,7 +98,7 @@ const PositionChart = ({
 export const FinishPositions = ({ finishPositions }: FinishPositionsProps) => {
   const bestFinish = useMemo(() => {
     return Math.min(
-      ...Object.keys(finishPositions).map((week) => parseInt(week, 10))
+      ...Object.keys(finishPositions).map((week) => parseInt(week, 10)),
     );
   }, [finishPositions]);
 

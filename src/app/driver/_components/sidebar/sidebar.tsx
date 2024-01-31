@@ -1,8 +1,6 @@
 import { getServerSession } from "next-auth";
 import { SidebarContent } from "./sidebar-content";
-import { getUserSettings } from "@/server/get-user-settings";
-import { authOptions } from "@/config/auth-options";
-import {
+/* import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -10,11 +8,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Icons } from "@/components/icons";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config/site"; */
+import { authOptions } from "@/server/auth";
+import { api } from "@/trpc/server";
 
 export const Sidebar = async () => {
   const session = await getServerSession(authOptions);
-  const userSettings = await getUserSettings(session?.user?.id);
+  const userSettings = await api.user.getSettings.query();
 
   return (
     <div className="h-full min-h-full 2xl:w-[300px]">

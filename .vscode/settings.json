@@ -1,18 +1,11 @@
 {
   "cSpell.words": [
-    "cust",
-    "hookform",
     "iracing",
-    "Irating",
-    "Lucide",
-    "nocompatible",
+    "irating",
+    "lucide",
     "posthog",
-    "quali",
-    "simsession",
     "subsession",
-    "tailwindcss",
-    "tanstack",
-    "UPLOADTHING"
+    "TRPC"
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true

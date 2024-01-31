@@ -7,20 +7,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import Link from "next/link";
-import { MainNavProps } from "./main-nav";
+import { type MainNavProps } from "./main-nav";
 import { Menu } from "lucide-react";
 import { Suspense } from "react";
-import { authOptions } from "@/config/auth-options";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { getServerSession } from "next-auth";
-import { getUserSettings } from "@/server/get-user-settings";
 import { siteConfig } from "@/config/site";
 import { getProfileUrl } from "@/server/get-profile-url";
+import { api } from "@/trpc/server";
 
 export const ProfileNavLink = async () => {
-  const session = await getServerSession(authOptions);
-  const userSettings = await getUserSettings(session?.user?.id);
+  const userSettings = await api.user.getSettings.query();
   const url = userSettings?.iracingId
     ? await getProfileUrl(userSettings.iracingId)
     : "#";
@@ -58,13 +55,13 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
                     href={item.href}
                     className={cn(
                       "w-full p-1",
-                      item.disabled && "cursor-not-allowed opacity-80"
+                      item.disabled && "cursor-not-allowed opacity-80",
                     )}
                   >
                     {item.title}
                   </Link>
                 </DropdownMenuItem>
-              )
+              ),
           )}
           <Suspense fallback={null}>
             <ProfileNavLink />

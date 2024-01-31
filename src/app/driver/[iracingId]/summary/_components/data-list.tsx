@@ -4,8 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { getDriverSeasons } from "../_api/get-driver-seasons";
 import { DataListSeason } from "./data-list-season";
+import { api } from "@/trpc/server";
 
 interface DriverSummaryDataListProps {
   iracingId: string;
@@ -14,7 +14,7 @@ interface DriverSummaryDataListProps {
 export const DriverSummaryDataList = async ({
   iracingId,
 }: DriverSummaryDataListProps) => {
-  const seasons = await getDriverSeasons(iracingId);
+  const seasons = await api.data.getDriverSeasons.query({ iracingId });
 
   return (
     <div className="flex w-full flex-col gap-2">

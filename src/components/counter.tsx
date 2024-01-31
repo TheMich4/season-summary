@@ -36,12 +36,15 @@ export const Counter = ({
     () =>
       springValue.on("change", (latest) => {
         if (ref.current) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           ref.current.textContent = formatValue
-            ? Intl.NumberFormat("en-US").format(latest.toFixed(precision))
-            : latest.toFixed(precision);
+            ? // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+              Intl.NumberFormat("en-US").format(latest.toFixed(precision))
+            : // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+              latest.toFixed(precision);
         }
       }),
-    [springValue, formatValue, precision]
+    [springValue, formatValue, precision],
   );
 
   if (disabled) {

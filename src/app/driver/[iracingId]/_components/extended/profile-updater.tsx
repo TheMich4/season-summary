@@ -1,9 +1,8 @@
 "use server";
 
-import { Category, categoryToId } from "@/config/category";
+import { type Category, categoryToId } from "@/config/category";
 
-import { ProfileRefresher } from "./profile-refresher";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 
 interface Props {
   iracingId: number;
@@ -23,16 +22,4 @@ export const ProfileUpdater = async ({
   await fetch(URL, { cache: "no-cache" });
 
   return null;
-
-  // return (
-  //   <div>
-  //     <ProfileRefresher
-  //       iracingId={iracingId}
-  //       year={year}
-  //       season={season}
-  //       category={category}
-  //       wsUrl={env.WS_URL}
-  //     />
-  //   </div>
-  // );
 };

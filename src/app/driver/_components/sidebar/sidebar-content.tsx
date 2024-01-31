@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { SidebarDivider } from "./sidebar-divider";
 import { SidebarYourProfile } from "./sidebar-your-profile";
 import { SidebarRecentlyVisited } from "./sidebar-recently-visited";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 import { type Session } from "next-auth";
 import { Search } from "@/components/search";
 
 interface SidebarContentProps {
   session: Session | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   userSettings: any;
 }
 
@@ -22,6 +24,7 @@ export const SidebarContent = ({
 
       <SidebarYourProfile
         name={session?.user.name}
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         iracingId={userSettings?.iracingId}
         avatarUrl={session?.user.image}
       />

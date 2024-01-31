@@ -3,7 +3,7 @@ import * as React from "react";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { MobileNavMenu } from "./mobile-nav-menu";
-import { NavItem } from "./types";
+import { type NavItem } from "./types";
 import { NavLink } from "./nav-link";
 import { ProfileNavLink } from "./profile-nav-link";
 import { ScheduleNavLink } from "./schedule-nav-link";

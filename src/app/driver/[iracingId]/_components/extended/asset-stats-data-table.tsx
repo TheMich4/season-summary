@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { type AssetData } from "./types";
 
 interface DataTableProps {
   data: AssetData[];
@@ -61,7 +62,7 @@ const DataTable = ({ data }: DataTableProps) => {
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
-                        header.getContext()
+                        header.getContext(),
                       )}
                 </TableHead>
               );
@@ -101,7 +102,7 @@ export const AssetDataTable = ({ data }: AssetDataTableProps) => {
       Object.entries(data)
         .map(([name, asset]) => ({ name, ...asset }))
         .sort((a, b) => b.races - a.races),
-    [data]
+    [data],
   );
 
   const className =

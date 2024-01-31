@@ -5,17 +5,17 @@ import { useMemo } from "react";
 
 export const useVisitedAvatars = (
   apiUrl: string,
-  visited: { iracingId: string; name: string }[]
+  visited: { iracingId: string; name: string }[],
 ) => {
   const url = useMemo(
     () =>
       `${apiUrl}v2/get-avatars?ids=${visited
         .map(({ iracingId }) => iracingId)
         .join(",")}`,
-    [apiUrl, visited]
+    [apiUrl, visited],
   );
 
-  const { data } = useQuery({
+  const response = useQuery({
     queryKey: ["visitedAvatars"],
     queryFn: () => fetch(url).then((r) => r.json()),
     enabled: visited.length > 0,
@@ -26,5 +26,6 @@ export const useVisitedAvatars = (
     retry: false,
   });
 
-  return data;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return response?.data;
 };

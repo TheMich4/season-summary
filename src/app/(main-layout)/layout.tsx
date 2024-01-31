@@ -17,9 +17,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { VisitedProvider } from "@/components/providers/visited-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 import { Footer } from "@/components/footer";
 import { Maintenance } from "@/components/maintenance";
+import { TRPCReactProvider } from "@/trpc/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -62,27 +63,33 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(
           inter.className,
-          "custom-scrollbar min-h-full my-gradient"
+          "custom-scrollbar my-gradient min-h-full",
         )}
       >
-        <PHProvider>
-          <AuthProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <QueryProvider>
-                <VisitedProvider>
-                  <div className="relative flex min-h-screen flex-col">
-                    <SiteHeader />
-                    <div className="flex-1">{children}</div>
-                    <Footer />
+        <TRPCReactProvider>
+          <PHProvider>
+            <AuthProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
+                <QueryProvider>
+                  <VisitedProvider>
+                    <div className="relative flex min-h-screen flex-col">
+                      <SiteHeader />
+                      <div className="flex-1">{children}</div>
+                      <Footer />
 
-                    <Toaster />
-                  </div>
-                  <TailwindIndicator />
-                </VisitedProvider>
-              </QueryProvider>
-            </ThemeProvider>
-          </AuthProvider>
-        </PHProvider>
+                      <Toaster />
+                    </div>
+                    <TailwindIndicator />
+                  </VisitedProvider>
+                </QueryProvider>
+              </ThemeProvider>
+            </AuthProvider>
+          </PHProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

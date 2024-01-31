@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Category } from "@/config/category";
+import { type Category } from "@/config/category";
 import { FinishPositions } from "./finish-positions";
 import { Incidents } from "./incidents";
 import { IncidentsGraph } from "./incidents-graph";

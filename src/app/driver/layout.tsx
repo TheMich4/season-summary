@@ -17,10 +17,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { VisitedProvider } from "@/components/providers/visited-provider";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
-import { env } from "@/env.mjs";
+import { env } from "@/env";
 import { Footer } from "@/components/footer";
 import { Maintenance } from "@/components/maintenance";
 import { Sidebar } from "./_components/sidebar/sidebar";
+import { TRPCReactProvider } from "@/trpc/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,33 +64,39 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(
           inter.className,
-          "h-screen max-h-screen my-gradient flex flex-col overflow-hidden "
+          "my-gradient flex h-screen max-h-screen flex-col overflow-hidden ",
         )}
       >
-        <PHProvider>
-          <AuthProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <QueryProvider>
-                <VisitedProvider>
-                  <SiteHeader fullWidth />
-                  <div className="flex size-full flex-row overflow-hidden">
-                    <Sidebar />
+        <TRPCReactProvider>
+          <PHProvider>
+            <AuthProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
+                <QueryProvider>
+                  <VisitedProvider>
+                    <SiteHeader fullWidth />
+                    <div className="flex size-full flex-row overflow-hidden">
+                      <Sidebar />
 
-                    <div className="flex size-full max-h-full flex-col justify-between overflow-auto scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground dark:scrollbar-thumb-primary">
-                      {children}
+                      <div className="flex size-full max-h-full flex-col justify-between overflow-auto scrollbar-thin scrollbar-track-background scrollbar-thumb-foreground dark:scrollbar-thumb-primary">
+                        {children}
 
-                      <Footer />
+                        <Footer />
+                      </div>
+
+                      <Toaster />
                     </div>
 
-                    <Toaster />
-                  </div>
-
-                  <TailwindIndicator />
-                </VisitedProvider>
-              </QueryProvider>
-            </ThemeProvider>
-          </AuthProvider>
-        </PHProvider>
+                    <TailwindIndicator />
+                  </VisitedProvider>
+                </QueryProvider>
+              </ThemeProvider>
+            </AuthProvider>
+          </PHProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

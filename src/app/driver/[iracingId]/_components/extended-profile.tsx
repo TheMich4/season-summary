@@ -1,11 +1,11 @@
-import { Category } from "@/config/category";
+import { type Category } from "@/config/category";
 
 import { ProfileUpdater } from "./extended/profile-updater";
 import { Suspense } from "react";
-import { env } from "@/env.mjs";
-import { getIracingData } from "@/server/get-iracing-data";
+import { env } from "@/env";
 import { ExtendedProfileManager } from "./extended-profile-manager";
 import { VisitedManager } from "./visited-manager";
+import { api } from "@/trpc/server";
 
 interface ExtendedProfileProps {
   iracingId: string;
@@ -20,7 +20,12 @@ export const ExtendedProfile = async ({
   year,
   category,
 }: ExtendedProfileProps) => {
-  const simpleData = await getIracingData(iracingId, +year, +season, category);
+  const simpleData = await api.data.getData.query({
+    iracingId,
+    year: +year,
+    season: +season,
+    category,
+  });
 
   return (
     <>

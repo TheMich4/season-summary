@@ -15,9 +15,9 @@ export const ProfileCard = ({
   iracingId,
   avatarUrl,
 }: {
-  name?: string;
+  name?: string | null;
   iracingId?: number | string;
-  avatarUrl?: string;
+  avatarUrl?: string | null;
 }) => {
   const router = useRouter();
   const pathname = usePathname();
