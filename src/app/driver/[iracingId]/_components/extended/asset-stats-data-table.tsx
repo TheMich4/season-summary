@@ -44,9 +44,14 @@ const columns: ColumnDef<AssetData>[] = [
     cell: ({ getValue }) => <Delta value={getValue() as number} />,
   },
   {
+    header: "iRating per race",
+    cell: ({ row: { original } }) => (
+      <Delta value={original.iRatingDiff / original.races} precision={2} />
+    ),
+  },
+  {
     accessorKey: "incidents",
     header: "Incidents",
-    cell: ({ getValue }) => <Delta value={getValue() as number} />,
   },
   { accessorKey: "lapsCompleted", header: "Laps Completed" },
   { accessorKey: "lapsLead", header: "Laps Lead" },

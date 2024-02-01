@@ -2,7 +2,7 @@ export interface AssetData {
   average: number;
   best: number;
   bestGain: number;
-  iratingDiff: number;
+  iRatingDiff: number;
   incidents: number;
   lapsCompleted: number;
   lapsLead: number;
