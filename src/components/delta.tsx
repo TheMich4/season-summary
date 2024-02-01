@@ -4,13 +4,13 @@ import { cn } from "@/lib/utils";
 
 export const Delta = ({
   value,
-  previous,
+  previous = 0,
   invert = false,
   precision = 0,
   useCounter = false,
 }: {
   value: number;
-  previous: number;
+  previous?: number;
   invert?: boolean;
   precision?: number;
   useCounter?: boolean;

@@ -16,6 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { type AssetData } from "./types";
+import { Delta } from "@/components/delta";
 
 interface DataTableProps {
   data: AssetData[];
@@ -37,8 +38,16 @@ const columns: ColumnDef<AssetData>[] = [
     header: "Avg. Finish",
   },
   { accessorKey: "bestGain", header: "Most Gained" },
-  { accessorKey: "iRatingDiff", header: "Gained iRating" },
-  { accessorKey: "incidents", header: "Incidents" },
+  {
+    accessorKey: "iRatingDiff",
+    header: "Gained iRating",
+    cell: ({ getValue }) => <Delta value={getValue() as number} />,
+  },
+  {
+    accessorKey: "incidents",
+    header: "Incidents",
+    cell: ({ getValue }) => <Delta value={getValue() as number} />,
+  },
   { accessorKey: "lapsCompleted", header: "Laps Completed" },
   { accessorKey: "lapsLead", header: "Laps Lead" },
 ];
