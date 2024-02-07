@@ -70,6 +70,12 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
           <DropdownMenuSeparator />
 
           <DropdownMenuItem>
+            <Link href="https://special-events.dyczkowski.dev">
+              Special Events
+            </Link>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem>
             <Link href="https://schedule.dyczkowski.dev/">
               <div className="flex flex-row items-center gap-1 dark:text-primary">
                 <span>Schedule</span>

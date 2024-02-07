@@ -9,6 +9,7 @@ import { ProfileNavLink } from "./profile-nav-link";
 import { ScheduleNavLink } from "./schedule-nav-link";
 import { Suspense } from "react";
 import { siteConfig } from "@/config/site";
+import { SpecialEventsNavLink } from "./special-events-nav-link";
 
 export interface MainNavProps {
   items: NavItem[];
@@ -26,12 +27,13 @@ export function MainNav({ items }: MainNavProps) {
       </Link>
       <nav className="hidden gap-6 md:flex">
         {items?.map(
-          (item, index) => item.href && <NavLink key={index} item={item} />
+          (item, index) => item.href && <NavLink key={index} item={item} />,
         )}
         <Suspense fallback={null}>
           <ProfileNavLink />
         </Suspense>
 
+        <SpecialEventsNavLink />
         <ScheduleNavLink />
       </nav>
     </div>
