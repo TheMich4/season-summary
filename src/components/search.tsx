@@ -81,7 +81,7 @@ export const Search = ({ iracingId, session, placeholder }: SearchProps) => {
       <Button
         variant="outline"
         onClick={() => setOpen(true)}
-        className="relative w-full justify-between rounded-md bg-background/40 text-sm font-normal text-muted-foreground shadow-none"
+        className="relative w-full justify-between rounded-md bg-background/40 text-sm font-normal text-muted-foreground shadow-none hover:bg-background/50"
       >
         <span className="inline-flex">{placeholder ?? "Search..."}</span>
         <kbd className="pointer-events-none -mr-2 hidden h-5 select-none items-center gap-1 self-center rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
