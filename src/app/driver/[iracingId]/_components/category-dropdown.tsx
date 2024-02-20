@@ -25,7 +25,7 @@ export const CategoryDropdown = () => {
       <DropdownMenuTrigger
         className={cn(
           buttonVariants({ variant: "outline", size: "xs" }),
-          "gap-1 bg-background/40"
+          "gap-1 bg-background/40 hover:bg-background/50",
         )}
       >
         <ChevronDown className="size-5" />
