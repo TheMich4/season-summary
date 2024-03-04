@@ -15,11 +15,21 @@ export const getPreviousSeason = (year: number, season: number) => {
 };
 
 export const isPastSeason = (year: number, season: number) => {
-  if (year < currentSeason.year) {
+  return isBeforeSeason({ year, season }, currentSeason);
+};
+
+export const isBeforeSeason = (
+  season: { year: number; season: number },
+  compareSeason: { year: number; season: number },
+) => {
+  if (season.year < compareSeason.year) {
     return true;
   }
 
-  if (year === currentSeason.year && season < currentSeason.season) {
+  if (
+    season.year === compareSeason.year &&
+    season.season < compareSeason.season
+  ) {
     return true;
   }
 
