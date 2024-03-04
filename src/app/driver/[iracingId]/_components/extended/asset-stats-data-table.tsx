@@ -26,13 +26,43 @@ interface AssetDataTableProps {
   data: AssetData;
 }
 
+const positionClasses = new Proxy(
+  {
+    1: "text-primary dark:text-primary font-bold",
+    2: "text-gray-400 dark:text-gray-400 font-bold",
+    3: "text-yellow-600 dark:text-yellow-600 font-bold",
+  },
+  {
+    get: (target, prop) => {
+      if (prop in target) {
+        return target[prop];
+      }
+      return "";
+    },
+  },
+);
+
 const columns: ColumnDef<AssetData>[] = [
   { accessorKey: "name", header: "Name" },
   { accessorKey: "races", header: "Races" },
   { accessorKey: "wins", header: "Wins" },
   { accessorKey: "podiums", header: "Podiums" },
-  { accessorFn: ({ best }: AssetData) => best + 1, header: "Best Finish" },
-  { accessorFn: ({ worst }: AssetData) => worst + 1, header: "Worst Finish" },
+  {
+    accessorFn: ({ best }: AssetData) => best + 1,
+    header: "Best Finish",
+    cell: ({ getValue }) => {
+      const position = getValue() as number;
+      return <span className={positionClasses[position]}>{position}</span>;
+    },
+  },
+  {
+    accessorFn: ({ worst }: AssetData) => worst + 1,
+    header: "Worst Finish",
+    cell: ({ getValue }) => {
+      const position = getValue() as number;
+      return <span className={positionClasses[position]}>{position}</span>;
+    },
+  },
   {
     accessorFn: ({ average }: AssetData) => average.toFixed(2),
     header: "Avg. Finish",
