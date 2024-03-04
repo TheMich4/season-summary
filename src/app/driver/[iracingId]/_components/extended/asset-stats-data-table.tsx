@@ -35,6 +35,7 @@ const positionClasses = new Proxy(
   {
     get: (target, prop) => {
       if (prop in target) {
+        // @ts-ignore
         return target[prop];
       }
       return "";
@@ -52,6 +53,7 @@ const columns: ColumnDef<AssetData>[] = [
     header: "Best Finish",
     cell: ({ getValue }) => {
       const position = getValue() as number;
+      // @ts-ignore
       return <span className={positionClasses[position]}>{position}</span>;
     },
   },
@@ -60,6 +62,7 @@ const columns: ColumnDef<AssetData>[] = [
     header: "Worst Finish",
     cell: ({ getValue }) => {
       const position = getValue() as number;
+      // @ts-ignore
       return <span className={positionClasses[position]}>{position}</span>;
     },
   },

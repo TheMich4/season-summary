@@ -69,7 +69,7 @@ export const CategoryDropdown = () => {
 
       <DropdownMenuContent className="light:bg-background">
         {options.map((cat) => {
-          const catName = categoryToName[cat];
+          const catName = categoryToName[cat as Category];
 
           return (
             <DropdownMenuItem asChild key={catName}>
