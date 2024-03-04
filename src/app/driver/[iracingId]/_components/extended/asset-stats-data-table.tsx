@@ -53,6 +53,11 @@ const columns: ColumnDef<AssetData>[] = [
     accessorKey: "incidents",
     header: "Incidents",
   },
+  {
+    header: "Incidents per race",
+    accessorFn: ({ incidents, races }: AssetData) =>
+      (incidents / races).toFixed(2),
+  },
   { accessorKey: "lapsCompleted", header: "Laps Completed" },
   { accessorKey: "lapsLead", header: "Laps Lead" },
 ];
