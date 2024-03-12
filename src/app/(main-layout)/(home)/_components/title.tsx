@@ -6,7 +6,7 @@ import { type ReactNode, useEffect, useState } from "react";
 export const Title = () => {
   const isInitialRender = useMotionValue(true);
   const textIndex = useMotionValue(0);
-  const texts = ["eason", "12024"];
+  const texts = ["eason", "22024"];
   const baseText = useTransform(textIndex, (latest) => texts[latest] || "");
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.round(latest));

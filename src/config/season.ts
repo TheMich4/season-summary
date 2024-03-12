@@ -1,4 +1,6 @@
+import { DEFAULT_SEASON, DEFAULT_YEAR } from "./iracing";
+
 export const currentSeason = {
-  year: 2024,
-  season: 1,
+  year: DEFAULT_YEAR,
+  season: DEFAULT_SEASON,
 };
