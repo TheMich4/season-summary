@@ -8,5 +8,6 @@
     "TRPC"
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "javascript.preferences.importModuleSpecifier": "non-relative"
 }
