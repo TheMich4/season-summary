@@ -34,8 +34,8 @@ export const Timeline = async ({
         category={category}
       />
       <div className="flex h-full w-full items-center">
-        {simpleData.seasonResults.map((race) => (
-          <RaceCard race={race} />
+        {simpleData.seasonResults.map((race: any) => (
+          <RaceCard race={race} key={race.id} />
         ))}
       </div>
     </div>
