@@ -156,7 +156,7 @@ export const getNewFullDataUtil = async ({
     const getResult = async (subsessionId: number) => {
       const result: any = await getRaceResult(`${subsessionId}`);
 
-      if (result && result.track.categoryId?.toString() === categoryId) {
+      if (result?.licenseCategoryId.toString() === categoryId) {
         results.push(result);
       }
 
