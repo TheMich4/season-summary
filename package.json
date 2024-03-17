@@ -1,4 +1,8 @@
 {
   "name": "season-summary-monorepo",
-  "type": "module"
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ]
 }
