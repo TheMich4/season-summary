@@ -1,8 +1,14 @@
 {
   "name": "season-summary-prisma",
+  "version": "1.0.0",
   "module": "src/index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "db:generate": "bun run prisma generate",
+    "db:pull": "bun run prisma db pull",
+    "prepare": "npx prisma generate"
+  },
   "dependencies": {
     "@prisma/client": "^5.11.0"
   },
@@ -13,6 +19,10 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "bundledDependencies": [
+    "@prisma/client",
+    ".prisma"
+  ],
   "prisma": {
     "schema": "src/schema.prisma"
   }
