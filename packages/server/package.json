@@ -1,5 +1,5 @@
 {
-  "name": "season-summary-api",
+  "name": "@season-summary/server",
   "version": "1.1.0",
   "description": "",
   "module": "src/index.ts",

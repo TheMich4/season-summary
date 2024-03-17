@@ -1,5 +1,5 @@
 {
-  "name": "season-summary",
+  "name": "@season-summary/app",
   "version": "3.3.0",
   "private": true,
   "type": "module",
