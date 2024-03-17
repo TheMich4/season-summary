@@ -7,10 +7,21 @@ const columnHelper = createColumnHelper<any>();
 
 export const getColumns = (
   result: any,
-  stats: { lapsPerClass: Record<string, number> }
+  stats: { lapsPerClass: Record<string, number> },
 ) => [
   columnHelper.accessor("finishPosition", {
-    cell: ({ getValue }) => getValue() + 1,
+    cell: ({ getValue, row }) => (
+      <span className="flex flex-row items-baseline gap-2">
+        <p>{getValue() + 1}</p>
+        <p className="text-xs">
+          <Delta
+            value={row.original.finishPosition}
+            previous={row.original.startingPosition}
+            invert
+          />
+        </p>
+      </span>
+    ),
     header: "Pos",
   }),
   columnHelper.accessor("finishPositionInClass", {
