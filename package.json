@@ -4,5 +4,11 @@
   "type": "module",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "app:build": "bun build --cwd packages/app build",
+    "app:dev": "bun run --cwd packages/app dev",
+    "server:dev": "bun run --cwd packages/server dev",
+    "server-start": "bun run --cwd packages/server start"
+  }
 }
