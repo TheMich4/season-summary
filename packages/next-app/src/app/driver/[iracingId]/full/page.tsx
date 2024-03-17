@@ -4,7 +4,6 @@ import {
   DEFAULT_YEAR,
 } from "@/config/iracing";
 
-import { Categories } from "@/config/category";
 import { redirect } from "next/navigation";
 
 interface DriverPageProps {
