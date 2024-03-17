@@ -21,12 +21,12 @@ model Season {
 
 model SeasonData {
   id         Int      @id @default(autoincrement())
-  data       Data?
   isPending  Boolean  @default(false)
   lastRace   String?
   lastUpdate DateTime @default(now())
   seasonId   Int
   userId     Int
+  data       Data?
   season     Season   @relation(fields: [seasonId], references: [id], onDelete: Cascade)
 
   @@unique([seasonId, userId])
@@ -35,15 +35,13 @@ model SeasonData {
 }
 
 model Data {
-  id           Int      @id @default(autoincrement())
-  lastUpdate   DateTime @default(now())
+  id           Int         @id @default(autoincrement())
+  lastUpdate   DateTime    @default(now())
   json         Json?
-  stats        Json?
+  seasonDataId Int         @unique
   finalIRating Int?
-
-  seasonDataId Int @unique
-
-  seasonData SeasonData? @relation(fields: [seasonDataId], references: [id], onDelete: Cascade)
+  stats        Json?
+  seasonData   SeasonData? @relation(fields: [seasonDataId], references: [id], onDelete: Cascade)
 }
 
 model IracingUser {
@@ -83,8 +81,8 @@ model User {
   email            String?   @unique
   emailVerified    DateTime?
   image            String?
-  isAdmin          Boolean   @default(false)
   iracingId        String?
+  isAdmin          Boolean   @default(false)
   preferFull       Boolean   @default(false)
   favoriteCategory String    @default("road")
 }
