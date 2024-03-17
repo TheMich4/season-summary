@@ -22,7 +22,7 @@ export const ResultTable = ({ result }: { result: Record<string, any> }) => {
   const { columns, data } = useMemo(() => {
     const data =
       result.sessionResults.find(
-        (r: Record<string, any>) => r.simsessionTypeName === "Race"
+        (r: Record<string, any>) => r.simsessionTypeName === "Race",
       )?.results ?? [];
 
     const lapsPerClass = (data as any[])
@@ -32,16 +32,32 @@ export const ResultTable = ({ result }: { result: Record<string, any> }) => {
           ...acc,
           [r.carClassId]: r.lapsComplete,
         }),
-        {}
+        {},
       );
 
-    return { columns: getColumns(result, { lapsPerClass }), data };
+    return {
+      columns: getColumns(result, { lapsPerClass }),
+      data,
+    };
+  }, [result]);
+
+  const columnVisibility = useMemo(() => {
+    const isMultiClass = result.carClasses.length > 1;
+
+    return {
+      finishPositionInClass: isMultiClass,
+      carClassName: isMultiClass,
+      classInterval: isMultiClass,
+    };
   }, [result]);
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    state: {
+      columnVisibility,
+    },
   });
 
   return (
@@ -57,7 +73,7 @@ export const ResultTable = ({ result }: { result: Record<string, any> }) => {
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
                 );
