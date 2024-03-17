@@ -7,7 +7,7 @@
   "scripts": {
     "db:generate": "bun run prisma generate",
     "db:pull": "bun run prisma db pull",
-    "prepare": "npx prisma generate"
+    "postinstall": "bun run prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.11.0"
