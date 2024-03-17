@@ -10,19 +10,18 @@
     "data:delete-corrupted": "bun run src/maintenance/delete-corrupted-season-data.ts",
     "data:regenerate": "bun run src/maintenance/index.ts"
   },
+  "dependencies": {
+    "@season-summary/prisma": "workspace:*",
+    "iracing-api": "0.4.1",
+    "typescript": "^5.0.0"
+  },
   "devDependencies": {
-    "bun-types": "latest",
-    "prisma": "5.3.1"
+    "bun-types": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "dependencies": {
-    "@prisma/client": "5.3.1",
-    "iracing-api": "0.4.1",
-    "typescript": "^5.0.0"
   }
 }
