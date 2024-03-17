@@ -1,5 +1,9 @@
 import { Categories, type Category } from "@/config/category";
-import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
+import {
+  DEFAULT_CATEGORY,
+  DEFAULT_SEASON,
+  DEFAULT_YEAR,
+} from "@/config/iracing";
 
 import { ConfigProvider } from "@/components/providers/config-provider";
 import { Suspense } from "react";
@@ -22,7 +26,7 @@ export default function TimelinePage({
   searchParams: {
     year = `${DEFAULT_YEAR}`,
     season = `${DEFAULT_SEASON}`,
-    category = Categories.ROAD,
+    category = DEFAULT_CATEGORY,
   },
 }: TimelinePageProps) {
   return (

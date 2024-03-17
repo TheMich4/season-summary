@@ -2,6 +2,7 @@
 
 import { type Category } from "@/config/category";
 import { api } from "@/trpc/server";
+import { DEFAULT_CATEGORY } from "../config/iracing";
 
 export const getProfileUrl = async (
   iracingId: string,
@@ -17,7 +18,7 @@ export const getProfileUrl = async (
     `/driver/${iracingId}` +
     (userSettings?.preferFull ? "/full" : "") +
     `?category=${
-      options?.category ?? userSettings?.favoriteCategory ?? "road"
+      options?.category ?? userSettings?.favoriteCategory ?? DEFAULT_CATEGORY
     }` +
     (options?.season ? `&season=${options.season}` : "") +
     (options?.year ? `&year=${options.year}` : "")

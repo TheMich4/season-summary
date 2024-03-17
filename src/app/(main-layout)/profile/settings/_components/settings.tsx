@@ -26,6 +26,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "@/trpc/react";
+import { DEFAULT_CATEGORY } from "../../../../../config/iracing";
 
 const formSchema = z.object({
   iracingId: z.string(),
@@ -50,7 +51,7 @@ export const Settings = ({
     defaultValues: {
       iracingId: userSettings?.iracingId ?? "",
       preferFull: userSettings?.preferFull ?? false,
-      category: userSettings?.favoriteCategory ?? Categories.ROAD,
+      category: userSettings?.favoriteCategory ?? DEFAULT_CATEGORY,
     },
   });
 

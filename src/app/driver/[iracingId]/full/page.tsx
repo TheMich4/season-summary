@@ -1,5 +1,10 @@
+import {
+  DEFAULT_CATEGORY,
+  DEFAULT_SEASON,
+  DEFAULT_YEAR,
+} from "@/config/iracing";
+
 import { Categories } from "@/config/category";
-import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
 import { redirect } from "next/navigation";
 
 interface DriverPageProps {
@@ -18,10 +23,10 @@ export default function FullPage({
   searchParams: {
     year = `${DEFAULT_YEAR}`,
     season = `${DEFAULT_SEASON}`,
-    category = Categories.ROAD,
+    category = DEFAULT_CATEGORY,
   },
 }: DriverPageProps) {
   return redirect(
-    `/driver/${iracingId}?year=${year}&season=${season}&category=${category}`
+    `/driver/${iracingId}?year=${year}&season=${season}&category=${category}`,
   );
 }

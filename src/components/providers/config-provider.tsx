@@ -2,7 +2,11 @@
 "use client";
 
 import { Categories, categoryToName, type Category } from "@/config/category";
-import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
+import {
+  DEFAULT_CATEGORY,
+  DEFAULT_SEASON,
+  DEFAULT_YEAR,
+} from "@/config/iracing";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   type ReactNode,
@@ -48,7 +52,8 @@ export const ConfigProvider = ({ children }: { children: ReactNode }) => {
     const season = searchParams.get("season")
       ? Number(searchParams.get("season"))
       : config.season;
-    const category = config.category ?? searchParams.get("category") ?? "road";
+    const category =
+      config.category ?? searchParams.get("category") ?? DEFAULT_CATEGORY;
 
     router.push(`?year=${year}&season=${season}&category=${category}`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
