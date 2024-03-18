@@ -68,6 +68,7 @@ export const authOptions: NextAuthOptions = {
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
       allowDangerousEmailAccountLinking: true,
+      authorization: { params: { prompt: "identify" } },
     }),
     GithubProvider({
       clientId: process.env.GITHUB_ID!,
