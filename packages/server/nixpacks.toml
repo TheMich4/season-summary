@@ -7,7 +7,6 @@ cmds = ['bun install']
 [phases.build]
 cmds = [
   '...',
-  'bun run prisma generate',
   'ln -s /usr/lib/x86_64-linux-gnu/libssl.so /lib/libssl.so',
   'ln -s /usr/lib/x86_64-linux-gnu/libssl.so.3 /lib/libssl.so.3',
   'ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so /lib/libcrypto.so',
@@ -15,4 +14,4 @@ cmds = [
 ]
 
 [start]
-cmd = 'bun run start'
+cmd = 'bun run server:start'
