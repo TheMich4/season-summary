@@ -61,6 +61,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
+  user              User    @relation(fields: [userId], references: [id])
 
   @@unique([provider, providerAccountId])
   @@index([userId])
@@ -71,6 +72,7 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
@@ -84,7 +86,10 @@ model User {
   iracingId        String?
   isAdmin          Boolean   @default(false)
   preferFull       Boolean   @default(false)
-  favoriteCategory String    @default("road")
+  favoriteCategory String    @default("oval")
+
+  accounts Account[]
+  sessions Session[]
 }
 
 model VerificationToken {
