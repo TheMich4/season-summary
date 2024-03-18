@@ -6,6 +6,8 @@ import { env } from "@/env";
 import { ExtendedProfileManager } from "./extended-profile-manager";
 import { VisitedManager } from "./visited-manager";
 import { api } from "@/trpc/server";
+import { NoAccountToast } from "./no-account-toast";
+import { getServerAuthSession } from "../../../../server/auth";
 
 interface ExtendedProfileProps {
   iracingId: string;
@@ -27,6 +29,8 @@ export const ExtendedProfile = async ({
     category,
   });
 
+  const session = await getServerAuthSession();
+
   return (
     <>
       <ExtendedProfileManager
@@ -36,6 +40,7 @@ export const ExtendedProfile = async ({
         category={category}
         wsUrl={env.WS_URL}
         simpleData={simpleData}
+        session={session}
       />
 
       <VisitedManager

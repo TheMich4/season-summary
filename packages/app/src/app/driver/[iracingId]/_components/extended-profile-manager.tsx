@@ -9,6 +9,8 @@ import { View } from "./extended/view";
 import { SeasonSwitch } from "./season-switch";
 import { CategoryDropdown } from "./category-dropdown";
 import { useDataStatusToast } from "../_hooks/use-data-status-toast";
+import type { Session } from "next-auth";
+import { useNoAccountToast } from "../_hooks/use-no-account-toast";
 
 interface Props {
   iracingId: string;
@@ -17,6 +19,7 @@ interface Props {
   category: Category;
   wsUrl: string;
   simpleData: any;
+  session: Session | null;
 }
 
 export const ExtendedProfileManager = ({
@@ -26,6 +29,7 @@ export const ExtendedProfileManager = ({
   category,
   wsUrl,
   simpleData,
+  session,
 }: Props) => {
   const wsData = useDataWebSocket({
     iracingId: parseInt(iracingId, 10),
@@ -45,6 +49,7 @@ export const ExtendedProfileManager = ({
   }, [wsData?.status]);
 
   useDataStatusToast(wsData);
+  useNoAccountToast(session);
 
   // TODO: Add maintenance stats
   if (wsData?.status === "DONE-MAINTENANCE") {
