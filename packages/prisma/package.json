@@ -1,0 +1,30 @@
+{
+  "name": "@season-summary/prisma",
+  "version": "1.0.0",
+  "module": "src/index.ts",
+  "types": "src/index.d.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "db:generate": "bun run prisma generate",
+    "db:pull": "bun run prisma db pull",
+    "postinstall": "bun run prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.11.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prisma": "^5.11.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "bundledDependencies": [
+    "@prisma/client",
+    ".prisma"
+  ],
+  "prisma": {
+    "schema": "src/schema.prisma"
+  }
+}
