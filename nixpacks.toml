@@ -12,6 +12,3 @@ cmds = [
   'ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so /lib/libcrypto.so',
   'ln -s /usr/lib/x86_64-linux-gnu/libcrypto.so.3 /lib/libcrypto.so.3',
 ]
-
-[start]
-cmd = 'bun run server:start'
