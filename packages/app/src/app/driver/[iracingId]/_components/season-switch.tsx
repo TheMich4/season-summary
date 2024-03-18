@@ -29,6 +29,10 @@ export const SeasonSwitch = ({
   };
 
   const getNextSeason = () => {
+    if (currentSeason.season === season && currentSeason.year === year) {
+      return "#";
+    }
+
     let newSeason = season + 1;
     let newYear = year;
 
