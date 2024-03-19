@@ -88,6 +88,8 @@ model User {
   preferFull       Boolean   @default(false)
   favoriteCategory String    @default("oval")
 
+  createdAt DateTime @default(now())
+
   accounts Account[]
   sessions Session[]
 }

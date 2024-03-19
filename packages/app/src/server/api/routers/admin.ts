@@ -15,4 +15,7 @@ export const adminRouter = createTRPCRouter({
 
     return { userCount };
   }),
+  getUsers: protectedProcedure.query(async ({ ctx }) => {
+    return await ctx.db.user.findMany();
+  }),
 });
