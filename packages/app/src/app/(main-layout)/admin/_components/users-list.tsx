@@ -1,11 +1,11 @@
 "use client";
 
 import { Avatar, AvatarFallback } from "../../../../components/ui/avatar";
+import { type Category, categoryToName } from "../../../../config/category";
 
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Badge } from "../../../../components/ui/badge";
 import type { User } from "@season-summary/prisma";
-import { categoryToName } from "../../../../config/category";
 
 interface UsersListProps {
   users: User[];
@@ -14,7 +14,7 @@ interface UsersListProps {
 export const UsersList = ({ users }: UsersListProps) => {
   return (
     <div className="container flex flex-col gap-2">
-      {users.map((user, i) => (
+      {users.map((user) => (
         <div
           className="flex flex-row items-center justify-between gap-4 rounded-md border bg-background/40 p-2"
           key={user.id}
@@ -26,7 +26,7 @@ export const UsersList = ({ users }: UsersListProps) => {
             </Avatar>
             <div className="font-bold">{user.name}</div>
             <Badge variant="secondary">
-              {categoryToName[user.favoriteCategory]}
+              {categoryToName[user.favoriteCategory as Category]}
             </Badge>
             {user.iracingId && (
               <Badge className="h-fit">{user.iracingId}</Badge>
