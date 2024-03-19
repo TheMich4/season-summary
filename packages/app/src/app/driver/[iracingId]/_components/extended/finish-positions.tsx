@@ -63,7 +63,7 @@ const PositionChart = ({
       parseInt(week, 10),
     );
     return Array.from(
-      { length: positions?.[positions.length - 1] ?? -1 + 1 ?? 0 },
+      { length: (positions?.[positions.length - 1] ?? -1) + 1 ?? 0 },
       (_, position) => ({
         name: position,
         races: finishPositions[position] || 0,
