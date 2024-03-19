@@ -129,7 +129,7 @@ export const Settings = ({
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="preferFull"
             render={({ field }) => (
@@ -146,7 +146,7 @@ export const Settings = ({
                 </FormLabel>
               </FormItem>
             )}
-          />
+          /> */}
 
           <Button
             type="submit"
