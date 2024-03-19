@@ -111,17 +111,19 @@ export const Settings = ({
                     </DropdownMenuTrigger>
 
                     <DropdownMenuContent>
-                      {Object.entries(categoryToName).map(([cat, catName]) => (
-                        <DropdownMenuItem asChild key={catName}>
-                          <span
-                            onClick={() =>
-                              form.setValue("category", cat as Category)
-                            }
-                          >
-                            {catName}
-                          </span>
-                        </DropdownMenuItem>
-                      ))}
+                      {Object.entries(categoryToName)
+                        .filter(([cat]) => cat !== Categories.ROAD)
+                        .map(([cat, catName]) => (
+                          <DropdownMenuItem asChild key={catName}>
+                            <span
+                              onClick={() =>
+                                form.setValue("category", cat as Category)
+                              }
+                            >
+                              {catName}
+                            </span>
+                          </DropdownMenuItem>
+                        ))}
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </FormControl>
