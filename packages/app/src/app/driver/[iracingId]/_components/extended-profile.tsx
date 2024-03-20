@@ -1,11 +1,10 @@
-import { type Category } from "@/config/category";
-
+import type { Category } from "@season-summary/config";
+import { ExtendedProfileManager } from "./extended-profile-manager";
 import { ProfileUpdater } from "./extended/profile-updater";
 import { Suspense } from "react";
-import { env } from "@/env";
-import { ExtendedProfileManager } from "./extended-profile-manager";
 import { VisitedManager } from "./visited-manager";
 import { api } from "@/trpc/server";
+import { env } from "@/env";
 import { getServerAuthSession } from "../../../../server/auth";
 
 interface ExtendedProfileProps {

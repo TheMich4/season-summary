@@ -1,6 +1,6 @@
 "use client";
 
-import { type Category, categoryToName, Categories } from "@/config/category";
+import { Categories, categoryToName } from "@season-summary/config";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,12 +8,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import type { Category } from "@season-summary/config";
 import { ChevronDown } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { isBeforeSeason } from "@/lib/season";
 import { useConfig } from "@/components/providers/config-provider";
 import { useMemo } from "react";
-import { isBeforeSeason } from "@/lib/season";
 import { useSearchParams } from "next/navigation";
 
 export const CategoryDropdown = () => {

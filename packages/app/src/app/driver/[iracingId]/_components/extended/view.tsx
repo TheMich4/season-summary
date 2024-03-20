@@ -3,22 +3,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { type Category } from "@/config/category";
+import { ActivityHeatMap } from "./activity-heat-map";
+import { AssetStats } from "./asset-stats";
+import type { Category } from "@season-summary/config";
 import { FinishPositions } from "./finish-positions";
+import { Header } from "./header";
 import { Incidents } from "./incidents";
 import { IncidentsGraph } from "./incidents-graph";
+import { Loader2 } from "lucide-react";
 import { MostRacedWeek } from "./most-raced-week";
 import { Points } from "./points";
 import { QualifyingStats } from "./qualifying-stats";
-import { RaceStats } from "./race-stats";
-import { SOF } from "./sof";
-import { ActivityHeatMap } from "./activity-heat-map";
-import { StatBox } from "@/components/stat-box";
-import { RatingChart } from "./rating-chart";
-import { AssetStats } from "./asset-stats";
-import { Loader2 } from "lucide-react";
 import { RaceList } from "../race-list";
-import { Header } from "./header";
+import { RaceStats } from "./race-stats";
+import { RatingChart } from "./rating-chart";
+import { SOF } from "./sof";
+import { StatBox } from "@/components/stat-box";
 
 interface ViewProps {
   category: Category;

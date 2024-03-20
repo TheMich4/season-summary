@@ -3,7 +3,7 @@
 import * as z from "zod";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Categories, type Category, categoryToName } from "@/config/category";
+import { Categories, categoryToName } from "@season-summary/config";
 import { ChevronDown, Loader2 } from "lucide-react";
 import {
   DropdownMenu,
@@ -19,14 +19,14 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 
+import type { Category } from "@season-summary/config";
+import { DEFAULT_CATEGORY } from "../../../../../config/iracing";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
+import { api } from "@/trpc/react";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { api } from "@/trpc/react";
-import { DEFAULT_CATEGORY } from "../../../../../config/iracing";
 
 const formSchema = z.object({
   iracingId: z.string(),

@@ -1,15 +1,15 @@
 "use client";
 
-import { type Category, categoryToName } from "@/config/category";
-import { useMemo } from "react";
-
-import { useDataWebSocket } from "@/hooks/use-data-web-socket";
-import { ExtendedProfileNoData } from "./extended-profile-no-data";
-import { View } from "./extended/view";
-import { SeasonSwitch } from "./season-switch";
+import type { Category } from "@season-summary/config";
 import { CategoryDropdown } from "./category-dropdown";
-import { useDataStatusToast } from "../_hooks/use-data-status-toast";
+import { ExtendedProfileNoData } from "./extended-profile-no-data";
+import { SeasonSwitch } from "./season-switch";
 import type { Session } from "next-auth";
+import { View } from "./extended/view";
+import { categoryToName } from "@season-summary/config";
+import { useDataStatusToast } from "../_hooks/use-data-status-toast";
+import { useDataWebSocket } from "@/hooks/use-data-web-socket";
+import { useMemo } from "react";
 import { useNoAccountToast } from "../_hooks/use-no-account-toast";
 
 interface Props {

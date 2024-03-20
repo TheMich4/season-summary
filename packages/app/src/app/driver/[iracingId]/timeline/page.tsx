@@ -1,13 +1,13 @@
-import { Categories, type Category } from "@/config/category";
 import {
   DEFAULT_CATEGORY,
   DEFAULT_SEASON,
   DEFAULT_YEAR,
 } from "@/config/iracing";
 
+import type { Category } from "@season-summary/config";
 import { ConfigProvider } from "@/components/providers/config-provider";
-import { Suspense } from "react";
 import { ProfileLoader } from "../_components/profile-loader";
+import { Suspense } from "react";
 import { Timeline } from "./_components/timeline";
 
 interface TimelinePageProps {
