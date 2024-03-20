@@ -1,14 +1,14 @@
-import { type Category, categoryToId } from "@/config/category";
-
+import type { Category } from "@season-summary/config";
 import { Loader2 } from "lucide-react";
 import { ProfileCard } from "@/components/profile-card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { StatBox } from "@/components/stat-box";
 import { Suspense } from "react";
+import { api } from "@/trpc/server";
+import { authOptions } from "@/server/auth";
+import { categoryToId } from "@season-summary/config";
 import { env } from "@/env";
 import { getServerSession } from "next-auth";
-import { StatBox } from "@/components/stat-box";
-import { authOptions } from "@/server/auth";
-import { api } from "@/trpc/server";
 
 const NoProfile = () => {
   return (

@@ -1,8 +1,8 @@
 "use server";
 
-import { type Category } from "@/config/category";
-import { api } from "@/trpc/server";
+import type { Category } from "@season-summary/config";
 import { DEFAULT_CATEGORY } from "../config/iracing";
+import { api } from "@/trpc/server";
 
 export const getProfileUrl = async (
   iracingId: string,

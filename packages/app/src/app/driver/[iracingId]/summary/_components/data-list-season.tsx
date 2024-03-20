@@ -1,11 +1,13 @@
 "use client";
 
-import { StatBox } from "@/components/stat-box";
-import { Badge } from "@/components/ui/badge";
-import { type Category, categoryToName } from "@/config/category";
-import { getProfileUrl } from "@/server/get-profile-url";
-import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
+import { usePathname, useRouter } from "next/navigation";
+
+import { Badge } from "@/components/ui/badge";
+import type { Category } from "@season-summary/config";
+import { StatBox } from "@/components/stat-box";
+import { categoryToName } from "@season-summary/config";
+import { getProfileUrl } from "@/server/get-profile-url";
 
 interface CategoryData {
   finalIRating: number;

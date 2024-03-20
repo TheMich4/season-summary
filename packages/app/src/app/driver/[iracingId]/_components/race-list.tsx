@@ -4,7 +4,6 @@
 "use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { type Category, categoryToName } from "@/config/category";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   DropdownMenu,
@@ -14,7 +13,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useMemo, useState } from "react";
 
+import type { Category } from "@season-summary/config";
 import Link from "next/link";
+import { categoryToName } from "@season-summary/config";
 import { cn } from "@/lib/utils";
 
 const createResultUrl = (subsessionId: number, iracingId: string | number) =>

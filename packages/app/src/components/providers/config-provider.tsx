@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { Categories, categoryToName, type Category } from "@/config/category";
+import type { Category } from "@season-summary/config";
+import { Categories } from "@season-summary/config";
 import {
   DEFAULT_CATEGORY,
   DEFAULT_SEASON,

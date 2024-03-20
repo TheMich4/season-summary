@@ -1,5 +1,5 @@
-import { type Category, categoryToId } from "@/config/category";
-
+import type { Category } from "@season-summary/config";
+import { categoryToId } from "@season-summary/config";
 import { useMemo } from "react";
 import useWebSocket from "react-use-websocket";
 

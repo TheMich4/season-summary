@@ -1,7 +1,7 @@
 "use server";
 
-import { type Category, categoryToId } from "@/config/category";
-
+import type { Category } from "@season-summary/config";
+import { categoryToId } from "@season-summary/config";
 import { env } from "@/env";
 
 interface Props {
