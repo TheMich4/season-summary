@@ -1,4 +1,5 @@
-import { Categories, type Category } from "./category";
+import { Categories } from "@season-summary/config";
+import type { Category } from "@season-summary/config";
 
 export const DEFAULT_SEASON = 2;
 export const DEFAULT_YEAR = 2024;

@@ -1,11 +1,12 @@
 "use client";
 
 import { Avatar, AvatarFallback } from "../../../../components/ui/avatar";
-import { type Category, categoryToName } from "../../../../config/category";
 
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Badge } from "../../../../components/ui/badge";
+import type { Category } from "@season-summary/config";
 import type { User } from "@season-summary/prisma";
+import { categoryToName } from "@season-summary/config";
 
 interface UsersListProps {
   users: User[];
