@@ -1,4 +1,4 @@
-import type { Category } from "@season-summary/config";
+import { categoryToName, type Category } from "@season-summary/config";
 import { CategoryDropdown } from "./category-dropdown";
 import { SeasonSwitch } from "./season-switch";
 
@@ -30,7 +30,9 @@ export const ExtendedProfileNoData = ({
           <CategoryDropdown />
         </div>
       </div>
-      <p className="font-semibold">No {category} data found for this season.</p>
+      <p className="font-semibold">
+        No {categoryToName[category]} data found for this season.
+      </p>
     </div>
   );
 };
