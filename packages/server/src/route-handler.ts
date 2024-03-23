@@ -1,3 +1,4 @@
+import { ClientResponse } from "./response";
 import { getAvatars } from "./routers/v2/get-avatars";
 import { getBasicData } from "./routers/v2/get-basic-data";
 import { getIracingData } from "./routers/v2/get-iracing-data";
@@ -9,7 +10,7 @@ import { searchDrivers } from "./routers/v2/search-drivers";
 
 export const routeHandler = new Proxy(
   {
-    ["/"]: () => new Response("season-summary-api", { status: 200 }),
+    ["/"]: () => new ClientResponse("season-summary-api", { status: 200 }),
     // ["/get-full-data"]: getFullDataRoute,
     // ["/get-full-data-status"]: getFullDataStatusRoute,
 
@@ -28,6 +29,6 @@ export const routeHandler = new Proxy(
   },
   {
     get: (target, name: string) =>
-      target[name] || (() => new Response("Not Found", { status: 404 })),
+      target[name] || (() => new ClientResponse("Not Found", { status: 404 })),
   }
 );

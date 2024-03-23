@@ -1,3 +1,4 @@
+import { ClientResponse } from "../response.js";
 import { getFullSeasonData } from "../iracing/api/full-data.js";
 import { getSeasonData } from "../db/actions/get-season-data.js";
 
@@ -10,7 +11,7 @@ export const getFullDataRoute = async (request) => {
   const categoryId = searchParams.get("categoryId");
 
   if (!iracingId || !year || !season || !categoryId) {
-    return new Response("missing params", { status: 400 });
+    return new ClientResponse("missing params", { status: 400 });
   }
 
   console.log("/get-full-data", { iracingId, year, season, categoryId });
@@ -30,7 +31,7 @@ export const getFullDataRoute = async (request) => {
       categoryId,
     });
 
-    return new Response(
+    return new ClientResponse(
       JSON.stringify({
         error: "START_FETCHING",
         params: { iracingId, year, season, categoryId },
@@ -39,7 +40,7 @@ export const getFullDataRoute = async (request) => {
   }
 
   if (fullData?.isPending || fullData?.lastRace || fullData?.data) {
-    return new Response(
+    return new ClientResponse(
       JSON.stringify({
         error: null,
         params: { iracingId, year, season, categoryId },

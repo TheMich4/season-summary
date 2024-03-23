@@ -1,3 +1,4 @@
+import { ClientResponse } from "../response.js";
 import { getFullSeasonData } from "../iracing/api/full-data.js";
 import { getSeasonDataStatus } from "../db/actions/get-season-data-status.js";
 import { getSeasonId } from "../db/actions/get-season-id.js";
@@ -12,7 +13,7 @@ export const getFullDataStatusRoute = async (request) => {
   const categoryId = searchParams.get("categoryId");
 
   if (!iracingId || !year || !season || !categoryId) {
-    return new Response("missing params", { status: 400 });
+    return new ClientResponse("missing params", { status: 400 });
   }
 
   let seasonId = await getSeasonId(
@@ -43,7 +44,7 @@ export const getFullDataStatusRoute = async (request) => {
     categoryId,
   });
 
-  return new Response(
+  return new ClientResponse(
     JSON.stringify({
       error: null,
       params: { iracingId, year, season, categoryId },

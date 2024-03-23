@@ -1,3 +1,4 @@
+import { ClientResponse } from "../../response";
 import { Server } from "bun";
 import { getNewFullData } from "../../iracing/api/new-full-data";
 import { getParams } from "../../utils/get-params";
@@ -8,7 +9,7 @@ export const requestNew = async (request: Request, server: Server) => {
   const { iracingId, year, season, categoryId } = getParams(request);
 
   if (!iracingId || !year || !season || !categoryId) {
-    return new Response("missing params", { status: 400 });
+    return new ClientResponse("missing params", { status: 400 });
   }
 
   const currentSeasonData = await getSeasonData(
@@ -20,12 +21,12 @@ export const requestNew = async (request: Request, server: Server) => {
 
   if (!currentSeasonData?.isPending) {
     getNewFullData(request, server, currentSeasonData?.id);
-    return new Response(JSON.stringify({ status: "DATA_REQUESTED" }), {
+    return new ClientResponse(JSON.stringify({ status: "DATA_REQUESTED" }), {
       status: 200,
     });
   }
 
-  return new Response(JSON.stringify({ status: "ALREADY_REQUESTED" }), {
+  return new ClientResponse(JSON.stringify({ status: "ALREADY_REQUESTED" }), {
     status: 200,
   });
 };

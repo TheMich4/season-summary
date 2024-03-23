@@ -1,3 +1,4 @@
+import { ClientResponse } from "../../response";
 import { Server } from "bun";
 import { getParams } from "../../utils/get-params";
 import { getSeasonData } from "../../db/actions/get-season-data";
@@ -6,7 +7,7 @@ export const getNew = async (request: Request, server: Server) => {
   const { iracingId, year, season, categoryId } = getParams(request);
 
   if (!iracingId || !year || !season || !categoryId) {
-    return new Response("missing params", { status: 400 });
+    return new ClientResponse("missing params", { status: 400 });
   }
 
   const seasonData = await getSeasonData(
@@ -17,18 +18,18 @@ export const getNew = async (request: Request, server: Server) => {
   );
 
   if (!seasonData) {
-    return new Response(JSON.stringify({ status: "NOT_FOUND" }), {
+    return new ClientResponse(JSON.stringify({ status: "NOT_FOUND" }), {
       status: 200,
     });
   }
 
   if (seasonData?.isPending) {
-    return new Response(JSON.stringify({ status: "PENDING" }), {
+    return new ClientResponse(JSON.stringify({ status: "PENDING" }), {
       status: 200,
     });
   }
 
-  return new Response(
+  return new ClientResponse(
     JSON.stringify({
       data: seasonData.data && {
         ...(seasonData.data.json as any),

@@ -1,3 +1,4 @@
+import { ClientResponse } from "../../response";
 import { getLoggedInIracingAPIClient } from "../../iracing/client";
 import { getPreviousSeason } from "../../utils/get-previous-season";
 
@@ -7,7 +8,7 @@ export const getBasicData = async (request: Request) => {
   // const categoryId = searchParams.get("categoryId");
 
   if (!iracingId) {
-    return new Response("missing params", { status: 400 });
+    return new ClientResponse("missing params", { status: 400 });
   }
 
   const ir = await getLoggedInIracingAPIClient();
@@ -35,14 +36,14 @@ export const getBasicData = async (request: Request) => {
   console.log({ memberRecap, previousMemberRecap });
 
   if (!memberRecap) {
-    return new Response("member not found", { status: 404 });
-  }
-  
-  if ((memberRecap as any).error) {
-    return new Response("iracing-maintenance", { status: 503 });
+    return new ClientResponse("member not found", { status: 404 });
   }
 
-  return new Response(
+  if ((memberRecap as any).error) {
+    return new ClientResponse("iracing-maintenance", { status: 503 });
+  }
+
+  return new ClientResponse(
     JSON.stringify({
       current: {
         wins: memberRecap?.stats?.wins ?? 0,

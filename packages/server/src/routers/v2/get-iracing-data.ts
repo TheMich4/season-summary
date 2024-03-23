@@ -3,6 +3,7 @@ import {
   resetIracingAPIClient,
 } from "../../iracing/client";
 
+import { ClientResponse } from "../../response";
 import { getParams } from "../../utils/get-params";
 import { getPreviousSeason } from "../../utils/get-previous-season";
 
@@ -29,7 +30,7 @@ export const getIracingData = async (request: Request) => {
     const { iracingId, year, season, categoryId } = getParams(request);
 
     if (!iracingId || !year || !season || !categoryId) {
-      return new Response("missing params", { status: 400 });
+      return new ClientResponse("missing params", { status: 400 });
     }
 
     const { year: previousYear, season: previousSeason } = getPreviousSeason(
@@ -103,7 +104,7 @@ export const getIracingData = async (request: Request) => {
       previousSeasonRecap?.stats as any
     );
 
-    return new Response(
+    return new ClientResponse(
       JSON.stringify({
         memberData: memberData?.members?.[0],
         memberRecap: memberRecap?.stats,

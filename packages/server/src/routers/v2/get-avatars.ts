@@ -1,3 +1,4 @@
+import { ClientResponse } from "../../response";
 import { prisma } from "../../db";
 
 export const getAvatars = async (request: Request) => {
@@ -5,7 +6,7 @@ export const getAvatars = async (request: Request) => {
   const ids = searchParams.get("ids")?.split(",") || [];
 
   if (!ids.length) {
-    return new Response("missing params", { status: 400 });
+    return new ClientResponse("missing params", { status: 400 });
   }
 
   const data = await prisma.user.findMany({
@@ -20,12 +21,17 @@ export const getAvatars = async (request: Request) => {
     },
   });
 
-  const idToAvatar = data.reduce((acc, { iracingId, image }) => {
-    acc[iracingId] = image;
-    return acc;
-  }, {} as Record<string, string>);
+  const idToAvatar = data.reduce(
+    (acc, { iracingId, image }) => {
+      acc[iracingId] = image;
+      return acc;
+    },
+    {} as Record<string, string>
+  );
 
-  const response = new Response(JSON.stringify(idToAvatar), { status: 200 });
+  const response = new ClientResponse(JSON.stringify(idToAvatar), {
+    status: 200,
+  });
   response.headers.set("Access-Control-Allow-Origin", "*");
 
   return response;

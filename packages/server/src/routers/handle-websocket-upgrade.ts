@@ -1,4 +1,5 @@
 import { type Server } from "bun";
+import { ClientResponse } from "../response";
 
 export const handleWebsocketUpgrade = (request: Request, server: Server) => {
   const { searchParams } = new URL(request.url);
@@ -9,7 +10,7 @@ export const handleWebsocketUpgrade = (request: Request, server: Server) => {
   const categoryId = searchParams.get("categoryId");
 
   if (!iracingId || !year || !season || !categoryId) {
-    return new Response("missing params", { status: 400 });
+    return new ClientResponse("missing params", { status: 400 });
   }
 
   const success = server.upgrade(request, {
@@ -18,5 +19,5 @@ export const handleWebsocketUpgrade = (request: Request, server: Server) => {
 
   return success
     ? undefined
-    : new Response("WebSocket upgrade error", { status: 400 });
+    : new ClientResponse("WebSocket upgrade error", { status: 400 });
 };

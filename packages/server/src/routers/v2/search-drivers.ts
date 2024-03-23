@@ -1,3 +1,4 @@
+import { ClientResponse } from "../../response";
 import { getLoggedInIracingAPIClient } from "../../iracing/client";
 
 export const searchDrivers = async (request: Request) => {
@@ -5,11 +6,11 @@ export const searchDrivers = async (request: Request) => {
   const searchTerm = searchParams.get("searchTerm");
 
   if (!searchTerm) {
-    return new Response("missing params", { status: 400 });
+    return new ClientResponse("missing params", { status: 400 });
   }
 
   const ir = await getLoggedInIracingAPIClient();
   const drivers = await ir.lookup.getDrivers({ searchTerm });
 
-  return new Response(JSON.stringify({ drivers }), { status: 200 });
+  return new ClientResponse(JSON.stringify({ drivers }), { status: 200 });
 };
