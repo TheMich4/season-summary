@@ -3,14 +3,16 @@
   "private": true,
   "type": "module",
   "workspaces": [
+    "app",
+    "server",
     "packages/*"
   ],
   "scripts": {
-    "app:build": "bun run --cwd packages/app build",
-    "app:dev": "bun run --cwd packages/app dev",
+    "app:build": "bun run --cwd app build",
+    "app:dev": "bun run --cwd app dev",
     "prisma:push": "bun run --cwd packages/prisma prisma db push",
     "prisma:studio": "bun run --cwd packages/prisma prisma studio",
-    "server:dev": "bun run --cwd packages/server dev",
-    "server:start": "bun run --cwd packages/server start"
+    "server:dev": "bun run --cwd server dev",
+    "server:start": "bun run --cwd server start"
   }
 }
