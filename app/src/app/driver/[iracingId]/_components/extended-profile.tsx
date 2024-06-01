@@ -27,6 +27,10 @@ export const ExtendedProfile = async ({
     category,
   });
 
+  if (!simpleData) {
+    return <div>Failed to get data for {iracingId}</div>;
+  }
+
   const session = await getServerAuthSession();
 
   return (
