@@ -15,13 +15,16 @@ import { getTrackData } from "./get-track-data.js";
 import { getSeriesData } from "./get-series-data.js";
 import { getIRatingData } from "./get-irating-data.js";
 import { getSafetyRatingData } from "./get-safety-rating-data.js";
+import { getLapsData } from "./get-laps-data.js";
+import { getActivityData } from "./get-activity-data.js";
+import { getReasonOutData } from "./get-reason-out-data.js";
 
 export const parseResults = (
   // TODO: add type
   results: Array<any>,
   iracingId: string,
   // TODO: add type
-  initialData: any = undefined
+  initialData: any = undefined,
 ) => {
   return results?.reduce((acc, result) => {
     const raceResult = getDriverResult(result, iracingId);
@@ -31,9 +34,10 @@ export const parseResults = (
     }
 
     return {
+      activity: getActivityData(acc.activity, result),
       finalIRating: raceResult.newiRating,
-
       carData: getCarData(acc.carData, raceResult),
+      laps: getLapsData(acc.laps, raceResult),
       finishPositions: getFinishPositions(acc.finishPositions, raceResult),
       incidents: getIncidentsData(acc.incidents, raceResult, result),
       iRatingData: getIRatingData(acc.iRatingData, raceResult),
@@ -46,11 +50,12 @@ export const parseResults = (
       sof: getSOFData(acc.sof, raceResult, result),
       stats: getStats(acc.stats, raceResult),
       trackData: getTrackData(acc.trackData, raceResult, result),
+      reasonOut: getReasonOutData(acc.reasonOut, raceResult),
 
       // To remove
       safetyRatingPoints: getSafetyRatingPoints(
         acc.safetyRatingPoints,
-        raceResult
+        raceResult,
       ),
       iratingPoints: getIratingPoints(acc.iratingPoints, raceResult),
     };

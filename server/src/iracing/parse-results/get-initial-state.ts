@@ -1,5 +1,7 @@
 export const getInitialState = () => {
   return {
+    activity: {},
+    reasonOut: {},
     carData: {},
     incidents: {
       incidentsPerCorner: {
@@ -78,6 +80,10 @@ export const getInitialState = () => {
       start: null,
       end: null,
       points: [],
+    },
+    laps: {
+      lead: 0,
+      total: 0,
     },
   };
 };
