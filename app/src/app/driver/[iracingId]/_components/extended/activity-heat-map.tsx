@@ -89,28 +89,48 @@ export const ActivityHeatMap = ({
     [season, year],
   );
 
-  const data = useMemo(() => {
-    const racesPerDate = {
+  const { data, max, maxDate } = useMemo(() => {
+    const racesPerDate: Record<string, number> = {
       ...getInitialRacesPerDate(seasonDateRange),
       ...activity,
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const max = Math.max(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      ...(Object.values(racesPerDate ?? {}) as unknown as number[]),
+    const { maxDate, max } = Object.entries(racesPerDate).reduce(
+      (acc, [date, count]) => {
+        const { maxDate, max } = acc;
+
+        if (!maxDate || count > max) {
+          return {
+            maxDate: date,
+            max: count,
+          };
+        }
+
+        return acc;
+      },
+      { maxDate: null, max: 0 },
     );
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    return Object.entries(racesPerDate ?? {})
-      .map(([date, count]) => ({
-        date,
-        count,
-        level: getLevel(count as number, max),
-      }))
-      .sort(
-        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-      ) as Activity[];
+    // const max = Math.max(
+    //   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    //   ...(Object.values(racesPerDate ?? {}) as unknown as number[]),
+    // );
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    return {
+      data: Object.entries(racesPerDate ?? {})
+        .map(([date, count]) => ({
+          date,
+          count,
+          level: getLevel(count as number, max),
+        }))
+        .sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+        ) as Activity[],
+      max,
+      maxDate: new Date(maxDate),
+    };
   }, [activity, seasonDateRange]);
 
   const renderBlock = useCallback((block: BlockElement, activity: Activity) => {
@@ -126,15 +146,19 @@ export const ActivityHeatMap = ({
     );
   }, []);
 
-  if (!seasonDateRange) {
+  if (!seasonDateRange || !activity || Object.values(activity).length === 2) {
     return null;
   }
 
   return (
-    <div className="flex w-full flex-col rounded-md border bg-background/40 p-4">
-      <p className="pb-2 text-start font-normal tracking-tight">Activity</p>
+    <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
+      <p className="pb-2 text-start font-normal tracking-tight">
+        Most raced day
+      </p>
+      <p className="text-2xl font-bold">{maxDate.toLocaleDateString()}</p>
+      <p className="mb-2 text-xs text-muted-foreground">({max} races)</p>
       <ActivityCalendar
-        blockSize={14}
+        blockSize={16}
         colorScheme={resolvedTheme as "light" | "dark"}
         data={data}
         theme={THEME}
