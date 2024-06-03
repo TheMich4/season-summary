@@ -1,13 +1,22 @@
 "use client";
 
+import { getRandomSeason } from "@/lib/season";
 import { animate, motion, useMotionValue, useTransform } from "framer-motion";
 import { type ReactNode, useEffect, useState } from "react";
+
+const getSeasonString = () => {
+  const { season, year } = getRandomSeason();
+
+  return `${season}${year}`;
+};
 
 export const Title = () => {
   const isInitialRender = useMotionValue(true);
   const textIndex = useMotionValue(0);
-  const texts = ["eason", "22024"];
-  const baseText = useTransform(textIndex, (latest) => texts[latest] || "");
+  const texts = ["Season", "random"];
+  const baseText = useTransform(textIndex, (latest) =>
+    latest === 0 ? texts[latest] || "" : getSeasonString(),
+  );
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.round(latest));
   const displayText = useTransform(rounded, (latest) =>

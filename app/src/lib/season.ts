@@ -35,3 +35,23 @@ export const isBeforeSeason = (
 
   return false;
 };
+
+export const getRandomSeason = () => {
+  const minYear = 2011;
+  const maxYear = currentSeason.year;
+  const minSeason = 1;
+  const maxSeason = 4;
+
+  const year = Math.floor(Math.random() * (maxYear - minYear + 1)) + minYear;
+  const season =
+    year === currentSeason.year
+      ? Math.floor(
+          Math.random() * (currentSeason.season - minSeason + 1) + minSeason,
+        )
+      : Math.floor(Math.random() * (maxSeason - minSeason + 1) + minSeason);
+
+  return {
+    year,
+    season,
+  };
+};
