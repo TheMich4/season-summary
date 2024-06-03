@@ -19,6 +19,7 @@ import { RaceStats } from "./race-stats";
 import { RatingChart } from "./rating-chart";
 import { SOF } from "./sof";
 import { StatBox } from "@/components/stat-box";
+import { Finishes } from "./finishes";
 
 interface ViewProps {
   category: Category;
@@ -42,6 +43,8 @@ export const View = ({
   if (!data) {
     return <Loader2 className="size-8 animate-spin dark:text-primary" />;
   }
+
+  console.log({ data });
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -87,6 +90,7 @@ export const View = ({
               <Incidents incidentData={data.incidents} useCounter={!isDone} />
               <SOF sofData={data.sof} useCounter={!isDone} />
               <Points pointsData={data.points} useCounter={!isDone} />
+              <Finishes finishes={data.reasonOut} useCounter={!isDone} />
             </div>
           </div>
         </div>
