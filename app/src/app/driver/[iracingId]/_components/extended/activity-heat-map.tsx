@@ -158,7 +158,8 @@ export const ActivityHeatMap = ({
       <p className="text-2xl font-bold">{maxDate.toLocaleDateString()}</p>
       <p className="mb-2 text-xs text-muted-foreground">({max} races)</p>
       <ActivityCalendar
-        blockSize={16}
+        blockMargin={4}
+        blockSize={18}
         colorScheme={resolvedTheme as "light" | "dark"}
         data={data}
         theme={THEME}
