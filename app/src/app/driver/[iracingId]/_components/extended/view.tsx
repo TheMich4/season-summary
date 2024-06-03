@@ -75,7 +75,7 @@ export const View = ({
           <div className="grid gap-4 lg:grid-cols-3">
             <div className="flex flex-col gap-4 lg:col-span-2">
               <ActivityHeatMap
-                raceResults={simpleData.seasonResults}
+                activity={data.activity}
                 season={season}
                 year={year}
               />

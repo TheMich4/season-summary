@@ -17,7 +17,7 @@ import {
 import { TooltipPortal } from "@radix-ui/react-tooltip";
 
 interface ActivityHeatMapProps {
-  raceResults: any[];
+  activity: Record<string, number>;
   season: string;
   year: string;
 }
@@ -78,7 +78,7 @@ const ActivityTooltip = ({ count, date }: Activity) => {
 };
 
 export const ActivityHeatMap = ({
-  raceResults,
+  activity,
   season,
   year,
 }: ActivityHeatMapProps) => {
@@ -90,18 +90,10 @@ export const ActivityHeatMap = ({
   );
 
   const data = useMemo(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const racesPerDate = raceResults?.reduce((acc, result) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-      const date = result.startTime.split("T")[0];
-
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      return {
-        ...acc,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-        [date]: (acc[date] ?? 0) + 1,
-      };
-    }, getInitialRacesPerDate(seasonDateRange));
+    const racesPerDate = {
+      ...getInitialRacesPerDate(seasonDateRange),
+      ...activity,
+    };
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const max = Math.max(
@@ -119,7 +111,7 @@ export const ActivityHeatMap = ({
       .sort(
         (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
       ) as Activity[];
-  }, [raceResults, seasonDateRange]);
+  }, [activity, seasonDateRange]);
 
   const renderBlock = useCallback((block: BlockElement, activity: Activity) => {
     return (
