@@ -22,8 +22,6 @@ export const Timeline = async ({
     category,
   });
 
-  console.log({ simpleData });
-
   return (
     <div className="h-full w-full">
       <Header

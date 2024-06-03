@@ -44,8 +44,6 @@ export const View = ({
     return <Loader2 className="size-8 animate-spin dark:text-primary" />;
   }
 
-  console.log({ data });
-
   return (
     <div className="flex w-full flex-col gap-4">
       <Header
