@@ -95,7 +95,9 @@ export const ActivityHeatMap = ({
       ...activity,
     };
 
+    // @ts-ignore
     const { maxDate, max } = Object.entries(racesPerDate).reduce(
+      // @ts-ignore
       (acc, [date, count]) => {
         const { maxDate, max } = acc;
 
@@ -111,13 +113,6 @@ export const ActivityHeatMap = ({
       { maxDate: null, max: 0 },
     );
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    // const max = Math.max(
-    //   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    //   ...(Object.values(racesPerDate ?? {}) as unknown as number[]),
-    // );
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return {
       data: Object.entries(racesPerDate ?? {})
         .map(([date, count]) => ({
