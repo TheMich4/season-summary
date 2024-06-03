@@ -141,7 +141,7 @@ export const ActivityHeatMap = ({
     );
   }, []);
 
-  if (!seasonDateRange || !activity || Object.values(activity).length === 2) {
+  if (!seasonDateRange || !activity || Object.values(activity).length === 0) {
     return null;
   }
 
