@@ -13,7 +13,7 @@ const getSeasonString = () => {
 export const Title = () => {
   const isInitialRender = useMotionValue(true);
   const textIndex = useMotionValue(0);
-  const texts = ["Season", "random"];
+  const texts = ["eason", "random"];
   const baseText = useTransform(textIndex, (latest) =>
     latest === 0 ? texts[latest] || "" : getSeasonString(),
   );
