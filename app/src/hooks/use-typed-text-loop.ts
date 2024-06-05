@@ -2,6 +2,8 @@ import { animate, useMotionValue, useTransform } from "framer-motion";
 import { useEffect } from "react";
 
 interface Config {
+  duration?: number;
+  repeatDelay?: number;
   getBaseText?: (index: number) => string;
   onUpdateToInitial?: () => void;
   onUpdateToNext?: () => void;
@@ -24,11 +26,11 @@ export const useTypedTextLoop = (texts: Array<string>, config?: Config) => {
   useEffect(() => {
     void animate(count, 30, {
       type: "tween",
-      duration: 5,
+      duration: config?.duration ?? 5,
       ease: "easeIn",
       repeat: Infinity,
       repeatType: "reverse",
-      repeatDelay: 0.1,
+      repeatDelay: config?.repeatDelay ?? 0.1,
       onUpdate(latest) {
         if (isInitialRender.get() === true && latest > 5) {
           isInitialRender.set(false);
