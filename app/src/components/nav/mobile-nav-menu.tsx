@@ -66,14 +66,15 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
           <Suspense fallback={null}>
             <ProfileNavLink />
           </Suspense>
-
           <DropdownMenuSeparator />
 
+          {/*
           <DropdownMenuItem>
             <Link href="https://special-events.dyczkowski.dev">
               Special Events
             </Link>
           </DropdownMenuItem>
+          */}
 
           <DropdownMenuItem>
             <Link href="https://schedule.dyczkowski.dev/">
@@ -85,9 +86,7 @@ export const MobileNavMenu = ({ items }: MainNavProps) => {
               </div>
             </Link>
           </DropdownMenuItem>
-
           <DropdownMenuSeparator />
-
           <DropdownMenuItem>
             <Link
               href={siteConfig.links.twitter}

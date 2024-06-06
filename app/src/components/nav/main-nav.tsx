@@ -33,7 +33,7 @@ export function MainNav({ items }: MainNavProps) {
           <ProfileNavLink />
         </Suspense>
 
-        <SpecialEventsNavLink />
+        {/* <SpecialEventsNavLink /> */}
         <ScheduleNavLink />
       </nav>
     </div>
