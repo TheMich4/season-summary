@@ -64,6 +64,6 @@ export const getBasicData = async (request: Request) => {
     }),
     {
       status: 200,
-    }
+    },
   );
 };

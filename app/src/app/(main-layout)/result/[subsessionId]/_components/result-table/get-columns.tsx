@@ -2,6 +2,7 @@ import { Delta } from "@/components/delta";
 import { Interval } from "./interval";
 import Link from "next/link";
 import { createColumnHelper } from "@tanstack/react-table";
+// import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
 
 const columnHelper = createColumnHelper<any>();
 
@@ -10,6 +11,24 @@ export const getColumns = (
   stats: { lapsPerClass: Record<string, number> },
 ) => {
   return [
+    // columnHelper.accessor("expand", {
+    //   size: 10,
+    //   maxWidth: 10,
+    //   header: "",
+    //   cell: ({ row }) => {
+    //     if (!row.getCanExpand()) return null;
+    //
+    //     const Icon = row.getIsExpanded() ? ChevronDownIcon : ChevronRightIcon;
+    //
+    //     return (
+    //       <span className="flex items-center justify-center">
+    //         <button onClick={row.getToggleExpandedHandler()}>
+    //           <Icon className="flex size-4 items-center justify-center dark:text-primary" />
+    //         </button>
+    //       </span>
+    //     );
+    //   },
+    // }),
     columnHelper.accessor("finishPosition", {
       cell: ({ getValue, row }) => (
         <span className="flex flex-row items-baseline gap-2">

@@ -12,13 +12,18 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getExpandedRowModel,
+  ExpandedState,
 } from "@tanstack/react-table";
 
 import { getColumns } from "./get-columns";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 // TODO: Add type from iracing-api
 export const ResultTable = ({ result }: { result: Record<string, any> }) => {
+  const [expanded, setExpanded] = useState<ExpandedState>({});
+  console.log({ expanded });
+
   const { columns, data } = useMemo(() => {
     const data =
       result.sessionResults.find(
@@ -54,9 +59,13 @@ export const ResultTable = ({ result }: { result: Record<string, any> }) => {
   const table = useReactTable({
     data,
     columns,
+    getRowCanExpand: () => true,
     getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    onExpandedChange: setExpanded,
     state: {
       columnVisibility,
+      expanded,
     },
   });
 
@@ -84,16 +93,29 @@ export const ResultTable = ({ result }: { result: Record<string, any> }) => {
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="py-2">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
+              <>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id} className="py-2">
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+
+                {row.getIsExpanded() && (
+                  <TableRow className="py-2">
+                    <TableCell colSpan={columns.length} className="py-2">
+                      test
+                    </TableCell>
+                  </TableRow>
+                )}
+              </>
             ))
           ) : (
             <TableRow>
