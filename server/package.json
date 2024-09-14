@@ -13,7 +13,7 @@
   "dependencies": {
     "@season-summary/config": "workspace:*",
     "@season-summary/prisma": "workspace:*",
-    "iracing-api": "0.4.1",
+    "iracing-api": "0.4.4",
     "typescript": "^5.0.0"
   },
   "devDependencies": {

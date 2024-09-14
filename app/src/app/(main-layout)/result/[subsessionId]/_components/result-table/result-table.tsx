@@ -18,11 +18,11 @@ import {
 
 import { getColumns } from "./get-columns";
 import { useMemo, useState } from "react";
+import { Details } from "./details";
 
 // TODO: Add type from iracing-api
 export const ResultTable = ({ result }: { result: Record<string, any> }) => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
-  console.log({ expanded });
 
   const { columns, data } = useMemo(() => {
     const data =
@@ -111,7 +111,7 @@ export const ResultTable = ({ result }: { result: Record<string, any> }) => {
                 {row.getIsExpanded() && (
                   <TableRow className="py-2">
                     <TableCell colSpan={columns.length} className="py-2">
-                      test
+                      <Details row={row.original} result={result} />
                     </TableCell>
                   </TableRow>
                 )}

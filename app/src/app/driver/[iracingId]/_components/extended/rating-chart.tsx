@@ -93,6 +93,7 @@ export const RatingChart = ({
         <ResponsiveContainer height={150}>
           <LineChart height={150} data={data}>
             <Line
+              animationEasing="ease-in-out"
               type="monotone"
               dataKey="value"
               stroke={theme.colors?.primary.DEFAULT}

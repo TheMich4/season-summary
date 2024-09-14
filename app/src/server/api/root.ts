@@ -2,6 +2,7 @@ import { createTRPCRouter } from "@/server/api/trpc";
 import { userRouter } from "./routers/user";
 import { adminRouter } from "./routers/admin";
 import { dataRouter } from "./routers/data";
+import { raceDataRouter } from "./routers/race-data";
 
 /**
  * This is the primary router for your server.
@@ -11,6 +12,7 @@ import { dataRouter } from "./routers/data";
 export const appRouter = createTRPCRouter({
   admin: adminRouter,
   data: dataRouter,
+  raceData: raceDataRouter,
   user: userRouter,
 });
 

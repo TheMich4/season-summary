@@ -7,6 +7,7 @@ import { getRaceResult } from "./routers/v2/get-race-result";
 import { handleWebsocketUpgrade } from "./routers/handle-websocket-upgrade";
 import { requestNew } from "./routers/v2/request-new";
 import { searchDrivers } from "./routers/v2/search-drivers";
+import { getRaceLapData } from "./routers/v2/get-race-lap-data";
 
 export const routeHandler = new Proxy(
   {
@@ -19,6 +20,8 @@ export const routeHandler = new Proxy(
 
     ["/v2/get-iracing-data"]: getIracingData,
     ["/v2/get-race-result"]: getRaceResult,
+    ["/v2/get-race-lap-data"]: getRaceLapData,
+
     ["/v2/search-drivers"]: searchDrivers,
 
     ["/v2/get-basic-data"]: getBasicData,
@@ -30,5 +33,5 @@ export const routeHandler = new Proxy(
   {
     get: (target, name: string) =>
       target[name] || (() => new ClientResponse("Not Found", { status: 404 })),
-  }
+  },
 );

@@ -1,6 +1,8 @@
 import { WS } from "./types";
 import { getWSChannelFromData } from "./utils/get-ws-channel";
 
+export type WebSocketData = any;
+
 export const websocket = {
   open: (ws: WS) => {
     // console.log("ws open");
