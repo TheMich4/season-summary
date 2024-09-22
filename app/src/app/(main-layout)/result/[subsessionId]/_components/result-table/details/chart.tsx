@@ -10,6 +10,46 @@ import {
   Tooltip,
 } from "recharts";
 
+const CustomTooltip = ({
+  active,
+  label,
+  payload,
+}: {
+  active: boolean;
+  label?: number;
+  payload?: any;
+}) => {
+  const data = useMemo(() => payload?.[0]?.payload, [payload]);
+
+  const lapTime = useMemo(() => {
+    if (!data?.value) return null;
+
+    if (data.value === -1) return "N/A";
+
+    const minutes = Math.floor(data.value / 60 / 10000);
+    const seconds = (data.value / 10000) % 60;
+
+    return `${minutes}:${seconds.toFixed(3)}`;
+  }, [data?.value]);
+
+  if (active && label && data) {
+    return (
+      <div className="grid grid-cols-2 gap-2 rounded-md border bg-background/80 p-2 text-muted-foreground backdrop-blur">
+        <div>
+          <div className="text-xs">LAP</div>
+          <div className="font-bold text-foreground">{data?.lapNumber}</div>
+        </div>
+        <div>
+          <div className="text-xs">LAP TIME</div>
+          <div className="font-bold text-foreground">{lapTime}</div>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+};
+
 export const ChartDot = ({
   cx,
   cy,
@@ -31,7 +71,7 @@ export const ChartDot = ({
 export const Chart = ({ lapData, driverId }: any) => {
   const theme = useTailwindTheme();
   const data = useMemo(() => {
-    return lapData.slice(1).map((value, index) => {
+    return lapData.slice(1).map((value: any, index: number) => {
       return {
         index,
         value: value.lapTime === -1 ? undefined : value.lapTime,
@@ -46,14 +86,14 @@ export const Chart = ({ lapData, driverId }: any) => {
   }, [lapData]);
 
   const { min, max } = useMemo(() => {
-    const values = Math.min(...data.map((d) => d.value));
+    const values = Math.min(...data.map((d: any) => d.value));
     const min = Math.min(values);
     const max = Math.max(values);
     return { max, min };
   }, [data]);
 
   const chartConfig = useMemo(() => {
-    return data.map((d, i) => {
+    return data.map((d: any, i: number) => {
       const x: any = [];
 
       // if (i === 0)
@@ -81,7 +121,7 @@ export const Chart = ({ lapData, driverId }: any) => {
 
       return x;
     });
-  }, [data]);
+  }, [data, theme.colors?.primary.DEFAULT]);
 
   return (
     <div className="flex size-full max-w-full self-center sm:w-full sm:max-w-md md:max-w-full">
@@ -95,7 +135,7 @@ export const Chart = ({ lapData, driverId }: any) => {
               x2="0"
               y2="1"
             >
-              {chartConfig.map(({ id, color, percentPosition, opacity }) => (
+              {chartConfig.map(({ id, color, percentPosition }: any) => (
                 <stop
                   key={id}
                   offset={`${percentPosition}%`}
@@ -109,6 +149,7 @@ export const Chart = ({ lapData, driverId }: any) => {
           <Line
             type="monotone"
             dataKey="value"
+            // @ts-ignore
             dot={ChartDot}
             stroke={`url(#color-${driverId})`}
             strokeWidth={2}
@@ -117,6 +158,7 @@ export const Chart = ({ lapData, driverId }: any) => {
           />
           <XAxis dataKey="value" hide />
           <YAxis domain={[min, max]} hide />
+          <Tooltip content={<CustomTooltip active={false} />} />
         </LineChart>
       </ResponsiveContainer>
     </div>
