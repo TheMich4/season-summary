@@ -9,6 +9,7 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
+import { getLapTime } from "./utils";
 
 const CustomTooltip = ({
   active,
@@ -24,12 +25,7 @@ const CustomTooltip = ({
   const lapTime = useMemo(() => {
     if (!data?.value) return null;
 
-    if (data.value === -1) return "N/A";
-
-    const minutes = Math.floor(data.value / 60 / 10000);
-    const seconds = (data.value / 10000) % 60;
-
-    return `${minutes}:${seconds.toFixed(3)}`;
+    return getLapTime(data?.value);
   }, [data?.value]);
 
   if (active && label && data) {
