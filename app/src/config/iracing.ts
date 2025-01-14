@@ -1,8 +1,8 @@
 import { Categories } from "@season-summary/config";
 import type { Category } from "@season-summary/config";
 
-export const DEFAULT_SEASON = 4;
-export const DEFAULT_YEAR = 2024;
+export const DEFAULT_SEASON = 1;
+export const DEFAULT_YEAR = 2025;
 export const DEFAULT_CATEGORY = Categories.OVAL as Category;
 
 // TODO: Fill with previous seasons
