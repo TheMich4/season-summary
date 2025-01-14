@@ -64,4 +64,10 @@ export const SEASON_DATE_RANGES: Record<
       end: "2024-12-08",
     },
   },
+  "2025": {
+    "1": {
+      start: "2024-12-09",
+      end: "2025-03-17",
+    },
+  },
 };
