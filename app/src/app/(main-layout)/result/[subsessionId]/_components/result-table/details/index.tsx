@@ -1,10 +1,14 @@
 import { api } from "@/trpc/react";
 import { Loader2 } from "lucide-react";
 import { Chart } from "./chart";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { getLapTime } from "./utils";
+import { Button } from "@/components/ui/button";
+import { LapTable } from "./lap-table";
 
 export const Details = (props: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const { data, isLoading } = api.raceData.getDriverRaceLaps.useQuery(
     {
       subsessionId: props.result.subsessionId,
@@ -22,7 +26,7 @@ export const Details = (props: any) => {
 
   const details = useMemo(() => {
     if (!data?.lapData) return null;
-    console.log({ data });
+
     return [
       {
         label: "Best Lap Time",
@@ -52,20 +56,29 @@ export const Details = (props: any) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
-      <div className="col-span-1">
-        {details?.map(({ label, value }) => (
-          <div key={label} className="flex flex-row items-baseline gap-1">
-            <div className="text-sm font-semibold uppercase text-primary">
-              {label}:
-            </div>
-            <div className="italic">{value}</div>
+    <>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
+        <div className="col-span-1 flex flex-col justify-between gap-2">
+          <div>
+            {details?.map(({ label, value }) => (
+              <div key={label} className="flex flex-row items-baseline gap-1">
+                <div className="text-sm font-semibold uppercase text-primary">
+                  {label}:
+                </div>
+                <div className="italic">{value}</div>
+              </div>
+            ))}
           </div>
-        ))}
+          <Button variant="secondary" size="xs" onClick={() => setIsOpen(true)}>
+            Lap Details
+          </Button>
+        </div>
+        <div className="col-span-3">
+          <Chart lapData={data.lapData} driverId={props.row.custId} />
+        </div>
       </div>
-      <div className="col-span-3">
-        <Chart lapData={data.lapData} driverId={props.row.custId} />
-      </div>
-    </div>
+
+      <LapTable isOpen={isOpen} close={() => setIsOpen(false)} />
+    </>
   );
 };
