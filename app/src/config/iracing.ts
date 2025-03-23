@@ -1,7 +1,7 @@
 import { Categories } from "@season-summary/config";
 import type { Category } from "@season-summary/config";
 
-export const DEFAULT_SEASON = 1;
+export const DEFAULT_SEASON = 2;
 export const DEFAULT_YEAR = 2025;
 export const DEFAULT_CATEGORY = Categories.OVAL as Category;
 
@@ -68,6 +68,18 @@ export const SEASON_DATE_RANGES: Record<
     "1": {
       start: "2024-12-09",
       end: "2025-03-17",
+    },
+    "2": {
+      start: "2025-03-18",
+      end: "2025-06-16",
+    },
+    "3": {
+      start: "2025-06-17",
+      end: "2025-09-15",
+    },
+    "4": {
+      start: "2025-09-16",
+      end: "2025-12-14",
     },
   },
 };
