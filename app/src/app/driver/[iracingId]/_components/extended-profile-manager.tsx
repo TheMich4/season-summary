@@ -6,6 +6,7 @@ import { ExtendedProfileNoData } from "./extended-profile-no-data";
 import { SeasonSwitch } from "./season-switch";
 import type { Session } from "next-auth";
 import { View } from "./extended/view";
+import { EnhancedView } from "./extended/enhanced-view";
 import { categoryToName } from "@season-summary/config";
 import { useDataStatusToast } from "../_hooks/use-data-status-toast";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
@@ -92,7 +93,7 @@ export const ExtendedProfileManager = ({
         </>
       )}
 
-      <View
+      <EnhancedView
         data={wsData?.message?.data}
         iracingId={iracingId}
         season={season}

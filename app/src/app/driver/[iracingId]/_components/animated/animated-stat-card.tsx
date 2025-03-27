@@ -35,9 +35,9 @@ export const AnimatedStatCard = ({
     const x = clientX - left;
     const y = clientY - top;
     
-    // Calculate rotation based on mouse position (max 6 degrees)
-    const rotateXValue = ((y - height / 2) / height) * -6;
-    const rotateYValue = ((x - width / 2) / width) * 6;
+    // Calculate rotation based on mouse position (max 4 degrees)
+    const rotateXValue = ((y - height / 2) / height) * -4;
+    const rotateYValue = ((x - width / 2) / width) * 4;
     
     // Update values for animations
     rotateX.set(rotateXValue);
@@ -63,8 +63,11 @@ export const AnimatedStatCard = ({
         transform: "perspective(1000px)",
         rotateX,
         rotateY,
+        willChange: "transform",
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+        WebkitFontSmoothing: "antialiased",
       }}
-      whileHover={{ scale: 1.005 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >

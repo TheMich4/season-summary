@@ -37,9 +37,9 @@ export default function ExtendedPage({
       <AnimatedRacingBackground />
       
       {/* Page content with animated transitions */}
-      <div className="container relative mx-auto flex flex-col items-center px-4 pt-8 md:pt-12">
-        <AnimatedSection className="w-full max-w-7xl" delay={0.2}>
-          <AnimatedStatCard className="p-6">
+      <div className="container relative mx-auto flex flex-col items-center px-2 pt-2 md:pt-4 lg:px-4">
+        <AnimatedSection className="w-full max-w-full" delay={0.2}>
+          <AnimatedStatCard className="p-4 md:p-6">
             {/* Glowing accents */}
             <GlowingAccent position="top-right" />
             <GlowingAccent position="bottom-left" />
@@ -57,7 +57,7 @@ export default function ExtendedPage({
           </AnimatedStatCard>
         </AnimatedSection>
         
-        <div className="mt-8 flex items-center justify-center gap-2 text-center text-sm text-muted-foreground">
+        <div className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
           <p>Track your season progress and compare with friends!</p>
           <span className="animate-pulse text-primary">•</span>
           <p>Updated in real-time</p>
