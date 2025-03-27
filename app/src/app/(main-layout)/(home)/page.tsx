@@ -30,11 +30,7 @@ export default function Home() {
         </AnimatedCard>
       </AnimatedSection>
 
-      <AnimatedSection className="mt-6 w-full max-w-4xl" delay={0.6}>
-        <AnimatedCard position="left">
-          <VisitedList apiUrl={env.API_URL} />
-        </AnimatedCard>
-      </AnimatedSection>
+      <VisitedList apiUrl={env.API_URL} />
     </main>
   );
 }
