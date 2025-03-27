@@ -2,7 +2,6 @@
 
 import type { Category } from "@season-summary/config";
 import { Loader2 } from "lucide-react";
-import { Header } from "./header";
 import { EnhancedRatingChart } from "../animated/enhanced-rating-chart";
 import { EnhancedActivityHeatMap } from "../animated/enhanced-activity-heatmap";
 import { EnhancedFinishPositions } from "../animated/enhanced-finish-positions";
@@ -47,14 +46,6 @@ export const EnhancedView = ({
 
   return (
     <div className="flex w-full flex-col gap-6">
-      <Header
-        displayName={simpleData?.memberData?.displayName ?? ""}
-        iracingId={iracingId}
-        season={+season}
-        year={+year}
-        category={category}
-      />
-
       {/* Rating charts row */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <EnhancedRatingChart
