@@ -163,7 +163,7 @@ export const EnhancedFinishPositions = ({
       </div>
 
       {/* Medals row */}
-      <div className="mt-3 flex justify-between">
+      <div className="mt-3 flex justify-between gap-2">
         {[1, 2, 3].map((position) => {
           const count = finishPositions[position] || 0;
           const medalColor = 
@@ -175,18 +175,18 @@ export const EnhancedFinishPositions = ({
             <motion.div 
               key={position}
               className={cn(
-                "flex flex-col items-center rounded-lg border border-primary/10 bg-background/50 p-2",
+                "flex flex-1 flex-col items-center rounded-lg border border-primary/10 bg-background/50 p-3",
                 count > 0 ? "opacity-100" : "opacity-60"
               )}
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: delay + 0.5 + (position * 0.1), duration: 0.3 }}
             >
-              <div className={`text-lg font-bold ${medalColor}`}>
+              <div className={`text-2xl font-bold ${medalColor}`}>
                 {count}
               </div>
-              <div className={`text-xs ${medalColor}`}>
-                {position === 1 ? "1st" : position === 2 ? "2nd" : "3rd"}
+              <div className={`text-sm ${medalColor}`}>
+                {position === 1 ? "1st Place" : position === 2 ? "2nd Place" : "3rd Place"}
               </div>
             </motion.div>
           );

@@ -55,9 +55,9 @@ const Race = ({ result, iracingId, index }: RaceProps) => {
     >
       <div className="flex items-center p-3">
         {/* Position indicator */}
-        <div className={`mr-3 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border-2 ${positionColor} font-bold text-2xl`}>
+        <div className={`relative mr-3 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border-2 ${positionColor} font-bold text-2xl`}>
           {finishPosition}
-          {isWin && <Trophy className="absolute -right-1 -top-1 h-5 w-5 text-primary" />}
+          {isWin && <Trophy className="absolute -right-2 -top-2 h-5 w-5 text-primary" />}
         </div>
         
         {/* Race details */}
@@ -162,31 +162,31 @@ export const EnhancedRaceList = ({
             <h2 className="text-2xl font-bold text-foreground">
               {categoryToName[category]} Season Races
             </h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground text-left">
               {totalRaces} races with {wins} wins and {podiums} podium finishes
             </p>
           </div>
           
           {/* Pagination controls */}
           <div className="flex items-center gap-2">
-            <div className="flex items-center rounded-lg border border-primary/10 bg-background/50 px-3 py-1 text-sm">
+            <div className="flex h-8 items-center rounded-lg border border-primary/10 bg-background/50 px-3 py-1 text-sm">
               <span>Page {page + 1} of {numberOfPages}</span>
             </div>
             
             <div className="flex gap-1">
               <Button
-                size="icon"
+                size="sm"
                 variant="outline"
-                className="h-8 w-8"
+                className="h-8 w-8 p-0"
                 disabled={page === 0}
                 onClick={() => setPage((prev) => prev - 1)}
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
               <Button
-                size="icon"
+                size="sm"
                 variant="outline"
-                className="h-8 w-8"
+                className="h-8 w-8 p-0"
                 disabled={page === numberOfPages - 1}
                 onClick={() => setPage((prev) => prev + 1)}
               >
@@ -196,7 +196,7 @@ export const EnhancedRaceList = ({
                 <DropdownMenuTrigger
                   className={cn(
                     buttonVariants({ variant: "outline", size: "sm" }),
-                    "gap-1 w-24"
+                    "h-8 gap-1 w-24"
                   )}
                 >
                   <span>{racesPerPage}</span>

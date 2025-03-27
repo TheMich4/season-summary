@@ -34,7 +34,9 @@ export default function ExtendedPage({
   return (
     <main className="relative min-h-screen w-full bg-gradient-to-b from-background to-background/95 pb-12">
       {/* Animated background with racing-themed elements */}
-      <AnimatedRacingBackground />
+      <div className="fixed inset-0 h-full w-full">
+        <AnimatedRacingBackground />
+      </div>
       
       {/* Page content with animated transitions */}
       <div className="container relative mx-auto flex flex-col items-center px-2 pt-2 md:pt-4 lg:px-4">
