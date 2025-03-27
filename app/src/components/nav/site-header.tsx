@@ -27,7 +27,7 @@ export async function SiteHeader({ fullWidth = false }: SiteHeaderProps) {
       
       <div
         className={cn(
-          "flex h-16 items-center sm:justify-between",
+          "flex h-16 items-center justify-between",
           fullWidth ? "px-4" : "px-4 md:container",
         )}
       >
