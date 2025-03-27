@@ -7,10 +7,6 @@ export const SpecialEventsNavLink = async () => {
         href: "https://special-events.dyczkowski.dev/",
         title: "Special Events",
       }}
-    >
-      <div className=" items-center md:flex">
-        <span>Special Events</span>
-      </div>
-    </NavLink>
+    />
   );
 };
