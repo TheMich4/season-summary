@@ -1,17 +1,11 @@
-"use client";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronRight, User } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getProfileUrl } from "@/server/get-profile-url";
-import { motion } from "framer-motion";
 
-export const ProfileCard = ({
+export const ProfileCardFallback = ({
   name,
   iracingId,
   avatarUrl,
@@ -20,19 +14,8 @@ export const ProfileCard = ({
   iracingId?: number | string;
   avatarUrl?: string | null;
 }) => {
-  const router = useRouter();
-  const pathname = usePathname();
-
-  const handleClick = async () => {
-    const url = iracingId ? await getProfileUrl(`${iracingId}`) : pathname;
-    router.push(url);
-  };
-
   return (
-    <div 
-      className="group relative flex flex-row justify-between overflow-hidden rounded-md border border-primary/20 bg-background/40 p-3 transition-colors hover:border-primary/50 hover:shadow-sm"
-    >
-      {/* Subtle glow effect */}
+    <div className="group relative flex flex-row justify-between overflow-hidden rounded-md border border-primary/20 bg-background/40 p-3 transition-colors hover:border-primary/50 hover:shadow-sm">
       <div className="absolute -right-4 -top-4 h-12 w-12 rounded-full bg-primary/5 opacity-0 blur-xl transition-opacity group-hover:opacity-100" />
       
       <div className="flex flex-row items-center gap-3 z-10">
@@ -60,7 +43,7 @@ export const ProfileCard = ({
         </div>
       </div>
       <div className="flex items-center z-10">
-        <Link href={"#"} onClick={handleClick} className="relative">
+        <Link href={"#"} className="relative">
           <Button 
             size="sm" 
             variant="ghost" 
@@ -72,4 +55,4 @@ export const ProfileCard = ({
       </div>
     </div>
   );
-};
+}; 

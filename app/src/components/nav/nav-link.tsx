@@ -1,15 +1,20 @@
-import Link from "next/link";
+"use client";
+
 import { type NavItem } from "./types";
-import { type ReactNode } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-export const NavLink = ({
-  children,
-  item,
-}: {
-  children?: ReactNode;
+interface NavLinkProps {
   item: NavItem;
-}) => {
+}
+
+export const NavLink = ({ item }: NavLinkProps) => {
+  const pathname = usePathname();
+  // Only compare if href exists, otherwise default to false
+  const isActive = item.href ? pathname === item.href : false;
+
+  // If href is undefined, don't render the link
   if (!item.href) {
     return null;
   }
@@ -18,11 +23,25 @@ export const NavLink = ({
     <Link
       href={item.href}
       className={cn(
-        "flex items-center text-lg font-semibold sm:text-sm text-nowrap text-muted-foreground hover:text-foreground",
-        item.disabled && "cursor-not-allowed opacity-80"
+        "group relative flex items-center rounded-md px-3 py-1.5 text-sm font-medium transition-all",
+        isActive
+          ? "bg-primary/20 text-primary-600 font-semibold shadow-sm dark:bg-primary/20 dark:text-primary"
+          : "text-slate-800 hover:bg-primary/15 hover:text-primary-600 hover:shadow-sm dark:text-slate-300 dark:hover:bg-primary/10 dark:hover:text-primary",
+        item.disabled && "pointer-events-none opacity-60"
       )}
     >
-      {children ?? item.title}
+      {/* Active indicator - small dot */}
+      {isActive && (
+        <span className="absolute -bottom-[1px] left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-primary dark:bg-primary"></span>
+      )}
+      
+      {/* Active indicator - sliding line animation on hover */}
+      <span className={cn(
+        "absolute -bottom-[1px] left-0 h-[2px] w-0 bg-gradient-to-r from-primary/60 via-primary/80 to-primary/60 transition-all group-hover:w-full",
+        isActive ? "opacity-0" : "opacity-0 group-hover:opacity-100"
+      )}></span>
+      
+      <span>{item.title}</span>
     </Link>
   );
 };

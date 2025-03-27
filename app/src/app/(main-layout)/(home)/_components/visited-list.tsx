@@ -1,8 +1,10 @@
 "use client";
 
-import { ProfileCard } from "@/components/profile-card";
 import { useVisited } from "@/components/providers/visited-provider";
 import { useVisitedAvatars } from "@/hooks/use-visited-avatars";
+import { ProfileCardClient } from "./profile-card-client";
+import { AnimatedSection } from "./animated-section";
+import { AnimatedCard } from "./animated-card";
 
 interface VisitedListProps {
   apiUrl: string;
@@ -14,24 +16,35 @@ export const VisitedList = ({ apiUrl }: VisitedListProps) => {
 
   if (!visited.length) return null;
 
+  const visibleProfiles = visited
+    .filter(({ iracingId, name }) => iracingId && name)
+    .slice(0, 10);
+
+  if (visibleProfiles.length === 0) return null;
+
   return (
-    <div className="w-full md:w-[720px] lg:w-[820px]">
-      <div className="text-center text-2xl font-bold md:text-start">
-        Recently Visited:
-      </div>
-      <div className="grid grid-cols-1 gap-2 py-2 md:grid-cols-2">
-        {visited
-          .filter(({ iracingId, name }) => iracingId && name)
-          .slice(0, 10)
-          .map(({ iracingId, name }) => (
-            <ProfileCard
-              avatarUrl={avatars?.[iracingId]}
-              key={iracingId}
-              iracingId={iracingId}
-              name={name}
-            />
-          ))}
-      </div>
-    </div>
+    <AnimatedSection className="mt-6 w-full max-w-4xl" delay={0.6}>
+      <AnimatedCard position="left">
+        <div className="mx-auto w-full max-w-full">
+          <div className="text-center text-2xl font-bold md:text-start">
+            Recently Visited:
+          </div>
+          <div className={`grid gap-2 py-2 ${
+            visibleProfiles.length > 1 
+              ? "grid-cols-1 sm:grid-cols-2" 
+              : "grid-cols-1"
+          }`}>
+            {visibleProfiles.map(({ iracingId, name }) => (
+              <ProfileCardClient
+                avatarUrl={avatars?.[iracingId]}
+                key={iracingId}
+                iracingId={iracingId}
+                name={name}
+              />
+            ))}
+          </div>
+        </div>
+      </AnimatedCard>
+    </AnimatedSection>
   );
 };
