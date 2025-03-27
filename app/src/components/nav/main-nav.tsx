@@ -20,13 +20,13 @@ export function MainNav({ items }: MainNavProps) {
       <MobileNavMenu items={items} />
       <Link 
         href="/" 
-        className="group flex items-center gap-2 rounded-md bg-transparent px-2 py-1 transition-all hover:bg-[hsl(47.9,95.8%,53.1%)]/5"
+        className="group flex items-center gap-2 rounded-md bg-transparent px-2 py-1 transition-all hover:bg-[hsl(47.9,95.8%,53.1%)]/10"
       >
         <div className="relative">
-          <div className="absolute -inset-1 -z-10 rounded-full bg-gradient-to-r from-[hsl(47.9,95.8%,53.1%)]/0 to-[hsl(47.9,95.8%,53.1%)]/10 opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-100"></div>
-          <Icons.home className="size-6 text-slate-800 transition-colors group-hover:text-[hsl(47.9,95.8%,53.1%)] dark:text-[hsl(47.9,95.8%,53.1%)]/90" />
+          <div className="absolute -inset-1 -z-10 rounded-full bg-gradient-to-r from-[hsl(47.9,95.8%,53.1%)]/10 to-[hsl(47.9,95.8%,53.1%)]/15 opacity-0 blur-md transition-opacity duration-500 group-hover:opacity-100"></div>
+          <Icons.home className="size-6 text-slate-900 transition-colors dark:text-[hsl(47.9,95.8%,53.1%)]/90 dark:group-hover:text-[hsl(47.9,95.8%,53.1%)]" />
         </div>
-        <span className="inline-block bg-gradient-to-r from-slate-800 to-slate-700 bg-clip-text font-bold text-transparent transition-all group-hover:from-[hsl(47.9,95.8%,53.1%)] group-hover:to-yellow-600 dark:from-white dark:to-slate-300 dark:group-hover:from-[hsl(47.9,95.8%,53.1%)] dark:group-hover:to-yellow-400">
+        <span className="inline-block bg-gradient-to-r from-slate-900 to-slate-800 bg-clip-text font-bold text-transparent transition-all dark:from-white dark:to-slate-300 dark:group-hover:from-[hsl(47.9,95.8%,53.1%)] dark:group-hover:to-yellow-400">
           {siteConfig.name}
         </span>
       </Link>
@@ -42,9 +42,9 @@ export function MainNav({ items }: MainNavProps) {
         <div className="relative">
           <Link 
             href="/schedule" 
-            className="group flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-slate-600 transition-all hover:bg-[hsl(47.9,95.8%,53.1%)]/10 hover:text-[hsl(47.9,95.8%,53.1%)]/90 dark:text-slate-300 dark:hover:bg-[hsl(47.9,95.8%,53.1%)]/10 dark:hover:text-[hsl(47.9,95.8%,53.1%)]"
+            className="group flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-slate-800 transition-all hover:bg-[hsl(47.9,95.8%,53.1%)]/15 hover:text-[hsl(47.9,95.8%,53.1%)]/90 hover:shadow-sm dark:text-slate-300 dark:hover:bg-[hsl(47.9,95.8%,53.1%)]/10 dark:hover:text-[hsl(47.9,95.8%,53.1%)]"
           >
-            <Calendar className="size-4 text-slate-500 transition-all group-hover:text-[hsl(47.9,95.8%,53.1%)] dark:text-slate-400" />
+            <Calendar className="size-4 text-slate-600 transition-all group-hover:text-[hsl(47.9,95.8%,53.1%)] dark:text-slate-400" />
             <span>Schedule</span>
           </Link>
         </div>

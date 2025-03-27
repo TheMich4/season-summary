@@ -25,8 +25,8 @@ export const NavLink = ({ item }: NavLinkProps) => {
       className={cn(
         "group relative flex items-center rounded-md px-3 py-1.5 text-sm font-medium transition-all",
         isActive
-          ? "bg-primary/20 text-primary dark:bg-primary/20 dark:text-primary"
-          : "text-slate-600 hover:bg-primary/10 hover:text-primary/90 dark:text-slate-300 dark:hover:bg-primary/10 dark:hover:text-primary",
+          ? "bg-primary/20 text-primary-600 font-semibold shadow-sm dark:bg-primary/20 dark:text-primary"
+          : "text-slate-800 hover:bg-primary/15 hover:text-primary-600 hover:shadow-sm dark:text-slate-300 dark:hover:bg-primary/10 dark:hover:text-primary",
         item.disabled && "pointer-events-none opacity-60"
       )}
     >
@@ -37,7 +37,7 @@ export const NavLink = ({ item }: NavLinkProps) => {
       
       {/* Active indicator - sliding line animation on hover */}
       <span className={cn(
-        "absolute -bottom-[1px] left-0 h-[2px] w-0 bg-gradient-to-r from-primary/40 via-primary/60 to-primary/40 transition-all group-hover:w-full",
+        "absolute -bottom-[1px] left-0 h-[2px] w-0 bg-gradient-to-r from-primary/60 via-primary/80 to-primary/60 transition-all group-hover:w-full",
         isActive ? "opacity-0" : "opacity-0 group-hover:opacity-100"
       )}></span>
       

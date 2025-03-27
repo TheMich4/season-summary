@@ -32,7 +32,7 @@ export function ThemeSwitch() {
         <Button 
           variant="ghost" 
           size="sm" 
-          className="rounded-md text-slate-600 hover:bg-primary/10 hover:text-primary dark:text-slate-400 dark:hover:bg-primary/10 dark:hover:text-primary"
+          className="rounded-md text-slate-800 hover:bg-primary/15 hover:text-primary-600 dark:text-slate-400 dark:hover:bg-primary/10 dark:hover:text-primary"
         >
           <Sun className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -41,29 +41,29 @@ export function ThemeSwitch() {
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="w-40 border-primary/20 bg-white/95 p-1 backdrop-blur-md dark:border-primary/10 dark:bg-slate-950/90 dark:backdrop-blur-md"
+        className="w-40 border border-slate-300 bg-white/95 p-1 shadow-md backdrop-blur-md dark:border-primary/10 dark:bg-slate-950/90 dark:backdrop-blur-md"
       >
         <DropdownMenuItem 
           onClick={() => changeTheme("light")}
-          className={`flex cursor-pointer items-center gap-2 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/10 dark:hover:text-primary ${theme === 'light' ? 'bg-primary/15 text-primary dark:bg-primary/15 dark:text-primary' : 'text-slate-700 dark:text-slate-300'}`}
+          className={`flex cursor-pointer items-center gap-2 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors hover:bg-primary/15 hover:text-primary-600 dark:hover:bg-primary/10 dark:hover:text-primary ${theme === 'light' ? 'bg-primary/15 text-primary-600 dark:bg-primary/15 dark:text-primary' : 'text-slate-800 dark:text-slate-300'}`}
         >
-          <Sun className="size-4 text-amber-500" />
+          <Sun className="size-4 text-amber-600" />
           <span className="flex-1">Light</span>
           {theme === 'light' && <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>}
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => changeTheme("dark")}
-          className={`flex cursor-pointer items-center gap-2 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/10 dark:hover:text-primary ${theme === 'dark' ? 'bg-primary/15 text-primary dark:bg-primary/15 dark:text-primary' : 'text-slate-700 dark:text-slate-300'}`}
+          className={`flex cursor-pointer items-center gap-2 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors hover:bg-primary/15 hover:text-primary-600 dark:hover:bg-primary/10 dark:hover:text-primary ${theme === 'dark' ? 'bg-primary/15 text-primary-600 dark:bg-primary/15 dark:text-primary' : 'text-slate-800 dark:text-slate-300'}`}
         >
-          <Moon className="size-4 text-indigo-400" />
+          <Moon className="size-4 text-indigo-500" />
           <span className="flex-1">Dark</span>
           {theme === 'dark' && <span className="h-1.5 w-1.5 rounded-full bg-primary"></span>}
         </DropdownMenuItem>
         <DropdownMenuItem 
           onClick={() => changeTheme("system")}
-          className={`flex cursor-pointer items-center gap-2 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/10 dark:hover:text-primary ${theme === 'system' ? 'bg-primary/15 text-primary dark:bg-primary/15 dark:text-primary' : 'text-slate-700 dark:text-slate-300'}`}
+          className={`flex cursor-pointer items-center gap-2 rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors hover:bg-primary/15 hover:text-primary-600 dark:hover:bg-primary/10 dark:hover:text-primary ${theme === 'system' ? 'bg-primary/15 text-primary-600 dark:bg-primary/15 dark:text-primary' : 'text-slate-800 dark:text-slate-300'}`}
         >
-          <span className="flex size-4 items-center justify-center rounded-full bg-slate-100 text-[10px] font-bold text-slate-500 dark:bg-slate-800 dark:text-slate-300">
+          <span className="flex size-4 items-center justify-center rounded-full bg-slate-200 text-[10px] font-bold text-slate-600 dark:bg-slate-800 dark:text-slate-300">
             OS
           </span>
           <span className="flex-1">System</span>

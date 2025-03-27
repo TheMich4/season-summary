@@ -17,9 +17,9 @@ export async function SiteHeader({ fullWidth = false }: SiteHeaderProps) {
   const isAdmin = await api.user.isAdmin.query();
 
   return (
-    <header className="sticky top-0 z-40 w-full overflow-hidden border-b border-slate-200 bg-white/80 backdrop-blur-md transition-all dark:border-primary/20 dark:bg-background/60 dark:backdrop-blur-lg">
+    <header className="sticky top-0 z-40 w-full overflow-hidden border-b border-slate-300 bg-background/50 shadow-sm backdrop-blur-md transition-all dark:border-primary/20 dark:bg-background/60 dark:backdrop-blur-lg">
       {/* Animated accent line */}
-      <div className="absolute inset-x-0 bottom-0 h-[1.5px] bg-gradient-to-r from-primary/40 via-primary/60 to-primary/40 dark:from-primary/30 dark:via-primary/60 dark:to-primary/30" />
+      <div className="absolute inset-x-0 bottom-0 h-[1.5px] bg-gradient-to-r from-primary/60 via-primary/80 to-primary/60 dark:from-primary/30 dark:via-primary/60 dark:to-primary/30" />
       
       {/* Decorative elements - only visible in dark mode */}
       <div className="absolute -left-20 top-6 h-6 w-32 rotate-45 rounded-full bg-primary/5 opacity-0 blur-xl transition-opacity dark:opacity-30" />
@@ -45,7 +45,7 @@ export async function SiteHeader({ fullWidth = false }: SiteHeaderProps) {
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
-                    className: "text-slate-600 hover:bg-primary/10 hover:text-primary dark:text-slate-400 dark:hover:bg-primary/10 dark:hover:text-primary",
+                    className: "text-slate-800 hover:bg-primary/15 hover:text-primary-600 dark:text-slate-400 dark:hover:bg-primary/10 dark:hover:text-primary",
                   })}
                 >
                   <FaXTwitter className="size-5" />
@@ -62,7 +62,7 @@ export async function SiteHeader({ fullWidth = false }: SiteHeaderProps) {
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
-                    className: "text-slate-600 hover:bg-primary/10 hover:text-primary dark:text-slate-400 dark:hover:bg-primary/10 dark:hover:text-primary",
+                    className: "text-slate-800 hover:bg-primary/15 hover:text-primary-600 dark:text-slate-400 dark:hover:bg-primary/10 dark:hover:text-primary",
                   })}
                 >
                   <Icons.gitHub className="size-5" />
