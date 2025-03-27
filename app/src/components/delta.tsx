@@ -1,3 +1,5 @@
+"use client";
+
 import { useMemo } from "react";
 import { Counter } from "./counter";
 import { cn } from "@/lib/utils";

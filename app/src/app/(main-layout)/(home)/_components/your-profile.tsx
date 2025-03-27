@@ -1,14 +1,14 @@
 import type { Category } from "@season-summary/config";
 import { Loader2 } from "lucide-react";
-import { ProfileCard } from "@/components/profile-card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { StatBox } from "@/components/stat-box";
 import { Suspense } from "react";
 import { api } from "@/trpc/server";
 import { authOptions } from "@/server/auth";
 import { categoryToId } from "@season-summary/config";
 import { env } from "@/env";
 import { getServerSession } from "next-auth";
+import { StatsClient } from "./stats-client";
+import { ProfileCardClient } from "./profile-card-client";
 
 const NoProfile = () => {
   return (
@@ -41,48 +41,7 @@ const Stats = async ({
 
   if (!stats) return null;
 
-  return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6">
-      <StatBox
-        label="Races"
-        value={stats.current.starts}
-        previous={stats.previous.starts}
-      />
-      <StatBox
-        label="Wins"
-        value={stats.current.wins}
-        previous={stats.previous.wins}
-      />
-      <StatBox
-        label="Top 5"
-        value={stats.current.top5}
-        previous={stats.previous.top5}
-      />
-      <StatBox
-        label="Laps"
-        value={stats.current.laps}
-        previous={stats.previous.laps}
-      />
-      <StatBox
-        label="Avg Start"
-        value={stats.current.avgStartPosition}
-        previous={stats.previous.avgStartPosition}
-        ignorePreviousIfZero
-        ignorePreviousIfValueZero
-        invert
-      />
-      <StatBox
-        label="Avg Finish"
-        value={stats.current.avgFinishPosition}
-        previous={stats.previous.avgFinishPosition}
-        ignorePreviousIfZero
-        ignorePreviousIfValueZero
-        invert
-      />
-      {/* <StatBox label="iRating" value="0" />
-      <StatBox label="SR" value="0" /> */}
-    </div>
-  );
+  return <StatsClient stats={stats} />;
 };
 
 const Profile = async () => {
@@ -94,8 +53,8 @@ const Profile = async () => {
   }
   return (
     <>
-      <div className="col-span-2 flex w-full flex-col gap-2">
-        <ProfileCard
+      <div className="flex w-full flex-col gap-2">
+        <ProfileCardClient
           iracingId={userSettings.iracingId}
           avatarUrl={session.user.image}
           name={session.user.name}
@@ -129,11 +88,11 @@ const Profile = async () => {
 
 export const YourProfile = async () => {
   return (
-    <div className="w-full md:w-[720px] lg:w-[820px]">
+    <div className="mx-auto w-full max-w-full">
       <div className="text-center text-2xl font-bold md:text-start">
         Your Profile:
       </div>
-      <div className="grid grid-cols-1 gap-2 py-2 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 py-2">
         <Suspense
           fallback={
             <div className="flex flex-row gap-2">

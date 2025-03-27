@@ -20,17 +20,17 @@ export default function Home() {
         <Subtitle />
       </AnimatedSection>
 
-      <AnimatedSection className="w-full md:w-[600px]" delay={0.2}>
+      <AnimatedSection className="w-full max-w-md" delay={0.2}>
         <Search />
       </AnimatedSection>
 
-      <AnimatedSection className="mt-10 w-full" delay={0.4}>
+      <AnimatedSection className="mt-10 w-full max-w-4xl" delay={0.4}>
         <AnimatedCard position="right">
           <YourProfile />
         </AnimatedCard>
       </AnimatedSection>
 
-      <AnimatedSection className="mt-6 w-full" delay={0.6}>
+      <AnimatedSection className="mt-6 w-full max-w-4xl" delay={0.6}>
         <AnimatedCard position="left">
           <VisitedList apiUrl={env.API_URL} />
         </AnimatedCard>
