@@ -18,7 +18,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-const columns = [];
+const columns:any = [];
 
 export const LapTable = ({ close, isOpen }: any) => {
   const table = useReactTable({
