@@ -53,9 +53,9 @@ export default function ExtendedPage({
           </AnimatedStatCard>
         </AnimatedSection>
         
-        <div className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
+        <AnimatedSection className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground" delay={0.4}>
           <p>Track your season progress and compare with friends!</p>
-        </div>
+        </AnimatedSection>
       </div>
     </main>
   );

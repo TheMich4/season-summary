@@ -125,9 +125,9 @@ export const AssetStats = ({
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger className="w-full">
         <motion.div
-          className="group relative overflow-hidden rounded-xl border border-primary/30 bg-background/60 p-4 backdrop-blur-md transition-colors hover:border-primary/60"
+          className="group relative overflow-hidden rounded-xl border border-primary/30 bg-background/60 p-4 backdrop-blur-md transition-colors hover:border-primary/60 w-full"
           style={{
             rotateX,
             rotateY,

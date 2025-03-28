@@ -17,6 +17,7 @@ import { SOF } from "./sof";
 import { Points } from "./points";
 import { Finishes } from "./finishes";
 import { RacingActivity } from "./racing-activity";
+import { AnimatedSection } from "../animated/animated-section";
 
 interface EnhancedViewProps {
   category: Category;
@@ -71,30 +72,38 @@ export const EnhancedView = ({
       
       {/* Key stats at a glance */}
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-        <StatBox
-          label="Races"
-          value={data.stats.races}
-          useCounter={!isDone}
-          className="bg-background/70 backdrop-blur-md"
-        />
-        <StatBox
-          label="Wins"
-          value={data.stats.wins}
-          useCounter={!isDone}
-          className="bg-background/70 backdrop-blur-md"
-        />
-        <StatBox
-          label="Top 5"
-          value={data.stats.top5}
-          useCounter={!isDone}
-          className="bg-background/70 backdrop-blur-md"
-        />
-        <StatBox
-          label="Laps"
-          value={data.stats.laps}
-          useCounter={!isDone}
-          className="bg-background/70 backdrop-blur-md"
-        />
+        <AnimatedSection delay={0.3}>
+          <StatBox
+            label="Races"
+            value={data.stats.races}
+            useCounter={!isDone}
+            className="bg-background/70 backdrop-blur-md"
+          />
+        </AnimatedSection>
+        <AnimatedSection delay={0.4}>
+          <StatBox
+            label="Wins"
+            value={data.stats.wins}
+            useCounter={!isDone}
+            className="bg-background/70 backdrop-blur-md"
+          />
+        </AnimatedSection>
+        <AnimatedSection delay={0.5}>
+          <StatBox
+            label="Top 5"
+            value={data.stats.top5}
+            useCounter={!isDone}
+            className="bg-background/70 backdrop-blur-md"
+          />
+        </AnimatedSection>
+        <AnimatedSection delay={0.6}>
+          <StatBox
+            label="Laps"
+            value={data.stats.laps}
+            useCounter={!isDone}
+            className="bg-background/70 backdrop-blur-md"
+          />
+        </AnimatedSection>
       </div>
 
       {/* Main stats grid */}
@@ -126,36 +135,52 @@ export const EnhancedView = ({
         <div className="lg:col-span-6">
           <div className="grid gap-4">
             <div className="grid gap-4 md:grid-cols-2">
-              <SOF sof={data.sof} useCounter={!isDone} />
-              <Points points={data.points} useCounter={!isDone} />
+              <AnimatedSection delay={0.7}>
+                <SOF sof={data.sof} useCounter={!isDone} />
+              </AnimatedSection>
+              <AnimatedSection delay={0.8}>
+                <Points points={data.points} useCounter={!isDone} />
+              </AnimatedSection>
             </div>
             
             <div className="grid gap-4 md:grid-cols-2">
-              <QualifyingStats qualiData={data.quali} />
-              <RaceStats raceData={data.race} />
+              <AnimatedSection delay={0.9}>
+                <QualifyingStats qualiData={data.quali} />
+              </AnimatedSection>
+              <AnimatedSection delay={1.0}>
+                <RaceStats raceData={data.race} />
+              </AnimatedSection>
             </div>
             
-            <AssetStats
-              name="series"
-              assetData={data.seriesData}
-              preposition="in"
-            />
+            <AnimatedSection delay={1.1}>
+              <AssetStats
+                name="series"
+                assetData={data.seriesData}
+                preposition="in"
+              />
+            </AnimatedSection>
+            <AnimatedSection delay={1.2}>
               <AssetStats name="cars" assetData={data.carData} preposition="in" />
+            </AnimatedSection>
+            <AnimatedSection delay={1.3}>
               <AssetStats
                 name="tracks"
                 assetData={data.trackData}
                 preposition="at"
               />
+            </AnimatedSection>
           </div>
         </div>
       </div>
 
       {/* Race list */}
-      <EnhancedRaceList
-        seasonResults={simpleData.seasonResults}
-        iracingId={iracingId}
-        category={category}
-      />
+      <AnimatedSection delay={1.4}>
+        <EnhancedRaceList
+          seasonResults={simpleData.seasonResults}
+          iracingId={iracingId}
+          category={category}
+        />
+      </AnimatedSection>
     </div>
   );
 }; 
