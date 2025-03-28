@@ -10,18 +10,22 @@ export const Result = async ({ subsessionId }: ResultProps) => {
   const result = await api.data.getRaceResult.query({ subsessionId });
 
   if (!result) {
-    return <div>Failed to get result for session {subsessionId}</div>;
+    return (
+      <div className="flex items-center justify-center p-6">
+        <p className="text-lg text-foreground/80">Failed to get result for session {subsessionId}</p>
+      </div>
+    );
   }
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full flex-col gap-4">
       <div className="flex flex-col items-baseline justify-start gap-1">
-        <p className="text-2xl font-extrabold leading-tight tracking-tighter dark:text-primary">
+        <h2 className="text-2xl font-extrabold leading-tight tracking-tighter text-primary">
           {result.seriesName}
-        </p>
-        <p>{result.track.trackName}</p>
-        <p className="text-xs text-foreground/80">
-          ({new Date(result.startTime).toLocaleString()})
+        </h2>
+        <p className="text-lg font-medium">{result.track.trackName}</p>
+        <p className="text-sm text-muted-foreground">
+          {new Date(result.startTime).toLocaleString()}
         </p>
       </div>
 

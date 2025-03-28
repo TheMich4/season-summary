@@ -27,6 +27,7 @@ export const ExtendedProfile = async ({
     season: +season,
     category,
   });
+  console.log(simpleData);
 
   if (!simpleData) {
     return <div>Failed to get data for {iracingId}</div>;
