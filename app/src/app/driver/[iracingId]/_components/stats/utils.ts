@@ -35,6 +35,16 @@ export interface IncidentStats {
   averageIncidentsPerRace: number;
 }
 
+export interface QualifyingPerformance {
+  races: number;
+  poles: number;
+  bestPosition: number;
+  worstPosition: number;
+  averagePosition: number;
+  frontRowStarts: number;
+  avgImprovement: number;
+}
+
 export const calculatePerformanceStats = (data: any): PerformanceStats => {
   return {
     races: data.stats.races,
@@ -87,5 +97,23 @@ export const calculateIncidentStats = (incidents: any): IncidentStats => {
     incidentsPerLap: incidents.incidentsPerLap.value,
     totalIncidents: incidents.incidentsPerRace.total,
     averageIncidentsPerRace: incidents.incidentsPerRace.value,
+  };
+};
+
+export const calculateQualifyingPerformance = (qualiData: any, raceData: any): QualifyingPerformance => {
+  // Calculate estimated front row starts - real data would be better
+  const frontRowStarts = qualiData.poles + (qualiData.lowest <= 2 ? 1 : 0);
+  
+  // Calculate average improvement from qualifying to finish
+  const avgImprovement = Math.max(0, qualiData.average - raceData.average);
+  
+  return {
+    races: qualiData.races,
+    poles: qualiData.poles,
+    bestPosition: qualiData.lowest,
+    worstPosition: qualiData.highest,
+    averagePosition: qualiData.average,
+    frontRowStarts,
+    avgImprovement,
   };
 }; 

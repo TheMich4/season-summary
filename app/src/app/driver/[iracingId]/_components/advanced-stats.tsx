@@ -5,15 +5,18 @@ import { PerformanceDashboard } from "./stats/performance-dashboard";
 import { VehiclePerformance } from "./stats/vehicle-performance";
 import { TrackPerformance } from "./stats/track-performance";
 import { ConsistencyMetrics } from "./stats/consistency-metrics";
+import { QualifyingPerformanceAnalysis } from "./stats/qualifying-performance";
 import { 
   calculatePerformanceStats,
   calculateBestTracks,
   calculateVehiclePerformance,
   calculateIncidentStats,
+  calculateQualifyingPerformance,
   type PerformanceStats,
   type TrackPerformance as TrackPerformanceType,
   type VehiclePerformance as VehiclePerformanceType,
-  type IncidentStats
+  type IncidentStats,
+  type QualifyingPerformance
 } from "./stats/utils";
 import { AnimatedSection } from "./animated/animated-section";
 import { Button } from "@/components/ui/button";
@@ -29,6 +32,7 @@ export function AdvancedStats({ data, onClose }: AdvancedStatsProps) {
   const [bestTracks, setBestTracks] = useState<TrackPerformanceType[]>([]);
   const [vehiclePerformance, setVehiclePerformance] = useState<VehiclePerformanceType[]>([]);
   const [incidentStats, setIncidentStats] = useState<IncidentStats | null>(null);
+  const [qualifyingStats, setQualifyingStats] = useState<QualifyingPerformance | null>(null);
   
   useEffect(() => {
     if (data) {
@@ -36,6 +40,7 @@ export function AdvancedStats({ data, onClose }: AdvancedStatsProps) {
       setBestTracks(calculateBestTracks(data.trackData));
       setVehiclePerformance(calculateVehiclePerformance(data.carData));
       setIncidentStats(calculateIncidentStats(data.incidents));
+      setQualifyingStats(calculateQualifyingPerformance(data.quali, data.race));
     }
   }, [data]);
   
@@ -62,6 +67,11 @@ export function AdvancedStats({ data, onClose }: AdvancedStatsProps) {
         {/* Performance Overview */}
         {performanceStats && (
           <PerformanceDashboard stats={performanceStats} />
+        )}
+        
+        {/* Qualifying Performance Analysis */}
+        {qualifyingStats && (
+          <QualifyingPerformanceAnalysis stats={qualifyingStats} />
         )}
         
         {/* Two-column layout for mid-size components */}
