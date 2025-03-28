@@ -8,6 +8,8 @@ import {
 import { AssetDataTable } from "./asset-stats-data-table";
 import { useMemo } from "react";
 import { type AssetData } from "./types";
+import { StatBox } from "@/components/stat-box";
+import { Car, Trophy, Medal, Target, Star, ChevronUp } from "lucide-react";
 
 interface AssetStatsProps {
   assetData: AssetData;
@@ -60,6 +62,24 @@ export const AssetStats = ({
     [assetData],
   );
 
+  const stats = Object.entries(assetData).map(([key, value]) => ({
+    name: key,
+    ...value,
+  }));
+
+  const getIcon = (name: string) => {
+    switch (name) {
+      case "cars":
+        return <Car className="h-5 w-5" />;
+      case "series":
+        return <Trophy className="h-5 w-5" />;
+      case "tracks":
+        return <Target className="h-5 w-5" />;
+      default:
+        return <Star className="h-5 w-5" />;
+    }
+  };
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -83,6 +103,26 @@ export const AssetStats = ({
             1,
           )} stats`}</DialogTitle>
         </DialogHeader>
+
+        <div className="flex w-full flex-col gap-4 rounded-lg border bg-background/40 p-4 backdrop-blur-md">
+          <div className="flex items-center gap-2">
+            {getIcon(name)}
+            <span className="text-base font-medium capitalize">
+              {name} Performance
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {stats.map((stat) => (
+              <StatBox
+                key={stat.name}
+                label={stat.name}
+                value={stat.races}
+                icon={getIcon(name)}
+              />
+            ))}
+          </div>
+        </div>
 
         <AssetDataTable data={assetData} />
       </DialogContent>

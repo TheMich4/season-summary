@@ -36,6 +36,7 @@ export const EnhancedView = ({
   category,
   isDone = true,
 }: EnhancedViewProps) => {
+  console.log({data})
   if (!data) {
     return (
       <div className="flex min-h-[400px] w-full items-center justify-center">
@@ -120,11 +121,9 @@ export const EnhancedView = ({
         {/* Right column - Series & Assets */}
         <div className="lg:col-span-7">
           <div className="grid gap-4">
-            <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-4">
-              <Incidents incidentData={data.incidents} useCounter={!isDone} />
-              <SOF sofData={data.sof} useCounter={!isDone} />
-              <Points pointsData={data.points} useCounter={!isDone} />
-              <Finishes finishes={data.reasonOut} useCounter={!isDone} />
+            <div className="grid gap-4 md:grid-cols-2">
+              <SOF sof={data.sof} useCounter={!isDone} />
+              <Points points={data.points} useCounter={!isDone} />
             </div>
             
             <div className="grid gap-4 md:grid-cols-2">
