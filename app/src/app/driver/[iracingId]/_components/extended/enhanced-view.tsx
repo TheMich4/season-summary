@@ -140,14 +140,12 @@ export const EnhancedView = ({
               assetData={data.seriesData}
               preposition="in"
             />
-            <div className="grid gap-4 md:grid-cols-2">
               <AssetStats name="cars" assetData={data.carData} preposition="in" />
               <AssetStats
                 name="tracks"
                 assetData={data.trackData}
                 preposition="at"
               />
-            </div>
           </div>
         </div>
       </div>

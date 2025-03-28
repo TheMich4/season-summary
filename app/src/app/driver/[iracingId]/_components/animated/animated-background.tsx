@@ -26,7 +26,7 @@ export const AnimatedRacingBackground = () => {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 h-screen w-screen overflow-hidden">
+    <div className="pointer-events-none fixed inset-0 min-h-screen h-full w-screen overflow-hidden">
       {/* Racing track elements */}
       <motion.div
         className="absolute -right-20 top-10 h-40 w-40 rounded-full border border-primary/20 opacity-20"

@@ -62,7 +62,7 @@ export const RacingActivity = ({
         </div>
         
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-lg border border-primary/10 bg-background/50 p-2">
+          <div className="rounded-lg border border-primary/10 bg-background/50 p-2 flex justify-center">
             <ActivityHeatMap
               activity={activity}
               season={season}
