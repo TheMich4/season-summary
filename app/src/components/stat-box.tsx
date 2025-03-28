@@ -107,7 +107,7 @@ export const StatBox = ({
   return (
     <motion.div
       className={cn(
-        "group relative flex w-full flex-col rounded-lg border bg-background/40 p-4 backdrop-blur-md transition-all duration-200 hover:bg-background/60",
+        "group relative overflow-hidden rounded-xl border border-primary/30 bg-background/60 p-4 backdrop-blur-md transition-colors hover:border-primary/60 ",
         className
       )}
       style={{
@@ -121,30 +121,30 @@ export const StatBox = ({
     >
       {/* Animated border gradient */}
       <motion.div
-        className="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+        className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-200 group-hover:opacity-100"
         style={{ background }}
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col">
+      <div className="relative z-10 flex h-full flex-col justify-between">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {icon || getIconForLabel(label)}
-            <span className="text-sm font-medium text-muted-foreground">{label}</span>
+            <span className="text-xs font-medium text-muted-foreground">{label}</span>
           </div>
           {rank && (
-            <span className={cn("text-sm font-bold", getRankColor(rank))}>
+            <span className={cn("text-xs font-bold", getRankColor(rank))}>
               #{rank}
             </span>
           )}
         </div>
 
-        <div className="mt-1 flex items-baseline gap-2">
-          <span className="text-2xl font-bold tracking-tight">
+        <div className="mt-2 flex items-baseline gap-1.5">
+          <span className="text-xl font-bold tracking-tight">
             {useCounter ? value.toLocaleString() : value}
           </span>
           {showDelta && (
-            <div className="text-sm">
+            <div className="text-xs">
               <Delta 
                 value={deltaValue} 
                 invert={invert}
