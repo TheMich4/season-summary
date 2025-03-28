@@ -55,8 +55,6 @@ export default function ExtendedPage({
         
         <div className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
           <p>Track your season progress and compare with friends!</p>
-          <span className="animate-pulse text-primary">•</span>
-          <p>Updated in real-time</p>
         </div>
       </div>
     </main>

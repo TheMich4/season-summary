@@ -128,7 +128,7 @@ export const StatBox = ({
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col justify-between">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 text-left">
             {icon || getIconForLabel(label)}
             <span className="text-xs font-medium text-muted-foreground">{label}</span>
           </div>

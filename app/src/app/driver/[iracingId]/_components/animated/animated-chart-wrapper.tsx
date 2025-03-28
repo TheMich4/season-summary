@@ -47,12 +47,6 @@ export const AnimatedChartWrapper = ({
             {icon && <div className="text-primary/80">{icon}</div>}
             <h3 className="text-base font-medium tracking-tight">{title}</h3>
           </div>
-          
-          {rank && rank <= 3 && (
-            <div className={`flex h-6 w-6 items-center justify-center rounded-full border border-primary/20 ${rankColor} text-xs font-bold`}>
-              #{rank}
-            </div>
-          )}
         </div>
         
         {/* Value display */}
