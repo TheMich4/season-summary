@@ -61,7 +61,7 @@ export const RacingActivity = ({
           </div>
         </div>
         
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="flex gap-2 flex-col lg:flex-row">
           <div className="rounded-lg border border-primary/10 bg-background/50 p-2 flex justify-center">
             <ActivityHeatMap
               activity={activity}
@@ -69,7 +69,7 @@ export const RacingActivity = ({
               year={year}
             />
           </div>
-          <div className="rounded-lg border border-primary/10 bg-background/50 p-2">
+          <div className="rounded-lg border border-primary/10 bg-background/50 p-2 flex-1">
             <MostRacedWeek racesPerWeek={racesPerWeek} />
           </div>
         </div>
