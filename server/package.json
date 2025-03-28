@@ -8,7 +8,8 @@
     "dev": "bun --hot run src/index.ts",
     "start": "bun run src/index.ts",
     "data:delete-corrupted": "bun run src/maintenance/delete-corrupted-season-data.ts",
-    "data:regenerate": "bun run src/maintenance/index.ts"
+    "data:regenerate": "bun run src/maintenance/index.ts",
+    "test": "bun test"
   },
   "dependencies": {
     "@season-summary/config": "workspace:*",

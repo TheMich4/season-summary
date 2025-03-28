@@ -5,10 +5,36 @@ import { prisma } from "../../db";
 import { upsertSeason } from "../../db/actions/upsert-season";
 import { upsertUser } from "../../db/actions/upsert-user";
 
+// Track concurrent requests to manage throttling
 let currentRequests = 0;
 
-// TODO: Improve this to calculate timeout based on currentRequests
-const getTimeout = () => {
+interface Race {
+  subsessionId: number;
+  finishPositionInClass: number;
+  lapsComplete: number;
+}
+
+interface Stats {
+  races: number;
+  wins: number;
+  top5: number;
+  laps: number;
+}
+
+interface SeasonDataParams {
+  iracingId: string;
+  year: string;
+  season: string;
+  categoryId: string;
+  sendMessage?: (status: string, message: any) => void;
+  seasonDataId?: number;
+}
+
+/**
+ * Calculate timeout based on number of concurrent requests
+ * to avoid rate limiting
+ */
+const getTimeout = (): number => {
   if (currentRequests >= 10) {
     return 5000;
   }
@@ -24,6 +50,94 @@ const getTimeout = () => {
   return +process.env.DEFAULT_FETCH_INTERVAL! || 100;
 };
 
+/**
+ * Process a single race result
+ */
+const processRaceResult = async (
+  subsessionId: number,
+  categoryId: string
+): Promise<any> => {
+  const result: any = await getRaceResult(`${subsessionId}`);
+
+  if (result?.licenseCategoryId.toString() === categoryId) {
+    return result;
+  }
+
+  return null;
+};
+
+/**
+ * Update statistics based on race result
+ */
+const updateStats = (currentStats: Stats, race: Race): Stats => {
+  return {
+    races: currentStats.races + 1,
+    wins: currentStats.wins + (race.finishPositionInClass === 0 ? 1 : 0),
+    top5: currentStats.top5 + (race.finishPositionInClass < 5 ? 1 : 0),
+    laps: currentStats.laps + race.lapsComplete,
+  };
+};
+
+/**
+ * Handle site maintenance response
+ */
+const handleSiteMaintenance = async (
+  seasonData: any,
+  sendMessage?: (status: string, message: any) => void
+) => {
+  await prisma.seasonData.update({
+    where: {
+      id: seasonData.id,
+    },
+    data: {
+      isPending: false,
+    },
+  });
+
+  const fullDataJson = seasonData.data && {
+    ...(seasonData.data.json as any),
+    stats: seasonData.data.stats,
+    finalIRating: seasonData.data.finalIRating,
+  };
+
+  const stats = (seasonData.data?.stats ?? {}) as Record<string, number>;
+  const data = {
+    races: stats.races ?? 0,
+    wins: stats.wins ?? 0,
+    top5: stats.top5 ?? 0,
+    laps: stats.laps ?? 0,
+  };
+
+  sendMessage?.("DONE-MAINTENANCE", { stats: data, data: fullDataJson });
+  currentRequests--;
+};
+
+/**
+ * Handle no races found
+ */
+const handleNoRaces = async (
+  seasonData: any,
+  sendMessage?: (status: string, message: any) => void
+) => {
+  await prisma.seasonData.update({
+    where: {
+      id: seasonData.id,
+    },
+    data: {
+      isPending: false,
+      data: undefined,
+    },
+  });
+
+  sendMessage?.("DONE", {
+    count: { races: 0, newRaces: 0, fetched: 0 },
+  });
+  currentRequests--;
+};
+
+/**
+ * Fetch and process race data for a user's season
+ */
 export const getNewFullDataUtil = async ({
   iracingId,
   year,
@@ -31,15 +145,9 @@ export const getNewFullDataUtil = async ({
   categoryId,
   sendMessage,
   seasonDataId,
-}: {
-  iracingId: string;
-  year: string;
-  season: string;
-  categoryId: string;
-  sendMessage?: (status: string, message: any) => void;
-  seasonDataId?: number;
-}) => {
+}: SeasonDataParams) => {
   try {
+    // Validate required parameters
     if (!iracingId || !year || !season || !categoryId) {
       return null;
     }
@@ -51,13 +159,15 @@ export const getNewFullDataUtil = async ({
     // Notify client that we are starting to fetch data
     sendMessage?.("START", "Fetching data");
 
-    // TODO: Refactor
+    // Get or create user and season records
     const { iracingId: userId } = await upsertUser(parseInt(iracingId, 10));
     const { id: seasonId } = await upsertSeason(
       parseInt(year, 10),
       parseInt(season, 10),
       parseInt(categoryId, 10)
     );
+    
+    // Get or create season data record
     const seasonData = await prisma.seasonData.upsert({
       where: {
         id: seasonDataId,
@@ -79,16 +189,16 @@ export const getNewFullDataUtil = async ({
       },
     });
 
-    const currentStats = (seasonData.data?.stats ?? {}) as Record<
-      string,
-      number
-    >;
+    // Initialize statistics from existing data
+    const currentStats = (seasonData.data?.stats ?? {}) as Record<string, number>;
     let data = {
       races: currentStats.races ?? 0,
       wins: currentStats.wins ?? 0,
       top5: currentStats.top5 ?? 0,
       laps: currentStats.laps ?? 0,
     };
+    
+    // Initialize full data from existing data
     let fullDataJson = seasonData.data && {
       ...(seasonData.data.json as any),
       stats: seasonData.data.stats,
@@ -97,6 +207,7 @@ export const getNewFullDataUtil = async ({
 
     const ir = await getLoggedInIracingAPIClient();
 
+    // Search for races in the specified season
     const races = await ir.results.searchSeries({
       seasonYear: parseInt(year, 10),
       seasonQuarter: parseInt(season, 10),
@@ -106,45 +217,26 @@ export const getNewFullDataUtil = async ({
       categoryIds: [parseInt(categoryId, 10)],
     });
 
+    // Handle site maintenance response
     if (races?.error === "Site Maintenance") {
-      await prisma.seasonData.update({
-        where: {
-          id: seasonData.id,
-        },
-        data: {
-          isPending: false,
-        },
-      });
-
-      sendMessage?.("DONE-MAINTENANCE", { stats: data, data: fullDataJson });
-      currentRequests--;
+      await handleSiteMaintenance(seasonData, sendMessage);
       return;
     }
 
     console.log(`Found ${races?.length} races`);
 
+    // Handle no races found
     if (!races?.length) {
-      await prisma.seasonData.update({
-        where: {
-          id: seasonData.id,
-        },
-        data: {
-          isPending: false,
-          data: undefined,
-        },
-      });
-
-      sendMessage?.("DONE", {
-        count: { races: 0, newRaces: 0, fetched: 0 },
-      });
-      currentRequests--;
+      await handleNoRaces(seasonData, sendMessage);
       return;
     }
 
+    // Find new races since last update
     const raceIndex = races.findIndex(
-      (r) => `${r.subsessionId}` === seasonData.lastRace
+      (r: Race) => `${r.subsessionId}` === seasonData.lastRace
     );
     const newRaces = raceIndex === -1 ? races : races.slice(raceIndex + 1);
+    
     sendMessage?.("PROGRESS", {
       count: { races: races.length, newRaces: newRaces.length, fetched: 0 },
     });
@@ -153,37 +245,26 @@ export const getNewFullDataUtil = async ({
 
     let results: Array<any> = [];
 
-    const getResult = async (subsessionId: number) => {
-      const result: any = await getRaceResult(`${subsessionId}`);
-
-      if (result?.licenseCategoryId.toString() === categoryId) {
-        results.push(result);
-      }
-
-      const timeout = getTimeout();
-
-      await new Promise((resolve) => setTimeout(resolve, timeout));
-
-      return result;
-    };
-
-    // TODO: Temporary try second time
+    // Process each race
     for (const race of newRaces) {
-      let r = await getResult(race.subsessionId);
+      // Try to get the result twice in case of failure
+      let r = await processRaceResult(race.subsessionId, categoryId);
 
       if (!r) {
-        r = await getResult(race.subsessionId);
+        r = await processRaceResult(race.subsessionId, categoryId);
       }
 
-      data = {
-        races: data.races + 1,
-        wins: data.wins + (race.finishPositionInClass === 0 ? 1 : 0),
-        top5: data.top5 + (race.finishPositionInClass < 5 ? 1 : 0),
-        laps: data.laps + race.lapsComplete,
-      };
+      if (r) {
+        results.push(r);
+      }
 
+      // Update statistics
+      data = updateStats(data, race);
+
+      // Update full data
       fullDataJson = parseResults([r], iracingId, fullDataJson);
 
+      // Notify progress
       sendMessage?.("PROGRESS", {
         count: {
           races: races.length,
@@ -193,14 +274,21 @@ export const getNewFullDataUtil = async ({
         stats: data,
         data: fullDataJson,
       });
+
+      // Throttle requests
+      const timeout = getTimeout();
+      await new Promise((resolve) => setTimeout(resolve, timeout));
     }
 
-    const { stats, finalIRating, ...json } = fullDataJson;
+    // Extract components for database update
+    const { stats, finalIRating, ...json } = fullDataJson || {};
 
+    // Get the ID of the last processed race
     const lastRace =
       results[results.length - 1]?.raceSummary.subsessionId ??
       seasonData.lastRace;
 
+    // Update season data with results
     await prisma.seasonData.update({
       where: {
         id: seasonData.id,
@@ -228,6 +316,7 @@ export const getNewFullDataUtil = async ({
       },
     });
 
+    // Notify completion
     sendMessage?.("DONE", {
       count: {
         races: races.length,
@@ -237,6 +326,7 @@ export const getNewFullDataUtil = async ({
       stats: data,
       data: fullDataJson,
     });
+    
     currentRequests--;
   } catch (e) {
     currentRequests--;
