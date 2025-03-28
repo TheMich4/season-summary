@@ -14,6 +14,7 @@ import { SOF } from "./sof";
 import { Points } from "./points";
 import { RacingActivity } from "./racing-activity";
 import { AnimatedSection } from "../animated/animated-section";
+import { DevStatsToggle } from "../dev-stats-toggle";
 
 interface EnhancedViewProps {
   category: Category;
@@ -40,6 +41,9 @@ export const EnhancedView = ({
       </div>
     );
   }
+
+  // Environment check for dev mode
+  const isDev = process.env.NODE_ENV === "development";
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -176,6 +180,9 @@ export const EnhancedView = ({
           category={category}
         />
       </AnimatedSection>
+      
+      {/* Dev Mode Stats Toggle */}
+      <DevStatsToggle data={data} isDev={isDev} />
     </div>
   );
 };
