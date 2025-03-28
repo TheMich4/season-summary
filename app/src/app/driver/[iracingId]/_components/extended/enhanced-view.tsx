@@ -16,6 +16,7 @@ import { Incidents } from "./incidents";
 import { SOF } from "./sof";
 import { Points } from "./points";
 import { Finishes } from "./finishes";
+import { RacingActivity } from "./racing-activity";
 
 interface EnhancedViewProps {
   category: Category;
@@ -99,10 +100,11 @@ export const EnhancedView = ({
       {/* Main stats grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
         {/* Left column - Activity & Positions */}
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-6">
           <div className="grid gap-4">
-            <EnhancedActivityHeatMap 
+            <RacingActivity 
               activity={data.activity}
+              racesPerWeek={data.racesPerWeek}
               season={season}
               year={year}
               delay={0.3}
@@ -111,15 +113,17 @@ export const EnhancedView = ({
               finishPositions={data.finishPositions}
               delay={0.4}
             />
-            <div className="grid gap-4 md:grid-cols-2">
-              <MostRacedWeek racesPerWeek={data.racesPerWeek} />
-              <IncidentsGraph dataPoints={data.incidents.incidentPoints} />
-            </div>
+            <IncidentsGraph 
+              dataPoints={data.incidents.incidentPoints}
+              incidentsPerLap={data.incidents.incidentsPerLap.value}
+              incidentsPerRace={data.incidents.incidentsPerRace.value}
+              incidentsPerCorner={data.incidents.incidentsPerCorner.value}
+            />
           </div>
         </div>
         
         {/* Right column - Series & Assets */}
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-6">
           <div className="grid gap-4">
             <div className="grid gap-4 md:grid-cols-2">
               <SOF sof={data.sof} useCounter={!isDone} />

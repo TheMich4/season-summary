@@ -146,12 +146,6 @@ export const ActivityHeatMap = ({
   }
 
   return (
-    <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
-      <p className="pb-2 text-start font-normal tracking-tight">
-        Most raced day
-      </p>
-      <p className="text-2xl font-bold">{maxDate.toLocaleDateString()}</p>
-      <p className="mb-2 text-xs text-muted-foreground">({max} races)</p>
       <ActivityCalendar
         blockMargin={4}
         blockSize={18}
@@ -164,6 +158,5 @@ export const ActivityHeatMap = ({
         hideTotalCount
         renderBlock={renderBlock}
       />
-    </div>
   );
 };

@@ -20,6 +20,7 @@ import { RatingChart } from "./rating-chart";
 import { SOF } from "./sof";
 import { StatBox } from "@/components/stat-box";
 import { Finishes } from "./finishes";
+import { RacingActivity } from "./racing-activity";
 
 interface ViewProps {
   category: Category;
@@ -71,65 +72,46 @@ export const View = ({
           useCounter={!isDone}
         />
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-10">
-        <div className="lg:col-span-5">
-          <div className="grid gap-4 lg:grid-cols-3">
-            <div className="flex flex-col gap-4 lg:col-span-2">
-              <ActivityHeatMap
-                activity={data.activity}
-                season={season}
-                year={year}
-              />
-              <MostRacedWeek racesPerWeek={data.racesPerWeek} />
-              <FinishPositions finishPositions={data.finishPositions} />
-              <IncidentsGraph dataPoints={data.incidents.incidentPoints} />
-            </div>
-            <div className="grid grid-cols-2 gap-4 lg:flex lg:flex-col">
-              <Incidents incidentData={data.incidents} useCounter={!isDone} />
-              <SOF sofData={data.sof} useCounter={!isDone} />
-              <Points pointsData={data.points} useCounter={!isDone} />
-              <Finishes finishes={data.reasonOut} useCounter={!isDone} />
-            </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
+        <div className="lg:col-span-6">
+          <div className="grid gap-4">
+            <RacingActivity 
+              activity={data.activity}
+              racesPerWeek={data.racesPerWeek}
+              season={season}
+              year={year}
+            />
+            <FinishPositions finishPositions={data.finishPositions} />
+            <IncidentsGraph 
+              dataPoints={data.incidents.incidentPoints}
+              incidentsPerLap={data.incidents.incidentsPerLap.value}
+              incidentsPerRace={data.incidents.incidentsPerRace.value}
+              incidentsPerCorner={data.incidents.incidentsPerCorner.value}
+            />
           </div>
         </div>
-        <div className="grid lg:col-span-5 lg:grid-cols-2">
-          <div className="col-span-2 flex flex-col gap-4">
-            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:flex-row">
-              <StatBox
-                label="Races"
-                value={data.stats.races}
-                useCounter={!isDone}
-              />
-              <StatBox
-                label="Wins"
-                value={data.stats.wins}
-                useCounter={!isDone}
-              />
-              <StatBox
-                label="Top 5"
-                value={data.stats.top5}
-                useCounter={!isDone}
-              />
-              <StatBox
-                label="Laps"
-                value={data.stats.laps}
-                useCounter={!isDone}
-              />
+        <div className="lg:col-span-6">
+          <div className="grid gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
+              <SOF sof={data.sof} useCounter={!isDone} />
+              <Points points={data.points} useCounter={!isDone} />
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <QualifyingStats qualiData={data.quali} />
+              <RaceStats raceData={data.race} />
             </div>
             <AssetStats
               name="series"
               assetData={data.seriesData}
               preposition="in"
             />
-            <AssetStats name="cars" assetData={data.carData} preposition="in" />
-            <AssetStats
-              name="tracks"
-              assetData={data.trackData}
-              preposition="at"
-            />
-            <div className="grid grid-cols-2 gap-4">
-              <QualifyingStats qualiData={data.quali} />
-              <RaceStats raceData={data.race} />
+            <div className="grid gap-4 md:grid-cols-2">
+              <AssetStats name="cars" assetData={data.carData} preposition="in" />
+              <AssetStats
+                name="tracks"
+                assetData={data.trackData}
+                preposition="at"
+              />
             </div>
           </div>
         </div>
