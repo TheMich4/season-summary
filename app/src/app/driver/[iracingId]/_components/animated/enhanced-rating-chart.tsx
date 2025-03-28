@@ -37,7 +37,7 @@ interface RatingChartTooltipProps {
 }
 
 const RatingChartTooltip = ({ active, payload }: RatingChartTooltipProps) => {
-  if (!active || !payload?.length) return null;
+  if (!active || !payload?.length || !payload[0]?.payload) return null;
 
   return (
     <div className="grid rounded-xl border border-primary/20 bg-background/95 p-3 text-muted-foreground shadow-md backdrop-blur-lg">

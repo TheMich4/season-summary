@@ -10,7 +10,7 @@ import { Counter } from "@/components/counter";
 
 interface StatBoxProps {
   label: string;
-  value: number;
+  value: number | string;
   previous?: number;
   className?: string;
   useCounter?: boolean;
@@ -99,7 +99,8 @@ export const StatBox = ({
 
   const showDelta = previous !== undefined && 
     (!ignorePreviousIfZero || previous !== 0) && 
-    (!ignorePreviousIfValueZero || value !== 0);
+    (!ignorePreviousIfValueZero || value !== 0) &&
+    typeof value === 'number';
 
   const deltaValue = showDelta ? value - previous : 0;
   const isPositive = deltaValue ? (invert ? deltaValue < 0 : deltaValue > 0) : undefined;
