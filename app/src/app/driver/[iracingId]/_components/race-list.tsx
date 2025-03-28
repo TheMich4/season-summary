@@ -18,9 +18,6 @@ import Link from "next/link";
 import { categoryToName } from "@season-summary/config";
 import { cn } from "@/lib/utils";
 
-const createResultUrl = (subsessionId: number, iracingId: string | number) =>
-  `https://members.iracing.com/membersite/member/EventResult.do?subsessionid=${subsessionId}&custid=${iracingId}`;
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Race = ({ result }: { result: any; iracingId: string }) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
@@ -76,7 +73,7 @@ export const RaceList = ({
   iracingId: string;
   category: Category;
 }) => {
-  const [racesPerPage, setRacePerPage] = useState(10);
+  const [racesPerPage, setRacesPerPage] = useState(10);
   const numberOfPages = useMemo(() => {
     const numberOfRaces = seasonResults?.length ?? 0;
     return Math.ceil(numberOfRaces / racesPerPage);
@@ -137,7 +134,7 @@ export const RaceList = ({
             <DropdownMenuContent>
               {[10, 20, 50, 100].map((n) => (
                 <DropdownMenuItem asChild key={n}>
-                  <span onClick={() => setRacePerPage(n)}>{n} </span>
+                  <span onClick={() => setRacesPerPage(n)}>{n} </span>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>

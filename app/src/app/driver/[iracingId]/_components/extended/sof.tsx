@@ -1,44 +1,29 @@
-import { Counter } from "@/components/counter";
+import { Medal, Star, Target, Trophy } from "lucide-react";
+import { StatsDisplay } from "./stats-display";
 
-export const SOF = ({
-  sofData,
-  useCounter = false,
-}: {
-  sofData: Record<string, any>;
-  useCounter?: boolean;
-}) => {
-  return (
-    <div className="flex flex-col gap-1 rounded-md border bg-background/40 p-4">
-      <p className="pb-2 text-start font-normal tracking-tight">SOF</p>
-      <div className="flex flex-row items-baseline gap-1">
-        <p className="text-2xl font-bold">
-          <Counter value={sofData.average} disabled={!useCounter} />
-        </p>
-        <p className="text-xs text-muted-foreground">average</p>
-      </div>
+export const SOF = ({ sof }: Record<string, any>) => {
+  const stats = [
+    {
+      label: "Average SOF",
+      value: Math.round(sof.average),
+      icon: <Medal className="h-5 w-5 text-yellow-600" />,
+    },
+    {
+      label: "Highest SOF",
+      value: sof.highest,
+      icon: <Trophy className="h-5 w-5 text-primary" />,
+    },
+    {
+      label: "Lowest SOF",
+      value: sof.lowest,
+      icon: <Target className="h-5 w-5 text-muted-foreground" />,
+    },
+    {
+      label: "Highest Win SOF",
+      value: sof.highestWin,
+      icon: <Star className="h-5 w-5 text-primary" />,
+    },
+  ];
 
-      <div className="flex flex-row items-baseline gap-1">
-        <p className="text-2xl font-bold">
-          <Counter value={sofData.lowest} disabled={!useCounter} />
-        </p>
-        <p className="text-xs text-muted-foreground">lowest</p>
-      </div>
-
-      <div className="flex flex-row items-baseline gap-1">
-        <p className="text-2xl font-bold">
-          <Counter value={sofData.highest} disabled={!useCounter} />
-        </p>
-        <p className="text-xs text-muted-foreground">highest</p>
-      </div>
-
-      {sofData.highestWin && (
-        <div className="flex flex-row items-baseline gap-1">
-          <p className="text-2xl font-bold">
-            <Counter value={sofData.highestWin} disabled={!useCounter} />
-          </p>
-          <p className="text-xs text-muted-foreground">highest win</p>
-        </div>
-      )}
-    </div>
-  );
+  return <StatsDisplay title="Strength of Field" icon={Star} stats={stats} />;
 };

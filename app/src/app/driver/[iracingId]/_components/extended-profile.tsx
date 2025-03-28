@@ -6,6 +6,7 @@ import { VisitedManager } from "./visited-manager";
 import { api } from "@/trpc/server";
 import { env } from "@/env";
 import { getServerAuthSession } from "../../../../server/auth";
+import { Header } from "./extended/header";
 
 interface ExtendedProfileProps {
   iracingId: string;
@@ -34,7 +35,14 @@ export const ExtendedProfile = async ({
   const session = await getServerAuthSession();
 
   return (
-    <>
+    <div className="flex w-full flex-col gap-4">
+      <Header 
+        displayName={simpleData.memberData?.displayName ?? ""} 
+        iracingId={iracingId} 
+        season={+season} 
+        year={+year} 
+        category={category} 
+      />
       <ExtendedProfileManager
         iracingId={iracingId}
         season={season}
@@ -58,6 +66,6 @@ export const ExtendedProfile = async ({
           category={category}
         />
       </Suspense>
-    </>
+    </div>
   );
 };

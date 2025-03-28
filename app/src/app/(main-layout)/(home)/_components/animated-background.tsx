@@ -1,30 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
 export const AnimatedBackground = () => {
-  // Track viewport dimensions to ensure elements are positioned properly
-  const [dimensions, setDimensions] = useState({
-    width: typeof window !== 'undefined' ? window.innerWidth : 1200,
-    height: typeof window !== 'undefined' ? window.innerHeight : 800
-  });
-
-  // Update dimensions on window resize
-  useEffect(() => {
-    const handleResize = () => {
-      setDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-    };
-    
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Initial call
-    
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   // Generate random values based on viewport dimensions
   const elements = useMemo(() => {
     return Array.from({ length: 15 }).map(() => ({
@@ -38,7 +17,7 @@ export const AnimatedBackground = () => {
       delay: Math.random() * 5,
       opacity: Math.random() * 0.2 + 0.1
     }));
-  }, [dimensions]);
+  }, []);
 
   return (
     <div className="pointer-events-none fixed inset-0 h-screen w-screen overflow-hidden">

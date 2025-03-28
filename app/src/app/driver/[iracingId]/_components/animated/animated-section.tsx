@@ -17,14 +17,15 @@ export const AnimatedSection = ({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{
         duration: 0.6,
         delay,
+        ease: "easeOut",
       }}
       style={{
-        willChange: "opacity",
+        willChange: "opacity, transform",
         backfaceVisibility: "hidden",
         WebkitBackfaceVisibility: "hidden",
         WebkitFontSmoothing: "subpixel-antialiased",

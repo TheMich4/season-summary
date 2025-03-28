@@ -18,13 +18,13 @@ const WeekChart = ({
       const week = i + 1;
       return {
         name: week,
-        races: racesPerWeek[i] || 0,
+        races: racesPerWeek[i] ?? 0,
       };
     });
   }, [racesPerWeek]);
 
   return (
-    <ResponsiveContainer width="100%" height={80}>
+    <ResponsiveContainer width="100%" height={150}>
       <BarChart data={data}>
         <Bar dataKey="races" fill={theme.colors?.primary.DEFAULT} />
         <Tooltip
@@ -72,7 +72,7 @@ const WeekList = ({
             className={cn(
               "flex justify-center text-muted-foreground",
               `${payload[0]?.payload.name}` === `${parseInt(week, 10) + 1}` &&
-                "font-bold text-foreground"
+                "font-bold text-foreground",
             )}
           >
             {`${parseInt(week, 10) + 1}`}
@@ -91,34 +91,5 @@ export const MostRacedWeek = ({
 }: {
   racesPerWeek: Record<string, number>;
 }) => {
-  const mostRacedWeek = useMemo(() => {
-    return Object.entries(racesPerWeek).reduce(
-      (acc, [week, numberOfRaces]) => {
-        if (numberOfRaces > acc.numberOfRaces) {
-          return {
-            week: `${parseInt(week) + 1}`,
-            numberOfRaces,
-          };
-        }
-        return acc;
-      },
-      {
-        week: "",
-        numberOfRaces: 0,
-      }
-    );
-  }, [racesPerWeek]);
-
-  return (
-    <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
-      <p className="pb-2 text-base font-normal tracking-tight">
-        Most raced week
-      </p>
-      <p className="text-2xl font-bold">Week {mostRacedWeek.week}</p>
-      <p className="text-xs text-muted-foreground">
-        ({mostRacedWeek.numberOfRaces} races)
-      </p>
-      <WeekChart racesPerWeek={racesPerWeek} />
-    </div>
-  );
+  return <WeekChart racesPerWeek={racesPerWeek} />;
 };

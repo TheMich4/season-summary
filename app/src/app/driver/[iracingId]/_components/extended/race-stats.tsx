@@ -1,38 +1,39 @@
+import { ChevronUp, Medal, Target, Trophy } from "lucide-react";
+import { StatsDisplay } from "./stats-display";
+
 export const RaceStats = ({ raceData }: Record<string, any>) => {
-  return (
-    <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
-      <div className="pb-2 text-base font-normal tracking-tight">Race</div>
-      <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
-        <div className="flex flex-row items-baseline gap-1">
-          <p className="text-2xl font-bold">{raceData.lowest}</p>
-          <p className="text-xs text-muted-foreground">best</p>
-        </div>
+  const stats = [
+    {
+      label: "Best Finish",
+      value: raceData.lowest,
+      icon: <Trophy className="h-5 w-5 text-primary" />,
+    },
+    {
+      label: "Worst Finish",
+      value: raceData.highest,
+      icon: <Target className="h-5 w-5 text-muted-foreground" />,
+    },
+    {
+      label: "Average Finish",
+      value: Math.round(raceData.average),
+      icon: <Medal className="h-5 w-5 text-yellow-600" />,
+    },
+    {
+      label: "Wins",
+      value: raceData.wins,
+      icon: <Trophy className="h-5 w-5 text-primary" />,
+    },
+    {
+      label: "Podiums",
+      value: raceData.podiums,
+      icon: <Medal className="h-5 w-5 text-yellow-600" />,
+    },
+    {
+      label: "Most Gained",
+      value: raceData.bestGain,
+      icon: <ChevronUp className="h-5 w-5 text-green-500" />,
+    },
+  ];
 
-        <div className="flex flex-row items-baseline gap-1">
-          <p className="text-2xl font-bold">{raceData.highest}</p>
-          <p className="text-xs text-muted-foreground">worst</p>
-        </div>
-
-        <div className="flex flex-row items-baseline gap-1">
-          <p className="text-2xl font-bold">{raceData.average.toFixed(0)}</p>
-          <p className="text-xs text-muted-foreground">average</p>
-        </div>
-
-        <div className="flex flex-row items-baseline gap-1">
-          <p className="text-2xl font-bold">{raceData.wins}</p>
-          <p className="text-xs text-muted-foreground">wins</p>
-        </div>
-
-        <div className="flex flex-row items-baseline gap-1">
-          <p className="text-2xl font-bold">{raceData.podiums}</p>
-          <p className="text-xs text-muted-foreground">podiums</p>
-        </div>
-
-        <div className="flex flex-row items-baseline gap-1">
-          <p className="text-2xl font-bold">{raceData.bestGain}</p>
-          <p className="text-xs text-muted-foreground">most gained</p>
-        </div>
-      </div>
-    </div>
-  );
+  return <StatsDisplay title="Race Performance" icon={Trophy} stats={stats} />;
 };

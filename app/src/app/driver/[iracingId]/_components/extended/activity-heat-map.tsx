@@ -89,28 +89,15 @@ export const ActivityHeatMap = ({
     [season, year],
   );
 
-  const { data, max, maxDate } = useMemo(() => {
+  const { data } = useMemo(() => {
     const racesPerDate: Record<string, number> = {
       ...getInitialRacesPerDate(seasonDateRange),
       ...activity,
     };
 
-    // @ts-ignore
-    const { maxDate, max } = Object.entries(racesPerDate).reduce(
-      // @ts-ignore
-      (acc, [date, count]) => {
-        const { maxDate, max } = acc;
-
-        if (!maxDate || count > max) {
-          return {
-            maxDate: date,
-            max: count,
-          };
-        }
-
-        return acc;
-      },
-      { maxDate: null, max: 0 },
+    const max = Object.values(racesPerDate).reduce(
+      (acc, count) => Math.max(acc, count as number),
+      0
     );
 
     return {
@@ -123,8 +110,6 @@ export const ActivityHeatMap = ({
         .sort(
           (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
         ) as Activity[],
-      max,
-      maxDate: new Date(maxDate),
     };
   }, [activity, seasonDateRange]);
 
@@ -146,12 +131,6 @@ export const ActivityHeatMap = ({
   }
 
   return (
-    <div className="flex w-full flex-col rounded-md border bg-background/40 p-4 text-start">
-      <p className="pb-2 text-start font-normal tracking-tight">
-        Most raced day
-      </p>
-      <p className="text-2xl font-bold">{maxDate.toLocaleDateString()}</p>
-      <p className="mb-2 text-xs text-muted-foreground">({max} races)</p>
       <ActivityCalendar
         blockMargin={4}
         blockSize={18}
@@ -164,6 +143,5 @@ export const ActivityHeatMap = ({
         hideTotalCount
         renderBlock={renderBlock}
       />
-    </div>
   );
 };

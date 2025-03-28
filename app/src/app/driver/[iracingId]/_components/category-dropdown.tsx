@@ -63,6 +63,7 @@ export const CategoryDropdown = () => {
           buttonVariants({ variant: "outline", size: "xs" }),
           "gap-1 bg-background/40 hover:bg-background/50",
         )}
+        onClick={console.log}
       >
         <ChevronDown className="size-5" />
         {category && categoryToName[category]}
@@ -73,10 +74,11 @@ export const CategoryDropdown = () => {
           const catName = categoryToName[cat as Category];
 
           return (
-            <DropdownMenuItem asChild key={catName}>
-              <span onClick={() => handleClick(cat as Category)}>
-                {catName}
-              </span>
+            <DropdownMenuItem
+              key={catName}
+              onClick={() => handleClick(cat as Category)}
+            >
+              {catName}
             </DropdownMenuItem>
           );
         })}

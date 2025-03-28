@@ -1,11 +1,9 @@
 "use client";
 
 import type { Category } from "@season-summary/config";
-import { CategoryDropdown } from "./category-dropdown";
 import { ExtendedProfileNoData } from "./extended-profile-no-data";
-import { SeasonSwitch } from "./season-switch";
 import type { Session } from "next-auth";
-import { View } from "./extended/view";
+import { EnhancedView } from "./extended/enhanced-view";
 import { categoryToName } from "@season-summary/config";
 import { useDataStatusToast } from "../_hooks/use-data-status-toast";
 import { useDataWebSocket } from "@/hooks/use-data-web-socket";
@@ -71,19 +69,6 @@ export const ExtendedProfileManager = ({
     <div className="flex w-full flex-col items-center justify-center gap-2 text-center">
       {description && (
         <>
-          <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-3">
-            <div className="md:col-start-2">
-              <SeasonSwitch
-                iracingId={iracingId}
-                season={+season}
-                year={+year}
-                category={category}
-              />
-            </div>
-            <div className="order-2 flex items-center justify-self-center md:order-3 md:justify-self-end">
-              <CategoryDropdown />
-            </div>
-          </div>
           <p className="font-semibold">
             We are preparing your {categoryToName[category].toLowerCase()} data
             for this season.
@@ -92,9 +77,8 @@ export const ExtendedProfileManager = ({
         </>
       )}
 
-      <View
+      <EnhancedView
         data={wsData?.message?.data}
-        iracingId={iracingId}
         season={season}
         year={year}
         category={category}

@@ -1,5 +1,6 @@
 import { CategoryDropdown } from "../category-dropdown";
 import { SeasonSwitch } from "../season-switch";
+import { AnimatedSection } from "../../_components/animated/animated-section";
 
 interface HeaderProps {
   displayName: string;
@@ -17,25 +18,24 @@ export const Header = ({
   category,
 }: HeaderProps) => {
   return (
-    <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-3">
-      <div className="order-3 flex flex-col items-baseline gap-1 justify-self-center text-ellipsis sm:flex-row sm:gap-2 md:order-1 md:justify-self-start">
-        <p className="text-ellipsis text-3xl font-extrabold leading-tight tracking-tighter">
-          {displayName}
-        </p>
-      </div>
+    <AnimatedSection className="w-full" delay={0.1}>
+      <div className="flex w-full flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col items-center md:items-start">
+          <h1 className="text-3xl font-extrabold tracking-tight text-foreground">
+            {displayName}
+          </h1>
+        </div>
 
-      <div className="order-1 flex justify-center md:order-2">
-        <SeasonSwitch
-          iracingId={iracingId}
-          season={season}
-          year={year}
-          category={category}
-        />
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+          <SeasonSwitch
+            iracingId={iracingId}
+            season={season}
+            year={year}
+            category={category}
+          />
+          <CategoryDropdown />
+        </div>
       </div>
-
-      <div className="order-2 flex items-center justify-self-center md:order-3 md:justify-self-end">
-        <CategoryDropdown />
-      </div>
-    </div>
+    </AnimatedSection>
   );
 };

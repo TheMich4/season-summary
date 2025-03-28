@@ -8,9 +8,6 @@ interface ResultPageProps {
   };
 }
 
-const createResultUrl = (subsessionId: number, iracingId: string | number) =>
-  `https://members.iracing.com/membersite/member/EventResult.do?subsessionid=${subsessionId}&custid=${iracingId}`;
-
 export default function ResultPage({
   params: { subsessionId },
 }: ResultPageProps) {
