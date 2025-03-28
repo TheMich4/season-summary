@@ -79,7 +79,6 @@ export const ExtendedProfileManager = ({
 
       <EnhancedView
         data={wsData?.message?.data}
-        iracingId={iracingId}
         season={season}
         year={year}
         category={category}

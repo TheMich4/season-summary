@@ -86,7 +86,7 @@ export const View = ({
           <div className="grid gap-4">
             <div className="grid gap-4 md:grid-cols-2">
               <SOF sof={data.sof} useCounter={!isDone} />
-              <Points points={data.points} useCounter={!isDone} />
+              <Points points={data.points} />
             </div>
             <div className="grid gap-4 md:grid-cols-2">
               <QualifyingStats qualiData={data.quali} />

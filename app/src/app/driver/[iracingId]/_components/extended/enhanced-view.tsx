@@ -18,7 +18,6 @@ import { AnimatedSection } from "../animated/animated-section";
 interface EnhancedViewProps {
   category: Category;
   data: any;
-  iracingId: string;
   season: string;
   simpleData: any;
   year: string;
@@ -27,7 +26,6 @@ interface EnhancedViewProps {
 
 export const EnhancedView = ({
   data,
-  iracingId,
   simpleData,
   season,
   year,
@@ -175,7 +173,6 @@ export const EnhancedView = ({
       <AnimatedSection delay={1.4}>
         <EnhancedRaceList
           seasonResults={simpleData.seasonResults}
-          iracingId={iracingId}
           category={category}
         />
       </AnimatedSection>
