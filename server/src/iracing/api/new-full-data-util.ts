@@ -4,6 +4,7 @@ import { parseResults } from "../parse-results";
 import { prisma } from "../../db";
 import { upsertSeason } from "../../db/actions/upsert-season";
 import { upsertUser } from "../../db/actions/upsert-user";
+import type { DriverStats } from "@season-summary/types";
 
 // Track concurrent requests to manage throttling
 let currentRequests = 0;
@@ -28,6 +29,37 @@ interface SeasonDataParams {
   categoryId: string;
   sendMessage?: (status: string, message: any) => void;
   seasonDataId?: number;
+}
+
+interface CountData {
+  races: number;
+  newRaces: number;
+  fetched: number;
+}
+
+interface ProgressData {
+  count: CountData;
+  stats?: Stats;
+  data?: DriverStats;
+}
+
+interface RaceResult {
+  licenseCategoryId: number | string;
+  raceSummary?: {
+    subsessionId: number;
+  };
+  [key: string]: any;
+}
+
+interface SeasonDataRecord {
+  id: number;
+  lastRace?: string;
+  data?: {
+    id?: number;
+    json: any;
+    stats: Record<string, number>;
+    finalIRating: number;
+  };
 }
 
 /**
@@ -56,11 +88,11 @@ const getTimeout = (): number => {
 const processRaceResult = async (
   subsessionId: number,
   categoryId: string
-): Promise<any> => {
-  const result: any = await getRaceResult(`${subsessionId}`);
+): Promise<RaceResult | null> => {
+  const result = await getRaceResult(`${subsessionId}`);
 
-  if (result?.licenseCategoryId.toString() === categoryId) {
-    return result;
+  if (result && result.licenseCategoryId && result.licenseCategoryId.toString() === categoryId) {
+    return result as RaceResult;
   }
 
   return null;
@@ -82,9 +114,9 @@ const updateStats = (currentStats: Stats, race: Race): Stats => {
  * Handle site maintenance response
  */
 const handleSiteMaintenance = async (
-  seasonData: any,
+  seasonData: SeasonDataRecord,
   sendMessage?: (status: string, message: any) => void
-) => {
+): Promise<void> => {
   await prisma.seasonData.update({
     where: {
       id: seasonData.id,
@@ -98,10 +130,10 @@ const handleSiteMaintenance = async (
     ...(seasonData.data.json as any),
     stats: seasonData.data.stats,
     finalIRating: seasonData.data.finalIRating,
-  };
+  } as DriverStats;
 
   const stats = (seasonData.data?.stats ?? {}) as Record<string, number>;
-  const data = {
+  const data: Stats = {
     races: stats.races ?? 0,
     wins: stats.wins ?? 0,
     top5: stats.top5 ?? 0,
@@ -116,9 +148,9 @@ const handleSiteMaintenance = async (
  * Handle no races found
  */
 const handleNoRaces = async (
-  seasonData: any,
+  seasonData: SeasonDataRecord,
   sendMessage?: (status: string, message: any) => void
-) => {
+): Promise<void> => {
   await prisma.seasonData.update({
     where: {
       id: seasonData.id,
@@ -145,7 +177,7 @@ export const getNewFullDataUtil = async ({
   categoryId,
   sendMessage,
   seasonDataId,
-}: SeasonDataParams) => {
+}: SeasonDataParams): Promise<void> => {
   try {
     // Validate required parameters
     if (!iracingId || !year || !season || !categoryId) {
@@ -191,7 +223,7 @@ export const getNewFullDataUtil = async ({
 
     // Initialize statistics from existing data
     const currentStats = (seasonData.data?.stats ?? {}) as Record<string, number>;
-    let data = {
+    let data: Stats = {
       races: currentStats.races ?? 0,
       wins: currentStats.wins ?? 0,
       top5: currentStats.top5 ?? 0,
@@ -203,7 +235,7 @@ export const getNewFullDataUtil = async ({
       ...(seasonData.data.json as any),
       stats: seasonData.data.stats,
       finalIRating: seasonData.data.finalIRating,
-    };
+    } as DriverStats;
 
     const ir = await getLoggedInIracingAPIClient();
 
@@ -243,7 +275,7 @@ export const getNewFullDataUtil = async ({
 
     console.log(`Getting ${newRaces.length} new races for`, iracingId);
 
-    let results: Array<any> = [];
+    let results: Array<RaceResult> = [];
 
     // Process each race
     for (const race of newRaces) {
@@ -285,7 +317,7 @@ export const getNewFullDataUtil = async ({
 
     // Get the ID of the last processed race
     const lastRace =
-      results[results.length - 1]?.raceSummary.subsessionId ??
+      results[results.length - 1]?.raceSummary?.subsessionId ??
       seasonData.lastRace;
 
     // Update season data with results
