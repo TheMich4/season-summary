@@ -1,16 +1,6 @@
-import { DEFAULT_SEASON, DEFAULT_YEAR } from "@/config/iracing";
-
 import { Loader2 } from "lucide-react";
 
-export const ProfileLoader = ({
-  iracingId,
-  season = DEFAULT_SEASON,
-  year = DEFAULT_YEAR,
-}: {
-  iracingId: string;
-  season?: number;
-  year?: number;
-}) => {
+export const ProfileLoader = ({ iracingId }: { iracingId: string }) => {
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="flex flex-row justify-center gap-2 text-2xl font-semibold">

@@ -3,7 +3,6 @@
 import type { Category } from "@season-summary/config";
 import { Loader2 } from "lucide-react";
 import { EnhancedRatingChart } from "../animated/enhanced-rating-chart";
-import { EnhancedActivityHeatMap } from "../animated/enhanced-activity-heatmap";
 import { EnhancedFinishPositions } from "../animated/enhanced-finish-positions";
 import { EnhancedRaceList } from "../animated/enhanced-race-list";
 import { StatBox } from "@/components/stat-box";
@@ -11,11 +10,8 @@ import { AssetStats } from "./asset-stats";
 import { QualifyingStats } from "./qualifying-stats";
 import { RaceStats } from "./race-stats";
 import { IncidentsGraph } from "./incidents-graph";
-import { MostRacedWeek } from "./most-raced-week";
-import { Incidents } from "./incidents";
 import { SOF } from "./sof";
 import { Points } from "./points";
-import { Finishes } from "./finishes";
 import { RacingActivity } from "./racing-activity";
 import { AnimatedSection } from "../animated/animated-section";
 
@@ -38,7 +34,7 @@ export const EnhancedView = ({
   category,
   isDone = true,
 }: EnhancedViewProps) => {
-  console.log({data})
+  console.log({ data });
   if (!data) {
     return (
       <div className="flex min-h-[400px] w-full items-center justify-center">
@@ -56,7 +52,6 @@ export const EnhancedView = ({
           label="iRating"
           description="How your iRating developed over the season."
           tooltipLabel="IRATING"
-          useCounter={!isDone}
           delay={0.1}
         />
         <EnhancedRatingChart
@@ -65,11 +60,10 @@ export const EnhancedView = ({
           description="How your safety rating developed over the season."
           deltaPrecision={2}
           tooltipLabel="SR"
-          useCounter={!isDone}
           delay={0.2}
         />
       </div>
-      
+
       {/* Key stats at a glance */}
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <AnimatedSection delay={0.3}>
@@ -111,18 +105,18 @@ export const EnhancedView = ({
         {/* Left column - Activity & Positions */}
         <div className="lg:col-span-6">
           <div className="grid gap-4">
-            <RacingActivity 
+            <RacingActivity
               activity={data.activity}
               racesPerWeek={data.racesPerWeek}
               season={season}
               year={year}
               delay={0.3}
             />
-            <EnhancedFinishPositions 
+            <EnhancedFinishPositions
               finishPositions={data.finishPositions}
               delay={0.4}
             />
-            <IncidentsGraph 
+            <IncidentsGraph
               dataPoints={data.incidents.incidentPoints}
               incidentsPerLap={data.incidents.incidentsPerLap.value}
               incidentsPerRace={data.incidents.incidentsPerRace.value}
@@ -130,7 +124,7 @@ export const EnhancedView = ({
             />
           </div>
         </div>
-        
+
         {/* Right column - Series & Assets */}
         <div className="lg:col-span-6">
           <div className="grid gap-4">
@@ -139,10 +133,10 @@ export const EnhancedView = ({
                 <SOF sof={data.sof} useCounter={!isDone} />
               </AnimatedSection>
               <AnimatedSection delay={0.8}>
-                <Points points={data.points} useCounter={!isDone} />
+                <Points points={data.points} />
               </AnimatedSection>
             </div>
-            
+
             <div className="grid gap-4 md:grid-cols-2">
               <AnimatedSection delay={0.9}>
                 <QualifyingStats qualiData={data.quali} />
@@ -151,7 +145,7 @@ export const EnhancedView = ({
                 <RaceStats raceData={data.race} />
               </AnimatedSection>
             </div>
-            
+
             <AnimatedSection delay={1.1}>
               <AssetStats
                 name="series"
@@ -160,7 +154,11 @@ export const EnhancedView = ({
               />
             </AnimatedSection>
             <AnimatedSection delay={1.2}>
-              <AssetStats name="cars" assetData={data.carData} preposition="in" />
+              <AssetStats
+                name="cars"
+                assetData={data.carData}
+                preposition="in"
+              />
             </AnimatedSection>
             <AnimatedSection delay={1.3}>
               <AssetStats
@@ -183,4 +181,5 @@ export const EnhancedView = ({
       </AnimatedSection>
     </div>
   );
-}; 
+};
+

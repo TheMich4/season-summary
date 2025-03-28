@@ -18,7 +18,7 @@ const WeekChart = ({
       const week = i + 1;
       return {
         name: week,
-        races: racesPerWeek[i] || 0,
+        races: racesPerWeek[i] ?? 0,
       };
     });
   }, [racesPerWeek]);
@@ -72,7 +72,7 @@ const WeekList = ({
             className={cn(
               "flex justify-center text-muted-foreground",
               `${payload[0]?.payload.name}` === `${parseInt(week, 10) + 1}` &&
-                "font-bold text-foreground"
+                "font-bold text-foreground",
             )}
           >
             {`${parseInt(week, 10) + 1}`}
@@ -91,25 +91,5 @@ export const MostRacedWeek = ({
 }: {
   racesPerWeek: Record<string, number>;
 }) => {
-  const mostRacedWeek = useMemo(() => {
-    return Object.entries(racesPerWeek).reduce(
-      (acc, [week, numberOfRaces]) => {
-        if (numberOfRaces > acc.numberOfRaces) {
-          return {
-            week: `${parseInt(week) + 1}`,
-            numberOfRaces,
-          };
-        }
-        return acc;
-      },
-      {
-        week: "",
-        numberOfRaces: 0,
-      }
-    );
-  }, [racesPerWeek]);
-
-  return (
-      <WeekChart racesPerWeek={racesPerWeek} />
-  );
+  return <WeekChart racesPerWeek={racesPerWeek} />;
 };

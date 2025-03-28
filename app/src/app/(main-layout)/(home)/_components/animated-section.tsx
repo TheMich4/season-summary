@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -9,28 +9,29 @@ interface AnimatedSectionProps {
   delay?: number;
 }
 
-export const AnimatedSection = ({ 
-  children, 
-  className = "", 
-  delay = 0 
+export const AnimatedSection = ({
+  children,
+  className = "",
+  delay = 0,
 }: AnimatedSectionProps) => {
   return (
     <motion.div
       className={className}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ 
-        duration: 0.6, 
-        delay
+      transition={{
+        duration: 0.6,
+        delay,
       }}
-      style={{ 
+      style={{
         willChange: "opacity",
         backfaceVisibility: "hidden",
         WebkitBackfaceVisibility: "hidden",
-        WebkitFontSmoothing: "subpixel-antialiased"
+        WebkitFontSmoothing: "subpixel-antialiased",
       }}
     >
       {children}
     </motion.div>
   );
-}; 
+};
+

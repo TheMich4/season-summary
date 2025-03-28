@@ -7,7 +7,6 @@ import { ProfileLoader } from "./_components/profile-loader";
 import { Suspense } from "react";
 import { AnimatedSection } from "./_components/animated/animated-section";
 import { AnimatedRacingBackground } from "./_components/animated/animated-background";
-import { GlowingAccent } from "./_components/animated/glowing-accent";
 import { AnimatedStatCard } from "./_components/animated/animated-stat-card";
 
 export const dynamic = "force-dynamic";
@@ -35,7 +34,7 @@ export default function ExtendedPage({
     <main className="relative min-h-screen w-full bg-gradient-to-b from-background to-background/95 pb-12">
       {/* Animated background with racing-themed elements */}
       <AnimatedRacingBackground />
-      
+
       {/* Page content with animated transitions */}
       <div className="container relative mx-auto flex flex-col items-center px-2 pt-2 md:pt-4 lg:px-4">
         <AnimatedSection className="w-full max-w-full" delay={0.2}>
@@ -52,8 +51,11 @@ export default function ExtendedPage({
             </Suspense>
           </AnimatedStatCard>
         </AnimatedSection>
-        
-        <AnimatedSection className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground" delay={0.4}>
+
+        <AnimatedSection
+          className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground"
+          delay={0.4}
+        >
           <p>Track your season progress and compare with friends!</p>
         </AnimatedSection>
       </div>

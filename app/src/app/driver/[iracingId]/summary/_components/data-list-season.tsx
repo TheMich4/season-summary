@@ -1,13 +1,11 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useMemo } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import type { Category } from "@season-summary/config";
 import { StatBox } from "@/components/stat-box";
 import { categoryToName } from "@season-summary/config";
-import { getProfileUrl } from "@/server/get-profile-url";
 
 interface CategoryData {
   finalIRating: number;
@@ -27,15 +25,7 @@ interface CategoryStatsProps {
   season: { season: number; year: number };
 }
 
-const CategoryStats = ({
-  data,
-  category,
-  iracingId,
-  season,
-}: CategoryStatsProps) => {
-  const router = useRouter();
-  const pathname = usePathname();
-
+const CategoryStats = ({ data, category }: CategoryStatsProps) => {
   const stats = useMemo(() => {
     if (!data) return [];
 
@@ -46,17 +36,6 @@ const CategoryStats = ({
       { label: "Laps", value: data.stats.laps },
     ];
   }, [data]);
-
-  const handleClick = useCallback(async () => {
-    const url = iracingId
-      ? await getProfileUrl(`${iracingId}`, {
-          category,
-          season: season.season,
-          year: season.year,
-        })
-      : pathname;
-    router.push(url);
-  }, [iracingId, category, season.season, season.year, pathname, router]);
 
   // TODO: Add no data component
   if (!data) return <div>No data for this season</div>;

@@ -8,10 +8,9 @@ interface PointsProps {
     highest: number;
     races: number;
   };
-  useCounter?: boolean;
 }
 
-export const Points = ({ points, useCounter = false }: PointsProps) => {
+export const Points = ({ points }: PointsProps) => {
   const stats = [
     {
       label: "Average Points",

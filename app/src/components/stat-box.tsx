@@ -2,11 +2,9 @@
 
 import { cn } from "@/lib/utils";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
-import { Medal, Trophy, Award, Star, Target, ChevronUp, ChevronDown } from "lucide-react";
+import { Medal, Trophy, Award, Star, Target } from "lucide-react";
 import { Delta } from "./delta";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useMemo, type ReactNode } from "react";
-import { Counter } from "@/components/counter";
+import type { ReactNode } from "react";
 
 interface StatBoxProps {
   label: string;
@@ -17,7 +15,7 @@ interface StatBoxProps {
   ignorePreviousIfZero?: boolean;
   ignorePreviousIfValueZero?: boolean;
   invert?: boolean;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   rank?: number;
 }
 
@@ -66,22 +64,22 @@ export const StatBox = ({
   // Create gradient position for light effect
   const backgroundX = useMotionValue(0);
   const backgroundY = useMotionValue(0);
-  
+
   // Create gradient transforms for the animated border
   const background = useMotionTemplate`radial-gradient(400px circle at ${backgroundX}px ${backgroundY}px, rgba(234,179,8,0.10), transparent 80%)`;
-  
+
   // Handle mouse movement to create 3D effect
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { currentTarget, clientX, clientY } = e;
     const { left, top, width, height } = currentTarget.getBoundingClientRect();
-    
+
     const x = clientX - left;
     const y = clientY - top;
-    
+
     // Calculate rotation based on mouse position (max 4 degrees)
     const rotateXValue = ((y - height / 2) / height) * -4;
     const rotateYValue = ((x - width / 2) / width) * 4;
-    
+
     // Update values for animations
     rotateX.set(rotateXValue);
     rotateY.set(rotateYValue);
@@ -90,26 +88,33 @@ export const StatBox = ({
     backgroundX.set(x);
     backgroundY.set(y);
   };
-  
+
   // Reset animation values on mouse leave
   const handleMouseLeave = () => {
     rotateX.set(0);
     rotateY.set(0);
   };
 
-  const showDelta = previous !== undefined && 
-    (!ignorePreviousIfZero || previous !== 0) && 
+  const showDelta =
+    previous !== undefined &&
+    (!ignorePreviousIfZero || previous !== 0) &&
     (!ignorePreviousIfValueZero || value !== 0) &&
-    typeof value === 'number';
+    typeof value === "number";
 
   const deltaValue = showDelta ? value - previous : 0;
-  const isPositive = deltaValue ? (invert ? deltaValue < 0 : deltaValue > 0) : undefined;
+  const isPositive = deltaValue
+    ? invert
+      ? deltaValue < 0
+      : deltaValue > 0
+    : undefined;
 
   return (
     <motion.div
       className={cn(
         "group relative overflow-hidden rounded-xl border border-primary/30 bg-background/60 p-4 backdrop-blur-md transition-colors hover:border-primary/60 ",
-        className
+        className,
+        isPositive !== undefined &&
+          (isPositive ? "border-green-500/30" : "border-red-500/30"),
       )}
       style={{
         rotateX,
@@ -131,7 +136,9 @@ export const StatBox = ({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-left">
             {icon || getIconForLabel(label)}
-            <span className="text-xs font-medium text-muted-foreground">{label}</span>
+            <span className="text-xs font-medium text-muted-foreground">
+              {label}
+            </span>
           </div>
           {rank && (
             <span className={cn("text-xs font-bold", getRankColor(rank))}>
@@ -146,10 +153,7 @@ export const StatBox = ({
           </span>
           {showDelta && (
             <div className="text-xs">
-              <Delta 
-                value={deltaValue} 
-                invert={invert}
-              />
+              <Delta value={deltaValue} invert={invert} />
             </div>
           )}
         </div>

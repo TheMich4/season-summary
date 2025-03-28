@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Counter } from "@/components/counter";
-import { Delta } from "@/components/delta";
+import { Award, Shield, TrendingUp } from "lucide-react";
 import { useTailwindTheme } from "@/hooks/use-tailwind-theme";
 import { useMemo } from "react";
 import {
@@ -15,7 +14,6 @@ import {
   ReferenceLine,
 } from "recharts";
 import { AnimatedChartWrapper } from "./animated-chart-wrapper";
-import { TrendingUp, Award, Shield } from "lucide-react";
 
 interface EnhancedRatingChartProps {
   dataPoints: Array<number>;
@@ -23,7 +21,6 @@ interface EnhancedRatingChartProps {
   description: string;
   label: string;
   tooltipLabel: string;
-  useCounter?: boolean;
   delay?: number;
 }
 
@@ -56,7 +53,6 @@ export const EnhancedRatingChart = ({
   description,
   label,
   tooltipLabel,
-  useCounter = false,
   delay = 0,
 }: EnhancedRatingChartProps) => {
   const theme = useTailwindTheme();

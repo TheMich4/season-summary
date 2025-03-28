@@ -8,8 +8,7 @@ import {
 import { AssetDataTable } from "./asset-stats-data-table";
 import { useMemo } from "react";
 import { type AssetData } from "./types";
-import { StatBox } from "@/components/stat-box";
-import { Car, Trophy, Medal, Target, Star, ChevronUp } from "lucide-react";
+import { Car, Trophy, Target, Star } from "lucide-react";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 
 interface AssetStatsProps {
@@ -57,22 +56,22 @@ export const AssetStats = ({
   // Create gradient position for light effect
   const backgroundX = useMotionValue(0);
   const backgroundY = useMotionValue(0);
-  
+
   // Create gradient transforms for the animated border
   const background = useMotionTemplate`radial-gradient(400px circle at ${backgroundX}px ${backgroundY}px, rgba(234,179,8,0.10), transparent 80%)`;
-  
+
   // Handle mouse movement to create 3D effect
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { currentTarget, clientX, clientY } = e;
     const { left, top, width, height } = currentTarget.getBoundingClientRect();
-    
+
     const x = clientX - left;
     const y = clientY - top;
-    
+
     // Calculate rotation based on mouse position (max 4 degrees)
     const rotateXValue = ((y - height / 2) / height) * -4;
     const rotateYValue = ((x - width / 2) / width) * 4;
-    
+
     // Update values for animations
     rotateX.set(rotateXValue);
     rotateY.set(rotateYValue);
@@ -81,7 +80,7 @@ export const AssetStats = ({
     backgroundX.set(x);
     backgroundY.set(y);
   };
-  
+
   // Reset animation values on mouse leave
   const handleMouseLeave = () => {
     rotateX.set(0);
@@ -105,11 +104,6 @@ export const AssetStats = ({
     [assetData],
   );
 
-  const stats = Object.entries(assetData).map(([key, value]) => ({
-    name: key,
-    ...value,
-  }));
-
   const getIcon = (name: string) => {
     switch (name) {
       case "cars":
@@ -127,7 +121,7 @@ export const AssetStats = ({
     <Dialog>
       <DialogTrigger className="w-full">
         <motion.div
-          className="group relative overflow-hidden rounded-xl border border-primary/30 bg-background/60 p-4 backdrop-blur-md transition-colors hover:border-primary/60 w-full"
+          className="group relative w-full overflow-hidden rounded-xl border border-primary/30 bg-background/60 p-4 backdrop-blur-md transition-colors hover:border-primary/60"
           style={{
             rotateX,
             rotateY,

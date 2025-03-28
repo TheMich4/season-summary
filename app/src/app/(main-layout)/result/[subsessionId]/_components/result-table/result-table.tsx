@@ -13,7 +13,7 @@ import {
   getCoreRowModel,
   useReactTable,
   getExpandedRowModel,
-  ExpandedState,
+  type ExpandedState,
 } from "@tanstack/react-table";
 
 import { getColumns } from "./get-columns";

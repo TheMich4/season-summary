@@ -1,7 +1,17 @@
 "use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { ChevronDown, ChevronLeft, ChevronRight, Trophy, Car, MapPin, Calendar, Flag, Users } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Trophy,
+  Car,
+  MapPin,
+  Calendar,
+  Flag,
+  Users,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,36 +27,38 @@ import { cn } from "@/lib/utils";
 
 interface RaceProps {
   result: any;
-  iracingId: string;
   index: number;
 }
 
-const Race = ({ result, iracingId, index }: RaceProps) => {
+const Race = ({ result, index }: RaceProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   const finishPosition = result.finishPositionInClass + 1;
   const raceDate = new Date(result.startTime);
   const isWin = finishPosition === 1;
   const isPodium = finishPosition <= 3;
-  
+
   // Format the race time and date
   const formattedDate = raceDate.toLocaleDateString(undefined, {
-    month: 'short',
-    day: 'numeric'
+    month: "short",
+    day: "numeric",
   });
   const formattedTime = raceDate.toLocaleTimeString(undefined, {
-    hour: '2-digit',
-    minute: '2-digit'
+    hour: "2-digit",
+    minute: "2-digit",
   });
 
   // Determine highlight colors
-  const positionColor = 
-    finishPosition === 1 ? "text-primary border-primary" : 
-    finishPosition === 2 ? "text-gray-400 border-gray-400" : 
-    finishPosition === 3 ? "text-yellow-600 border-yellow-600" : 
-    "text-muted-foreground border-muted-foreground/50";
-  
+  const positionColor =
+    finishPosition === 1
+      ? "text-primary border-primary"
+      : finishPosition === 2
+        ? "text-gray-400 border-gray-400"
+        : finishPosition === 3
+          ? "text-yellow-600 border-yellow-600"
+          : "text-muted-foreground border-muted-foreground/50";
+
   return (
-    <motion.div 
+    <motion.div
       className="overflow-hidden rounded-xl border border-primary/20 bg-background/70 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-primary/40"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -55,11 +67,15 @@ const Race = ({ result, iracingId, index }: RaceProps) => {
     >
       <div className="flex items-center p-3">
         {/* Position indicator */}
-        <div className={`relative mr-3 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border-2 ${positionColor} font-bold text-2xl`}>
+        <div
+          className={`relative mr-3 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border-2 ${positionColor} text-2xl font-bold`}
+        >
           {finishPosition}
-          {isWin && <Trophy className="absolute -right-2 -top-2 h-5 w-5 text-primary" />}
+          {isWin && (
+            <Trophy className="absolute -right-2 -top-2 h-5 w-5 text-primary" />
+          )}
         </div>
-        
+
         {/* Race details */}
         <div className="flex grow flex-col">
           <div className="flex items-center justify-between">
@@ -68,10 +84,12 @@ const Race = ({ result, iracingId, index }: RaceProps) => {
             </span>
             <div className="flex items-center gap-1 text-xs text-muted-foreground">
               <Calendar className="h-3 w-3" />
-              <span>{formattedDate} {formattedTime}</span>
+              <span>
+                {formattedDate} {formattedTime}
+              </span>
             </div>
           </div>
-          
+
           <div className="mt-1 flex items-center justify-between">
             <div className="flex items-center gap-2 text-sm">
               <div className="flex items-center gap-1 text-muted-foreground">
@@ -83,7 +101,7 @@ const Race = ({ result, iracingId, index }: RaceProps) => {
                 <span>{result.track.trackName}</span>
               </div>
             </div>
-            
+
             {(result.strengthOfField || result.sizeOfField) && (
               <div className="flex gap-2 text-xs">
                 {result.strengthOfField && (
@@ -102,14 +120,18 @@ const Race = ({ result, iracingId, index }: RaceProps) => {
             )}
           </div>
         </div>
-        
+
         {/* View details button */}
         <Link
           href={`/result/${result.subsessionId}`}
           className="ml-2 self-center"
           prefetch={false}
         >
-          <Button size="sm" variant="ghost" className={isPodium ? "text-primary" : ""}>
+          <Button
+            size="sm"
+            variant="ghost"
+            className={isPodium ? "text-primary" : ""}
+          >
             <ChevronRight className="h-4 w-4" />
           </Button>
         </Link>
@@ -120,14 +142,12 @@ const Race = ({ result, iracingId, index }: RaceProps) => {
 
 export const EnhancedRaceList = ({
   seasonResults,
-  iracingId,
   category,
 }: {
   seasonResults: Array<any> | undefined;
-  iracingId: string;
   category: Category;
 }) => {
-  const [racesPerPage, setRacePerPage] = useState(10);
+  const [racesPerPage, setRacesPerPage] = useState(10);
   const numberOfPages = useMemo(() => {
     const numberOfRaces = seasonResults?.length ?? 0;
     return Math.ceil(numberOfRaces / racesPerPage);
@@ -141,15 +161,22 @@ export const EnhancedRaceList = ({
   if (!seasonResults?.length) return null;
 
   // Memoize the filtered race results
-  const displayedRaces = seasonResults.slice(page * racesPerPage, (page + 1) * racesPerPage);
-  
+  const displayedRaces = seasonResults.slice(
+    page * racesPerPage,
+    (page + 1) * racesPerPage,
+  );
+
   // Calculate stats
-  const wins = seasonResults.filter(r => r.finishPositionInClass === 0).length;
-  const podiums = seasonResults.filter(r => r.finishPositionInClass <= 2).length;
+  const wins = seasonResults.filter(
+    (r) => r.finishPositionInClass === 0,
+  ).length;
+  const podiums = seasonResults.filter(
+    (r) => r.finishPositionInClass <= 2,
+  ).length;
   const totalRaces = seasonResults.length;
 
   return (
-    <motion.div 
+    <motion.div
       className="overflow-hidden rounded-xl border border-primary/20 bg-background/70 p-4 shadow-sm backdrop-blur-md"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
@@ -162,17 +189,19 @@ export const EnhancedRaceList = ({
             <h2 className="text-2xl font-bold text-foreground">
               {categoryToName[category]} Season Races
             </h2>
-            <p className="text-sm text-muted-foreground text-left">
+            <p className="text-left text-sm text-muted-foreground">
               {totalRaces} races with {wins} wins and {podiums} podium finishes
             </p>
           </div>
-          
+
           {/* Pagination controls */}
           <div className="flex items-center gap-2">
             <div className="flex h-8 items-center rounded-lg border border-primary/10 bg-background/50 px-3 py-1 text-sm">
-              <span>Page {page + 1} of {numberOfPages}</span>
+              <span>
+                Page {page + 1} of {numberOfPages}
+              </span>
             </div>
-            
+
             <div className="flex gap-1">
               <Button
                 size="sm"
@@ -196,7 +225,7 @@ export const EnhancedRaceList = ({
                 <DropdownMenuTrigger
                   className={cn(
                     buttonVariants({ variant: "outline", size: "sm" }),
-                    "h-8 gap-1 w-24"
+                    "h-8 w-24 gap-1",
                   )}
                 >
                   <span>{racesPerPage}</span>
@@ -205,7 +234,10 @@ export const EnhancedRaceList = ({
 
                 <DropdownMenuContent align="end">
                   {[5, 10, 20, 50].map((n) => (
-                    <DropdownMenuItem key={n} onClick={() => setRacePerPage(n)}>
+                    <DropdownMenuItem
+                      key={n}
+                      onClick={() => setRacesPerPage(n)}
+                    >
                       {n} per page
                     </DropdownMenuItem>
                   ))}
@@ -214,19 +246,15 @@ export const EnhancedRaceList = ({
             </div>
           </div>
         </div>
-        
+
         {/* Race list */}
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
           {displayedRaces.map((result, index) => (
-            <Race
-              result={result}
-              iracingId={iracingId}
-              key={result.subsessionId}
-              index={index}
-            />
+            <Race key={result.subsessionId} result={result} index={index} />
           ))}
         </div>
       </div>
     </motion.div>
   );
-}; 
+};
+

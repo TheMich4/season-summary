@@ -1,25 +1,17 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { ActivityHeatMap } from "./activity-heat-map";
 import { AssetStats } from "./asset-stats";
 import type { Category } from "@season-summary/config";
 import { FinishPositions } from "./finish-positions";
 import { Header } from "./header";
-import { Incidents } from "./incidents";
 import { IncidentsGraph } from "./incidents-graph";
 import { Loader2 } from "lucide-react";
-import { MostRacedWeek } from "./most-raced-week";
 import { Points } from "./points";
 import { QualifyingStats } from "./qualifying-stats";
 import { RaceList } from "../race-list";
 import { RaceStats } from "./race-stats";
 import { RatingChart } from "./rating-chart";
 import { SOF } from "./sof";
-import { StatBox } from "@/components/stat-box";
-import { Finishes } from "./finishes";
 import { RacingActivity } from "./racing-activity";
 
 interface ViewProps {
@@ -75,14 +67,14 @@ export const View = ({
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-6">
           <div className="grid gap-4">
-            <RacingActivity 
+            <RacingActivity
               activity={data.activity}
               racesPerWeek={data.racesPerWeek}
               season={season}
               year={year}
             />
             <FinishPositions finishPositions={data.finishPositions} />
-            <IncidentsGraph 
+            <IncidentsGraph
               dataPoints={data.incidents.incidentPoints}
               incidentsPerLap={data.incidents.incidentsPerLap.value}
               incidentsPerRace={data.incidents.incidentsPerRace.value}
@@ -106,7 +98,11 @@ export const View = ({
               preposition="in"
             />
             <div className="grid gap-4 md:grid-cols-2">
-              <AssetStats name="cars" assetData={data.carData} preposition="in" />
+              <AssetStats
+                name="cars"
+                assetData={data.carData}
+                preposition="in"
+              />
               <AssetStats
                 name="tracks"
                 assetData={data.trackData}
