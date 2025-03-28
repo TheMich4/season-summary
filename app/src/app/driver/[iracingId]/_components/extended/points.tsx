@@ -1,13 +1,9 @@
 import { Medal, Star, Target, Trophy } from "lucide-react";
 import { StatsDisplay } from "./stats-display";
+import { type PointsData } from "@season-summary/types";
 
 interface PointsProps {
-  points: {
-    average: number;
-    lowest: number;
-    highest: number;
-    races: number;
-  };
+  points: PointsData;
 }
 
 export const Points = ({ points }: PointsProps) => {

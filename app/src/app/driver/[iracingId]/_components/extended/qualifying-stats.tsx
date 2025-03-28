@@ -1,7 +1,12 @@
 import { Flag, Medal, Target, Trophy } from "lucide-react";
 import { StatsDisplay } from "./stats-display";
+import { type QualiData } from "@season-summary/types";
 
-export const QualifyingStats = ({ qualiData }: Record<string, any>) => {
+interface QualifyingStatsProps {
+  qualiData: QualiData;
+}
+
+export const QualifyingStats = ({ qualiData }: QualifyingStatsProps) => {
   const stats = [
     {
       label: "Best Grid",

@@ -1,7 +1,12 @@
 import { ChevronUp, Medal, Target, Trophy } from "lucide-react";
 import { StatsDisplay } from "./stats-display";
+import { type RaceData } from "@season-summary/types";
 
-export const RaceStats = ({ raceData }: Record<string, any>) => {
+interface RaceStatsProps {
+  raceData: RaceData;
+}
+
+export const RaceStats = ({ raceData }: RaceStatsProps) => {
   const stats = [
     {
       label: "Best Finish",

@@ -15,7 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { type AssetData } from "./types";
+import { type AssetData } from "@season-summary/types";
 import { Delta } from "@/components/delta";
 
 interface DataTableProps {

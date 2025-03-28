@@ -1,4 +1,11 @@
-export const getStats = (currentStats: any, raceResult: any) => {
+import { type DriverStats } from "@season-summary/types";
+
+interface RaceResult {
+  lapsComplete: number;
+  finishPosition: number;
+}
+
+export const getStats = (currentStats: DriverStats["stats"], raceResult: RaceResult) => {
   return {
     laps:
       currentStats.laps +

@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { AssetDataTable } from "./asset-stats-data-table";
 import { useMemo } from "react";
-import { type AssetData } from "./types";
+import { type AssetData } from "@season-summary/types";
 import { Car, Trophy, Target, Star } from "lucide-react";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
 

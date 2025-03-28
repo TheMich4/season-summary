@@ -27,6 +27,7 @@
     "@radix-ui/react-tooltip": "^1.1.8",
     "@season-summary/config": "workspace:*",
     "@season-summary/prisma": "workspace:*",
+    "@season-summary/types": "workspace:*",
     "@t3-oss/env-nextjs": "^0.7.3",
     "@tanstack/react-query": "^4.36.1",
     "@tanstack/react-table": "^8.21.2",

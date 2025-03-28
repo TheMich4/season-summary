@@ -1,13 +1,14 @@
 import { StatBox } from "@/components/stat-box";
 import { type LucideIcon } from "lucide-react";
 
-interface StatItem {
+export interface StatItem {
   label: string;
   value: number;
   icon: React.ReactNode;
+  useCounter?: boolean;
 }
 
-interface StatsDisplayProps {
+export interface StatsDisplayProps {
   title: string;
   icon: LucideIcon;
   stats: StatItem[];
@@ -32,6 +33,7 @@ export const StatsDisplay = ({
             label={stat.label}
             value={stat.value}
             icon={stat.icon}
+            useCounter={stat.useCounter}
           />
         ))}
       </div>
