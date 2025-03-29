@@ -15,7 +15,7 @@
     "@season-summary/config": "workspace:*",
     "@season-summary/prisma": "workspace:*",
     "@season-summary/types": "workspace:*",
-    "iracing-api": "0.4.4",
+    "iracing-api": "0.4.5",
     "typescript": "^5.0.0"
   },
   "devDependencies": {

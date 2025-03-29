@@ -5,6 +5,7 @@ import { prisma } from "../../db";
 import { upsertSeason } from "../../db/actions/upsert-season";
 import { upsertUser } from "../../db/actions/upsert-user";
 import type { DriverStats } from "@season-summary/types";
+import { GetResultResponse } from "iracing-api";
 
 // Track concurrent requests to manage throttling
 let currentRequests = 0;
@@ -43,13 +44,6 @@ interface ProgressData {
   data?: DriverStats;
 }
 
-interface RaceResult {
-  licenseCategoryId: number | string;
-  raceSummary?: {
-    subsessionId: number;
-  };
-  [key: string]: any;
-}
 
 interface SeasonDataRecord {
   id: number;
@@ -88,11 +82,11 @@ const getTimeout = (): number => {
 const processRaceResult = async (
   subsessionId: number,
   categoryId: string
-): Promise<RaceResult | null> => {
+)=> {
   const result = await getRaceResult(`${subsessionId}`);
 
-  if (result && result.licenseCategoryId && result.licenseCategoryId.toString() === categoryId) {
-    return result as RaceResult;
+  if (result?.licenseCategoryId && result.licenseCategoryId.toString() === categoryId) {
+    return result;
   }
 
   return null;
@@ -275,7 +269,7 @@ export const getNewFullDataUtil = async ({
 
     console.log(`Getting ${newRaces.length} new races for`, iracingId);
 
-    let results: Array<RaceResult> = [];
+    let results: Array<GetResultResponse> = [];
 
     // Process each race
     for (const race of newRaces) {

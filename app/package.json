@@ -41,7 +41,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^0.2.1",
     "framer-motion": "^10.18.0",
-    "iracing-api": "^0.2.4",
+    "iracing-api": "0.4.5",
     "lucide-react": "^0.263.1",
     "next": "^14.2.24",
     "next-auth": "^4.24.11",
