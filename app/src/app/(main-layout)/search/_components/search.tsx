@@ -12,7 +12,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import type { GetDriversResponse } from "iracing-api";
+// import type { GetDriversResponse } from "iracing-api";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import { ProfileCard } from "@/components/profile-card";
@@ -21,7 +21,8 @@ import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-type Drivers = GetDriversResponse;
+// type Drivers = GetDriversResponse;
+type Drivers = any;
 
 const formSchema = z.object({
   searchTerm: z.string().min(3),
